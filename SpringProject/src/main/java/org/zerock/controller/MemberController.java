@@ -2,9 +2,11 @@ package org.zerock.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.zerock.domain.Member;
 import org.zerock.service.MemberService;
 
 import lombok.extern.log4j.Log4j;
@@ -17,22 +19,35 @@ public class MemberController {
 	private MemberService service;
 	
 	@PostMapping("/join")
-	public String join() {
-		service.join();
+	public String join(Member member) {
+		service.join(member);
 		return null;
 	}
 	
-	@RequestMapping("/profile")
-	public String profile() {
-		service.memberInfo();
+	// security?
+	@PostMapping("/login.do")
+	public String login(Model model, String id, String pwd) {
+		
+		service.login(id, pwd);
 		return null;
 	}
 	
-	public void edit() {
-		service.editInfo();
+	@GetMapping("/profile")
+	public String profile(Model model, String id) {
+		Member member = new Member();
+		service.memberInfo(id);
+		model.addAttribute("member", member);
+		return null;
 	}
 	
-	public void bye() {
-		service.withdrawal();
+	@RequestMapping("/edit")
+	public String edit(Member member) {
+		service.editInfo(member);
+		return null;
+	}
+	
+	@RequestMapping("/farewell")
+	public void farewell(String id) {
+		service.withdrawal(id);
 	}
 }

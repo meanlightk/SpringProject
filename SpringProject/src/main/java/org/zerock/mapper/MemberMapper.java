@@ -1,12 +1,17 @@
 package org.zerock.mapper;
 
+import org.zerock.domain.Member;
+
 public interface MemberMapper {
 	
-	public void selectMember();
+	public Member selectMemberasIdnPwd(String id, String pwd);
 	
-	public void insertMember();
+	public Member selectMember(String id);
 	
-	public void deleteMember();
+	public void insertMember(Member member);
 	
-	public void updateMember();
+	public void updateMember(Member member);
+	
+	public void deleteMember(String id);
+
 }

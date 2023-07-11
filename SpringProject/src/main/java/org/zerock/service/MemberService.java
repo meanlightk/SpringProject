@@ -2,6 +2,7 @@ package org.zerock.service;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.zerock.domain.Member;
 import org.zerock.mapper.MemberMapper;
 
 import lombok.extern.log4j.Log4j;
@@ -14,23 +15,23 @@ public class MemberService {
 	private MemberMapper memberMapper;
 	
 	
-	public void join() {
-		memberMapper.insertMember();
+	public void join(Member member) {
+		memberMapper.insertMember(member);
 	}
 	
-	public void login() {
-		memberMapper.selectMember();
+	public void login(String id, String pwd) {
+		memberMapper.selectMemberasIdnPwd(id, pwd);
 	}
 	
-	public void memberInfo() {
-		memberMapper.selectMember();
+	public void memberInfo(String id) {
+		memberMapper.selectMember(id);
 	}
 
-	public void editInfo() {
-		memberMapper.updateMember();
+	public void editInfo(Member member) {
+		memberMapper.updateMember(member);
 	}
 	
-	public void withdrawal() {
-		memberMapper.deleteMember();
+	public void withdrawal(String id) {
+		memberMapper.deleteMember(id);
 	}
 }
