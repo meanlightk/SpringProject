@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<mapper namespace="org.zerock.mapper.Product_ReviewMapper">
+
+<select id="writeReview" resultType="org.zerock.domain.Product_QnAMapper">
+	<![CDATA[
+	select * from qna
+	]]>
+</select>
+
+</mapper>
