@@ -8,10 +8,10 @@ public interface GoodsMapper {
 	
 	public Goods findOne(int pno);
 	
-	public List<Goods> findGoods(int pno);
+	public List<Goods> findGoods();
 	
-	public int insertCart(int pno);
+	public void insertCart(int pno);
 	
-	public int deleteCart(int pno);
-	
+	public void deleteCart(int pno);
+		
 }
