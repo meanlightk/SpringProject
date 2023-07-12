@@ -11,6 +11,7 @@ import org.zerock.service.MemberService;
 
 import lombok.extern.log4j.Log4j;
 
+@RequestMapping("/admin/")
 @Controller
 @Log4j
 public class MemberController {
@@ -48,6 +49,6 @@ public class MemberController {
 	@RequestMapping("/farewell")
 	public String farewell(String id) {
 		service.withdrawal(id);
-		return "redirect:/main";
+		return "redirect:/";
 	}
 }
