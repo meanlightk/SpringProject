@@ -1,4 +1,3 @@
-
 CREATE TABLE member(
 	name varchar(100) NOT NULL,
 	id varchar(100) PRIMARY KEY,
@@ -31,6 +30,17 @@ CREATE TABLE qna(
 	updatedate date DEFAULT current_timestamp
 );
 
+-- table qna의 컬럼 regidate 초기값 변경을 방지하는 트리거
+DELIMITER //
+CREATE TRIGGER prevent_qregidate_update
+BEFORE UPDATE ON qna
+FOR EACH ROW
+BEGIN
+    IF NEW.regidate <> OLD.regidate THEN
+        SIGNAL SQLSTATE '45000' SET MESSAGE_TEXT = 'regidate의 초기값을 변경할 수 없습니다.';
+    END IF;
+END; //
+DELIMITER ;
 
 CREATE TABLE product_review(
 	id varchar(100) NOT NULL,
@@ -41,5 +51,17 @@ CREATE TABLE product_review(
 	regidate date DEFAULT current_timestamp,
 	updatedate date DEFAULT current_timestamp
 );
+
+--table product_review의 컬럼 regidate 초기값 변경을 방지하는 트리거
+DELIMITER //
+CREATE TRIGGER prevent_pregidate_update
+BEFORE UPDATE ON product_review
+FOR EACH ROW
+BEGIN
+    IF NEW.regidate <> OLD.regidate THEN
+        SIGNAL SQLSTATE '45000' SET MESSAGE_TEXT = 'regidate의 초기값을 변경할 수 없습니다.';
+    END IF;
+END; //
+DELIMITER ;
 
 COMMIT;
