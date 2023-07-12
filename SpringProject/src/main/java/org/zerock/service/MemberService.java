@@ -19,12 +19,12 @@ public class MemberService {
 		memberMapper.insertMember(member);
 	}
 	
-	public void login(String id, String pwd) {
-		memberMapper.selectMemberasIdnPwd(id, pwd);
+	public Member login(Member member) {
+		return memberMapper.selectMemberaslogin(member);
 	}
 	
-	public void memberInfo(String id) {
-		memberMapper.selectMember(id);
+	public Member memberInfo(String id) {
+		return memberMapper.selectMember(id);
 	}
 
 	public void editInfo(Member member) {

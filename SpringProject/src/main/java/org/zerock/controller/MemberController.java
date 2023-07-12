@@ -26,9 +26,8 @@ public class MemberController {
 	
 	// security?
 	@PostMapping("/login.do")
-	public String login(Model model, String id, String pwd) {
-		
-		service.login(id, pwd);
+	public String login(Model model, Member member) {
+		service.login(member);
 		return null;
 	}
 	
@@ -47,7 +46,8 @@ public class MemberController {
 	}
 	
 	@RequestMapping("/farewell")
-	public void farewell(String id) {
+	public String farewell(String id) {
 		service.withdrawal(id);
+		return "redirect:/main";
 	}
 }

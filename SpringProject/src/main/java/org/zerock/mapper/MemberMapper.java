@@ -4,7 +4,7 @@ import org.zerock.domain.Member;
 
 public interface MemberMapper {
 	
-	public Member selectMemberasIdnPwd(String id, String pwd);
+	public Member selectMemberaslogin(Member member);
 	
 	public Member selectMember(String id);
 	

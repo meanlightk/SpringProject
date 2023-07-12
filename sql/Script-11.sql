@@ -64,4 +64,9 @@ BEGIN
 END; //
 DELIMITER ;
 
+
+-- table member 샘플
+-- DELETE FROM shop.member;
+INSERT INTO shop.member(name, id, pwd, pnum, email, grade) VALUES('admin', 'admin', '12345', '01011111111', 'admin@test.com', 2);
+
 COMMIT;

@@ -14,7 +14,6 @@
 		<property name="jdbcUrl" value="jdbc:log4jdbc:mysql://52.79.129.200:3306/shop"></property>
 		<property name="username" value="root"></property>
 		<property name="password" value="12345"></property>
-
 	</bean>
 
 	<!-- HikariCP configuration -->

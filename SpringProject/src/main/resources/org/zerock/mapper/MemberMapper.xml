@@ -6,7 +6,7 @@
 
 <mapper namespace="org.zerock.mapper.MemberMapper">
 
-	<select id="selectMemberasIdnPwd" resultType="org.zerock.domain.Member">
+	<select id="selectMemberaslogin" parameterType="org.zerock.domain.Member" resultType="org.zerock.domain.Member">
 		<![CDATA[
 		select * from member where id=#{id} and pwd=#{pwd}
 		]]>
