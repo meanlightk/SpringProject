@@ -7,15 +7,15 @@
 <mapper namespace="org.zerock.mapper.MemberMapper">
 
 	<select id="selectMemberaslogin" parameterType="org.zerock.domain.Member" resultType="org.zerock.domain.Member">
-		
+		<![CDATA[
 		select * from member where id=#{id} and pwd=#{pwd}
-		
+		]]>
 	</select>
 	
 	<select id="selectMember" resultType="org.zerock.domain.Member">
-		
+		<![CDATA[
 		select * from member where id=#{id}
-		
+		]]>
 	</select>
 	
 	<insert id="insertMember" parameterType="org.zerock.domain.Member">

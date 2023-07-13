@@ -6,9 +6,33 @@
 
 <mapper namespace="org.zerock.mapper.GoodsMapper">
 
-<select id="findOne" resultType="org.zerock.domain.Goods">
-	<![CDATA[
-	]]>
+<select id="selectOneItem" resultType="org.zerock.domain.Goods">
+	select * from goods where goods_no = #{gno}
 </select>
 
+<select id="selectListByCategory" resultType="org.zerock.domain.Goods">
+	select * from goods where category = #{category} 
+</select>
+
+<select id="selecteListByCateAndSkin" resultType="org.zerock.domain.Goods">
+	select * from goods where category = #{category} and skintype = #{skintype}
+</select>
+
+<insert id="insertItem">
+	insert into goods(category, pname, price, skintype, regidate, updatedate, stock, status) values(#{goods_category},#{pname},#{price},
+	#${skintype},#{regidate},${updatedate},#{stock},#{status}) 
+</insert>
+
+<update id="updateItem">
+	update goods set category = #{category}, pname = #{pname}, goods_price = #{price},
+	skintype=#{skintype}, regidate = #{regidate}, updatedate = #{updatedate}, stock = #{stock}, status = #{status}
+</update>
+
+<delete id="deleteItem">
+	delete goods where goods_no = #{gno}
+</delete>
+
+<select id="selectImageList" resultType="org.zerock.domain.GoodsImage">
+	select * from goodsImage where goods_no = #{gno}
+</select>
 </mapper>

@@ -1,16 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<!DOCTYPE html>
-<html lang="en">
-<head>
-	<title>About</title>
-	<meta charset="UTF-8">
-	<meta name="viewport" content="width=device-width, initial-scale=1">
-<%@include file="../includes/stylesheetLink.jsp" %>
-</head>
 <body class="animsition">
-	<%@include file="../includes/header.jsp" %>
-
 	<!-- Title page -->
 	<section class="bg-img1 txt-center p-lr-15 p-tb-92" style="background-image: url('../resources/images/bg-01.jpg');">
 		<h2 class="ltext-105 cl0 txt-center">
@@ -85,7 +75,3 @@
 			</div>
 		</div>
 	</section>	
-	
-		
-
-<%@include file="../includes/footer.jsp" %>
