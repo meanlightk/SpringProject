@@ -5,17 +5,60 @@
 
 <tiles-definitions>
 
-<definition name="tiles-layout" template="/WEB-INF/views/tiles/index.jsp">
+<definition name="layout" template="/WEB-INF/views/tiles/template.jsp">
 <put-attribute name="header" value="/WEB-INF/views/tiles/header.jsp" />
-<put-attribute name="left" value="/WEB-INF/views/tiles/left.jsp" />
 <put-attribute name="body" value="" />
 <put-attribute name="footer" value="/WEB-INF/views/tiles/footer.jsp" />
 </definition>
 
-<definition name="main" extends="tiles-layout">
-<put-attribute name="title" value="메인페이지"></put-attribute>
-<put-attribute name="body" value="/WEB-INF/views/main.jsp" />
+
+
+
+<definition name="about" extends="layout">
+<put-attribute name="title" value="about" />
+<put-attribute name="body" value="/WEB-INF/views/about/about.jsp" />
 </definition>
+
+<definition name="blog" extends="layout">
+<put-attribute name="title" value="blog" />
+<put-attribute name="body" value="/WEB-INF/views/blog/blog.jsp" />
+</definition>
+
+<definition name="blogs" extends="layout">
+<put-attribute name="title" value="blogs" />
+<put-attribute name="body" value="/WEB-INF/views/blog/bloglist.jsp" />
+</definition>
+
+<definition name="mycart" extends="layout">
+<put-attribute name="title" value="Cart" />
+<put-attribute name="body" value="/WEB-INF/views/cart/myCart.jsp" />
+</definition>
+
+
+<definition name="contact" extends="layout">
+<put-attribute name="title" value="Contact" />
+<put-attribute name="body" value="/WEB-INF/views/contact/contact.jsp" />
+</definition>
+
+
+<definition name="item" extends="layout">
+<put-attribute name="title" value="Goods" />
+<put-attribute name="body" value="/WEB-INF/views/goods/item.jsp" />
+</definition>
+
+
+<definition name="itemlist" extends="layout">
+<put-attribute name="title" value="Goods List" />
+<put-attribute name="body" value="/WEB-INF/views/goods/list.jsp" />
+</definition>
+
+
+
+<definition name="home" extends="layout">
+<put-attribute name="title" value="home" />
+<put-attribute name="body" value="/WEB-INF/views/main/home.jsp" />
+</definition>
+
 
 
 </tiles-definitions>

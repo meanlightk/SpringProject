@@ -1,15 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<!DOCTYPE html>
-<html>
-<head>
-	<title>Blog Detail</title>
-	<meta charset="UTF-8">
-	<meta name="viewport" content="width=device-width, initial-scale=1">
-<%@include file="../includes/stylesheetLink.jsp" %>
-</head>
+
 <body class="animsition">
-	<%@include file="../includes/header.jsp" %>
 
 	<!-- breadcrumb -->
 	<div class="container">
@@ -378,5 +370,3 @@
 			</div>
 		</div>
 	</section>	
-	
-<%@include file="../includes/footer.jsp" %>

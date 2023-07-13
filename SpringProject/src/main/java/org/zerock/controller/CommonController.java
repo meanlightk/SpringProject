@@ -10,33 +10,48 @@ import lombok.extern.log4j.Log4j;
 @Log4j
 public class CommonController {
 	
-	@RequestMapping("/home")
-	public String mainPage() {
-		return "/main/home";
+	@RequestMapping("/")
+	public String main() {
+		return "redirect:/home";
 	}
 	
-	@RequestMapping("/product")
-	public String product() {
-		return "/product";
+	@RequestMapping("/home")
+	public String mainPage() {
+		return "home";
+	}
+	
+	@RequestMapping("/list")
+	public String goodslist() {
+		return "itemlist";
+	}
+	
+	@RequestMapping("/list/goods")
+	public String goods() {
+		return "item";
 	}
 	
 	@RequestMapping("/about")
 	public String about() {
-		return "/about/about";
+		return "about";
 	}
 	
 	@RequestMapping("/contact")
 	public String contact() {
-		return "/contact/contact";
+		return "contact";
 	}
 	
-	@RequestMapping("/bloglist")
+	@RequestMapping("/blogs")
 	public String bloglist() {
-		return "/blog/bloglist";
+		return "blogs";
 	}
 	
-	@RequestMapping("/blog")
+	@RequestMapping("/blogs/blog")
 	public String blog() {
-		return "/blog/blog";
+		return "blog";
 	}
+	
+//	@RequestMapping("/test")
+//	public String test() {
+//		return "part";
+//	}
 }
