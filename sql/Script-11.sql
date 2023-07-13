@@ -6,10 +6,10 @@ CREATE TABLE member(
 	pwd varchar(300) NOT NULL,
 	pnum varchar(100) NOT NULL,
 	email varchar(100) NOT NULL,
-	grade int NOT NULL comment '1:관리자 2~4:일반회원 2:새싹회원, 3:실버회원, 4:골드회원',
+	grade int NOT NULL DEFAULT 2 comment '1:관리자 2~4:일반회원 2:새싹회원, 3:실버회원, 4:골드회원',
 	regidate datetime DEFAULT current_timestamp,
 	updatedate datetime DEFAULT current_timestamp ON UPDATE CURRENT_TIMESTAMP,
-	status enum ('1', '2', '3') NOT NULL comment '1:정상 2:휴면 3:잠금 4:탈퇴'
+	status enum ('1', '2', '3', '4') DEFAULT '1' NOT NULL comment '1:정상 2:휴면 3:잠금 4:탈퇴'
 );
 
 CREATE TABLE goods (
@@ -30,7 +30,7 @@ CREATE TABLE goodsImage(
 	imagepath varchar(150) NOT NULL
 );
 
-ALTER TABLE goodsImage ADD CONSTRAINT fk_goods FOREIGN KEY (pno) REFERENCES goods(pno); 
+-- ALTER TABLE goodsImage ADD CONSTRAINT fk_goods FOREIGN KEY (pno) REFERENCES goods(pno); 
 
 CREATE TABLE qna(
 	qno int AUTO_INCREMENT PRIMARY KEY,
@@ -92,8 +92,6 @@ CREATE TABLE answer(
 	updatedate datetime DEFAULT current_timestamp ON UPDATE CURRENT_TIMESTAMP,
 	status enum ('1', '2', '3') NOT NULL comment '1:처리대기 2:처리중 3:처리완료'
 );
-
-
 
 -- table product_review의 컬럼 regidate 초기값 변경을 방지하는 트리거
 /*DELIMITER //
