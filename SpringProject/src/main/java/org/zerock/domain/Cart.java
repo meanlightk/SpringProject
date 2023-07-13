@@ -7,14 +7,10 @@ import lombok.Data;
 
 @Data
 @AllArgsConstructor
-public class Goods {
+public class Cart {
+	private int cno;
+	private String memid;
 	private int gno;
-	private int category;
-	private String pname;
-	private int price;
-	private int skintype;
+	private int ordernum;
 	private Date regidate;
-	private Date updatedate;
-	private int stock;
-	private int status;
 }

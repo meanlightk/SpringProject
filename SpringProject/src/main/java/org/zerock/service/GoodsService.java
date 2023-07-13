@@ -16,27 +16,38 @@ public class GoodsService {
 	@Autowired
 	private GoodsMapper mapper;
 	
-	public Goods showOneItem(int pno) {
-		
-		log.info("get one item......");
-		return mapper.findOne(pno);
+	public Goods showOneItem(int gno) {
+		log.info("-- show one item --");
+		return mapper.selectOneItem(gno);
 	}
 	
-	public List<Goods> showItemList(){
-		
-		log.info("show item list....");
-		return mapper.findGoods();
+	public List<Goods> showListByCategory(int category){
+		log.info("-- show item list by category --");
+		return mapper.selectListByCategory(category);
 	}
 	
-	public void putCart(int pno) {
-		
-		log.info("cart insert....");
-		mapper.insertCart(pno);
+	public List<Goods> showListByCateAndSkin(int category, int skintype){
+		log.info("-- show item list by category and skin-type --");
+		return mapper.selectListByCateAndSkin(category, skintype);
 	}
 	
-	public void removeGoods(int pno) {
-		
-		log.info("cart remove.....");
-		mapper.deleteCart(pno);
+	public void registerItem(Goods goods) {
+		log.info("-- insert goods --");
+		mapper.insertItem(goods);
+	}
+	
+	public void modifyItem(Goods goods) {
+		log.info("-- update goods --");
+		mapper.updateItem(goods);
+	}
+	
+	public void deleteItem(Goods goods) {
+		log.info("-- delete goods --");
+		mapper.deleteItem(goods);
+	}
+	
+	public void callImageList(int gno) {
+		log.info("-- call image list -- ");
+		mapper.selectImageList(gno);
 	}
 }
