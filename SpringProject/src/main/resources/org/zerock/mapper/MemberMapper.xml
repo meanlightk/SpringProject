@@ -7,28 +7,44 @@
 <mapper namespace="org.zerock.mapper.MemberMapper">
 
 	<select id="selectMemberaslogin" parameterType="org.zerock.domain.Member" resultType="org.zerock.domain.Member">
-		<![CDATA[
-		select * from member where id=#{id} and pwd=#{pwd}
-		]]>
+		select
+		mem_id as id,
+		name,
+		pwd,
+		pnum,
+		email,
+		grade,
+		regidate,
+		updatedate,
+		status
+		from member where mem_id=#{id} and pwd=#{pwd}
 	</select>
 	
 	<select id="selectMember" resultType="org.zerock.domain.Member">
-		<![CDATA[
-		select * from member where id=#{id}
-		]]>
+		select
+		mem_id as id,
+		name,
+		pwd,
+		pnum,
+		email,
+		grade,
+		regidate,
+		updatedate,
+		status
+		from member where mem_id=#{id}
 	</select>
 	
 	<insert id="insertMember" parameterType="org.zerock.domain.Member">
-		insert into member(name, id, pwd, pnum, email)
-		values(#{name}, #{id}, #{pwd}, #{pnum}, #{email})
+		insert into member(mem_id, name, pwd, pnum, email)
+		values(#{id}, #{name}, #{pwd}, #{pnum}, #{email})
 	</insert>
 	
 	<update id="updateMember" parameterType="org.zerock.domain.Member">
-		update member set pwd=#{pwd}, pnum=#{pnum}, email=#{email} where id=#{id}
+		update member set pwd=#{pwd}, pnum=#{pnum}, email=#{email} where mem_id=#{id}
 	</update>
 	
 	<delete id="deleteMember">
-		delete from member where id=#{id}
+		delete from member where mem_id=#{id}
 	</delete>
 
 </mapper>

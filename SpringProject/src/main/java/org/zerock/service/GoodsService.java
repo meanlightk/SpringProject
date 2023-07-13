@@ -26,9 +26,9 @@ public class GoodsService {
 		return mapper.selectListByCategory(category);
 	}
 	
-	public List<Goods> showListByCateAndSkin(int category, int skintype){
+	public List<Goods> showListByCateAndSkin(Goods goods){
 		log.info("-- show item list by category and skin-type --");
-		return mapper.selectListByCateAndSkin(category, skintype);
+		return mapper.selectListByCateAndSkin(goods);
 	}
 	
 	public void registerItem(Goods goods) {
@@ -41,9 +41,9 @@ public class GoodsService {
 		mapper.updateItem(goods);
 	}
 	
-	public void deleteItem(Goods goods) {
+	public void deleteItem(int gno) {
 		log.info("-- delete goods --");
-		mapper.deleteItem(goods);
+		mapper.deleteItem(gno);
 	}
 	
 	public void callImageList(int gno) {
