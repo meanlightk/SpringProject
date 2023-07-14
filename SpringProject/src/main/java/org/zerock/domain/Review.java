@@ -5,13 +5,13 @@ import java.sql.Date;
 import lombok.Data;
 
 @Data
-public class Product_Review {
-
-	private Long pno; // pk
-	private String id; // 유저아이디
+public class Review {
+	private int rno;
+	private String id;
+	private int pno;
 	private String title;
 	private String content;
-	private int score; // 평점
+	private int score;
 	private Date regiDate;
 	private Date updateDate;
 }
