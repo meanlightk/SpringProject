@@ -2,7 +2,9 @@ package org.zerock.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import lombok.extern.log4j.Log4j;
 
@@ -17,45 +19,30 @@ public class ReviewController {
 	@Autowired
 	private ReviewService reviewService;
 	
-	@RequestMapping("/main.do")
-	public String main() {
+	@RequestMapping("/save.do")
+	public String review(Model model) {
 		
+		model.addAttribute("list", reviewService.getReviewList());
 		
 		return "home";
 	}
 	
-	@RequestMapping("/list")
-	public String goodslist() {
-		return "itemlist";
+	
+	@RequestMapping("/form.do")
+	public String form(Model model) {
+		
+		return "/review/form";
+	}
+
+	
+	
+	@RequestMapping("/remove.do")
+	public String remove(Model model,@RequestParam("reviewNo") int reviewNo) {
+		
+		return "redirect://";
 	}
 	
-	@RequestMapping("/list/goods")
-	public String goods() {
-		return "item";
-	}
 	
-	@RequestMapping("/about")
-	public String about() {
-		return "about";
-	}
 	
-	@RequestMapping("/contact")
-	public String contact() {
-		return "contact";
-	}
 	
-	@RequestMapping("/blogs")
-	public String bloglist() {
-		return "blogs";
-	}
-	
-	@RequestMapping("/blogs/blog")
-	public String blog() {
-		return "blog";
-	}
-	
-	@RequestMapping("/test")
-	public String test() {
-		return "test";
-	}
 }

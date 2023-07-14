@@ -6,7 +6,7 @@
 
 <mapper namespace="org.zerock.mapper.QnAMapper">
 
-<select id="writeReview" resultType="org.zerock.domain.QnA">
+<select id="writeReview" resultType="org.zerock.domain.QnA_A">
 	<![CDATA[
 	select * from qna
 	]]>

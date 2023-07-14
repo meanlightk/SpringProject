@@ -53,6 +53,13 @@
 </definition>
 
 
+<definition name="/review/form" extends="layout">
+	<put-attribute name="title" value="home" />
+	<put-attribute name="body" value="/WEB-INF/views/review/form.jsp" />
+</definition>
+
+
+
 
 <definition name="home" extends="layout">
 <put-attribute name="title" value="home" />
