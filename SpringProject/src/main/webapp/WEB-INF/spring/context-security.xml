@@ -19,8 +19,8 @@
 		 
 		<security:form-login username-parameter="id"
 		            password-parameter="pwd"
-		            login-page="/login"
-		            default-target-url="/main/main.do"
+		            login-page="/member/login"
+		            default-target-url="/"
 		            login-processing-url="/member/login.do"
 		            authentication-failure-url="/member/main.do?fail=true" />
 		 

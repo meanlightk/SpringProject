@@ -1,5 +1,11 @@
 package org.zerock.controller;
 
+import java.nio.charset.StandardCharsets;
+import java.security.MessageDigest;
+import java.security.NoSuchAlgorithmException;
+
+import javax.websocket.Session;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -11,7 +17,7 @@ import org.zerock.service.MemberService;
 
 import lombok.extern.log4j.Log4j;
 
-@RequestMapping("/admin/")
+@RequestMapping("/member/")
 @Controller
 @Log4j
 public class MemberController {
@@ -27,10 +33,21 @@ public class MemberController {
 	
 	// security?
 	@PostMapping("/login.do")
-	public String login(Model model, Member member) {
+	public String auth(Model model, Member member) {
+		String pwd=member.getPwd();
+		member.setPwd(sha256Hash(pwd));
 		service.login(member);
 		return null;
 	}
+	
+	
+	@GetMapping("/logout.do")
+	public String logout() {
+		Session session;
+		return "redirect:/home";
+	}
+	
+	
 	
 	@GetMapping("/profile")
 	public String profile(Model model, String id) {
@@ -50,5 +67,28 @@ public class MemberController {
 	public String farewell(String id) {
 		service.withdrawal(id);
 		return "redirect:/";
+	}
+
+	
+	public static String sha256Hash(String input) {
+	    try {
+	        MessageDigest digest = MessageDigest.getInstance("SHA-256");
+	        byte[] hash = digest.digest(input.getBytes(StandardCharsets.UTF_8));
+	
+	        // 해시 값을 16진수 문자열로 변환
+	        StringBuilder hexString = new StringBuilder();
+	        for (byte b : hash) {
+	            String hex = Integer.toHexString(0xff & b);
+	            if (hex.length() == 1) {
+	                hexString.append('0');
+	            }
+	            hexString.append(hex);
+	        }
+	
+	        return hexString.toString();
+	    } catch (NoSuchAlgorithmException e) {
+	        e.printStackTrace();
+	        return null;
+	    }
 	}
 }

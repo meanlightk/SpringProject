@@ -6,7 +6,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Insert title here</title>
+<title>로그인</title>
 </head>
 <body>
 
@@ -18,13 +18,13 @@
 
 <script type="text/javascript">
 		$(function() {
-			$('#formContent #userID').focus();
+			$('#formContent #id').focus();
 			
 			// 에러가 있는 경우 메세지 처리
 			var errMsg = $('#errMsg').val();
 			if(errMsg != '') {
 				alert(errMsg);
-				$('#formContent').find('#userID').focus();
+				$('#formContent').find('#id').focus();
 			}
 		});
 	</script>
@@ -37,16 +37,16 @@
 				<!-- Tabs Titles -->
 				<h2 class="active">로그인</h2>
 				<!-- Login Form -->
-				<form action="${contextPath}/member/login.do" method="post">
-					<input type="text" id="userID" class="fadeIn second" name="userID" placeholder="아이디"> 
-					<input type="password" id="password" class="fadeIn third" name="password" placeholder="비밀번호" autocomplete="off"> 
+				<form action="/member/login.do" method="post">
+					<input type="text" id="id" class="fadeIn second" name="id" placeholder="아이디"> 
+					<input type="password" id="pwd" class="fadeIn third" name="pwd" placeholder="비밀번호" autocomplete="off"> 
 					<input type="submit" class="fadeIn fourth" value="로그인">
 					<input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}" />
 					<input type="hidden" id="errMsg" value='${sessionScope["SPRING_SECURITY_LAST_EXCEPTION"].message}' />
 				</form>
 				<!-- Signup Link -->
 				<div id="formFooter">
-					<a class="underlineHover" href="${contextPath}/member/join.do">회원가입</a>
+					<a class="underlineHover" href="/member/join">회원가입</a>
 				</div>
 			</div>
 		</div>
