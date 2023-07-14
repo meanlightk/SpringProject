@@ -3,8 +3,8 @@ package org.zerock.service;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.zerock.mapper.MemberMapper;
-import org.zerock.mapper.Product_ReviewMapper;
-import org.zerock.mapper.QnAMapper;
+import org.zerock.mapper.ReviewMapper;
+import org.zerock.mapper.QnA_QMapper;
 
 import lombok.extern.log4j.Log4j;
 
@@ -16,8 +16,8 @@ public class AdminService {
 	private MemberMapper memberMapper;
 	
 	@Autowired
-	private Product_ReviewMapper reviewMapper;
+	private ReviewMapper reviewMapper;
 	
 	@Autowired
-	private QnAMapper qnaMapper;
+	private QnA_QMapper qnaMapper;
 }
