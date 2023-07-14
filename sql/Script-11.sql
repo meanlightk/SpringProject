@@ -1,8 +1,10 @@
 -- !! 결제 테이블 필요 !! --
+CREATE DATABASE IF NOT EXISTS `shop`;
+USE `shop`;
 
 CREATE TABLE member(
 	name varchar(100) NOT NULL,
-	id varchar(100) PRIMARY KEY,
+	mem_id varchar(100) PRIMARY KEY,
 	pwd varchar(300) NOT NULL,
 	pnum varchar(100) NOT NULL,
 	email varchar(100) NOT NULL,
@@ -13,7 +15,7 @@ CREATE TABLE member(
 );
 
 CREATE TABLE goods (
-    gno INT AUTO_INCREMENT PRIMARY KEY,
+    goods_no INT AUTO_INCREMENT PRIMARY KEY,
     category VARCHAR(100) NOT NULL,
     pname VARCHAR(100) NOT NULL,
     price INT NOT NULL,
@@ -69,7 +71,7 @@ CREATE TABLE orderlist(
 	ono int AUTO_INCREMENT PRIMARY KEY,
 	id varchar(100) NOT NULL,
 	totprice int NOT NULL,
-	regidate date DEFAULT current_timestamp,
+	regidate datetime DEFAULT current_timestamp,
 	dstatus enum('1', '2', '3', '4') NOT NULL comment '1:배송준비중 2:출고완료 3:배송중 4:배송완료'
 );
 
