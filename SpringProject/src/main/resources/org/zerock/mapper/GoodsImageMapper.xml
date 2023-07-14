@@ -11,7 +11,7 @@
  		image_no as ino,
  		goods_no as gno,
  		imagepath
- 		form goodsImage
+ 		from goodsImage
  		where image_no=#{ino}
  	</select>
  	
@@ -27,6 +27,6 @@
  	</update>
  	
  	<delete id="deleteImg">
- 		delete from goodsImage where=#{ino}
+ 		delete from goodsImage where image_no=#{ino}
  	</delete>
  </mapper>
