@@ -9,10 +9,12 @@ import lombok.NoArgsConstructor;
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-public class Cart {
-	private int cno;
-	private String memid;
+public class Gclaim {
+	private int glno;
 	private int gno;
-	private int ordernum;
+	private String id;
+	private String content;
 	private Date regidate;
+	private Date updatedate;
+	private int status;
 }

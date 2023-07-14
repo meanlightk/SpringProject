@@ -8,7 +8,7 @@ public interface GoodsImageMapper {
 		
 	public List<GoodsImage> selectImgs(int ino);
 	
-	public void insertImg();
+	public void insertImg(GoodsImage images);
 	
 	public void updateImg();
 	
