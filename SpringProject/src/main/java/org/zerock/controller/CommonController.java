@@ -50,8 +50,14 @@ public class CommonController {
 		return "blog";
 	}
 	
-	@RequestMapping("/test")
-	public String test() {
-		return "test";
+	@RequestMapping("/login")
+	public String login() {
+		return "/customlogin";
 	}
+	
+//	@RequestMapping("/test")
+//	public String test() {
+//		return "test";
+//	}
+
 }
