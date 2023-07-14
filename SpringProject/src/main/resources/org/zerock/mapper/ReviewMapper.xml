@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE mapper
+
+
+
+ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="org.zerock.mapper.ReviewMapper">
+	<sql id="info">
+			review_no as reviewNo
+			mem_id as memId
+			goods_no as goodsNo
+			title as title
+			content as content
+			socre as score
+			DATE_FORMAT(regiDate,'%Y%m%d') as regiDateStr 
+			DATE_FORMAT(updateDate,'%Y%m%d') as updateDateStr	
+	</sql>
+
+	<select id="selectReviewList" resultType="org.zerock.domain.Review">
+		select
+		<include refid="info"/>  
+		from review
+	</select>	
+	
+	<select id="selectReviewById"  resultType="org.zerock.domain.Review">
+		select 
+		<include refid="info"/>  
+		from review
+		where review_no = #{reviewNo}
+	</select>
+
+	<insert id="insertReview"  parameterType="org.zerock.domain.Review">
+		insert into review(mem_id,goods_no,title,content,score) 
+		values(#{memId},#{goodsNo},#{title},#{content},#{score})
+	</insert>
+	
+	<update id="updateReview" parameterType="org.zerock.domain.Review">
+		update review
+		set titl e= #{title},
+			content = #{content},
+			score = #{score}
+		where review_no = #{reviewNo} 
+	</update>
+	
+	<delete id="deleteReview">
+		delete from review
+		where review_no = #{reviewNo}
+	</delete>
+	
+	
+
+</mapper>

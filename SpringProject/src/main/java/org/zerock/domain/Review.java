@@ -6,12 +6,25 @@ import lombok.Data;
 
 @Data
 public class Review {
-	private int rno;
-	private String id;
-	private int pno;
+
+	private int reviewNo;
+	
+	private String memId;
+
+	private int goodsNo;
+	
 	private String title;
+	
 	private String content;
+	
 	private int score;
+	
 	private Date regiDate;
+	
+	private String regiDateStr;
+	
 	private Date updateDate;
+	
+	private String updateDateStr;
+	
 }
