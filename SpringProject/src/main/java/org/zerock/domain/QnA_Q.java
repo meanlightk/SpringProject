@@ -5,9 +5,9 @@ import java.sql.Date;
 import lombok.Data;
 
 @Data
-public class QnA {
-	private int qno; // pk
-	private String id; // 유저아이디
+public class QnA_Q {
+	private int qna_questno; // pk
+	private String id;
 	private String title;
 	private String content;
 	private Date regiDate;
