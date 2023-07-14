@@ -11,4 +11,6 @@ public interface CartMapper {
 	public void insertCart(Cart cart);
 	
 	public void deleteCart(Cart cart);
+	
+	public int selectCartCount(String id);
 }

@@ -15,28 +15,18 @@
 			<security:intercept-url pattern="/main/*.do" access="hasRole('ROLE_USER')"/>
 			 -->
 		 
- 			<security:intercept-url pattern="/join" access="permitAll"/>
-		 
-		<security:form-login username-parameter="id"
-		            password-parameter="pwd"
-		            login-page="/member/login"
-		            default-target-url="/"
-		            login-processing-url="/member/login.do"
-		            authentication-failure-url="/member/main.do?fail=true" />
-		 
-		 <!-- 
-		 		<security:form-login username-parameter="id"
-		            password-parameter="pwd"
-		            login-page="/login"
+		<security:form-login username-parameter="userID"
+		            password-parameter="password"
+		            login-page="/member/main.do"
 		            default-target-url="/main/main.do"
 		            login-processing-url="/member/login.do"
 		            authentication-failure-url="/member/main.do?fail=true" />
 		 
-		 
+		 <!-- 
 		<security:logout logout-url="/member/logout.do"
 		        invalidate-session="true"
 		/>
- 		 -->
+ 		-->
 	</security:http>        		 
  	
 	<security:authentication-manager>

@@ -51,8 +51,8 @@
     </beans:bean>
 	
 	
-	
-	
+	<!-- 파일 업로더 -->
+	<beans:bean id="multipartResolver" class="org.springframework.web.multipart.support.StandardServletMultipartResolver" />
 	
 	<!-- Tiles Start -->
 	<!-- 

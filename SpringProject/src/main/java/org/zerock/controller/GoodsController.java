@@ -41,7 +41,7 @@ public class GoodsController {
 		
 		//model.addAttribute("good", good);
 		
-		return "goods/item";
+		return "item";
 	}	
 	
 	@GetMapping("/put")
@@ -63,4 +63,6 @@ public class GoodsController {
 	 * 
 	 * }
 	 */
+	
+
 }

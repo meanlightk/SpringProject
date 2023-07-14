@@ -15,7 +15,6 @@ public class CartService {
 	
 	@Autowired
 	private CartMapper mapper;
-	
 	public List<Cart> showCart(String id){
 		log.info("-- show cart --");
 		return mapper.selectCart(id);
@@ -29,5 +28,10 @@ public class CartService {
 	public void removeCart(Cart cart) {
 		log.info("-- delete cart --");
 		mapper.deleteCart(cart);
+	}
+	
+	public void showCartCount(String id) {
+		log.info("-- cart count --");
+		
 	}
 }

@@ -3,7 +3,23 @@
 <!DOCTYPE mapper
 
  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
- 
- <mapper namespace="org.zerock.mapper.CartMapper">
- 
- </mapper>
+
+<mapper namespace="org.zerock.mapper.CartMapper">
+
+<select id="selectCart" resultType="org.zerock.domain.Cart">
+	select * from cart where mem_id = ${id}
+</select>
+
+<insert id="insertCart">
+	insert into cart(mem_id, goods_no, ordernum, regidate) values(#{mem_id},#{goods_no},#{ordernum},#{regidate})
+</insert>
+
+<delete id="deleteCart">
+	delete cart where cno = #{cno}
+</delete>
+
+<select id="selectCartCount" resultType="int">
+	select count(*) from cart where mem_id = ${id}
+</select>
+
+</mapper>
