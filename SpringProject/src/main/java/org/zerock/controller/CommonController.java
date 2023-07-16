@@ -62,5 +62,10 @@ public class CommonController {
 //	public String test() {
 //		return "test";
 //	}
+	
+	@GetMapping("/review/form")
+	public String reviewForm() {
+		return "/review/form";
+	}
 
 }

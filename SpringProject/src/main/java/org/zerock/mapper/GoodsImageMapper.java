@@ -5,12 +5,11 @@ import java.util.List;
 import org.zerock.domain.GoodsImage;
 
 public interface GoodsImageMapper {
+	
+	public void insert(GoodsImage vo);
+	
+	public void delete(String uuid);
+	
+	public List<GoodsImage> findByGno(int gno);
 		
-	public List<GoodsImage> selectImgs(int ino);
-	
-	public void insertImg(GoodsImage images);
-	
-	public void updateImg();
-	
-	public void deleteImg(int ino);
 }

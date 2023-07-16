@@ -1,32 +1,18 @@
 <?xml version="1.0" encoding="UTF-8"?>
-
 <!DOCTYPE mapper
-
  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="org.zerock.mapper.GoodsImageMapper">
  
- <mapper namespace="org.zerock.mapper.GoodsImageMapper">
- 
- 	<select id="selectImgs" resultType="org.zerock.domain.GoodsImage">
- 		select
- 		image_no as ino,
- 		goods_no as gno,
- 		imagepath
- 		from goodsImage
- 		where image_no=#{ino}
- 	</select>
- 	
- 	<insert id="insertImg" parameterType="org.zerock.domain.GoodsImage">
- 		insert into goodsImage(image_no, goods_no, imagepath)
- 		values(#{ino}, #{gno}, #{imagepath})
+ 	<insert id="insert">
+ 		insert into goodsImage (image_no, goods_no, imagepath, uuid) values (#{ino},#{gno},#{imagepath}, #{uuid})
  	</insert>
- 
- 
- 	<update id="updateImg" parameterType="org.zerock.domain.GoodsImage">
- 		update goodsImage set imagepath=#{imagepath}
- 		where image_no=#{ino}
- 	</update>
  	
- 	<delete id="deleteImg">
- 		delete from goodsImage where image_no=#{ino}
+ 	<delete id="delete">
+ 		delete from goodsImage where uuid = #{uuid}
  	</delete>
- </mapper>
+ 	
+ 	<select id="findByGno" resultType="org.zerock.domain.GoodsImage">
+ 		select * from goodsImage where goods_no = #{gno}
+ 	</select>
+ 
+</mapper>
