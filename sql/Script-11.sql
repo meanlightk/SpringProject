@@ -14,6 +14,13 @@ CREATE TABLE member(
 	status enum ('1', '2', '3', '4') DEFAULT '1' NOT NULL comment '1:정상 2:휴면 3:잠금 4:탈퇴'
 );
 
+CREATE TABLE authority(
+	auth_id int AUTO_INCREMENT PRIMARY KEY,
+	mem_id varchar(100) NOT NULL,
+	auth varchar(100) NOT NULL,
+	FOREIGN KEY (mem_id) REFERENCES member(mem_id) 
+);
+
 CREATE TABLE goods (
     goods_no INT AUTO_INCREMENT PRIMARY KEY,
     category VARCHAR(100) NOT NULL,
