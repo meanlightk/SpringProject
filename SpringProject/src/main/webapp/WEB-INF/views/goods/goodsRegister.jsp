@@ -144,7 +144,7 @@ p {
 		<div class="sub">
 			<div class="image-wrap">
 				<p>서브이미지</p>
-				<br> <input type="file" name="subImages" id="subImages" multiple>
+				<br> <input type="file" name="uploadSubFile" id="subImages" multiple>
 			</div>
 			<div class='v-line'></div>
 			<div id="uploadResult" style="width: 30%;">
@@ -191,12 +191,12 @@ function submitData(){
 		},
 		success:function(data){
 			console.log("성공" + data);
-			loadImage();
+			loadImage(data);
+			loadSubImage(data);
 		},
 		error:function(){
 			alert("error");
 		}
-		
 	});
 /*	
 	$.ajax({
@@ -239,11 +239,10 @@ $(".bigPictureWrapper").on("click", function(e){
 	},1000);
 })
 
-function loadImage(){
+function loadImage(Data){
 		var formData = new FormData();
 		var inputFile = $("input[name='uploadFile']");
 		var files = inputFile[0].files;
-		console.log(files);
 		// Add File Data to formData
 		for(var i = 0; i < files.length; i++){
 			if(!checkExtension(files[i].name, files[i].size)){
@@ -252,6 +251,7 @@ function loadImage(){
 			
 			formData.append("uploadFile", files[i]);
 		}
+		formData.append("goods", Data);
 		$.ajax({
 			url: '/uploadAjaxAction',
 			processData: false,
@@ -263,15 +263,50 @@ function loadImage(){
 				xhr.setRequestHeader(header, token); //csrf 전송하지 않으면 아예 ajax가 되지 않는 문제가 생김.
 			},
 			success: function(result){
-				console.log(result);
-				alert('upload');
-				
+				//console.log(result);
+				//console.log(formData);
 				showUploadedFile(result);
 				$(".uploadDiv").html(cloneObj.html());
 			}
 		});  //$.ajax
 	}; 
-	
+
+	function loadSubImage(Data){
+		var formData = new FormData();
+		var inputFile = $("input[name='uploadSubFile']");
+		var files = inputFile[0].files;
+
+		// Add File Data to formData
+		for(var i = 0; i < files.length; i++){
+			if(!checkExtension(files[i].name, files[i].size)){
+				return false;
+			}
+			
+			formData.append("uploadFile", files[i]);
+		}
+		formData.append("goods", Data);
+		console.log(formData);
+		console.log(files);
+
+
+		$.ajax({
+			url: '/uploadAjaxAction',
+			processData: false,
+			contentType: false,
+			data: formData,
+			type: 'POST',
+			dataType: 'json',
+			beforeSend: function(xhr) { //XMLHttpRequest (XHR)은 AJAX 요청을 생성하는 JavaScript API이다. XHR의 메서드로 브라우저와 서버간의 네트워크 요청을 전송할 수 있다.
+				xhr.setRequestHeader(header, token); //csrf 전송하지 않으면 아예 ajax가 되지 않는 문제가 생김.
+			},
+			success: function(result){
+//				console.log(result);
+//				console.log(formData);
+				showUploadedFile(result);
+				$(".uploadDiv").html(cloneObj.html());
+			}
+		});  //$.ajax
+	}; 
 	
 	var regex = new RegExp("(.*?)\.(exe|sh|zip|alz)$");
 	var maxSize = 5242880;  //5MB
@@ -297,7 +332,7 @@ $(document).ready(function(){
 	
 	var cloneObj = $(".uploadDiv").clone();
 	
- 	$('#uploadBtn').on("click", function(e){
+/* 	$('#uploadBtn').on("click", function(e){
 		var formData = new FormData();
 		var inputFile = $("input[name='uploadFile']");
 		var files = inputFile[0].files;
@@ -329,7 +364,7 @@ $(document).ready(function(){
 			}
 		});  //$.ajax
 	}); 
-	
+	*/
 	var uploadResult = $(".uploadResult ul");
 	
 	function showUploadedFile(uploadResultArr){

@@ -24,10 +24,10 @@ import org.springframework.stereotype.Controller;
 import org.springframework.util.FileCopyUtils;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestHeader;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
-import org.zerock.domain.AttachFileDTO;
 import org.zerock.domain.Goods;
 import org.zerock.domain.GoodsImage;
 import org.zerock.service.GoodsImageService;
@@ -78,6 +78,10 @@ public class UploadController {
 		
 		for(MultipartFile multipartFile: uploadFile) {
 			
+			int i = 1;
+			
+			log.info("test : i" + i++ );
+			
 			log.info("-----------------------------------");
 			log.info("Upload File Name: " + multipartFile.getOriginalFilename());
 			log.info("Upload File Size: " + multipartFile.getSize());
@@ -103,8 +107,10 @@ public class UploadController {
 				multipartFile.transferTo(saveFile);                       //파일을 최종 경로로 이동
 				
 				goodsImage.setUuid(uuid.toString());
-				goodsImage.setImagepath(uploadFolderPath);
+				goodsImage.setImagepath(uploadFolderPath+"/"+ uploadFileName);
 				goodsImage.setGno(goods.getGno());
+				service.insertGoodsImage(goodsImage);
+				list.add(goodsImage);
 				
 				// 만일 이미지 타입이라면 섬네일을 생성하도록 한다.
 				//check image type file
@@ -117,6 +123,12 @@ public class UploadController {
 					Thumbnailator.createThumbnail(multipartFile.getInputStream(), thumbnail, 100, 100);
 					
 					thumbnail.close();
+					
+					goodsImage.setUuid(uuid.toString());
+					goodsImage.setImagepath(uploadFolderPath +  "/s_" + uploadFileName);
+					goodsImage.setGno(goods.getGno());
+					service.insertGoodsImage(goodsImage);
+
 				}
 				
 				//add to List
@@ -126,6 +138,7 @@ public class UploadController {
 				e.printStackTrace();
 			}//end catch
 		}//end for
+		
 		return new ResponseEntity<>(list, HttpStatus.OK);
 	}
 	
