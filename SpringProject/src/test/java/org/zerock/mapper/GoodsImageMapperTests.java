@@ -21,7 +21,7 @@ public class GoodsImageMapperTests {
 	
 	@Test
 	public void testselectImgs(){
-		List<GoodsImage> images= mapper.selectImgs(1);
+		List<GoodsImage> images= mapper.findByGno(1);
 		log.info(images);
 	};
 	
@@ -31,16 +31,16 @@ public class GoodsImageMapperTests {
 		image.setGno(1);
 		image.setIno(1);
 		image.setImagepath("a");
-		mapper.insertImg(image);
+		mapper.insert(image);
 	};
 	
-	@Test
-	public void testupdateImg() {
-		mapper.updateImg();
-	};
+//	@Test
+//	public void testupdateImg() {
+//		mapper.updateImg();
+//	};
 	
 	@Test
 	public void testdeleteImg() {
-		mapper.deleteImg(1);
+		mapper.delete("");
 	};
 }

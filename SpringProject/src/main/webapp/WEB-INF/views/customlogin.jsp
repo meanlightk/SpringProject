@@ -15,19 +15,20 @@
 
 
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
-
+<!-- 
 <script type="text/javascript">
-		$(function() {
-			$('#formContent #id').focus();
-			
-			// 에러가 있는 경우 메세지 처리
-			var errMsg = $('#errMsg').val();
-			if(errMsg != '') {
-				alert(errMsg);
-				$('#formContent').find('#id').focus();
-			}
-		});
-	</script>
+	$(function() {
+		$('#formContent #id').focus();
+		
+		// 에러가 있는 경우 메세지 처리
+		var errMsg = $('#errMsg').val();
+		if(errMsg != '') {
+			alert(errMsg);
+			$('#formContent').find('#id').focus();
+		}
+	});
+</script>
+ -->
 <title>로그인</title>
 <link rel="stylesheet" href='<c:out value="/resources/css/login.css"/>'>
 </head>
@@ -37,9 +38,9 @@
 				<!-- Tabs Titles -->
 				<h2 class="active">로그인</h2>
 				<!-- Login Form -->
-				<form action="/member/login.do" method="post">
-					<input type="text" id="id" class="fadeIn second" name="id" placeholder="아이디"> 
-					<input type="password" id="pwd" class="fadeIn third" name="pwd" placeholder="비밀번호" autocomplete="off"> 
+				<form action="/login" method="post">
+					<input type="text" id="username" class="fadeIn second" name="username" placeholder="아이디"> 
+					<input type="password" id="password" class="fadeIn third" name="password" placeholder="비밀번호" autocomplete="off"> 
 					<input type="submit" class="fadeIn fourth" value="로그인">
 					<input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}" />
 					<input type="hidden" id="errMsg" value='${sessionScope["SPRING_SECURITY_LAST_EXCEPTION"].message}' />

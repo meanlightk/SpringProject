@@ -5,16 +5,34 @@
 	xsi:schemaLocation="http://www.springframework.org/schema/security http://www.springframework.org/schema/security/spring-security.xsd
 		http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
 
-	<security:http auto-config="true" use-expressions="true">
-			<!-- 
-			<security:intercept-url pattern="/member/join.do" access="permitAll"/>
-			<security:intercept-url pattern="/member/main.do" access="permitAll"/>
-			<security:intercept-url pattern="/member/*.do" access="hasRole('ROLE_USER')"/>
-			<security:intercept-url pattern="/board/*.do" access="hasRole('ROLE_USER')"/>
-			<security:intercept-url pattern="/admin/*.do" access="hasRole('ROLE_USER')"/>
-			<security:intercept-url pattern="/main/*.do" access="hasRole('ROLE_USER')"/>
-			 -->
+	<bean id="customAccessDenied" class="org.zerock.security.CustomAccessDeniedHandler"></bean>
+	<bean id="loginSuccess" class="org.zerock.security.LoginSuccessHandler"></bean>
+	<bean id="customPasswordEncoder" class="org.zerock.security.CustomPasswordEncoder"></bean>
+	<bean id="customUserDetailService" class="org.zerock.security.CustomUserDetailsService"></bean>
+ 	
+	<security:http>
+		<!-- <security:intercept-url pattern="/*" access="permitAll"/> -->
+		<security:intercept-url pattern="/sample/member" access="hasRole('ROLE_MEMBER')" />
+		<security:intercept-url pattern="/sample/admin" access="hasRole('ROLE_ADMIN')"/>
+		
+		<security:form-login login-page="/login" authentication-success-handler-ref="loginSuccess" />
+		<security:logout logout-url="/logout.do" invalidate-session="true" />
+		
+		<!-- <security:access-denied-handler error-page="/accessError"/> -->
+		<security:access-denied-handler ref="customAccessDenied"/>
+	</security:http>
+
+
+	<security:authentication-manager>
 		 
+		<security:authentication-provider  user-service-ref="customUserDetailService" >	
+			<security:password-encoder ref="customPasswordEncoder"/>
+		</security:authentication-provider>
+	</security:authentication-manager>
+
+</beans>
+
+<!-- 
 		<security:form-login username-parameter="userID"
 		            password-parameter="password"
 		            login-page="/member/main.do"
@@ -22,20 +40,21 @@
 		            login-processing-url="/member/login.do"
 		            authentication-failure-url="/member/main.do?fail=true" />
 		 
-		 <!-- 
+		
 		<security:logout logout-url="/member/logout.do"
 		        invalidate-session="true"
 		/>
- 		-->
+ 		
 	</security:http>        		 
  	
 	<security:authentication-manager>
 	    
-	   <!--  <security:authentication-provider ref="customAuthenticationProvider"/> -->
+	    <security:authentication-provider ref="customAuthenticationProvider"/>
 	    
 	</security:authentication-manager>	
-    <!-- 
+    
     <bean id="customAuthenticationProvider" class="org.zerock.security.CustomAuthenticationProvider"/>  
-     -->
+    
        
 </beans>
+ -->

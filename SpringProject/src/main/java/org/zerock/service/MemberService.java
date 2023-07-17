@@ -19,8 +19,9 @@ public class MemberService {
 		memberMapper.insertMember(member);
 	}
 	
-	public Member login(Member member) {
-		return memberMapper.selectMemberaslogin(member);
+	public Member login(String id) {
+		return memberMapper.selectMemberaslogin(id);
+//		return memberMapper.selectMember(id);
 	}
 	
 	public Member memberInfo(String id) {
