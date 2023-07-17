@@ -41,12 +41,12 @@ public class MemberMapperTests {
 	
 	@Test
 	public void testUpdateMember() {
-		String id = "admin";
-		String pwd = "12345";
+		String id = "unable";
+		String pwd = "unable";
 		String pnum = "01011111111";
-		String email = "admin1@test.com";
+		String email = "unable@test.com";
 		Member member=new Member();
-		member.setId(id);
+		member.setMem_id(id);
 		member.setPwd(pwd);
 		member.setPnum(pnum);
 		member.setEmail(email);

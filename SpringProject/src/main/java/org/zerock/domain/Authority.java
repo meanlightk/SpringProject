@@ -6,6 +6,6 @@ import lombok.Data;
 public class Authority {
 
 	private int aid;
-	private String id;
+	private String mem_id;
 	private String auth;
 }
