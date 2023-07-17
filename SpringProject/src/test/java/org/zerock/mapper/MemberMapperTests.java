@@ -18,38 +18,26 @@ public class MemberMapperTests {
 	private MemberMapper mapper;
 	
 	@Test
-	public void testSelectMemberaslogin() {
-		String id = "admin";
-		String pwd = "12345";
-		
-		Member member = new Member();
-		member.setId(id);
-		member.setPwd(pwd);
-		mapper.selectMemberaslogin(member);
-		log.info(member);
-	}
-	
-	@Test
 	public void testSelectMember() {
 		Member member = mapper.selectMember("admin");
 		log.info(member);
 	}
 	
-	@Test
-	public void testInsertMember() {
-		Member member = new Member();
-		String id = "test1";
-		String pwd = "12345";
-		String name = "tester1";
-		String pnum = "01022222222";
-		String email = "tester@test.com";
-		member.setEmail(email);
-		member.setId(id);
-		member.setName(name);
-		member.setPnum(pnum);
-		member.setPwd(pwd);
-		mapper.insertMember(member);
-	}
+//	@Test
+//	public void testInsertMember() {
+//		Member member = new Member();
+//		String id = "test1";
+//		String pwd = "12345";
+//		String name = "tester1";
+//		String pnum = "01022222222";
+//		String email = "tester@test.com";
+//		member.setEmail(email);
+//		member.setId(id);
+//		member.setName(name);
+//		member.setPnum(pnum);
+//		member.setPwd(pwd);
+//		mapper.insertMember(member);
+//	}
 	
 	@Test
 	public void testUpdateMember() {

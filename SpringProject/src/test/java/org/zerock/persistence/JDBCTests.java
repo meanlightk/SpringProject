@@ -20,12 +20,25 @@ public class JDBCTests {
 		}
 	}
 
+//	@Test
+//	public void testConnectionMariaDB() {
+//		try(Connection con= 
+//			DriverManager.getConnection(
+//					"jdbc:mysql://52.79.129.200:3306/shop",
+//					"root",
+//					"12345")) {
+//				log.info(con);
+//		} catch (Exception e) {
+//			fail(e.getMessage());
+//		}
+//	}
+	
 	@Test
 	public void testConnectionMariaDB() {
 		try(Connection con= 
 			DriverManager.getConnection(
-					"jdbc:mysql://52.79.129.200:3306/shop",
-					"root",
+					"jdbc:mysql://3.39.15.64:3306/shop",
+					"parrot",
 					"12345")) {
 				log.info(con);
 		} catch (Exception e) {

@@ -5,10 +5,28 @@
  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
 <mapper namespace="org.zerock.mapper.MemberMapper">
-
-	<select id="selectMemberaslogin" parameterType="org.zerock.domain.Member" resultType="org.zerock.domain.Member">
+	 
+	<resultMap type="org.zerock.domain.Member" id="memberMap">
+		<id property="username" column="mem_id" />
+		<result property="username" column="mem_id" />
+		<result property="name" column="name" />
+		<result property="pwd" column="pwd" />
+		<result property="pnum" column="pnum" />
+		<result property="email" column="email" />
+		<result property="grade" column="grade" />
+		<result property="regidate" column="regidate" />
+		<result property="updatedate" column="updatedate" />
+		<collection property="authList" resultMap="authMap"></collection>
+	</resultMap>
+	 
+	<resultMap type="org.zerock.domain.Authority" id="authMap">
+		<result property="id" column="mem_id"/>
+		<result property="auth" column="auth"/>
+	</resultMap>
+	 
+	<select id="selectMemberaslogin" resultMap="memberMap">
 		select
-		mem_id as id,
+		mem.mem_id as username,
 		name,
 		pwd,
 		pnum,
@@ -16,10 +34,12 @@
 		grade,
 		regidate,
 		updatedate,
-		status
-		from member where mem_id=#{id} and pwd=#{pwd}
+		status,
+		auth
+		from member mem LEFT JOIN authority auth on mem.mem_id = auth.mem_id
+		where mem.mem_id=#{username}
 	</select>
-	
+
 	<select id="selectMember" resultType="org.zerock.domain.Member">
 		select
 		mem_id as id,
