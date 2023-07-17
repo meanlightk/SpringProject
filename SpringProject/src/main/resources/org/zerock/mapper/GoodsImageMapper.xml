@@ -3,9 +3,18 @@
  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="org.zerock.mapper.GoodsImageMapper">
  
- 	<insert id="insert">
- 		insert into goodsImage (image_no, goods_no, imagepath, uuid) values (#{ino},#{gno},#{imagepath}, #{uuid})
- 	</insert>
+ 	<insert id="insert" parameterType="org.zerock.domain.GoodsImage">
+   <selectKey keyProperty="ino" resultType="int" order="BEFORE">
+      SELECT IFNULL(MAX(image_no)+1,1) FROM goodsImage
+   </selectKey>
+   INSERT INTO goodsImage (image_no, goods_no, imagepath, uuid)
+   VALUES ( 
+      #{ino}, 
+      #{gno}, 
+      #{imagepath},
+      #{uuid}
+   )
+</insert>
  	
  	<delete id="delete">
  		delete from goodsImage where uuid = #{uuid}

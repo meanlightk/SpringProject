@@ -2,6 +2,10 @@
 	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
+<head>
+<meta name="_csrf" content="${_csrf.token}">
+<meta name="_csrf_header" content="${_csrf.headerName}">
+</head>
 <style>
 .title {
 	font-size: 35px;
@@ -50,7 +54,7 @@ input {
 }
 #main2{
 
-	width: 80%;
+	
 
 }
 .v-line {
@@ -92,19 +96,37 @@ p {
 <div id="main">
 	<div id="main2">
 		<p class="title">상품 등록</p>
+		<div>
+			<p>카테고리</p>
+			<select name="category"  class="category">
+				<option value="skincare">skincare</option>
+				<option value="base">base</option>
+				<option value="lib">lib</option>
+				<option value="eye">eye</option>
+				<option value="cheek">cheek</option>
+			</select>
+		</div>
+		<div>
+			<p>피부타입</p>
+			<select name="skintype" class="skintype">
+				<option value="oily">지성</option>
+				<option value="middle">복합성</option>
+				<option value="dry">건성</option>
+			</select>
+		</div>
 		<div id="pname" class="all">
 			<p>상품이름</p>
-			<input type="text" name="pname">
+			<input type="text" name="pname" id="pnameReal">
 		</div>
 		<div id="real">
 			<div id="price" class="all">
 				<p>상품가격</p>
-				<input type="text" name="price">
+				<input type="text" name="price" id="priceReal">
 			</div>
 	
 			<div id="stock" class="all">
 				<p>상품수량</p>
-				<input type="number" name="stock" placeholder="0">
+				<input type="number" name="stock" placeholder="0" id="stockReal">
 	
 				<div class="result"></div>
 			</div>
@@ -113,7 +135,7 @@ p {
 		<div class="image">
 			<div class="image-wrap">
 				<p>메인이미지</p>
-				<br> <input type="file" name="uploadFile" id="mainImage">
+				<br> <input type="file" name="uploadFile" id="mainImage" enc="multipart-formdata">
 			</div>
 	
 			<div class='v-line'></div>
@@ -125,12 +147,16 @@ p {
 				<br> <input type="file" name="subImages" id="subImages" multiple>
 			</div>
 			<div class='v-line'></div>
-			<div id="uploadResult" style="width: 30%;"></div>
+			<div id="uploadResult" style="width: 30%;">
+				<ul>
+				
+				</ul>
+			</div>
 		</div>
 	</div>
 
 
-	<button id="uploadBtn">제출</button>
+	<button id="uploadBtn" onClick="submitData()">제출</button>
 	<button id="resetBtn">취소</button>
 </div>
 
@@ -140,6 +166,61 @@ p {
 <script>
 var token = $("meta[name='_csrf']").attr("content");
 var header = $("meta[name='_csrf_header']").attr("content");
+
+function submitData(){
+	var pname = $("#pnameReal").val();
+	var price = $("#priceReal").val();
+	var stock = $('#stockReal').val();
+	var category = $('.category').val();
+	var skintype = $('.skintype').val();
+	var uploadBtn = $("#uploadBtn");
+	
+	console.log(pname);
+	console.log(price);
+	console.log(stock);
+	console.log(category);
+	console.log(skintype);
+
+	$.ajax({
+		url:"/registerGoods",		// servlet 
+		type: "post",
+		dataType: 'json',
+		data: {"price" : price, "pname": pname, "stock": stock, "skintype": skintype, "category": category},
+		beforeSend: function(xhr) { //XMLHttpRequest (XHR)은 AJAX 요청을 생성하는 JavaScript API이다. XHR의 메서드로 브라우저와 서버간의 네트워크 요청을 전송할 수 있다.
+			xhr.setRequestHeader(header, token); //csrf 전송하지 않으면 아예 ajax가 되지 않는 문제가 생김.
+		},
+		success:function(data){
+			console.log("성공" + data);
+			loadImage();
+		},
+		error:function(){
+			alert("error");
+		}
+		
+	});
+/*	
+	$.ajax({
+			url: '/registerGoods',
+			processData: false,
+			contentType: false,  //이것때문에 오류. contentType: "application/json",파일보낼 때 이렇게 씀
+			data: {"price": price},
+			type: 'post',
+			dataType: 'json',
+			beforeSend: function(xhr) { //XMLHttpRequest (XHR)은 AJAX 요청을 생성하는 JavaScript API이다. XHR의 메서드로 브라우저와 서버간의 네트워크 요청을 전송할 수 있다.
+				xhr.setRequestHeader(header, token); //csrf 전송하지 않으면 아예 ajax가 되지 않는 문제가 생김.
+			},
+			success: function(result){
+				console.log(result);
+				alert('upload');
+				
+				showUploadedFile(result);
+				$(".uploadDiv").html(cloneObj.html());
+			},
+			error: function(error){
+				console.log(error);
+			}
+		});*/
+}
 
 function showImage(fileCallPath){
 	//alert(fileCallPath);
@@ -158,30 +239,7 @@ $(".bigPictureWrapper").on("click", function(e){
 	},1000);
 })
 
-
-$(document).ready(function(){
-	
-	var regex = new RegExp("(.*?)\.(exe|sh|zip|alz)$");
-	var maxSize = 5242880;  //5MB
-	
-	function checkExtension(fileName, fileSize){
-		
-		if(fileSize >= maxSize){
-			alert('파일 사이즈 초과');
-			return false;
-		}
-		
-		if(regex.test(fileName)){
-			alert("해당 종류의 파일은 업로드할 수 없습니다.");
-			return false;
-		}
-		return true;
-	}
-	
-	
-	var cloneObj = $(".uploadDiv").clone();
-	
-	$('#uploadBtn').on("click", function(e){
+function loadImage(){
 		var formData = new FormData();
 		var inputFile = $("input[name='uploadFile']");
 		var files = inputFile[0].files;
@@ -212,7 +270,65 @@ $(document).ready(function(){
 				$(".uploadDiv").html(cloneObj.html());
 			}
 		});  //$.ajax
-	});
+	}; 
+	
+	
+	var regex = new RegExp("(.*?)\.(exe|sh|zip|alz)$");
+	var maxSize = 5242880;  //5MB
+	function checkExtension(fileName, fileSize){
+		
+		if(fileSize >= maxSize){
+			alert('파일 사이즈 초과');
+			return false;
+		}
+		
+		if(regex.test(fileName)){
+			alert("해당 종류의 파일은 업로드할 수 없습니다.");
+			return false;
+		}
+		return true;
+	}
+	
+$(document).ready(function(){
+
+	
+
+	
+	
+	var cloneObj = $(".uploadDiv").clone();
+	
+ 	$('#uploadBtn').on("click", function(e){
+		var formData = new FormData();
+		var inputFile = $("input[name='uploadFile']");
+		var files = inputFile[0].files;
+		console.log(files);
+		// Add File Data to formData
+		for(var i = 0; i < files.length; i++){
+			if(!checkExtension(files[i].name, files[i].size)){
+				return false;
+			}
+			
+			formData.append("uploadFile", files[i]);
+		}
+		$.ajax({
+			url: '/uploadAjaxAction',
+			processData: false,
+			contentType: false,
+			data: formData,
+			type: 'POST',
+			dataType: 'json',
+			beforeSend: function(xhr) { //XMLHttpRequest (XHR)은 AJAX 요청을 생성하는 JavaScript API이다. XHR의 메서드로 브라우저와 서버간의 네트워크 요청을 전송할 수 있다.
+				xhr.setRequestHeader(header, token); //csrf 전송하지 않으면 아예 ajax가 되지 않는 문제가 생김.
+			},
+			success: function(result){
+				console.log(result);
+				alert('upload');
+				
+				showUploadedFile(result);
+				$(".uploadDiv").html(cloneObj.html());
+			}
+		});  //$.ajax
+	}); 
 	
 	var uploadResult = $(".uploadResult ul");
 	
