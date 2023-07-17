@@ -1,5 +1,6 @@
 package org.zerock.mapper;
 
+import org.zerock.domain.Authority;
 import org.zerock.domain.Member;
 
 public interface MemberMapper {
@@ -9,6 +10,8 @@ public interface MemberMapper {
 	public Member selectMember(String id);
 	
 	public void insertMember(Member member);
+	
+	public void insertAuth(Authority auth);
 	
 	public void updateMember(Member member);
 	

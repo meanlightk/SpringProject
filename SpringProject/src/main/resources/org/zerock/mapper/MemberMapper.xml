@@ -56,15 +56,20 @@
 	
 	<insert id="insertMember" parameterType="org.zerock.domain.Member">
 		insert into member(mem_id, name, pwd, pnum, email)
-		values(#{id}, #{name}, #{pwd}, #{pnum}, #{email})
+		values(#{mem_id}, #{name}, #{pwd}, #{pnum}, #{email})
+	</insert>
+	
+	<insert id="insertAuth" parameterType="org.zerock.domain.Authority">
+		insert into authority (mem_id, auth)
+		values (#{mem_id}, #{auth})
 	</insert>
 	
 	<update id="updateMember" parameterType="org.zerock.domain.Member">
-		update member set pwd=#{pwd}, pnum=#{pnum}, email=#{email} where mem_id=#{id}
+		update member set pwd=#{pwd}, pnum=#{pnum}, email=#{email} where mem_id=#{mem_id}
 	</update>
 	
 	<delete id="deleteMember">
-		delete from member where mem_id=#{id}
+		delete from member where mem_id=#{mem_id}
 	</delete>
 
 </mapper>
