@@ -1,66 +1,272 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
+	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
-<!DOCTYPE html>
-<html>
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Admin Page</title>
-</head>
-<body>
-    <h1>상품 등록</h1>
-    <form action="" method="post">
-        <div class="classification">
-            <table class="table">
-                <tr>
-                    <td>
-                        <p>1차 분류</p>
-                    </td>
-                    <td>
-                        <select class="selectOption" name="category">
-                            <option value="skincare">skincare</option>
-                            <option value="base">base</option>
-                            <option value="lip">lip</option>
-                            <option value="eye">eye</option>
-                            <option value="cheek">cheek</option>
-                        </select>
-                    </td>
-                </tr>
-                <tr>
-                    <td>
-                        <p>상품명</p>
-                    </td>
-                    <td>
-                        <input name="pname" type="text" />
-                    </td>
-                </tr>
-                <tr>
-                    <td>
-                        <p>상품가격</p>
-                    </td>
-                    <td>
-                        <input name="price" type="number" />
-                    </td>
-                </tr>
-                <tr>
-                    <td>
-                        <p>상품수량</p>
-                    </td>
-                    <td>
-                        <input name="stock" type="number" />
-                    </td>
-                </tr>
-            </table>
-        <div class="main">
-            <p>메인 이미지(1장)</p>
-            <input type="file" name="mainImage">
-            <p>서브 이미지(여러장)</p>
-            <input type="file" name="subImage" multiple>
-        </div>
-        <button type="submit">제출</button>
-        <button type="reset">취소</button>
-    </form>
-</body>
-</html>
+<style>
+.title {
+	font-size: 35px;
+}
+
+input {
+	display: inline-block;
+	border: 1px solid black;
+	width: 300px;
+}
+
+#mainImage {
+	border: none;
+}
+
+#subImages {
+	border: none;
+}
+
+.all {
+	margin-top: 1em;
+	position: relative;
+}
+
+.all p {
+	margin-right: 0;
+	display: inline-block;
+}
+
+#pname input {
+	width: 400px;
+}
+
+#main {
+	height: auto;
+	/* margin-left: 100px; */
+	text-align: center;
+}
+
+.image {
+	
+}
+
+.sub {
+	
+}
+#main2{
+
+	width: 80%;
+
+}
+.v-line {
+	border-left: thick solid #32a1ce;
+	display: inline-block;
+	height: 50px;
+}
+
+#uploadResult {
+	display: inline-block;
+}
+
+#real {
+	/* display: inline-block;
+ */
+	
+}
+
+#real input {
+	width: 200px;
+}
+
+#price {
+	display: inline-block;
+}
+
+#stock {
+	display: inline-block;
+}
+
+p {
+	display: inline-block;
+}
+
+.image-wrap {
+	display: inline-block;
+}
+</style>
+<div id="main">
+	<div id="main2">
+		<p class="title">상품 등록</p>
+		<div id="pname" class="all">
+			<p>상품이름</p>
+			<input type="text" name="pname">
+		</div>
+		<div id="real">
+			<div id="price" class="all">
+				<p>상품가격</p>
+				<input type="text" name="price">
+			</div>
+	
+			<div id="stock" class="all">
+				<p>상품수량</p>
+				<input type="number" name="stock" placeholder="0">
+	
+				<div class="result"></div>
+			</div>
+		</div>
+	
+		<div class="image">
+			<div class="image-wrap">
+				<p>메인이미지</p>
+				<br> <input type="file" name="uploadFile" id="mainImage">
+			</div>
+	
+			<div class='v-line'></div>
+			<div id="uploadResult" style="width: 30%;"></div>
+		</div>
+		<div class="sub">
+			<div class="image-wrap">
+				<p>서브이미지</p>
+				<br> <input type="file" name="subImages" id="subImages" multiple>
+			</div>
+			<div class='v-line'></div>
+			<div id="uploadResult" style="width: 30%;"></div>
+		</div>
+	</div>
+
+
+	<button id="uploadBtn">제출</button>
+	<button id="resetBtn">취소</button>
+</div>
+
+
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
+<script>
+var token = $("meta[name='_csrf']").attr("content");
+var header = $("meta[name='_csrf_header']").attr("content");
+
+function showImage(fileCallPath){
+	//alert(fileCallPath);
+	
+	$(".bigPictureWrapper").css("display", "flex").show();
+	
+	$(".bigPicture")
+	.html("<img src='/display?fileName=" + encodeURI(fileCallPath) + "'>")
+	.animate({width: '100%', height: '100%'}, 1000);
+}
+
+$(".bigPictureWrapper").on("click", function(e){
+	$(".bigPicture").animate({width: '0%', height: '0%'}, 1000);
+	setTimeout(() => {
+		$(this).hide();	
+	},1000);
+})
+
+
+$(document).ready(function(){
+	
+	var regex = new RegExp("(.*?)\.(exe|sh|zip|alz)$");
+	var maxSize = 5242880;  //5MB
+	
+	function checkExtension(fileName, fileSize){
+		
+		if(fileSize >= maxSize){
+			alert('파일 사이즈 초과');
+			return false;
+		}
+		
+		if(regex.test(fileName)){
+			alert("해당 종류의 파일은 업로드할 수 없습니다.");
+			return false;
+		}
+		return true;
+	}
+	
+	
+	var cloneObj = $(".uploadDiv").clone();
+	
+	$('#uploadBtn').on("click", function(e){
+		var formData = new FormData();
+		var inputFile = $("input[name='uploadFile']");
+		var files = inputFile[0].files;
+		console.log(files);
+		// Add File Data to formData
+		for(var i = 0; i < files.length; i++){
+			if(!checkExtension(files[i].name, files[i].size)){
+				return false;
+			}
+			
+			formData.append("uploadFile", files[i]);
+		}
+		$.ajax({
+			url: '/uploadAjaxAction',
+			processData: false,
+			contentType: false,
+			data: formData,
+			type: 'POST',
+			dataType: 'json',
+			beforeSend: function(xhr) { //XMLHttpRequest (XHR)은 AJAX 요청을 생성하는 JavaScript API이다. XHR의 메서드로 브라우저와 서버간의 네트워크 요청을 전송할 수 있다.
+				xhr.setRequestHeader(header, token); //csrf 전송하지 않으면 아예 ajax가 되지 않는 문제가 생김.
+			},
+			success: function(result){
+				console.log(result);
+				alert('upload');
+				
+				showUploadedFile(result);
+				$(".uploadDiv").html(cloneObj.html());
+			}
+		});  //$.ajax
+	});
+	
+	var uploadResult = $(".uploadResult ul");
+	
+	function showUploadedFile(uploadResultArr){
+		
+		var str = "";
+		
+		$(uploadResultArr).each(
+				function(i, obj){
+					
+					if(!obj.image){
+						
+						var fileCallPath = encodeURIComponent( obj.uploadPath + "/" + obj.uuid + "_" + obj.fileName);
+						
+						var fileLink = fileCallPath.replace(new RegExp(/\\/g),"/");
+						
+						str += "<li><div><a href='/download?fileName=" + fileCallPath + "'>" + "<img src='/resources/img/attach.png'>" + obj.fileName + "</a>"
+								+ "<span data-file=\'" + fileCallPath + "\' data-type='file'> x </span>"
+								+ "</div></li>";
+					}else{
+						//str += "<li>" + obj.fileName + "</li>";
+						
+						var fileCallPath = encodeURIComponent( obj.uploadPath + "/s_" + obj.uuid + "_" + obj.fileName);
+						
+						var originPath = obj.uploadPath + "\\" + obj.uuid + "_" + obj.fileName;
+						
+						originPath = originPath.replace(new RegExp(/\\/g),"/");
+						
+						str += "<li><a href=\"javascript:showImage(\'" + originPath + "\')\">" + 
+						"<img src='display?fileName=" + fileCallPath + "'></a>"
+								+ "<span data-file=\'" + fileCallPath + "\' data-type='image'> x </span>" + "</li>";
+					}
+		});
+			
+		uploadResult.append(str);
+	}
+	
+	$(".uploadResult").on("click", "span", function(e){
+		
+		var targetFile = $(this).data("file");
+		var type = $(this).data("type");
+		console.log(targetFile);
+		
+		$.ajax({
+			
+			url: '/deleteFile',
+			data: {fileName: targetFile, type: type},
+			dataType: 'text',
+			type: 'POST',
+			success: function(result){
+				alert(result);
+			}
+		});  //$.ajax
+	});
+	
+});  
+</script>
