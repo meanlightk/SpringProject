@@ -1,8 +1,12 @@
 package org.zerock.controller;
 
+<<<<<<< HEAD
 import java.nio.charset.StandardCharsets;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
+=======
+import static org.zerock.security.SHA2.sha256;
+>>>>>>> ff6216538b959ba15b90d83916f2a52873751532
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -25,29 +29,25 @@ public class MemberController {
 	@Autowired
 	private MemberService service;
 	
-	@PostMapping("/join")
+	@GetMapping("/join")
+	public String joinform() {
+		log.info("=========join========");
+		return "/join";
+	}
+	
+	@PostMapping("/join.do")
 	public String join(Member member) {
+		log.info("-------dojoin--------");
+		String password=member.getPwd();
+		member.setPwd(sha256(password));
+		System.out.println(member.getMem_id());
+		System.out.println(member.getName());
+		System.out.println(member.getPwd());
+		System.out.println(member.getPnum());
+		System.out.println(member.getEmail());
 		service.join(member);
-		return null;
+		return "redirect:/login";
 	}
-	
-	// security?
-	@PostMapping("/login.do")
-	public String auth(Model model, Member member) {
-		String pwd=member.getPwd();
-		member.setPwd(sha256Hash(pwd));
-		service.login(member);
-		return null;
-	}
-	
-	
-	@GetMapping("/logout.do")
-	public String logout() {
-		Session session;
-		return "redirect:/home";
-	}
-	
-	
 	
 	@GetMapping("/profile")
 	public String profile(Model model, String id) {
@@ -67,28 +67,5 @@ public class MemberController {
 	public String farewell(String id) {
 		service.withdrawal(id);
 		return "redirect:/";
-	}
-
-	
-	public static String sha256Hash(String input) {
-	    try {
-	        MessageDigest digest = MessageDigest.getInstance("SHA-256");
-	        byte[] hash = digest.digest(input.getBytes(StandardCharsets.UTF_8));
-	
-	        // 해시 값을 16진수 문자열로 변환
-	        StringBuilder hexString = new StringBuilder();
-	        for (byte b : hash) {
-	            String hex = Integer.toHexString(0xff & b);
-	            if (hex.length() == 1) {
-	                hexString.append('0');
-	            }
-	            hexString.append(hex);
-	        }
-	
-	        return hexString.toString();
-	    } catch (NoSuchAlgorithmException e) {
-	        e.printStackTrace();
-	        return null;
-	    }
 	}
 }

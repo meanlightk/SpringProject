@@ -15,7 +15,7 @@ import org.zerock.service.GoodsService;
 
 import lombok.extern.log4j.Log4j;
 
-@RequestMapping("/goods/*")
+
 @Controller
 @Log4j
 public class GoodsController {
@@ -63,6 +63,11 @@ public class GoodsController {
 	 * 
 	 * }
 	 */
+	
+	@GetMapping("/registerGoods")
+	public void registerGoods() {
+		log.info("registerGoods");
+	}
 	
 
 }

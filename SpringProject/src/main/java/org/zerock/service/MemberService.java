@@ -2,6 +2,7 @@ package org.zerock.service;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.zerock.domain.Authority;
 import org.zerock.domain.Member;
 import org.zerock.mapper.MemberMapper;
 
@@ -17,10 +18,16 @@ public class MemberService {
 	
 	public void join(Member member) {
 		memberMapper.insertMember(member);
+		
+		Authority auth = new Authority();
+		auth.setMem_id(member.getMem_id());
+		auth.setAuth("ROLE_MEMBER");
+		memberMapper.insertAuth(auth);
 	}
 	
-	public Member login(Member member) {
-		return memberMapper.selectMemberaslogin(member);
+	public Member login(String id) {
+		return memberMapper.selectMemberaslogin(id);
+//		return memberMapper.selectMember(id);
 	}
 	
 	public Member memberInfo(String id) {
