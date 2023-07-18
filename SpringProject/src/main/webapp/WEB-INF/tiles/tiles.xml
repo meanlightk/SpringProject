@@ -71,5 +71,10 @@
 <!-- <put-attribute name="footer" value="/WEB-INF/views/tiles/footer.jsp" /> -->
 </definition>
 
+<definition name="/payments" extends="layout">
+	<put-attribute name="title" value="OrderList" />
+	<put-attribute name="body" value="/WEB-INF/views/payments/payments.jsp" />
+</definition>
+
 
 </tiles-definitions>
