@@ -17,9 +17,5 @@
 <put-attribute name="body" value="/WEB-INF/views/main.jsp" />
 </definition>
 
-<definition name="/payments" extends="layout">
-	<put-attribute name="title" value="OrderList" />
-	<put-attribute name="body" value="/WEB-INF/views/payments/payments.jsp" />
-</definition>
 
 </tiles-definitions>

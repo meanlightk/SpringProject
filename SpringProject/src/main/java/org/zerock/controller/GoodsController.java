@@ -1,15 +1,14 @@
 package org.zerock.controller;
 
-import java.util.List;
-
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.MediaType;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.zerock.domain.Goods;
 import org.zerock.service.GoodsService;
 
@@ -63,11 +62,38 @@ public class GoodsController {
 	 * 
 	 * }
 	 */
+	/*@RequestParam("price") String price, @RequestParam("pname") String pname, @RequestParam("stock") int stock*/
+//	@PostMapping(value = "/registerGoods", consumes = MediaType.APPLICATION_JSON_VALUE)	
+	@PostMapping("/registerGoods")	
+	@ResponseBody
+	public Goods registerGoods(@RequestParam("price") String  price,@RequestParam("pname") String pname, @RequestParam("stock") String stock,
+			@RequestParam("skintype") String skintype, @RequestParam("category") String category) {
+		
+		log.info("registerGoods");
+		
+		log.info(price); 
+		log.info(pname); 
+		log.info(stock); 
+		log.info(skintype); 
+		int stock2 = Integer.parseInt(stock);
+		
+		 Goods goods = new Goods(); 
+		 goods.setPname(pname); 
+		 goods.setStock(stock2); 
+		 int realprice = Integer.parseInt(price); 
+		 goods.setPrice(realprice);
+		 service.registerItem(goods); 
+		 return goods;
+		 
+	}
 	
 	@GetMapping("/registerGoods")
-	public void registerGoods() {
-		log.info("registerGoods");
+	public String registerGoods2() {
+		log.info("register goods");
+		return "registerGoods";
 	}
+	
+	
 	
 
 }
