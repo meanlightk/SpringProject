@@ -18,7 +18,9 @@ public interface GoodsMapper {
 	
 	public void deleteItem(int gno);
 	
-	public int selectNumber();
-	
 	public void selectImageList(int gno); //상품목록을 불러올 때 불러올 이미지리스트
+	
+	public int getGoodsNo();
+	
+	public List<Goods> goodsList();
 }

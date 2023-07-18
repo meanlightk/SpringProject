@@ -121,7 +121,7 @@ p {
 		<div id="real">
 			<div id="price" class="all">
 				<p>상품가격</p>
-				<input type="text" name="price" id="priceReal">
+				<input type="text" name="price" id="priceReal" pattern="[0-9]+">
 			</div>
 	
 			<div id="stock" class="all">
@@ -139,7 +139,7 @@ p {
 			</div>
 	
 			<div class='v-line'></div>
-			<div id="uploadResult" style="width: 30%;"></div>
+			<div id="previewContainer" style="width: 30%;"></div>
 		</div>
 		<div class="sub">
 			<div class="image-wrap">
@@ -147,7 +147,7 @@ p {
 				<br> <input type="file" name="uploadSubFile" id="subImages" multiple>
 			</div>
 			<div class='v-line'></div>
-			<div id="uploadResult" style="width: 30%;">
+			<div id="uploadSubResult" style="width: 30%;">
 				<ul>
 				
 				</ul>
@@ -181,23 +181,27 @@ function submitData(){
 	console.log(category);
 	console.log(skintype);
 
-	$.ajax({
-		url:"/registerGoods",		// servlet 
-		type: "post",
-		dataType: 'json',
-		data: {"price" : price, "pname": pname, "stock": stock, "skintype": skintype, "category": category},
-		beforeSend: function(xhr) { //XMLHttpRequest (XHR)은 AJAX 요청을 생성하는 JavaScript API이다. XHR의 메서드로 브라우저와 서버간의 네트워크 요청을 전송할 수 있다.
-			xhr.setRequestHeader(header, token); //csrf 전송하지 않으면 아예 ajax가 되지 않는 문제가 생김.
-		},
-		success:function(data){
-			console.log("성공" + data);
-			loadImage(data);
-			loadSubImage(data);
-		},
-		error:function(){
-			alert("error");
-		}
-	});
+	if (join()){
+		$.ajax({
+			url:"/registerGoods",		// servlet 
+			type: "post",
+			dataType: 'json',
+			data: {"price" : price, "pname": pname, "stock": stock, "skintype": skintype, "category": category},
+			beforeSend: function(xhr) { //XMLHttpRequest (XHR)은 AJAX 요청을 생성하는 JavaScript API이다. XHR의 메서드로 브라우저와 서버간의 네트워크 요청을 전송할 수 있다.
+				xhr.setRequestHeader(header, token); //csrf 전송하지 않으면 아예 ajax가 되지 않는 문제가 생김.
+			},
+			success:function(data){
+				console.log("성공" + data);
+				console.log(data);
+				loadImage(data);
+				loadSubImage(data); 
+				location.href = '/registerGoods2'
+			},
+			error:function(){
+				alert("error");
+			}
+		});
+	}	
 /*	
 	$.ajax({
 			url: '/registerGoods',
@@ -251,7 +255,9 @@ function loadImage(Data){
 			
 			formData.append("uploadFile", files[i]);
 		}
-		formData.append("goods", Data);
+		console.log('냐냐냐냐');
+		console.log(Data);
+		formData.append("gno", Data.gno);
 		$.ajax({
 			url: '/uploadAjaxAction',
 			processData: false,
@@ -284,7 +290,8 @@ function loadImage(Data){
 			
 			formData.append("uploadFile", files[i]);
 		}
-		formData.append("goods", Data);
+	
+		formData.append("gno", Data.gno);
 		console.log(formData);
 		console.log(files);
 
@@ -324,11 +331,76 @@ function loadImage(Data){
 		return true;
 	}
 	
+	
+	
+	function join() {
+		
+		const name = document.querySelector("#pnameReal");
+		const price =document.querySelector("#priceReal");
+		const stock = document.querySelector("#stockReal");
+		const main = document.querySelector("#mainImage");
+		const sub = document.querySelector("#subImages");
+		
+		
+		if (!name.value) {
+			alert("상품명을 입력해주세요.");
+			name.focus();
+			return false;
+		}
+		if (!price.value || price < 0) {
+			alert("가격을 입력해주세요.");
+			price.focus();
+			return false;
+		}
+		if (!stock.value) {
+			alert("재고를 입력해주세요.");
+			stock.focus();
+			return false;
+		}
+
+
+		if (!main.value) {
+			alert("메인 이미지를 삽입해 주세요.");
+			return false;
+		}
+
+		if (!sub.value) {
+			alert("서브 이미지를 삽입해주세요.");
+			return false;
+		}
+		return true;
+		
+	}
 $(document).ready(function(){
 
 	
 
+	const mainImageInput = document.querySelector("#mainImage");
+	const previewContainer = document.getElementById("previewContainer");
 	
+	
+	mainImageInput.addEventListener("change", (event) => {
+        const file = event.target.files[0];
+        
+        if (file) {
+            // FileReader 인스턴스 생성
+            const reader = new FileReader();
+
+            // 파일 읽기 성공 시 미리보기 생성
+            reader.onload = (e) => {
+                const imagePreview = document.createElement("img");
+                imagePreview.src = e.target.result;
+                imagePreview.style.maxWidth = "200px"; // 미리보기 이미지 크기 제한 (선택사항)
+                previewContainer.innerHTML = ""; // 기존 미리보기 제거
+                previewContainer.appendChild(imagePreview);
+            };
+
+            // 파일 읽기 시작
+            reader.readAsDataURL(file);
+        }
+    });
+	
+
 	
 	var cloneObj = $(".uploadDiv").clone();
 	

@@ -1,10 +1,11 @@
 package org.zerock.controller;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.zerock.service.GoodsService;
 
 import lombok.extern.log4j.Log4j;
 
@@ -13,13 +14,17 @@ import lombok.extern.log4j.Log4j;
 @Log4j
 public class CommonController {
 	
+	@Autowired
+	GoodsService service;
+	
 	@RequestMapping("/")
 	public String main() {
 		return "redirect:/home";
 	}
 	
 	@RequestMapping("/home")
-	public String mainPage() {
+	public String mainPage(Model model) {
+		model.addAttribute("goodsList",service.goodsList());
 		return "home";
 	}
 	

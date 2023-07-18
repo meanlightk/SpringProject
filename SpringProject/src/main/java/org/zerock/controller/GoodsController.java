@@ -77,23 +77,27 @@ public class GoodsController {
 		log.info(skintype); 
 		int stock2 = Integer.parseInt(stock);
 		
-		 Goods goods = new Goods(); 
+		
+		
+		 Goods goods = new Goods();
+		
+		 int gno = service.getGno() + 1;
+		 System.out.println("내가 보낸 gno:" + gno);
+		 goods.setGno(gno);
 		 goods.setPname(pname); 
 		 goods.setStock(stock2); 
 		 int realprice = Integer.parseInt(price); 
 		 goods.setPrice(realprice);
 		 service.registerItem(goods); 
+		 
 		 return goods;
 		 
 	}
 	
-	@GetMapping("/registerGoods")
+	@GetMapping("/registerGoods2")
 	public String registerGoods2() {
 		log.info("register goods");
 		return "registerGoods";
 	}
 	
-	
-	
-
 }

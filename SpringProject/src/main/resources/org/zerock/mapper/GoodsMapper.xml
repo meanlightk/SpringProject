@@ -83,4 +83,15 @@
       #{stock}
    )
 </insert>
+
+<select id="getGoodsNo" resultType="int">
+	select max(goods_no) from goods
+</select>
+
+	<select id="goodsList" resultType="org.zerock.domain.Goods">
+		select 
+			*,
+			(select imagepath from goodsImage i where g.goods_no = i.goods_no limit 1) as imagepath	
+		 from goods g
+	</select>
 </mapper>

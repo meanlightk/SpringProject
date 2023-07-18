@@ -16,6 +16,6 @@ public class GoodsImageService {
 
 	public void insertGoodsImage(GoodsImage goodsImage) {
 		log.info("goodsImage insert");
-		mapper.insert(goodsImage);
+		log.info("방금 저장한 번호: " + mapper.insert(goodsImage));
 	}
 }

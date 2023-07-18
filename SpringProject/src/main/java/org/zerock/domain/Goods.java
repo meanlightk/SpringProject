@@ -20,6 +20,8 @@ public class Goods {
 	private Date updatedate;
 	private int stock;
 	private int status;
+	private String imagepath;
+
 	
 	private List<GoodsImage> imageList;
 }

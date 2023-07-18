@@ -5,6 +5,7 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.zerock.domain.Goods;
+import org.zerock.domain.GoodsImage;
 import org.zerock.mapper.GoodsMapper;
 
 import lombok.extern.log4j.Log4j;
@@ -49,5 +50,14 @@ public class GoodsService {
 	public void callImageList(int gno) {
 		log.info("-- call image list -- ");
 		mapper.selectImageList(gno);
+	}
+	
+	public int getGno() {
+		log.info("-- get gno --");
+		return mapper.getGoodsNo();
+	}
+	
+	public List<Goods> goodsList(){
+		return mapper.goodsList();
 	}
 }

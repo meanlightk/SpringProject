@@ -7,9 +7,8 @@
    <selectKey keyProperty="ino" resultType="int" order="BEFORE">
       SELECT IFNULL(MAX(image_no)+1,1) FROM goodsImage
    </selectKey>
-   INSERT INTO goodsImage (image_no, goods_no, imagepath, uuid)
-   VALUES ( 
-      #{ino}, 
+   INSERT INTO goodsImage (goods_no, imagepath, uuid)
+   VALUES (
       #{gno}, 
       #{imagepath},
       #{uuid}

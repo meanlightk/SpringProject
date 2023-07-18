@@ -12,4 +12,6 @@ public class GoodsImage {
 	private int ino;
 	private int gno;
 	private String imagepath;
+	
+	private String ifmain;
 }
