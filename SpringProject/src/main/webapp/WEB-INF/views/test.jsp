@@ -3,132 +3,126 @@
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <!DOCTYPE html>
-<html>
+<html lang="ko">
 <head>
 <meta charset="UTF-8">
-<title>Insert title here</title>
-</head>
-<body>
+<title>Document</title>
+<!-- include libraries(jQuery, bootstrap) -->
+<link href="https://stackpath.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css" rel="stylesheet">
+<script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
 
-
-
-
-
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
-
-<script type="text/javascript">
-		$(function() {
-			$('#formContent #userID').focus();
-			
-			// 에러가 있는 경우 메세지 처리
-			var errMsg = $('#errMsg').val();
-			if(errMsg != '') {
-				alert(errMsg);
-				$('#formContent').find('#userID').focus();
-			}
-		});
-	</script>
-<title>로그인</title>
-<link rel="stylesheet" href='<c:out value="/resources/css/login.css"/>'>
-</head>
-	<body>
-		<div class="wrapper fadeInDown">
-			<div id="formContent">
-				<!-- Tabs Titles -->
-				<h2 class="active">로그인</h2>
-				<!-- Login Form -->
-				<form action="${contextPath}/member/login.do" method="post">
-					<input type="text" id="userID" class="fadeIn second" name="userID" placeholder="아이디"> 
-					<input type="password" id="password" class="fadeIn third" name="password" placeholder="비밀번호" autocomplete="off"> 
-					<input type="submit" class="fadeIn fourth" value="로그인">
-					<input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}" />
-					<input type="hidden" id="errMsg" value='${sessionScope["SPRING_SECURITY_LAST_EXCEPTION"].message}' />
-				</form>
-				<!-- Signup Link -->
-				<div id="formFooter">
-					<a class="underlineHover" href="${contextPath}/member/join.do">회원가입</a>
-				</div>
-			</div>
-		</div>
-
-
-
-
-
-<!-- 
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.0/jquery.min.js"></script>
-    
-<div class="container">
-  <button type="button" class="btn btn-info btn-round" data-toggle="modal" data-target="#loginModal">
-    Login
-  </button>  
-</div>
-
-<div class="modal fade" id="loginModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-  <div class="modal-dialog modal-dialog-centered" role="document">
-    <div class="modal-content">
-      <div class="modal-header border-bottom-0">
-        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-          <span aria-hidden="true">&times;</span>
-        </button>
-      </div>
-      <div class="modal-body">
-        <div class="form-title text-center">
-          <h4>Login</h4>
-        </div>
-        <div class="d-flex flex-column text-center">
-          <form>
-            <div class="form-group">
-              <input type="email" class="form-control" id="email1"placeholder="Your email address...">
-            </div>
-            <div class="form-group">
-              <input type="password" class="form-control" id="password1" placeholder="Your password...">
-            </div>
-            <button type="button" class="btn btn-info btn-block btn-round">Login</button>
-          </form>
-          
-          <div class="text-center text-muted delimiter">or use a social network</div>
-          <div class="d-flex justify-content-center social-buttons">
-            <button type="button" class="btn btn-secondary btn-round" data-toggle="tooltip" data-placement="top" title="Twitter">
-              <i class="fab fa-twitter"></i>
-            </button>
-            <button type="button" class="btn btn-secondary btn-round" data-toggle="tooltip" data-placement="top" title="Facebook">
-              <i class="fab fa-facebook"></i>
-            </button>
-            <button type="button" class="btn btn-secondary btn-round" data-toggle="tooltip" data-placement="top" title="Linkedin">
-              <i class="fab fa-linkedin"></i>
-            </button>
-          </di>
-        </div>
-      </div>
-    </div>
-      <div class="modal-footer d-flex justify-content-center">
-        <div class="signup-section">Not a member yet? <a href="#a" class="text-info"> Sign Up</a>.</div>
-      </div>
-  </div>
-</div>
-</div>
+<!-- include summernote css/js -->
+<link href="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote.min.css" rel="stylesheet">
+<script src="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote.min.js"></script>
 
 <script>
 $(document).ready(function() {
-	$('#loginModal').modal('show');
-		$(function () {
-			$('[data-toggle="tooltip"]').tooltip()
-		})
-	});
+  $('#summernote').summernote({
+            height: 300,                 // 에디터 높이
+            minHeight: null,             // 최소 높이
+            maxHeight: null,             // 최대 높이
+            focus: true,                  // 에디터 로딩후 포커스를 맞출지 여부
+            lang: "ko-KR",					// 한글 설정
+            placeholder: '최대 2048자까지 쓸 수 있습니다',	//placeholder 설정
+
+            toolbar: [
+                ['style', ['style']], // 글자 스타일 설정 옵션
+                ['fontsize', ['fontsize']], // 글꼴 크기 설정 옵션
+                ['font', ['bold', 'underline', 'clear']], // 글자 굵게, 밑줄, 포맷 제거 옵션
+                ['color', ['color']], // 글자 색상 설정 옵션
+                ['table', ['table']], // 테이블 삽입 옵션
+                ['para', ['ul', 'ol', 'paragraph']], // 문단 스타일, 순서 없는 목록, 순서 있는 목록 옵션
+                ['height', ['height']], // 에디터 높이 조절 옵션
+                ['insert', ['picture', 'link', 'video']], // 이미지 삽입, 링크 삽입, 동영상 삽입 옵션
+                ['view', ['codeview', 'fullscreen', 'help']], // 코드 보기, 전체 화면, 도움말 옵션
+            ],
+
+            // fontSizes: [
+            //     '8', '9', '10', '11', '12', '14', '16', '18',
+            //     '20', '22', '24', '28', '30', '36', '50', '72',
+            // ], // 글꼴 크기 옵션
+
+            styleTags: [
+                'p',  // 일반 문단 스타일 옵션
+                {
+                    title: 'Blockquote',
+                    tag: 'blockquote',
+                    className: 'blockquote',
+                    value: 'blockquote',
+                },  // 인용구 스타일 옵션
+                'pre',  // 코드 단락 스타일 옵션
+                {
+                    title: 'code_light',
+                    tag: 'pre',
+                    className: 'code_light',
+                    value: 'pre',
+                },  // 밝은 코드 스타일 옵션
+                {
+                    title: 'code_dark',
+                    tag: 'pre',
+                    className: 'code_dark',
+                    value: 'pre',
+                },  // 어두운 코드 스타일 옵션
+                'h1', 'h2', 'h3', 'h4', 'h5', 'h6',  // 제목 스타일 옵션
+            ],
+
+            callbacks: {
+                onImageUpload: function (files, editor, welEditable) {
+                    // 파일 업로드 (다중 업로드를 위해 반복문 사용)
+                    for (var i = files.length - 1; i >= 0; i--) {
+                        var fileName = files[i].name
+
+                        // 이미지 alt 속성 삽일을 위한 설정
+                        var caption = prompt('이미지 설명 :', fileName)
+                        if (caption == '') {
+                            caption = '이미지'
+                        }
+                        uploadSummernoteImageFile(files[i], this, caption)
+                    }
+                },
+            },
+  });
+});
+
+function uploadSummernoteImageFile(file, el, caption) {
+        data = new FormData()
+        data.append('file', file)
+        $.ajax({
+            data: data,
+            type: 'POST',
+            url: '/uploadSummernoteImageFile',
+            contentType: false,
+            enctype: 'multipart/form-data',
+            processData: false,
+            success: function (data) {
+                $(el).summernote(
+                    'editor.insertImage',
+                    data.url,
+                    function ($image) {
+                        $image.attr('alt', caption) // 캡션 정보를 이미지의 alt 속성에 설정
+                    }
+                )
+            },
+        })
+    } 
 </script>
-
-<link rel="stylesheet" type="text/css" href="../resources/css/bootstrap.css">
-<link rel="stylesheet" type="text/css" href="../resources/css/bootstrap-grid.css">
-<link rel="stylesheet" type="text/css" href="../resources/css/bootstrap-reboot.css">
-
-<script src="../resources/js/bootstrap.js"/>
-<script src="../resources/js/bootstrap.bundle.js"/>
-
-
- -->
-
-<%-- <%@include file="includes/loginmodal.jsp" %> --%>
-
+</head>
+<body>
+<form method="post">
+    <table border=1 width="400"> <!-- table 너비 지정 -->
+        <tr>
+            <td>제목</td>
+            <td><input type="text" name="subject" style="width:100%;"></td>
+        </tr>
+        <tr>
+            <td colspan="2">
+                <textarea id="summernote" name="board"></textarea>
+            </td>
+        </tr>
+    </table>
+    <input type="submit" value="전송">
+</form>
+  
 </body>
 </html>
