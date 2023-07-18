@@ -48,12 +48,12 @@
 	from goods where category=#{category} and skintype=#{skintype}
 </select>
 
-<insert id="insertItem" parameterType="org.zerock.domain.Goods" >
+<!-- <insert id="insertItem" parameterType="org.zerock.domain.Goods" >
 
 	insert into goods(category, pname, price, skintype, stock, status)
 	values(#{category}, #{pname}, #{price}, #{skintype}, #{stock}, #{status}) 
 
-</insert>
+</insert> -->
 
 <update id="updateItem" parameterType="org.zerock.domain.Goods" >
 	update goods set category=#{category}, pname=#{pname}, price=#{price},
@@ -68,4 +68,19 @@
 	select * from goodsImage where goods_no = #{gno}
 </select>
  -->
+ 
+<insert id="insertItem" parameterType="org.zerock.domain.Goods">
+   <selectKey keyProperty="gno" resultType="int" order="BEFORE">
+		SELECT IFNULL(max(goods_no)+1,1) FROM goods
+   </selectKey>
+   INSERT INTO goods (category, skintype,goods_no, price, pname, stock)
+   VALUES ( 
+   		#{category},
+   		#{skintype},
+      #{gno}, 
+      #{price}, 
+      #{pname},
+      #{stock}
+   )
+</insert>
 </mapper>

@@ -6,7 +6,7 @@ import org.zerock.domain.GoodsImage;
 
 public interface GoodsImageMapper {
 	
-	public void insert(GoodsImage vo);
+	public int insert(GoodsImage vo);
 	
 	public void delete(String uuid);
 	
