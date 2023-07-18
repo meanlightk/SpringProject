@@ -9,6 +9,8 @@ public interface MemberMapper {
 	
 	public Member selectMember(String id);
 	
+	public int selectbyidCheck(String id);
+	
 	public void insertMember(Member member);
 	
 	public void insertAuth(Authority auth);

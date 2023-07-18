@@ -2,13 +2,17 @@ package org.zerock.controller;
 
 import static org.zerock.security.SHA2.sha256;
 
+import javax.servlet.http.HttpServletRequest;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.zerock.domain.Member;
 import org.zerock.service.MemberService;
 
@@ -60,5 +64,18 @@ public class MemberController {
 	public String farewell(String id) {
 		service.withdrawal(id);
 		return "redirect:/";
+	}
+	
+	@RequestMapping("/checkId.do")
+	@ResponseBody
+	public String idCheck(ModelMap model, HttpServletRequest request, String mem_id){
+		String result = "";
+		if(service.idCheck(mem_id) == 1) {
+			result = "fail";
+		}else {
+			result = "success";
+		}
+		
+		return result;
 	}
 }

@@ -33,6 +33,10 @@ public class MemberService {
 	public Member memberInfo(String id) {
 		return memberMapper.selectMember(id);
 	}
+	
+	public int idCheck(String id) {
+		return memberMapper.selectbyidCheck(id);
+	}
 
 	public void editInfo(Member member) {
 		memberMapper.updateMember(member);

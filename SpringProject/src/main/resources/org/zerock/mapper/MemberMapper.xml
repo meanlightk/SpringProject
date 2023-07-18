@@ -54,6 +54,10 @@
 		from member where mem_id=#{id}
 	</select>
 	
+	<select id="selectbyidCheck" parameterType="String" resultType="int" >
+		select count(*) from member where mem_id = #{mem_id}
+	</select>
+	
 	<insert id="insertMember" parameterType="org.zerock.domain.Member">
 		insert into member(mem_id, name, pwd, pnum, email)
 		values(#{mem_id}, #{name}, #{pwd}, #{pnum}, #{email})
