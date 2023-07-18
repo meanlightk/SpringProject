@@ -31,30 +31,3 @@
 	</security:authentication-manager>
 
 </beans>
-
-<!-- 
-		<security:form-login username-parameter="userID"
-		            password-parameter="password"
-		            login-page="/member/main.do"
-		            default-target-url="/main/main.do"
-		            login-processing-url="/member/login.do"
-		            authentication-failure-url="/member/main.do?fail=true" />
-		 
-		
-		<security:logout logout-url="/member/logout.do"
-		        invalidate-session="true"
-		/>
- 		
-	</security:http>        		 
- 	
-	<security:authentication-manager>
-	    
-	    <security:authentication-provider ref="customAuthenticationProvider"/>
-	    
-	</security:authentication-manager>	
-    
-    <bean id="customAuthenticationProvider" class="org.zerock.security.CustomAuthenticationProvider"/>  
-    
-       
-</beans>
- -->

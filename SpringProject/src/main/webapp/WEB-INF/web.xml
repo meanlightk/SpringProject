@@ -28,19 +28,21 @@
 			<param-value>/WEB-INF/spring/appServlet/servlet-context.xml</param-value>
 		</init-param>
 		<load-on-startup>1</load-on-startup>
-		
+
 		<multipart-config>
 			<location>C:\\upload\\temp</location>    <!-- 나중에 우분투 내에서의 폴더를 설정할 예정 -->
-        	<max-file-size>20971520</max-file-size> <!-- 1MB * 20 -->
-        	<max-request-size>41943040</max-request-size> <!-- 40MB -->
-        	<file-size-threshold>20971520</file-size-threshold> <!-- 20MB -->
-    	</multipart-config>
+			<max-file-size>20971520</max-file-size> <!-- 1MB * 20 -->
+			<max-request-size>41943040</max-request-size> <!-- 40MB -->
+			<file-size-threshold>20971520</file-size-threshold> <!-- 20MB -->
+		</multipart-config>
 	</servlet>
 
 	<servlet-mapping>
 		<servlet-name>appServlet</servlet-name>
 		<url-pattern>/</url-pattern>
 	</servlet-mapping>
+
+
 
 	<filter>
 		<filter-name>encodingFilter</filter-name>
@@ -49,22 +51,24 @@
 			<param-name>encoding</param-name>
 			<param-value>UTF-8</param-value>
 		</init-param>
+		<init-param>
+			<param-name>forceEncoding</param-name>
+			<param-value>true</param-value>
+		</init-param>
 	</filter>
-
-	
-	<filter>
-		<filter-name>springSecurityFilterChain</filter-name>
-		<filter-class>org.springframework.web.filter.DelegatingFilterProxy
-		</filter-class>
-	</filter>
-	<filter-mapping>
-		<filter-name>springSecurityFilterChain</filter-name>
-		<url-pattern>/*</url-pattern>
-	</filter-mapping>
-
-
 	<filter-mapping>
 		<filter-name>encodingFilter</filter-name>
 		<url-pattern>/*</url-pattern>
 	</filter-mapping>
+
+
+	<filter>
+		<filter-name>springSecurityFilterChain</filter-name>
+		<filter-class>org.springframework.web.filter.DelegatingFilterProxy</filter-class>
+	</filter>
+	<filter-mapping>
+		<filter-name>springSecurityFilterChain</filter-name>
+		<url-pattern>/*</url-pattern>
+	</filter-mapping>
+
 </web-app>

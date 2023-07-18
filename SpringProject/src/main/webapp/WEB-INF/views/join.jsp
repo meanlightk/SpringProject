@@ -1,6 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-
 <!DOCTYPE html>
 <html>
 <head>
@@ -125,10 +124,13 @@ body {
 </style>
 <meta charset="UTF-8">
 <title>Insert title here</title>
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+
 </head>
 <body>
 
-	<form action="/member/join.do" method="post" class="joinForm">                                                                                      
+	<form action="/member/join.do" method="post" id="joinForm" class="joinForm" >                                                                                      
       <h2>회원가입</h2>
 	      <div class="textForm">
 	        <input name="mem_id" type="text" class="id" placeholder="아이디">
@@ -148,7 +150,7 @@ body {
 	      <div class="textForm">
 	        <input name="pnum" type="number" class="cellphoneNo" placeholder="전화번호 ('-'없이)">
 	      </div>
-      <input type="submit" class="btn" value="J O I N"/>
+      <input type="submit" id="btn" class="btn" value="J O I N"/>
       <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}" />
     </form>
     

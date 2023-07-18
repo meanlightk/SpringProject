@@ -72,5 +72,10 @@ public class CommonController {
 	public String reviewForm() {
 		return "/review/form";
 	}
+	
+	@RequestMapping("/sample/member")
+	public String membersample() {
+		return "/sample/member";
+	}
 
 }
