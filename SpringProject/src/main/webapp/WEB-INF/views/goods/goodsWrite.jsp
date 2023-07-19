@@ -3,14 +3,13 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>  
 <%@ taglib prefix="tiles" uri="http://tiles.apache.org/tags-tiles" %>
-<meta name="_csrf" content="${_csrf.token}">
-<meta name="_csrf_header" content="${_csrf.headerName}">
-
 
 <!DOCTYPE html>
 <html>
 <meta charset="utf-8"> 
 <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
+<meta name="_csrf" content="${_csrf.token}">
+<meta name="_csrf_header" content="${_csrf.headerName}">
 <title>상품등록</title>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
 <script src="http://code.jquery.com/jquery-1.7.js"></script>
@@ -72,7 +71,7 @@ h1 {
 				<tr>
 					<th>상품이름 </th>
 					<td>
-						<input type="text" id="pname" name="pname" placeholder="상품이름입력" size="40" 
+						<input type="text" id="GOODS_NAME" name="GOODS_NAME" placeholder="상품이름입력" size="40" 
 						style="padding:10px;" value=<c:if test="${type eq 'modify'}">"${map.GOODS_NAME}"</c:if>>
 					</td>
 				</tr>
@@ -81,7 +80,7 @@ h1 {
 				<tr>
 					<th>상품내용 </th>
 					<td>
-						<textarea rows="30" cols="100" id="content" name="content">
+						<textarea rows="30" cols="100" id="GOODS_CONTENT" name="GOODS_CONTENT">
 						<c:if test="${type eq 'modify'}">${map.GOODS_CONTENT}</c:if>
 						</textarea>
 					</td>
@@ -90,12 +89,12 @@ h1 {
 				<tr>
 					<th>카테고리 </th>
 					<td>
-						<select name="category" id="category">
-							<option value="skincare">skincare</option>
-							<option value="base">base</option>
-							<option value="eye">eye</option>
-							<option value="lip">lip</option>
-							<option value="cheek">cheek</option>
+						<select name="GOODS_CATEGORY">
+							<option value="outer">outer</option>
+							<option value="top">top</option>
+							<option value="one-piece">one-piece</option>
+							<option value="bottom">bottom</option>
+							<option value="acc">acc</option>
 						</select>
 					</td>
 				</tr>
@@ -103,7 +102,7 @@ h1 {
 				<tr>
 					<th>상품원가 </th>
 					<td>
-						<input type="text" name="originalPrice" id="originalPrice" placeholder="상품원가" size="40" 
+						<input type="text" name="GOODS_ORIGIN_PRICE" id="GOODS_ORIGIN_PRICE" placeholder="상품원가" size="40" 
 						style="padding:10px;" value=<c:if test="${type eq 'modify'}">"${map.GOODS_ORIGIN_PRICE}"</c:if>> 
 					</td>
 				</tr>
@@ -111,7 +110,7 @@ h1 {
 				<tr>
 					<th>상품할인가 </th>
 					<td>
-						<input type="text" name="discountPrice" id="discountPrice" placeholder="상품할인가" size="40" 
+						<input type="text" name="GOODS_SALE_PRICE" id="GOODS_SALE_PRICE" placeholder="상품할인가" size="40" 
 						style="padding:10px;" value=<c:if test="${type eq 'modify'}">"${map.GOODS_SALE_PRICE}"</c:if>>
 					</td>
 				</tr>
@@ -119,18 +118,27 @@ h1 {
 				<tr>
 					<th>상품판매가 </th>
 					<td>
-						<input type="text" name="sellPrice" id="sellPrice" placeholder="상품판매가" size="40" 
+						<input type="text" name="GOODS_SELL_PRICE" id="GOODS_SELL_PRICE" placeholder="상품판매가" size="40" 
 						style="padding:10px;" value=<c:if test="${type eq 'modify'}">"${map.GOODS_SELL_PRICE}"</c:if>>
 					</td>
 				</tr>
 				
 				<tr>
-					<th>피부타입 </th>
+					<th>키워드 </th>
 					<td>
-						<input type="checkbox" name="skintype" id="skintype" value="dry" style="padding:10px;"> 건성
-						<input type="checkbox" name="skintype" id="skintype" value="middle" style="padding:10px;"> 복합성
-						<input type="checkbox" name="skintype" id="skintype" value="oily" style="padding:10px;"> 지성
-						<!-- <input type="hidden" name="GOODS_PICK" id="GOODS_PICK" value=""> -->
+						<input type="text" name="GOODS_KEYWORD" id="GOODS_KEYWORD" placeholder="키워드" size="40" 
+						style="padding:10px;" value=<c:if test="${type eq 'modify'}">"${map.GOODS_KEYWORD}"</c:if>>
+					</td>
+				</tr>
+				
+				<tr>
+					<th>PICK </th>
+					<td>
+						<input type="checkbox" name="PICK" id="PICK" value=" " style="padding:10px;"> 공백
+						<input type="checkbox" name="PICK" id="PICK" value="BEST" style="padding:10px;"> BEST
+						<input type="checkbox" name="PICK" id="PICK" value="MD PICK" style="padding:10px;"> MD PICK
+						<input type="checkbox" name="PICK" id="PICK" value="MUSTHAVE" style="padding:10px;"> MUSTHAVE
+						<input type="hidden" name="GOODS_PICK" id="GOODS_PICK" value="">
 					</td>
 				</tr>
 				
@@ -146,7 +154,13 @@ h1 {
 					</td>
 				</tr>
 				
-
+				<tr>
+					<th>상품색상 </th>
+					<td>
+						<input type="text" name="GOODS_ATT_COLOR" id="GOODS_ATT_COLOR" placeholder="컬러" size="40" 
+						style="padding:10px;" value=<c:if test="${type eq 'modify'}">${map.GOODS_ATT_COLOR}</c:if>>
+					</td>
+				</tr>
 				
 				<tr>
 					<th>상품수량 </th>
@@ -157,17 +171,6 @@ h1 {
 				</tr>
 				<input type="hidden" id="IDX" name="IDX" value="${map.GOODS_NO}">
 		</table>
-		
-		<div class="image">
-			<div class="image-wrap">
-				<p>메인이미지</p>
-				<br> <input type="file" name="uploadFile" id="mainImage" enc="multipart-formdata">
-			</div>
-	
-			<div id="previewContainer" style="width: 30%;">
-			</div>
-			
-		</div>
 	
 	<br>	
 	<div align="center">
@@ -175,6 +178,7 @@ h1 {
 	<c:if test="${type eq 'modify'}"><a href="#this" class="btn" id="update" onClick="fn_chk()">수정하기</a></c:if>
 	<a href="#this" class="btn" id="list">목록으로</a>
 	</div>
+	<input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}" />
 </form>
 
 </div>
@@ -182,82 +186,12 @@ h1 {
 <form id="commonForm" name="commonForm"></form>
 
 <script type="text/javascript">
-var token = $("meta[name='_csrf']").attr("content");
-var header = $("meta[name='_csrf_header']").attr("content");
-function submitData(){
-	var pname = $("#pnameReal").val();
-	var price = $("#priceReal").val();
-	var stock = $('#stockReal').val();
-	var category = $('.category').val();
-	var skintype = $('.skintype').val();
-	var uploadBtn = $("#uploadBtn");
-	
-	console.log(pname);
-	console.log(price);
-	console.log(stock);
-	console.log(category);
-	console.log(skintype);
-
-	if (join()){
-		$.ajax({
-			url:"/registerGoods",		// servlet 
-			type: "post",
-			dataType: 'json',
-			data: {"price" : price, "pname": pname, "stock": stock, "skintype": skintype, "category": category, "gno": gno},
-			beforeSend: function(xhr) { //XMLHttpRequest (XHR)은 AJAX 요청을 생성하는 JavaScript API이다. XHR의 메서드로 브라우저와 서버간의 네트워크 요청을 전송할 수 있다.
-				xhr.setRequestHeader(header, token); //csrf 전송하지 않으면 아예 ajax가 되지 않는 문제가 생김.
-			},
-			success:function(data){
-				console.log("성공" + data);
-				console.log(data);
-				loadImage(data); 
-				location.href = '/registerGoods2'
-			},
-			error:function(){
-				alert("error");
-			}
-		});
-	}	
-}
-
-
 $(function(){
 	CKEDITOR.replace('GOODS_CONTENT',{
         width:'120%',
         height:'400px',
-		filebrowserUploadUrl: '${pageContext.request.contextPath }/fileupload.do'
-			
+		filebrowserUploadUrl: "<c:url value="/fileupload.do?"/>${_csrf.parameterName}=${_csrf.token}"
 	});
-	
-	
-	const mainImageInput = document.querySelector("#mainImage");
-	const previewContainer = document.getElementById("previewContainer");
-	
-	
-	mainImageInput.addEventListener("change", (event) => {
-        const file = event.target.files[0];
-        
-        if (file) {
-            // FileReader 인스턴스 생성
-            const reader = new FileReader();
-			alert("성공");
-            // 파일 읽기 성공 시 미리보기 생성
-            reader.onload = (e) => {
-                const imagePreview = document.createElement("img");
-                alert("성공");
-                imagePreview.src = e.target.result;
-                imagePreview.style.maxWidth = "200px"; // 미리보기 이미지 크기 제한 (선택사항)
-                previewContainer.innerHTML = ""; // 기존 미리보기 제거
-                previewContainer.appendChild(imagePreview);
-            };
-
-            // 파일 읽기 시작
-            reader.readAsDataURL(file);
-        }
-    });	
-	
-	
-	
 });
 
 	var gfv_count = 1;
@@ -396,57 +330,6 @@ function fn_chk() {
 	//alert($('#GOODS_ATT_SIZE').val());
 		
 }
-
-function showImage(fileCallPath){
-	//alert(fileCallPath);
-	
-	$(".bigPictureWrapper").css("display", "flex").show();
-	
-	$(".bigPicture")
-	.html("<img src='/display?fileName=" + encodeURI(fileCallPath) + "'>")
-	.animate({width: '100%', height: '100%'}, 1000);
-}
-
-$(".bigPictureWrapper").on("click", function(e){
-	$(".bigPicture").animate({width: '0%', height: '0%'}, 1000);
-	setTimeout(() => {
-		$(this).hide();	
-	},1000);
-})
-
-function loadImage(Data){
-		var formData = new FormData();
-		var inputFile = $("input[name='uploadFile']");
-		var files = inputFile[0].files;
-		// Add File Data to formData
-		for(var i = 0; i < files.length; i++){
-			if(!checkExtension(files[i].name, files[i].size)){
-				return false;
-			}
-			
-			formData.append("uploadFile", files[i]);
-		}
-		console.log('냐냐냐냐');
-		console.log(Data);
-		formData.append("gno", Data.gno);
-		$.ajax({
-			url: '/uploadAjaxAction',
-			processData: false,
-			contentType: false,
-			data: formData,
-			type: 'POST',
-			dataType: 'json',
-			beforeSend: function(xhr) { //XMLHttpRequest (XHR)은 AJAX 요청을 생성하는 JavaScript API이다. XHR의 메서드로 브라우저와 서버간의 네트워크 요청을 전송할 수 있다.
-				xhr.setRequestHeader(header, token); //csrf 전송하지 않으면 아예 ajax가 되지 않는 문제가 생김.
-			},
-			success: function(result){
-				//console.log(result);
-				//console.log(formData);
-				showUploadedFile(result);
-				$(".uploadDiv").html(cloneObj.html());
-			}
-		});  //$.ajax
-	}; 
 
 </script>
 
