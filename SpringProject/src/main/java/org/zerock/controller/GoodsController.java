@@ -101,7 +101,9 @@ public class GoodsController {
 	}
 	
 	@GetMapping("/goodsWrite")
-	public String goodsWrite() {
+	public String goodsWrite(Model model) {
+		int gno = service.getGno();
+		model.addAttribute("gno", gno);
 		log.info("goods write");
 		return "/goods/goodsWrite";
 	}

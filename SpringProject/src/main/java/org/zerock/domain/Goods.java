@@ -14,14 +14,14 @@ public class Goods {
 	private int gno;
 	private int category;
 	private String pname;
-	private int price;
+	private String content;
+	private int sellPrice;
 	private int skintype;
 	private Date regidate;
 	private Date updatedate;
 	private int stock;
 	private int status;
 	private String imagepath;
-
-	
-	private List<GoodsImage> imageList;
+	private int originalPrice;
+	private int discountPrice;
 }
