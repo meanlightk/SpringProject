@@ -9,7 +9,7 @@ import org.zerock.mapper.MemberMapper;
 import lombok.extern.log4j.Log4j;
 
 @Log4j
-@Service
+@Service 
 public class MemberService {
 	
 	@Autowired

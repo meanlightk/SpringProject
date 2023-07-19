@@ -2,7 +2,7 @@ package org.zerock.domain;
 
 import lombok.Data;
 
-@Data
+@Data 
 public class Authority {
 
 	private int aid;

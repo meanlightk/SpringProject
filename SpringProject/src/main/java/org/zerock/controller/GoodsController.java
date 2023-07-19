@@ -1,12 +1,11 @@
 package org.zerock.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.MediaType;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.zerock.domain.Goods;
@@ -16,7 +15,7 @@ import lombok.extern.log4j.Log4j;
 
 
 @Controller
-@Log4j
+@Log4j 
 public class GoodsController {
 	
 	@Autowired
@@ -65,30 +64,23 @@ public class GoodsController {
 	/*@RequestParam("price") String price, @RequestParam("pname") String pname, @RequestParam("stock") int stock*/
 //	@PostMapping(value = "/registerGoods", consumes = MediaType.APPLICATION_JSON_VALUE)	
 	@PostMapping("/registerGoods")	
-	@ResponseBody
-	public Goods registerGoods(@RequestParam("price") String  price,@RequestParam("pname") String pname, @RequestParam("stock") String stock,
-			@RequestParam("skintype") String skintype, @RequestParam("category") String category) {
-		
+	
+//	public Goods registerGoods(@RequestParam("sellPrice") String  sellPrice,@RequestParam("originalPrice") String  originalPrice,@RequestParam("pname") String pname, @RequestParam("stock") String stock,
+//			@RequestParam("skintype") String skintype, @RequestParam("category") String category, ) {
+	public Goods registerGoods(Goods goods) {
 		log.info("registerGoods");
 		
-		log.info(price); 
-		log.info(pname); 
-		log.info(stock); 
-		log.info(skintype); 
-		int stock2 = Integer.parseInt(stock);
+		log.info(goods); 		
 		
 		
+		 //Goods goods = new Goods();
 		
-		 Goods goods = new Goods();
-		
-		 int gno = service.getGno() + 1;
-		 System.out.println("내가 보낸 gno:" + gno);
-		 goods.setGno(gno);
-		 goods.setPname(pname); 
-		 goods.setStock(stock2); 
-		 int realprice = Integer.parseInt(price); 
-		 goods.setPrice(realprice);
-		 service.registerItem(goods); 
+			/*
+			 * int gno = service.getGno() + 1; System.out.println("내가 보낸 gno:" + gno);
+			 * goods.setGno(gno); goods.setPname(pname); goods.setStock(stock2); int
+			 * realprice = Integer.parseInt(price); // goods.setPrice(realprice);
+			 */		 
+		service.registerItem(goods); 
 		 
 		 return goods;
 		 
@@ -100,9 +92,10 @@ public class GoodsController {
 		return "registerGoods";
 	}
 	
-	@GetMapping("/goodsWrite")
-	public String goodsWrite(Model model) {
+	@GetMapping("/goodsWrite/{type}")
+	public String goodsWrite(Model model, @PathVariable("type") String type) {
 		int gno = service.getGno();
+		model.addAttribute("type", type);
 		model.addAttribute("gno", gno);
 		log.info("goods write");
 		return "/goods/goodsWrite";

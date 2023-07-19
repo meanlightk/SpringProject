@@ -16,7 +16,11 @@
 	regidate,
 	updatedate,
 	stock,
-	status
+	status,
+	imagepath,
+	originalPrice,
+	discountPrice,
+	uuid
 	from goods where goods_no = #{gno}
 </select>
 
@@ -25,12 +29,17 @@
 	goods_no as gno,
 	category,
 	pname,
+	content,
 	price,
 	skintype,
 	regidate,
 	updatedate,
 	stock,
-	status
+	status,
+	imagepath,
+	originalPrice,
+	discountPrice,
+	uuid
 	from goods where category = #{category} 
 </select>
 
@@ -39,12 +48,17 @@
 	goods_no as gno,
 	category,
 	pname,
+	content,
 	price,
 	skintype,
 	regidate,
 	updatedate,
 	stock,
-	status
+	status,
+	imagepath,
+	originalPrice,
+	discountPrice,
+	uuid
 	from goods where category=#{category} and skintype=#{skintype}
 </select>
 
@@ -56,8 +70,9 @@
 </insert> -->
 
 <update id="updateItem" parameterType="org.zerock.domain.Goods" >
-	update goods set category=#{category}, pname=#{pname}, price=#{price},
-	skintype=#{skintype}, stock=#{stock}, status=#{status} where goods_no=#{gno}
+	update goods set category=#{category}, pname=#{pname}, sellPrice=#{sellPrice}, originalPrice=#{originalPrice},
+	discountPrice=#{discountPrice},content=#{content},imagepath=#{imagepath},
+	skintype=#{skintype}, stock=#{stock}, status=#{status},uuid=#{uuid} where goods_no=#{gno}
 </update>
 
 <delete id="deleteItem">
@@ -73,14 +88,19 @@
    <selectKey keyProperty="gno" resultType="int" order="BEFORE">
 		SELECT IFNULL(max(goods_no)+1,1) FROM goods
    </selectKey>
-   INSERT INTO goods (category, skintype,goods_no, price, pname, stock)
+   INSERT INTO goods (category, pname, content, sellPrice, skintype, stock, status, imagepath, originalPrice, discountPrice, uuid)
    VALUES ( 
    		#{category},
+   		#{pname},
+   		#{content},
+   		#{sellPrice},
    		#{skintype},
-      #{gno}, 
-      #{price}, 
-      #{pname},
-      #{stock}
+   		#{stock},
+   		#{status},
+   		#{imagepath}
+      #{originalPrice}, 
+      #{discountPrice},
+      #{uuid}      
    )
 </insert>
 
@@ -94,4 +114,7 @@
 			(select imagepath from goodsImage i where g.goods_no = i.goods_no limit 1) as imagepath	
 		 from goods g
 	</select>
+<update id="updateFilePath" parameterType="org.zerock.domain.Goods">
+	update goods set imagepath=#{imagepath}, uuid=#{uuid} where goods_no = #{gno}
+</update>
 </mapper>

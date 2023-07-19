@@ -13,7 +13,7 @@
 <title>상품등록</title>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
 <script src="http://code.jquery.com/jquery-1.7.js"></script>
-<script src="<c:url value='/js/common1.js'/>" charset="utf-8"></script>
+<script src="<c:url value='/resources/js/common.js'/>" charset="utf-8"></script>
 <script src="../resources/ckeditor/ckeditor.js"></script>
 <head>
 
@@ -71,7 +71,7 @@ h1 {
 				<tr>
 					<th>상품이름 </th>
 					<td>
-						<input type="text" id="GOODS_NAME" name="GOODS_NAME" placeholder="상품이름입력" size="40" 
+						<input type="text" id="pname" name="pname" placeholder="상품이름입력" size="40" 
 						style="padding:10px;" value=<c:if test="${type eq 'modify'}">"${map.GOODS_NAME}"</c:if>>
 					</td>
 				</tr>
@@ -80,7 +80,7 @@ h1 {
 				<tr>
 					<th>상품내용 </th>
 					<td>
-						<textarea rows="30" cols="100" id="GOODS_CONTENT" name="GOODS_CONTENT">
+						<textarea rows="30" cols="100" id="content" name="content">
 						<c:if test="${type eq 'modify'}">${map.GOODS_CONTENT}</c:if>
 						</textarea>
 					</td>
@@ -89,7 +89,7 @@ h1 {
 				<tr>
 					<th>카테고리 </th>
 					<td>
-						<select name="GOODS_CATEGORY">
+						<select name="category">
 							<option value="outer">outer</option>
 							<option value="top">top</option>
 							<option value="one-piece">one-piece</option>
@@ -102,7 +102,7 @@ h1 {
 				<tr>
 					<th>상품원가 </th>
 					<td>
-						<input type="text" name="GOODS_ORIGIN_PRICE" id="GOODS_ORIGIN_PRICE" placeholder="상품원가" size="40" 
+						<input type="text" name="originalPrice" id="originalPrice" placeholder="상품원가" size="40" 
 						style="padding:10px;" value=<c:if test="${type eq 'modify'}">"${map.GOODS_ORIGIN_PRICE}"</c:if>> 
 					</td>
 				</tr>
@@ -110,7 +110,7 @@ h1 {
 				<tr>
 					<th>상품할인가 </th>
 					<td>
-						<input type="text" name="GOODS_SALE_PRICE" id="GOODS_SALE_PRICE" placeholder="상품할인가" size="40" 
+						<input type="text" name="discountPrice" id="discountPrice" placeholder="상품할인가" size="40" 
 						style="padding:10px;" value=<c:if test="${type eq 'modify'}">"${map.GOODS_SALE_PRICE}"</c:if>>
 					</td>
 				</tr>
@@ -118,18 +118,11 @@ h1 {
 				<tr>
 					<th>상품판매가 </th>
 					<td>
-						<input type="text" name="GOODS_SELL_PRICE" id="GOODS_SELL_PRICE" placeholder="상품판매가" size="40" 
+						<input type="text" name="sellPrice" id="sellPrice" placeholder="상품판매가" size="40" 
 						style="padding:10px;" value=<c:if test="${type eq 'modify'}">"${map.GOODS_SELL_PRICE}"</c:if>>
 					</td>
 				</tr>
 				
-				<tr>
-					<th>키워드 </th>
-					<td>
-						<input type="text" name="GOODS_KEYWORD" id="GOODS_KEYWORD" placeholder="키워드" size="40" 
-						style="padding:10px;" value=<c:if test="${type eq 'modify'}">"${map.GOODS_KEYWORD}"</c:if>>
-					</td>
-				</tr>
 				
 				<tr>
 					<th>PICK </th>
@@ -142,26 +135,22 @@ h1 {
 					</td>
 				</tr>
 				
+				
+				
 				<tr>
-					<th>상품사이즈 </th>
+					<th>옵션 리스트</th>
 					<td>
-						<input type="checkbox" name="SIZE" value="FREE" style="padding:10px;"> FREE
-						<input type="checkbox" name="SIZE" value="S" style="padding:10px;"> S
-						<input type="checkbox" name="SIZE" value="M" style="padding:10px;"> M
-						<input type="checkbox" name="SIZE" value="L" style="padding:10px;"> L
-						<input type="checkbox" name="SIZE" value="XL" style="padding:10px;"> XL
-						<input type="hidden" name="GOODS_ATT_SIZE" id="GOODS_ATT_SIZE" value="">
+						<textarea rows="2" cols="45" id="option_list" name="option_list"></textarea>
 					</td>
 				</tr>
 				
 				<tr>
-					<th>상품색상 </th>
+					<th>옵션 이름</th>
 					<td>
-						<input type="text" name="GOODS_ATT_COLOR" id="GOODS_ATT_COLOR" placeholder="컬러" size="40" 
-						style="padding:10px;" value=<c:if test="${type eq 'modify'}">${map.GOODS_ATT_COLOR}</c:if>>
+						<input type="text" name="option" id="option" style="padding:10px;" placeholder="옵션 이름" size="40">
+						<input type="button" id="optionBtn" onclick="addOption()" value="옵션추가 " style="height:39px; vertical-align:middle;"></input>
 					</td>
 				</tr>
-				
 				<tr>
 					<th>상품수량 </th>
 					<td>
@@ -186,8 +175,19 @@ h1 {
 <form id="commonForm" name="commonForm"></form>
 
 <script type="text/javascript">
+function addOption(){
+	
+	const input = $("#option");
+	const inputVal = input.val();
+//	const option_list = document.getElementById("option_list");
+	const option_list = $("#option_list");
+
+	option_list.text(option_list.text() + inputVal + "\n");
+	input.val("");
+}
+
 $(function(){
-	CKEDITOR.replace('GOODS_CONTENT',{
+	CKEDITOR.replace('content',{
         width:'120%',
         height:'400px',
 		filebrowserUploadUrl: "<c:url value="/fileupload.do?"/>${_csrf.parameterName}=${_csrf.token}"
@@ -243,7 +243,7 @@ function fn_updateGoods(){
 function fn_insertBoard() { // 유효성체크
 
 	var comSubmit = new ComSubmit("frm"); // 객체생성
-	comSubmit.setUrl("<c:url value='/shop/goodsWrite.do' />"); // url설정
+	comSubmit.setUrl("<c:url value='/registerGoods' />"); // url설정
 
     // 게시글 제목 필요
     if(!$("#GOODS_NAME").val()){
@@ -287,12 +287,6 @@ function fn_insertBoard() { // 유효성체크
         alert("상품사이즈를 선택해주세요.");
         return false;
     }  */ 
-	 // 컬러
-    if(!$("#GOODS_ATT_COLOR").val()){
-        alert("상품컬러를 입력해주세요.");
-        $("#GOODS_ATT_COLOR").focus();
-        return false;
-    }
 	 // 상품 수량
     if(!$("#GOODS_ATT_AMOUNT").val()){
         alert("상품수량을 입력해주세요.");

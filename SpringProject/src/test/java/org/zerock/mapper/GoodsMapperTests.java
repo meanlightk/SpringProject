@@ -45,7 +45,7 @@ public class GoodsMapperTests {
 		Goods goods = new Goods();
 		goods.setCategory(1);
 		goods.setPname("ezen");
-		goods.setPrice(10000);
+		//goods.setPrice(10000);
 		goods.setSkintype(1);
 		goods.setStock(5);
 		goods.setStatus(1);
@@ -57,7 +57,7 @@ public class GoodsMapperTests {
 		Goods goods = new Goods();
 		goods.setCategory(1);
 		goods.setPname("ezen");
-		goods.setPrice(20000);
+		//goods.setPrice(20000);
 		goods.setSkintype(1);
 		goods.setStock(20);
 		goods.setStatus(1);

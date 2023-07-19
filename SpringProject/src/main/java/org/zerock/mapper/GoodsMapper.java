@@ -23,4 +23,6 @@ public interface GoodsMapper {
 	public int getGoodsNo();
 	
 	public List<Goods> goodsList();
+	
+	public void updateFilePath(Goods goods);
 }

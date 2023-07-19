@@ -10,7 +10,7 @@ import org.zerock.mapper.CartMapper;
 import lombok.extern.log4j.Log4j;
 
 @Service
-@Log4j
+@Log4j 
 public class CartService {
 	
 	@Autowired
