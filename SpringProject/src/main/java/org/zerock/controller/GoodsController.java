@@ -100,4 +100,10 @@ public class GoodsController {
 		return "registerGoods";
 	}
 	
+	@GetMapping("/goodsWrite")
+	public String goodsWrite() {
+		log.info("goods write");
+		return "/goods/goodsWrite";
+	}
+	
 }
