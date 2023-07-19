@@ -8,6 +8,8 @@ CREATE TABLE member(
 	pwd varchar(300) NOT NULL,
 	pnum varchar(100) NOT NULL,
 	email varchar(100) NOT NULL,
+	userAddr varchar(300) NOT NULL,
+	userDaddr varchar(200) NOT NULL,
 	grade int NOT NULL DEFAULT 2 comment '1:관리자 2~4:일반회원 2:새싹회원, 3:실버회원, 4:골드회원',
 	regidate datetime DEFAULT current_timestamp,
 	updatedate datetime DEFAULT current_timestamp ON UPDATE CURRENT_TIMESTAMP,

@@ -13,6 +13,8 @@
 		<result property="pwd" column="pwd" />
 		<result property="pnum" column="pnum" />
 		<result property="email" column="email" />
+		<result property="userAddr" column="userAddr" />
+		<result property="userDaddr" column="userDaddr" />
 		<result property="grade" column="grade" />
 		<result property="regidate" column="regidate" />
 		<result property="updatedate" column="updatedate" />
@@ -31,6 +33,8 @@
 		pwd,
 		pnum,
 		email,
+		userAddr,
+		userDaddr,
 		grade,
 		regidate,
 		updatedate,
@@ -47,6 +51,8 @@
 		pwd,
 		pnum,
 		email,
+		userAddr,
+		userDaddr,
 		grade,
 		regidate,
 		updatedate,
@@ -59,8 +65,8 @@
 	</select>
 	
 	<insert id="insertMember" parameterType="org.zerock.domain.Member">
-		insert into member(mem_id, name, pwd, pnum, email)
-		values(#{mem_id}, #{name}, #{pwd}, #{pnum}, #{email})
+		insert into member(mem_id, name, pwd, pnum, email, userAddr, userDaddr)
+		values(#{mem_id}, #{name}, #{pwd}, #{pnum}, #{email}, #{userAddr}, #{userDaddr})
 	</insert>
 	
 	<insert id="insertAuth" parameterType="org.zerock.domain.Authority">
@@ -69,7 +75,7 @@
 	</insert>
 	
 	<update id="updateMember" parameterType="org.zerock.domain.Member">
-		update member set pwd=#{pwd}, pnum=#{pnum}, email=#{email} where mem_id=#{mem_id}
+		update member set pwd=#{pwd}, pnum=#{pnum}, email=#{email}, userAddr=#{userAddr}, userDaddr=#{userDaddr} where mem_id=#{mem_id}
 	</update>
 	
 	<delete id="deleteMember">

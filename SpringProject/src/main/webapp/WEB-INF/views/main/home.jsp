@@ -442,7 +442,7 @@
 									</a>
 	
 									<span class="stext-105 cl3">
-										${goods.price} 
+										${goods.sellPrice} 
 									</span>
 								</div>
 	

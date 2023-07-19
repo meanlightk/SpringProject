@@ -13,6 +13,8 @@ public class Member {
 	private String pwd;
 	private String pnum;
 	private String email;
+	private String userAddr;
+	private String userDaddr;
 	private int grade;
 	private Date regidate;
 	private Date updatedate;

@@ -131,10 +131,11 @@
 </script>
 </head>
 <body>
-	<form name="joinForm" method="post" action="/member/join.do">
+	<form name="joinForm" class="joinform" method="post" action="/member/join.do">
 		<input type="hidden" name="checkID" value="no" />
 		<div class="joinBox">
-			<h1 class="tit">회원가입</h1>
+            <input type="button" onClick="history.go(-1);" class="closeBtn" value="X">
+            <h1 class="tit">회원가입</h1>
 			<div class="AlignRight MAT30">
 				<span class="blet">* </span>표시는 필수입니다.
 			</div>
@@ -188,8 +189,7 @@
 					</tr>
 			</table>
 			<div class="btnZone">
-				<input type="button" onClick="join();" class="btnOk" value="확인">
-				<input type="button" onClick="history.go(-1);" class="btnC" value="뒤로">
+				<input type="button" id="btn" class="btn" onClick="join();" value="J O I N"/>
 				<input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}" />
 			</div>
 		</div>
