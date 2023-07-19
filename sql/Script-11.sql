@@ -43,15 +43,16 @@ CREATE TABLE goodsImage(
 
 -- ALTER TABLE goodsImage ADD CONSTRAINT fk_goods FOREIGN KEY (pno) REFERENCES goods(pno); 
 
-CREATE TABLE qna(
-	qno int AUTO_INCREMENT PRIMARY KEY,
-	id varchar(100) NOT NULL,
-	title varchar(200) NOT NULL,
-	content varchar(4000) NOT NULL,
-	regidate datetime DEFAULT current_timestamp,
-	updatedate datetime DEFAULT current_timestamp ON UPDATE CURRENT_TIMESTAMP,
-	status enum('1', '2') NOT NULL comment '1:답변대기중 2:답변완료'
-);
+CREATE TABLE IF NOT EXISTS `qna` (
+  `qna_no` int NOT NULL AUTO_INCREMENT,
+  `mem_id` varchar(100) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NOT NULL,
+  `title` varchar(200) NOT NULL,
+  `content` varchar(4000) NOT NULL,
+  `regidate` datetime DEFAULT CURRENT_TIMESTAMP,
+  `updatedate` datetime DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+  `status` enum('1','2') NOT NULL DEFAULT '1' COMMENT '1:답변대기중 2:답변완료',
+  PRIMARY KEY (`qna_no`) USING BTREE
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
 -- table qna의 컬럼 regidate 초기값 변경을 방지하는 트리거
 /*DELIMITER //

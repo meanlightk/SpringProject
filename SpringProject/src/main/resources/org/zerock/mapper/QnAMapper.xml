@@ -6,10 +6,100 @@
 
 <mapper namespace="org.zerock.mapper.QnAMapper">
 
-<select id="writeReview" resultType="org.zerock.domain.QnA_A">
+<select id="selectAllListByQnA_a" resultType="org.zerock.domain.QnA_A">
 	<![CDATA[
-	select * from qna
+	select
+	qna_no as qna_questno,
+	mem_id as id,
+	title,
+	content,
+	regidate,
+	updatedate,
+	status
+	from qna
 	]]>
 </select>
+
+<select id="selectOneQna_q" resultType="org.zerock.domain.QnA_Q">
+	<![CDATA[
+	select
+	qna_no as qna_questno,
+	mem_id as id,
+	title,
+	content,
+	regidate,
+	updatedate,
+	status
+	from qna
+	where qna_no=#{qna_questno}
+	]]>
+</select>
+
+<!-- 사용자 -->
+<select id="selectQna_q" resultType="org.zerock.domain.QnA_Q">
+	<![CDATA[
+	select
+	qna_no,
+	mem_id as id,
+	title,
+	content,
+	regidate,
+	updatedate,
+	status
+	from qna
+	where qna_no=#{qna_questno}
+	]]>
+</select>
+
+<insert id="insertQna_q" parameterType="org.zerock.domain.QnA_Q">
+	insert into qna(mem_id, title, content) <!-- status는 '1'이 디폴트 입력 -->
+	values (#{id}, #{title}, #{content})
+</insert>
+
+<update id="updateQna_q" parameterType="org.zerock.domain.QnA_Q">
+	update qna
+	set
+	title=#{title},
+	content=#{content},
+	status=#{status}
+	where qna_no=#{qna_questno}
+</update>
+
+<delete id="deleteQna_q">
+	delete from qna where qna_no=#{qna_questno}
+</delete>
+
+
+<!-- 관리자 -->
+<select id="selectOneQna_a" resultType="org.zerock.domain.QnA_A">
+	select
+	answer_no as qna_ansno,
+	qna_no as qna_questno,
+	title,
+	content,
+	regidate,
+	updatedate,
+	status
+	from answer_qna
+	where answer_no=#{qna_ansno}
+</select>
+
+<insert id="insertQna_a" parameterType="org.zerock.domain.QnA_A">
+	insert into answer_qna(qna_no, title, content, status)
+	values(#{qna_questno}, #{title}, #{content}, #{status})
+</insert>
+
+<update id="updateQna_a" parameterType="org.zerock.domain.QnA_A">
+	update answer_qna
+	set
+	title = #{title},
+	content = #{content},
+	status = #{status}
+	where answer_no=#{qna_ansno}
+</update>
+
+<delete id="deleteQna_a">
+	delete from answer_qna where answer_no=#{qna_ansno}
+</delete>
 
 </mapper>

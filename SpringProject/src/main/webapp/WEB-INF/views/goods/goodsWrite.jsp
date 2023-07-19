@@ -65,7 +65,7 @@ h1 {
 
 <br><br>
 <div align="center">
-<form name="frm" id="frm" enctype="multipart/form-data" method="post">
+	<form name="frm" id="frm" enctype="multipart/form-data" method="post">
 		<table align="center" border="0">
 				
 				<tr>
@@ -90,11 +90,11 @@ h1 {
 					<th>카테고리 </th>
 					<td>
 						<select name="category">
-							<option value="outer">outer</option>
-							<option value="top">top</option>
-							<option value="one-piece">one-piece</option>
-							<option value="bottom">bottom</option>
-							<option value="acc">acc</option>
+							<option value="skincare">skincare</option>
+							<option value="base">base</option>
+							<option value="eye">eye</option>
+							<option value="lip">lip</option>
+							<option value="cheek">cheek</option>
 						</select>
 					</td>
 				</tr>
@@ -125,13 +125,13 @@ h1 {
 				
 				
 				<tr>
-					<th>PICK </th>
+					<th>피부 타입 </th>
 					<td>
-						<input type="checkbox" name="PICK" id="PICK" value=" " style="padding:10px;"> 공백
-						<input type="checkbox" name="PICK" id="PICK" value="BEST" style="padding:10px;"> BEST
-						<input type="checkbox" name="PICK" id="PICK" value="MD PICK" style="padding:10px;"> MD PICK
-						<input type="checkbox" name="PICK" id="PICK" value="MUSTHAVE" style="padding:10px;"> MUSTHAVE
-						<input type="hidden" name="GOODS_PICK" id="GOODS_PICK" value="">
+						<input type="checkbox" name="skintype" id="skintype" value="dry" style="padding:10px;"> 건성
+						<input type="checkbox" name="skintype" id="skintype" value="middle" style="padding:10px;"> 복합성
+						<input type="checkbox" name="skintype" id="skintype" value="oily" style="padding:10px;"> 지성
+						<!-- <input type="checkbox" name="PICK" id="PICK" value="MUSTHAVE" style="padding:10px;"> MUSTHAVE
+						<input type="hidden" name="GOODS_PICK" id="GOODS_PICK" value=""> -->
 					</td>
 				</tr>
 				
@@ -154,12 +154,21 @@ h1 {
 				<tr>
 					<th>상품수량 </th>
 					<td>
-					<input type="text" name="GOODS_ATT_AMOUNT" id="GOODS_ATT_AMOUNT" placeholder="상품수량" size="40" 
+					<input type="text" name="stock" id="stock" placeholder="상품수량" size="40" 
 					style="padding:10px;" value=<c:if test="${type eq 'modify'}">${map.GOODS_ATT_AMOUNT}</c:if>>
 					</td>
 				</tr>
-				<input type="hidden" id="IDX" name="IDX" value="${map.GOODS_NO}">
+				<input type="hidden" id="gno" name="gno" value="${gno}">
 		</table>
+		
+		<div class="image">
+			<div class="image-wrap">
+				<p>메인이미지</p>
+				<br> <input type="file" name="uploadFile" id="mainImage" >
+			</div>
+	
+			<div id="previewContainer" style="width: 30%;">
+		</div>
 	
 	<br>	
 	<div align="center">
@@ -221,6 +230,31 @@ $(document).ready(function() {
 		fn_updateGoods();	
 	});
 
+	const mainImageInput = document.querySelector("#mainImage");
+	const previewContainer = document.getElementById("previewContainer");
+	
+	
+	mainImageInput.addEventListener("change", (event) => {
+        const file = event.target.files[0];
+        
+        if (file) {
+            // FileReader 인스턴스 생성
+            const reader = new FileReader();
+			alert("성공");
+            // 파일 읽기 성공 시 미리보기 생성
+            reader.onload = (e) => {
+                const imagePreview = document.createElement("img");
+                alert("성공");
+                imagePreview.src = e.target.result;
+                imagePreview.style.maxWidth = "200px"; // 미리보기 이미지 크기 제한 (선택사항)
+                previewContainer.innerHTML = ""; // 기존 미리보기 제거
+                previewContainer.appendChild(imagePreview);
+            };
+
+            // 파일 읽기 시작
+            reader.readAsDataURL(file);
+        }
+    });	
 	
 	
 });
@@ -244,37 +278,37 @@ function fn_insertBoard() { // 유효성체크
 
 	var comSubmit = new ComSubmit("frm"); // 객체생성
 	comSubmit.setUrl("<c:url value='/registerGoods' />"); // url설정
-
+	
     // 게시글 제목 필요
-    if(!$("#GOODS_NAME").val()){
+    if(!$("#pname").val()){
         alert("제목를 입력해주세요.");
-        $("#GOODS_NAME").focus();
+        $("#pname").focus();
         return false;
     }
 	 	// 게시글 내용 필요
-    if(CKEDITOR.instances.GOODS_CONTENT.getData() =='' 
-            || CKEDITOR.instances.GOODS_CONTENT.getData().length ==0){
+    if(CKEDITOR.instances.content.getData() =='' 
+            || CKEDITOR.instances.content.getData().length ==0){
         alert("내용을 입력해주세요.");
-        $("#GOODS_CONTENT").focus();
+        $("#content").focus();
         return false;
     }
-	 	
+	 
  	// 상품원가 
-    if(!$("#GOODS_ORIGIN_PRICE").val()){
+    if(!$("#originalPrice").val()){
         alert("상품원가를 입력해주세요.");
-        $("#GOODS_ORIGIN_PRICE").focus();
+        $("#originalPrice").focus();
         return false;
     }
  	// 할인가
-    if(!$("#GOODS_SALE_PRICE").val()){
+    if(!$("#discountPrice").val()){
         alert("상품할인가를 입력해주세요.");
-        $("#GOODS_SALE_PRICE").focus();
+        $("#discountPrice").focus();
         return false;
     }
  	// 판매가
-    if(!$("#GOODS_SELL_PRICE").val()){
+    if(!$("#sellPrice").val()){
         alert("판매가를 입력해주세요.");
-        $("#GOODS_SELL_PRICE").focus();
+        $("#sellPrice").focus();
         return false;
     }
 /*   	// PICK
@@ -288,12 +322,11 @@ function fn_insertBoard() { // 유효성체크
         return false;
     }  */ 
 	 // 상품 수량
-    if(!$("#GOODS_ATT_AMOUNT").val()){
+    if(!$("#stock").val()){
         alert("상품수량을 입력해주세요.");
-        $("#GOODS_ATT_AMOUNT").focus();
+        $("#stock").focus();
         return false;
     }
-
 
 	comSubmit.submit();
 	

@@ -16,8 +16,9 @@
 <body>
 <div class="container">
   <h2>상품 리스트</h2>
-  <p>여기다 뭘 쓸수도 있음</p>        
-  <table class="table">
+  <p>여기다 뭘 쓸수도 있음</p>
+  <c:if test="${!empty goodsList}">
+    <table class="table">
     <thead>
       <tr>
         <th>썸네일</th>
@@ -29,23 +30,20 @@
       </tr>
     </thead>
     <tbody>
+    <c:forEach var="good" items="${goodsList}">
       <tr>
-        <td>John</td>
-        <td>Doe</td>
-        <td>john@example.com</td>
+        <td><img src="upload/main/${good.simagepath}"></img></td>
+        <td>${good.pname}</td>
+        <td>${good.category}</td>
+        <td>${good.sellPrice}</td>
+        <td>${good.stock}</td>
+        <td>${good.regidate}</td>
       </tr>
-      <tr>
-        <td>Mary</td>
-        <td>Moe</td>
-        <td>mary@example.com</td>
-      </tr>
-      <tr>
-        <td>July</td>
-        <td>Dooley</td>
-        <td>july@example.com</td>
-      </tr>
+    </c:forEach>
     </tbody>
   </table>
+  </c:if>        
+
 </div>
 </body>
 </html>

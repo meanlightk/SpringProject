@@ -78,7 +78,7 @@ public class UploadController {
 
 		System.out.println("내가 받은 상품 번호: ");
 		String uploadFolderPath = gno;
-		System.out.println("내가 받은 상품 번호!!!!!!!!:" + gno);
+		
 
 		// make folder ---------
 		File uploadPath = new File(uploadFolder, uploadFolderPath); // 상품 번호로 경로를 만듦

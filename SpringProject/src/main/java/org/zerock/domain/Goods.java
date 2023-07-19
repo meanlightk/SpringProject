@@ -11,18 +11,21 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @NoArgsConstructor
 public class Goods {
-	private int gno;
-	private int category;
+	private Integer gno;
+	private String category;
 	private String pname;
 	private String content;
-	private int sellPrice;
-	private int skintype;
+	private Integer sellPrice;
+	private String skintype;
 	private Date regidate;
 	private Date updatedate;
-	private int stock;
-	private int status;
+	private Integer stock;
+	private String status;
 	private String imagepath;
-	private int originalPrice;
-	private int discountPrice;
+	private String simagepath;
+
+	
+	private Integer originalPrice;
+	private Integer discountPrice;
 	private String uuid;
 }

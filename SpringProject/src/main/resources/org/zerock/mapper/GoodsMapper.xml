@@ -97,7 +97,7 @@
    		#{skintype},
    		#{stock},
    		#{status},
-   		#{imagepath}
+   		#{imagepath},
       #{originalPrice}, 
       #{discountPrice},
       #{uuid}      
@@ -110,8 +110,9 @@
 
 	<select id="goodsList" resultType="org.zerock.domain.Goods">
 		select 
-			*,
-			(select imagepath from goodsImage i where g.goods_no = i.goods_no limit 1) as imagepath	
+			goods_no as gno, 
+			g.*,
+			concat(goods_no,'/s_',uuid) as simagepath
 		 from goods g
 	</select>
 <update id="updateFilePath" parameterType="org.zerock.domain.Goods">
