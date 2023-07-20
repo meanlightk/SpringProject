@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE mapper
+
+ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="org.zerock.mapper.AnswerClaimMapper">
+
+<select id="selectClaimAnswers" resultType="org.zerock.domain.AnswerClaim">
+	select
+	answer_no as anscno,
+	gclaim_no as glno,
+	title,
+	content,
+	regidate,
+	updatedate,
+	status
+	from answer_claim
+</select>
+
+<select id="selectOneClaimAnswer" resultType="org.zerock.domain.AnswerClaim">
+	select
+	answer_no as anscno,
+	gclaim_no as glno,
+	title,
+	content,
+	regidate,
+	updatedate,
+	status
+	from answer_claim
+	where answer_no=#{anscno}
+</select>
+
+<insert id="insertClaimAnswer" parameterType="org.zerock.domain.AnswerClaim">
+	insert into answer_claim (gclaim_no, title, content, status)
+	values (#{glno}, #{title}, #{content}, #{status})
+</insert>
+
+<update id="updateClaimStatus" parameterType="org.zerock.domain.AnswerClaim">
+	update answer_claim
+	set
+	title=#{title},
+	content=#{content},
+	status=#{status}
+	where answer_no=#{anscno}
+</update>
+
+<delete id="deleteClaimAnswer">
+	delete from answer_no=#{anscno}
+</delete>
+
+</mapper>
