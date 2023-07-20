@@ -9,7 +9,7 @@ import lombok.extern.log4j.Log4j;
 @RequestMapping("/qna/*")
 @Controller
 @Log4j
-public class QnaController {
+public class QnAController {
 	
 //	@Autowired
 //	private QnaService service;
