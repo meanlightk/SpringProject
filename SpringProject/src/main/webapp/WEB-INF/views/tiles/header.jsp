@@ -70,7 +70,7 @@
 				<nav class="limiter-menu-desktop container">
 					
 					<!-- Logo desktop -->		
-					<a href="#" class="logo">
+					<a href="/home" class="logo">
 						<img src="../resources/images/icons/logo-01.png" alt="IMG-LOGO">
 					</a>
 
@@ -78,32 +78,32 @@
 					<div class="menu-desktop">
 						<ul class="main-menu">
 							<li>
-								<a href="index.html">Home</a>
+								<a href="/home">Home</a>
 								<ul class="sub-menu">
-									<li><a href="index.html">Homepage 1</a></li>
-									<li><a href="home-02.html">Homepage 2</a></li>
-									<li><a href="home-03.html">Homepage 3</a></li>
+									<li><a href="/home">Homepage 1</a></li>
+									<li><a href="/home2">Homepage 2</a></li>
+									<li><a href="/home3">Homepage 3</a></li>
 								</ul>
 							</li>
 
 							<li class="active-menu">
-								<a href="product.html">Shop</a>
+								<a href="/showlist">Shop</a>
 							</li>
 
 							<li class="label1" data-label1="hot">
-								<a href="shoping-cart.html">Features</a>
+								<a href="/put">Features</a>
 							</li>
 
 							<li>
-								<a href="blog.html">Blog</a>
+								<a href="/blogs">Blog</a>
 							</li>
 
 							<li>
-								<a href="about.html">About</a>
+								<a href="/about">About</a>
 							</li>
 
 							<li>
-								<a href="contact.html">Contact</a>
+								<a href="/contact">Contact</a>
 							</li>
 						</ul>
 					</div>	
@@ -130,7 +130,7 @@
 		<div class="wrap-header-mobile">
 			<!-- Logo moblie -->		
 			<div class="logo-mobile">
-				<a href="index.html"><img src="../resources/images/icons/logo-01.png" alt="IMG-LOGO"></a>
+				<a href="/home"><img src="../resources/images/icons/logo-01.png" alt="IMG-LOGO"></a>
 			</div>
 
 			<!-- Icon header -->
@@ -189,11 +189,11 @@
 
 			<ul class="main-menu-m">
 				<li>
-					<a href="index.html">Home</a>
+					<a href="/home">Home</a>
 					<ul class="sub-menu-m">
-						<li><a href="index.html">Homepage 1</a></li>
-						<li><a href="home-02.html">Homepage 2</a></li>
-						<li><a href="home-03.html">Homepage 3</a></li>
+						<li><a href="/home">Homepage 1</a></li>
+						<li><a href="/home2">Homepage 2</a></li>
+						<li><a href="/home3">Homepage 3</a></li>
 					</ul>
 					<span class="arrow-main-menu-m">
 						<i class="fa fa-angle-right" aria-hidden="true"></i>
@@ -201,23 +201,23 @@
 				</li>
 
 				<li>
-					<a href="product.html">Shop</a>
+					<a href="/showlist">Shop</a>
 				</li>
 
 				<li>
-					<a href="shoping-cart.html" class="label1 rs1" data-label1="hot">Features</a>
+					<a href="/put" class="label1 rs1" data-label1="hot">Features</a>
 				</li>
 
 				<li>
-					<a href="blog.html">Blog</a>
+					<a href="/blogs">Blog</a>
 				</li>
 
 				<li>
-					<a href="about.html">About</a>
+					<a href="/about">About</a>
 				</li>
 
 				<li>
-					<a href="contact.html">Contact</a>
+					<a href="/contact">Contact</a>
 				</li>
 			</ul>
 		</div>
@@ -311,7 +311,7 @@
 					</div>
 
 					<div class="header-cart-buttons flex-w w-full">
-						<a href="shoping-cart.html" class="flex-c-m stext-101 cl0 size-107 bg3 bor2 hov-btn3 p-lr-15 trans-04 m-r-8 m-b-10">
+						<a href="/put" class="flex-c-m stext-101 cl0 size-107 bg3 bor2 hov-btn3 p-lr-15 trans-04 m-r-8 m-b-10">
 							View Cart
 						</a>
 

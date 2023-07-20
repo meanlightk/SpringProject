@@ -34,8 +34,8 @@ public class GoodsMapperTests {
 	@Test
 	public void testselectListByCateAndSkin() {
 		Goods goods = new Goods();
-		goods.setCategory(1);
-		goods.setSkintype(1);
+		goods.setCategory("1");
+		goods.setSkintype("1");
 		List<Goods>goodslist = mapper.selectListByCateAndSkin(goods);
 		log.info(goodslist);
 	}
@@ -43,24 +43,24 @@ public class GoodsMapperTests {
 	@Test
 	public void testinsertItem() {
 		Goods goods = new Goods();
-		goods.setCategory(1);
+		goods.setCategory("1");
 		goods.setPname("ezen");
 		//goods.setPrice(10000);
-		goods.setSkintype(1);
+		goods.setSkintype("1");
 		goods.setStock(5);
-		goods.setStatus(1);
+		goods.setStatus("1");
 		mapper.insertItem(goods);
 	}
 	
 	@Test
 	public void testupdateItem() {
 		Goods goods = new Goods();
-		goods.setCategory(1);
+		goods.setCategory("1");
 		goods.setPname("ezen");
 		//goods.setPrice(20000);
-		goods.setSkintype(1);
+		goods.setSkintype("1");
 		goods.setStock(20);
-		goods.setStatus(1);
+		goods.setStatus("1");
 		goods.setGno(1);
 		mapper.updateItem(goods);
 	}

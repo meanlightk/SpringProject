@@ -63,7 +63,7 @@ public class GoodsController {
 		 * model.addAttribute("cartList", goodsList);
 		 */
 		
-		return "cart/myCart"; 
+		return "mycart"; 	// tiles 적용
 	}
 	
 	/*

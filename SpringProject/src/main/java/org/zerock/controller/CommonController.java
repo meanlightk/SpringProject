@@ -28,7 +28,19 @@ public class CommonController {
 		return "home";
 	}
 	
-	@RequestMapping("/list")
+	@RequestMapping("/home2")
+	public String homePage2(Model model) {
+		model.addAttribute("goodsList",service.goodsList());
+		return "/main/home2";
+	}
+	
+	@RequestMapping("/home3")
+	public String homePage3(Model model) {
+		model.addAttribute("goodsList",service.goodsList());
+		return "/main/home3";
+	}
+	
+	@RequestMapping("/showlist")
 	public String goodslist() {
 		return "itemlist";
 	}
