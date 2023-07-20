@@ -73,7 +73,7 @@
 
 <definition name="/payments" extends="layout">
 	<put-attribute name="title" value="OrderList" />
-	<put-attribute name="body" value="/WEB-INF/views/payments/payments.jsp" />
+	<put-attribute name="body" value="/WEB-INF/views/cart/myCart.jsp" />
 </definition>
 
 <definition name="qna" extends="layout">
