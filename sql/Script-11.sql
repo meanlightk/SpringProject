@@ -125,6 +125,19 @@ CREATE TABLE cart (
 	regidate datetime DEFAULT current_timestamp
 );
 
+CREATE TABLE coupon (
+	id int AUTO_INCREMENT PRIMARY KEY,
+	cname varchar(80) NOT NULL,
+	code varchar(50) UNIQUE NOT NULL,
+	ctype int NOT NULL,
+	value int NOT NULL,
+	cond varchar(50) comment '쿠폰 적용 조건',
+	regidate datetime DEFAULT current_timestamp,
+	enddate datetime NOT NULL,
+	status int NOT NULL DEFAULT 1 comment '1:쿠폰 이용 가능 / 2:쿠폰 발급 / 3:쿠폰 이용 정지',
+	CONSTRAINT check_date_range CHECK (regidate <= enddate)
+);
+
 -- table member 샘플
 -- DELETE FROM shop.member;
 -- INSERT INTO shop.member(name, id, pwd, pnum, email, grade) VALUES('admin', 'admin', '12345', '01011111111', 'admin@test.com', 2);

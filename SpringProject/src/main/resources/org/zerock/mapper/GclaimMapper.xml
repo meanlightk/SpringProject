@@ -5,7 +5,47 @@
  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
  
 <mapper namespace="org.zerock.mapper.GclaimMapper">
+ <!-- 
+ <select id="" resultType="org.zerock.domain.Gclaim">
+ 	select
+ 	gclaim_no as glno,
+ 	goods_no as gno,
+ 	mem_id as id,
+ 	content,
+ 	regidate,
+ 	updatedate,
+ 	status
+ 	from gclaim
+ </select>
  
+ <select id="" resultType="org.zerock.domain.Gclaim">
+ 	select
+ 	gclaim_no as glno,
+ 	goods_no as gno,
+ 	mem_id as id,
+ 	content,
+ 	regidate,
+ 	updatedate,
+ 	status
+ 	from gclaim
+ 	where gclaim_no=#{glno}
+ </select>
  
+ <insert id="" parameterType="org.zerock.domain.Gclaim">
+ 	insert into gclaim(goods_no, mem_id, content, status)
+ 	values(#{gno}, #{id}, #{content}, #{status})
+ </insert>
  
+ <update id="" parameterType="org.zerock.domain.Gclaim">
+ 	update gclaim
+ 	set
+ 	content=#{content},
+ 	status
+ 	where gclaim_no=#{glno}
+ </update>
+ 
+ <delete id="">
+ 	delete from gclaim where gclaim_no=#{glno}
+ </delete>
+  -->
 </mapper>
