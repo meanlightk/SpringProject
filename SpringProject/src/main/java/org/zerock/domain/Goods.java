@@ -23,7 +23,7 @@ public class Goods {
 	private String status;
 	private String imagepath;
 	private String simagepath;
-
+	private String optionList;
 	
 	private Integer originalPrice;
 	private Integer discountPrice;

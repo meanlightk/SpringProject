@@ -133,12 +133,12 @@ public class GoodsController {
 
 			try {
 
-				File saveFile = new File(uploadPath, uploadFileName); // 연월일경로에 파일이름으로 최종 경로 생성
+				File saveFile = new File(uploadPath, uploadFileName); // c:upload/main/{상품 번호 폴더}/파일이름으로 최종 경로 생성
 				multipartFile.transferTo(saveFile); // 파일을 최종 경로로 이동
 
 				int gno2 = goods.getGno();
 				goods.setUuid(uploadFileName);
-				goods.setImagepath("/main/"+uploadFolderPath + "/" + uploadFileName);
+				goods.setImagepath(uploadFolderPath + "/" + uploadFileName);
 				
 
 				//service.updateFilePath(goods);
@@ -156,9 +156,7 @@ public class GoodsController {
 
 					thumbnail.close();
 
-					goods.setUuid(uuid.toString());
-					goods.setImagepath(uploadFolderPath + "/s_" + uploadFileName);
-
+					goods.setUuid(uuid.toString());	
 				}
 
 			} catch (Exception e) {
@@ -192,6 +190,7 @@ public class GoodsController {
 	@GetMapping("/goodsWrite/{type}")
 	public String goodsWrite(Model model, @PathVariable("type") String type) {
 		int gno = service.getGno();
+		log.info(gno);
 		model.addAttribute("type", type);
 		model.addAttribute("gno", gno);
 		log.info("goods write");
@@ -218,4 +217,12 @@ public class GoodsController {
 		return false;
 	}
 	
+	
+	@GetMapping("/goodsDetail/{gno}")
+	public String goodsDetail(Model model, @PathVariable("gno") int gno) {
+		log.info("goods detail");
+		Goods goods = service.showOneItem(gno);
+		model.addAttribute("goods", goods);
+		return "/goods/goodsDetail";
+	}
 }

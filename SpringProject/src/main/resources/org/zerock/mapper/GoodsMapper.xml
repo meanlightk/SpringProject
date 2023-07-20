@@ -11,7 +11,7 @@
 	goods_no as gno,
 	category,
 	pname,
-	price,
+	sellPrice,
 	skintype,
 	regidate,
 	updatedate,
@@ -20,7 +20,8 @@
 	imagepath,
 	originalPrice,
 	discountPrice,
-	uuid
+	uuid,
+	optionList
 	from goods where goods_no = #{gno}
 </select>
 
@@ -30,7 +31,7 @@
 	category,
 	pname,
 	content,
-	price,
+	sellPrice,
 	skintype,
 	regidate,
 	updatedate,
@@ -39,7 +40,8 @@
 	imagepath,
 	originalPrice,
 	discountPrice,
-	uuid
+	uuid,
+	optionList
 	from goods where category = #{category} 
 </select>
 
@@ -49,7 +51,7 @@
 	category,
 	pname,
 	content,
-	price,
+	sellPrice,
 	skintype,
 	regidate,
 	updatedate,
@@ -58,7 +60,8 @@
 	imagepath,
 	originalPrice,
 	discountPrice,
-	uuid
+	uuid,
+	optionList
 	from goods where category=#{category} and skintype=#{skintype}
 </select>
 
@@ -72,7 +75,7 @@
 <update id="updateItem" parameterType="org.zerock.domain.Goods" >
 	update goods set category=#{category}, pname=#{pname}, sellPrice=#{sellPrice}, originalPrice=#{originalPrice},
 	discountPrice=#{discountPrice},content=#{content},imagepath=#{imagepath},
-	skintype=#{skintype}, stock=#{stock}, status=#{status},uuid=#{uuid} where goods_no=#{gno}
+	skintype=#{skintype}, stock=#{stock}, status=#{status},uuid=#{uuid},optionList=#{optionList} where goods_no=#{gno}
 </update>
 
 <delete id="deleteItem">
@@ -88,7 +91,7 @@
    <selectKey keyProperty="gno" resultType="int" order="BEFORE">
 		SELECT IFNULL(max(goods_no)+1,1) FROM goods
    </selectKey>
-   INSERT INTO goods (category, pname, content, sellPrice, skintype, stock, status, imagepath, originalPrice, discountPrice, uuid)
+   INSERT INTO goods (category, pname, content, sellPrice, skintype, stock, status, imagepath, originalPrice, discountPrice, uuid, optionList)
    VALUES ( 
    		#{category},
    		#{pname},
@@ -100,12 +103,13 @@
    		#{imagepath},
       #{originalPrice}, 
       #{discountPrice},
-      #{uuid}      
+      #{uuid},
+      #{optionList}      
    )
 </insert>
 
 <select id="getGoodsNo" resultType="int">
-	select max(goods_no) from goods
+	SELECT max(last_insert_id(goods_no))+1 FROM goods
 </select>
 
 	<select id="goodsList" resultType="org.zerock.domain.Goods">
