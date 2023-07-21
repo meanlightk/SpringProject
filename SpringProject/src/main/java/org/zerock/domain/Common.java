@@ -7,7 +7,5 @@ public class Common {
 
 	private int section = 1;
 	
-	private int pageNum = 1;
-	
-	private int type;
+	private int pagenum = 1;
 }
