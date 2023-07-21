@@ -222,6 +222,9 @@ public class GoodsController {
 	public String goodsDetail(Model model, @PathVariable("gno") int gno) {
 		log.info("goods detail");
 		Goods goods = service.showOneItem(gno);
+		String optionList = goods.getOption_list();
+		String[] optionListAll = optionList.split("\n");
+		goods.setOption_list_split(optionListAll);
 		model.addAttribute("goods", goods);
 		return "/goods/goodsDetail";
 	}

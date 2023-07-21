@@ -15,4 +15,6 @@ public class Cart {
 	private int gno;
 	private int ordernum;
 	private Date regidate;
+	private String option_name;
+	private int quantity;
 }

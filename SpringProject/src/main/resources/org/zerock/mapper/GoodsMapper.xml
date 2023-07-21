@@ -21,7 +21,7 @@
 	originalPrice,
 	discountPrice,
 	uuid,
-	optionList
+	option_list
 	from goods where goods_no = #{gno}
 </select>
 
@@ -41,7 +41,7 @@
 	originalPrice,
 	discountPrice,
 	uuid,
-	optionList
+	option_list
 	from goods where category = #{category} 
 </select>
 
@@ -61,7 +61,7 @@
 	originalPrice,
 	discountPrice,
 	uuid,
-	optionList
+	option_list
 	from goods where category=#{category} and skintype=#{skintype}
 </select>
 
@@ -75,7 +75,7 @@
 <update id="updateItem" parameterType="org.zerock.domain.Goods" >
 	update goods set category=#{category}, pname=#{pname}, sellPrice=#{sellPrice}, originalPrice=#{originalPrice},
 	discountPrice=#{discountPrice},content=#{content},imagepath=#{imagepath},
-	skintype=#{skintype}, stock=#{stock}, status=#{status},uuid=#{uuid},optionList=#{optionList} where goods_no=#{gno}
+	skintype=#{skintype}, stock=#{stock}, status=#{status},uuid=#{uuid},option_list=#{option_list} where goods_no=#{gno}
 </update>
 
 <delete id="deleteItem">
@@ -91,7 +91,7 @@
    <selectKey keyProperty="gno" resultType="int" order="BEFORE">
 		SELECT IFNULL(max(goods_no)+1,1) FROM goods
    </selectKey>
-   INSERT INTO goods (category, pname, content, sellPrice, skintype, stock, status, imagepath, originalPrice, discountPrice, uuid, optionList)
+   INSERT INTO goods (category, pname, content, sellPrice, skintype, stock, status, imagepath, originalPrice, discountPrice, uuid, option_list)
    VALUES ( 
    		#{category},
    		#{pname},
@@ -104,7 +104,7 @@
       #{originalPrice}, 
       #{discountPrice},
       #{uuid},
-      #{optionList}      
+      #{option_list}      
    )
 </insert>
 

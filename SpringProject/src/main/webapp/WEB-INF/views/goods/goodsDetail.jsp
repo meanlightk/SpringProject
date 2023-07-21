@@ -118,21 +118,20 @@
 
 			<br>
 			<br>
- 
+
 			<div id="item_option">
 				<table>
 					<tr>
-						<td><select name="ColorList" id="ColorList" class='total_cartAdd'
+						<td><select name="option" id="option"
+							class='org.zerock.domain.Goods'
 							style="width: 600px; height: 30px;">
-								<option value="">==(필수)옵션: 색상 선택 ==</option>
-								<c:forEach var="ColorList" items="${Color}" varStatus="index">
-									<option value="${ColorList}">${ColorList}</option>
+								<option value="">==(필수)옵션: 세부 사항 선택 ==</option>
+								<c:forEach var="option_each" items="${goods.option_list_split}"
+									varStatus="index">
+									<option name="option" value="${option_each}">${option_each}</option>
 								</c:forEach>
 						</select></td>
-						
-
 					</tr>
-
 				</table>
 			</div>
 
@@ -185,6 +184,8 @@
 	</div> 
 	
 	</div>
-	
+	<script>
+		const 
+	</script>
 </body>
 </html>

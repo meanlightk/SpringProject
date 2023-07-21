@@ -23,9 +23,10 @@ public class Goods {
 	private String status;
 	private String imagepath;
 	private String simagepath;
-	private String optionList;
+	private String option_list;
 	
 	private Integer originalPrice;
 	private Integer discountPrice;
 	private String uuid;
+	private String[] option_list_split;
 }
