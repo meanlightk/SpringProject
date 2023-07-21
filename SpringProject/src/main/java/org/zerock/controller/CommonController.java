@@ -80,10 +80,10 @@ public class CommonController {
 	}
 
 	
-//	@RequestMapping("/test")
-//	public String test() {
-//		return "test";
-//	}
+	@RequestMapping("/test")
+	public String test() {
+		return "test";
+	}
 	
 	@GetMapping("/review/form")
 	public String reviewForm() {

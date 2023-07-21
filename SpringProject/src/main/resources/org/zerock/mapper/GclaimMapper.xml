@@ -5,8 +5,57 @@
  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
  
 <mapper namespace="org.zerock.mapper.GclaimMapper">
- <!-- 
- <select id="" resultType="org.zerock.domain.Gclaim">
+
+<!-- gclaim + answer_gclaim  -->
+<select id="selectClaims" parameterType="org.zerock.domain.Common" resultType="org.zerock.domain.Adminclaim">
+SELECT * FROM(
+	WITH RECURSIVE ClaimHierarchy AS (
+	  SELECT
+	    gclaim_no,
+	    goods_no,
+	    mem_id,
+	    content,
+	    regidate,
+	    updatedate,
+	    status,
+	    1 AS level
+	  FROM gclaim
+	  
+	  UNION ALL
+	  
+	  SELECT
+	    ac.gclaim_no,
+	    gc.goods_no,
+	    gc.mem_id,
+	    ac.content,
+	    ac.regidate,
+	    ac.updatedate,
+	    ac.status,
+	    ch.level + 1 AS level
+	  FROM answer_claim ac
+	  JOIN ClaimHierarchy ch ON ac.gclaim_no = ch.gclaim_no
+	  JOIN gclaim gc ON ac.gclaim_no = gc.gclaim_no
+	  WHERE LEVEL = 1
+	)
+	SELECT
+	  LEVEL,
+	  gclaim_no,
+	  goods_no,
+	  mem_id,
+	  CONCAT(SPACE(4*(LEVEL-1)), content) AS content,
+	  regidate,
+	  updatedate,
+	  status,
+	  ROW_NUMBER() over(ORDER BY regidate desc) AS rownum
+	FROM ClaimHierarchy
+	ORDER BY gclaim_no, LEVEL
+)b
+WHERE rownum BETWEEN (#{section}-1)*100+(#{pagenum}-1)*10+1 AND (#{section}-1)*100+#{pagenum}*10;
+</select>
+
+
+<!-- gclaim table -->
+ <select id="selectGclaims" resultType="org.zerock.domain.Gclaim">
  	select
  	gclaim_no as glno,
  	goods_no as gno,
@@ -18,7 +67,7 @@
  	from gclaim
  </select>
  
- <select id="" resultType="org.zerock.domain.Gclaim">
+ <select id="selectOneGclaim" resultType="org.zerock.domain.Gclaim">
  	select
  	gclaim_no as glno,
  	goods_no as gno,
@@ -31,12 +80,12 @@
  	where gclaim_no=#{glno}
  </select>
  
- <insert id="" parameterType="org.zerock.domain.Gclaim">
+ <insert id="insertGclaim" parameterType="org.zerock.domain.Gclaim">
  	insert into gclaim(goods_no, mem_id, content, status)
  	values(#{gno}, #{id}, #{content}, #{status})
  </insert>
  
- <update id="" parameterType="org.zerock.domain.Gclaim">
+ <update id="updateGclaim" parameterType="org.zerock.domain.Gclaim">
  	update gclaim
  	set
  	content=#{content},
@@ -44,8 +93,55 @@
  	where gclaim_no=#{glno}
  </update>
  
- <delete id="">
+ <delete id="deleteGclaim">
  	delete from gclaim where gclaim_no=#{glno}
  </delete>
-  -->
+ 
+ 
+ <!-- answer_gclaim table -->
+ <select id="selectClaimAnswers" resultType="org.zerock.domain.AnswerClaim">
+	select
+	answer_no as anscno,
+	gclaim_no as glno,
+	title,
+	content,
+	regidate,
+	updatedate,
+	status
+	from answer_claim
+</select>
+
+<select id="selectOneClaimAnswer" resultType="org.zerock.domain.AnswerClaim">
+	select
+	answer_no as anscno,
+	gclaim_no as glno,
+	title,
+	content,
+	regidate,
+	updatedate,
+	status
+	from answer_claim
+	where answer_no=#{anscno}
+</select>
+
+<insert id="insertClaimAnswer" parameterType="org.zerock.domain.AnswerClaim">
+	insert into answer_claim (gclaim_no, title, content, status)
+	values (#{glno}, #{title}, #{content}, #{status})
+</insert>
+
+<update id="updateClaimStatus" parameterType="org.zerock.domain.AnswerClaim">
+	update answer_claim
+	set
+	title=#{title},
+	content=#{content},
+	status=#{status}
+	where answer_no=#{anscno}
+</update>
+
+<delete id="deleteClaimAnswer">
+	delete from answer_no=#{anscno}
+</delete>
+ 
+ 
+
 </mapper>
