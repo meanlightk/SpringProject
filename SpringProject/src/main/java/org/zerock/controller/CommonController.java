@@ -1,10 +1,18 @@
 package org.zerock.controller;
 
+import java.util.List;
+
+import org.apache.ibatis.annotations.Param;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.zerock.domain.Adminclaim;
+import org.zerock.domain.AnswerClaim;
+import org.zerock.domain.Common;
+import org.zerock.domain.Gclaim;
+import org.zerock.service.ClaimService;
 import org.zerock.service.GoodsService;
 
 import lombok.extern.log4j.Log4j;
@@ -16,6 +24,9 @@ public class CommonController {
 	
 	@Autowired
 	GoodsService service;
+	
+	@Autowired
+	ClaimService claimService;
 	
 	@RequestMapping("/")
 	public String main() {
@@ -81,7 +92,22 @@ public class CommonController {
 
 	
 	@RequestMapping("/test")
-	public String test() {
+	public String test(Model model) {
+		log.info("test() called");
+		
+		
+		
+		return "test";
+	}
+	
+	@RequestMapping("/test2")
+	public String test2(Model model, int answer_no) {
+		log.info("test2() called");
+		
+		AnswerClaim answer = claimService.showOneAnswer(answer_no);
+		
+		model.addAttribute("answer", answer);
+		
 		return "test";
 	}
 	

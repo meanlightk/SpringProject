@@ -10,7 +10,7 @@
 <title>클레임 관리 게시판</title>
 <style>
 .w3-container {
-  padding: 0.01em 16px;
+  padding: 10px;
 }
 
 .w3-container:after,
@@ -40,13 +40,14 @@
 
 .w3-responsive {
   overflow-x: auto;
+  margin: 0px 0px 0px 100px;
 }
 
 .w3-table,
 .w3-table-all {
   border-collapse: collapse;
   border-spacing: 0;
-  width: 100%;
+  width: 900px;
   display: table;
 }
 
@@ -75,6 +76,11 @@
   display: table-cell;
   text-align: left;
   vertical-align: top;
+  border-left: 1px solid #ddd;
+}
+
+.w3-table-all tr.fixed-height {
+  height: 400px;
 }
 
 .w3-table th:first-child,
@@ -82,6 +88,7 @@
 .w3-table-all th:first-child,
 .w3-table-all td:first-child {
   padding-left: 16px;
+  width: 10%;
 }
 
 .w3-center {
@@ -95,27 +102,6 @@
 
 .w3-bar-block .w3-center .w3-bar-item {
   text-align: center;
-}
-
-.w3-pagination {
-  display: inline-block;
-  padding: 0;
-  margin: 0;
-}
-
-.w3-pagination li {
-  display: inline;
-}
-
-.w3-pagination li a {
-  text-decoration: none;
-  color: #000;
-  float: left;
-  padding: 8px 16px;
-}
-
-.w3-pagination li a:hover {
-  background-color: #ccc;
 }
 
 .w3-btn,
@@ -137,83 +123,51 @@
 .w3-closenav,
 .w3-closebtn,
 *[class*="w3-hover-"] {
-  -webkit-transition: background-color 0.25s, color 0.15s, box-shadow 0.25s,
-    opacity 0.25s, filter 0.25s, border 0.15s;
+  -webkit-transition: background-color 0.25s, color 0.15s,
+    box-shadow 0.25s, opacity 0.25s, filter 0.25s, border 0.15s;
   transition: background-color 0.25s, color 0.15s, box-shadow 0.15s,
     opacity 0.25s, filter 0.25s, border 0.15s;
-}
-
-.w3-green,
-.w3-hover-green:hover {
-  color: #fff !important;
-  background-color: #4caf50 !important;
 }
 </style>
 </head>
 <body>
-  <div class="w3-container">
-    <h2>테스트 게시판</h2>
-    <div class="w3-responsive">
-      <table class="w3-table-all">
-        <tr>
-          <th>번호</th>
-          <th>글 제목</th>
-          <th>작성일</th>
-          <th>작성자</th>
-          <th>조회수</th>
-        </tr>
-        <tr>
-          <td>3</td>
-          <td>테스트3</td>
-          <td>2017.01.10</td>
-          <td>김대성</td>
-          <td>50</td>
-        </tr>
-        <tr>
-          <td>2</td>
-          <td>테스트2</td>
-          <td>2017.01.10</td>
-          <td>김대성</td>
-          <td>50</td>
-        </tr>
-        <tr>
-          <td>1</td>
-          <td>테스트1</td>
-          <td>2017.01.10</td>
-          <td>김대성</td>
-          <td>50</td>
-        </tr>
-      </table>
-    </div>
-
-    <br />
-
-    <div class="w3-center">
-      <ul class="w3-pagination">
-        <li><a href="#">&laquo;</a></li>
-        <li><a class="w3-green" href="#">1</a></li>
-        <li><a href="#">2</a></li>
-        <li><a href="#">3</a></li>
-        <li><a href="#">4</a></li>
-        <li><a href="#">5</a></li>
-        <li><a href="#">&raquo;</a></li>
-      </ul>
-    </div>
+<div class="w3-container">
+  <h2>테스트 게시판</h2>
+  <div class="w3-responsive">
+    <table class="w3-table-all">
+    <%-- <c:when test="${answer }"></c:when> --%>
+      <tr>
+        <td>번호</td>
+        <td>${answer.anscno }</td>
+      </tr>
+      <tr>
+        <td>제목</td>
+        <td>${answer.title }</td>
+      </tr>
+      <tr>
+        <td>아이디</td>
+        <td></td>
+      </tr>
+      <tr>
+        <td>날짜</td>
+        <td>${answer.regidate }</td>
+      </tr>
+      <tr>
+      	<td>절차단계</td>
+      	<td>${answer.status }</td>
+      </tr>
+      <tr>
+        <td>상품id</td>
+        <td></td>
+      </tr>
+      <tr class="fixed-height">
+        <td>내용</td>
+        <td>${answer.content }</td>
+      </tr>
+    </table>
   </div>
-  
-<!-- 
-w3-container
-
-w3-responsive
-
-w3-table-all
-
-w3-center
-
-w3-pagination
-
-w3-green
-   -->
-  
+  <a href="/admin/claims">임시목록</a>
+</div>
 </body>
 </html>
+

@@ -15,5 +15,8 @@ public class Adminclaim {
 	private Date regidate;
 	private Date updatedate;
 	private String status;
+	private int answer_no;
+	
 	private int rownum;
+	private int total;
 }

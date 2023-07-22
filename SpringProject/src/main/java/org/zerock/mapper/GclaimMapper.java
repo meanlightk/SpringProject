@@ -17,11 +17,11 @@ public interface GclaimMapper {
 	
 	public Gclaim selectOneGclaim(int glno);
 	
-	public void insertGclaim();
+	public void insertGclaim(Gclaim claim);
 	
-	public void updateGclaim();
+	public void updateGclaim(Gclaim claim);
 	
-	public void deleteGclaim();
+	public void deleteGclaim(int glno);
 	
 	
 	/* answer_gclaim table */
@@ -31,7 +31,7 @@ public interface GclaimMapper {
 	
 	public void insertClaimAnswer(AnswerClaim AClaim);
 	
-	public void updateClaimStatus(AnswerClaim AClaim);	//주로 status를 업데이트용이나 제목 및 내용 수정 가능
+	public void updateClaimStatus(AnswerClaim AClaim);
 	
 	public void deleteClaimAnswer(int anscno);
 }

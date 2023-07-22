@@ -17,4 +17,7 @@ public class Gclaim {
 	private Date regidate;
 	private Date updatedate;
 	private int status;
+	
+	private int rownum;
+	private int total;
 }
