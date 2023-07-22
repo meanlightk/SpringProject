@@ -77,7 +77,7 @@
 					<!-- Menu desktop -->
 					<div class="menu-desktop">
 						<ul class="main-menu">
-							<li>
+							<li class="active-menu">
 								<a href="/home">Home</a>
 								<ul class="sub-menu">
 									<li><a href="/home">Homepage 1</a></li>
@@ -86,7 +86,7 @@
 								</ul>
 							</li>
 
-							<li class="active-menu">
+							<li>
 								<a href="/showlist">Shop</a>
 							</li>
 

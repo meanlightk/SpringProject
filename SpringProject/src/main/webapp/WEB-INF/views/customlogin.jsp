@@ -7,15 +7,8 @@
 <head>
 <meta charset="UTF-8">
 <title>로그인</title>
-</head>
-<body>
-
-
-
-
-
+<link rel="stylesheet" href='<c:out value="/resources/css/login.css"/>'>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
-<!-- 
 <script type="text/javascript">
 	$(function() {
 		$('#formContent #id').focus();
@@ -28,9 +21,9 @@
 		}
 	});
 </script>
- -->
-<title>로그인</title>
-<link rel="stylesheet" href='<c:out value="/resources/css/login.css"/>'>
+
+</head>
+<body>
 </head>
 	<body>
 		<div class="wrapper fadeInDown">

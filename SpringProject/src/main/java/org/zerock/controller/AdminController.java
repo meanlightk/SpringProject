@@ -42,7 +42,7 @@ public class AdminController {
 		List<Adminclaim> claimlist = claimService.showlistAll(common);
 		model.addAttribute("claimlist", claimlist);
 		model.addAttribute("section", common.getSection());
-		model.addAttribute("pagenum", common.getPagenum());
+		model.addAttribute("pagenum", common.getPageNum());
 		
 		if(claimlist.size() > 0)
 			model.addAttribute("tot", claimlist.get(0).getTotal());

@@ -8,20 +8,31 @@
 
 <mapper namespace="org.zerock.mapper.ReviewMapper">
 	<sql id="info">
-			review_no as reviewNo
-			mem_id as memId
-			goods_no as goodsNo
-			title as title
-			content as content
-			socre as score
-			DATE_FORMAT(regiDate,'%Y%m%d') as regiDateStr 
-			DATE_FORMAT(updateDate,'%Y%m%d') as updateDateStr	
+			review_no as reviewNo,
+			RPAD(mem_id,9,'*') as memId,
+			goods_no as goodsNo,
+			title as title,
+			content as content,
+			score as score,
+			DATE_FORMAT(regiDate,'%Y%m%d') as regiDateStr,
+			DATE_FORMAT(updateDate,'%Y%m%d') as updateDateStr,
+			ROW_NUMBER() over(ORDER BY regidate desc) AS rownum,
+			count(1) over() AS totalCount 			
 	</sql>
+	<sql id="whereorder">
+	</sql>
+	
 
-	<select id="selectReviewList" resultType="org.zerock.domain.Review">
-		select
-		<include refid="info"/>  
-		from review
+	<select id="selectReviewList" parameterType="org.zerock.domain.Common" resultType="org.zerock.domain.Review">
+		select *	
+		from (
+			select
+				<include refid="info"/>  
+			from review
+			where goods_no = #{no}
+		) t
+		where rownum BETWEEN (#{section}-1)*10*100+(#{pageNum}-1)*10+1 AND (#{section}-1)*100+#{pageNum}*10
+		order by rownum
 	</select>	
 	
 	<select id="selectReviewById"  resultType="org.zerock.domain.Review">

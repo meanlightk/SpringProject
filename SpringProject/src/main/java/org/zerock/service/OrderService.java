@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.zerock.domain.Cart;
+import org.zerock.domain.Common;
 import org.zerock.domain.Goods;
 import org.zerock.domain.OrderAddress;
 import org.zerock.domain.OrderList;
@@ -74,4 +75,31 @@ public class OrderService {
 
 		return PaymentItem.builder().orderNo(orderList.getOrderlist_no()).totalPrice(totalAmount).build();
 	}
+	
+
+	
+	public List<OrderList> getOrderList(Common common) {
+		return orderMapper.selectOrderList(common);
+	}
+	
+	public OrderList getOrder(int orderlistNo) {
+		return orderMapper.selectOrderId(orderlistNo);
+	}
+	
+	public int save(OrderList order) {
+		if(order.getOrderlist_no() == 0)
+			return orderMapper.insertOrderList(order);
+		else
+			return orderMapper.updateOrderList(order);
+
+	}
+
+	public int removeOrderList(int orderlistNo) {
+		return orderMapper.deleteOrderList(orderlistNo);
+	}
+	
+	public int updateWayData(OrderList order) {
+		return orderMapper.updateWaybillData(order);
+	}
+	
 }

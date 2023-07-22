@@ -1,272 +1,133 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
+
+
+<!--  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>-->
+<script src="../resources/ckeditor/ckeditor.js"></script>
+
+<style>
+@CHARSET "UTF-8";
+a:link, a:visited {text-decoration: none; color: #656565;}
+
+.board_list {width:50%;border-top:2px solid #252525;border-bottom:1px solid #ccc; margin: auto;}
+.board_list thead th:first-child{background-image:none}
+.board_list thead th {border-bottom:1px solid #ccc;padding:12px 0 13px 0;color:#3b3a3a;vertical-align:middle}
+.board_list tbody td {border-top:1px solid #ccc;padding:10px 0;text-align:center;vertical-align:middle}
+.board_list tbody tr:first-child td {border:none}
+.board_list tbody td.title {text-align:left; padding-left:20px}
+.board_list tbody td a {display:inline-block}
+
+.board_view {width:50%;border-top:2px solid #252525;border-bottom:1px solid #ccc}
+.board_view tbody th {text-align:left;background:#f7f7f7;color:#3b3a3a}
+.board_view tbody th.list_tit {font-size:13px;color:#000;letter-spacing:0.1px}
+.board_view tbody .no_line_b th, .board_view tbody .no_line_b td {border-bottom:none}
+.board_view tbody th, .board_view tbody td {padding:15px 0 16px 16px;border-bottom:1px solid #ccc}
+.board_view tbody td.view_text {border-top:1px solid #ccc; border-bottom:1px solid #ccc;padding:45px 18px 45px 18px}
+.board_view tbody th.th_file {padding:0 0 0 15px; vertical-align:middle}
+
+.pad_5 {padding: 5px;}
+.wdp_90 {width:90%}
+.btn {border-radius:3px;padding:5px 11px;color:#fff !important; display:inline-block; background-color:#6b9ab8; border:1px solid #56819d;vertical-align:middle}
+
+a {
+	text-decoration: none;
+	color: #666;
+}
+
+h1 {
+	text-align: center;
+	padding: 50px 0;
+	font-weight: normal;
+	font-size: 2em;
+	letter-spacing: 10px;
+}
+</style>
 <body class="animsition">
+<br><br>
+<div align="center">
+<h2>리뷰 작성</h2>
+</div>
+
+<br><br>
+<div align="center" class="board_list">
+<form name="frm" id="frm" action="/review/save.do" enctype="multipart/form-data" method="post">
+		<table align="center" border="0">
+				
+				<tr>
+					<th>제목</th>
+					<td>
+						<input type="text" id="title" name="title" placeholder="제목입력" size="40" 
+						style="padding:10px;" value=<c:if test="${type eq 'modify'}">"${review.title}"</c:if>>
+					</td>
+				</tr>
+				
+				
+				
+				<tr>
+					<th>상품내용 </th>
+					<td>
+						<textarea rows="50" cols="250" id="content" name="content">
+						</textarea>
+					</td>
+				</tr>
+		</table>
+	
+	<br>	
+	<div align="center">
+	<a href="#this" class="btn" id="write" onClick="fn_chk()">작성하기</a>
+	<!-- <a href="#this" class="btn" id="update" onClick="fn_chk()">수정하기</a> -->
+	<a href="#this" class="btn" id="list">목록으로</a>
+	</div>
+	<input type="hidden" name="gno" value="${gno}">
+</form>
+
+</div>
+<!-- commandForm  -->
+<form id="commonForm" name="commonForm"></form>
+
+<script type="text/javascript">
+
+$(function(){
+	CKEDITOR.replace('content',{
+        width:'120%',
+        height:'400px',
+		filebrowserUploadUrl: '${pageContext.request.contextPath }/fileReviewUpload.do'
+
+	});
+});
+
+	var gfv_count = 1;
+
+// $(document).ready(function() 함수 또는 코드가 호출 또는 실행되는 시점을
+// 스케쥴링할 수 있게 해준다. 그 시점은 바로 문서객체모델이라고 하는 DOM
+// (Document Object Model)이 모두 로딩되었을 때인데 이렇게
+// $(document).ready(function() 안에 위치한 코드를 DOM이 모두 준비된 이후에 
+// 실행되게끔 해준다.
+$(document).ready(function() {
+
+	$("#list").on("click", function(e){//목록으로 버튼
+		//html 에서 a 태그나 submit 태그는 고유의 동작이 있다. 
+		//페이지를 이동시킨다거나 form 안에 있는 input 등을 전송한다던가 
+		//그러한 동작이 있는데 e.preventDefault 는 그 동작을 중단시킨다.
+		e.preventDefault(); 
+		fn_openDetailList();	
+	});
+
+	$("#write").on("click", function(e){ //작성하기 버튼
+		e.preventDefault();
+		fn_insertReview();
+	});
+
+});
+
+function fn_insertReview(){
+	frm.submit();
+ }
 
 
 
-	<!-- Slider -->
-	<section class="section-slide">
-		<div class="review-form _weblog-data">
-			<div class="seller-review _seller-review-container">
-				<div class="review-intake-form">
-					<div class="review-intake-form__head">
-						<div class="review-intake-form__title">
-							<img
-								src=""
-								class="review-intake-form__logo"><span
-								class="review-intake-form__text">서비스 리뷰</span>
-						</div>
-					</div>
-					<div class="review-intake-form__satisfaction _satisfaction"
-						data-question-id="3"
-						data-question-type="MULTIPLE_CHOICE_SINGLE_SELECT">
-						<div class="review-table">
-							<div class="review-table__cell title">만족도</div>
-							<div class="review-table__cell description _thumbs">
-								<a href="javascript:void(0);" class="icon-thumbs thumbs-down _thumbs-down" data-answer-id="8">thumbs down</a> 
-								<a href="javascript:void(0);" class="icon-thumbs thumbs-up _thumbs-up" data-thumbs-status="UP">thumbs up</a>
-							</div>
-						</div>
-					</div>
-					<div
-						class="review-intake-form__detail-review _seller_detail_review">
-						<div class="review-table">
-							<div class="review-table__cell title">상세리뷰</div>
-							<div class="review-table__cell description">
-								<div class="answer-list _answer-list">
-									<span class="_seller_survey" data-question-id="5" data-answer-id="" data-question-type="MULTIPLE_CHOICE_MULTI_SELECT"> 
-										<span class="answer _answer" data-answer-id="16">상품 미수령</span> 
-										<span class="answer _answer" data-answer-id="17">배송 지연</span> 
-										<span class="answer _answer" data-answer-id="18">상품 파손</span> 
-										<span class="answer _answer" data-answer-id="19">부적절한 배송장소</span> 
-										<span class="answer _answer" data-answer-id="20">배송기사의 불친절</span> 
-										<span class="answer _answer" data-answer-id="21">프레시백 수거지연</span> 
-										<span class="answer _answer" data-answer-id="22">그 외</span>
-									</span>
-								</div>
-								<div class="review-textarea-wrap _satisfaction-review-textarea"
-									data-thumb-up-content-guide="판매자의 어떤 점이 마음에 드셨나요? (상품 품질이 아닌 배송, 포장, 질문 응대, 상품 가격 등 판매자에 대한 만족도를 평가해주세요.)"
-									data-thumb-down-content-guide="어떤 점이 불편하셨나요? (상품 품질이 아닌 배송, 포장, 질문 응대, 상품 가격 등 판매자에 대한 만족도를 평가해주세요.)">
-									<textarea class="review-textarea-wrap__input _seller-review-textarea" rows="4" placeholder=""></textarea>
-								</div>
-								<div class="textarea-count _seller-review-textarea-count">0</div>
-							</div>
-						</div>
-					</div>
-
-					<div
-						class="review-intake-form__image-attach seller-image-attach _seller_detail_review">
-						<!-- 새로운 템플릿과 js 가 필요함 -->
-
-
-						<div class="my-review__modify__file">
-							<div class="my-review__modify__field__title">사진첨부</div>
-							<div
-								class="my-review__modify__file__content _image-attachment-container"
-								data-attachment-max-size="10">
-								<div>
-									<button
-										class="my-review__modify__file__upload-btn _image-attach-upload-button"
-										type="button">사진 첨부하기</button>
-									<span class="my-review__modify__file__count"> <strong
-										class="_image-attach-upload-count">0</strong>&nbsp;/&nbsp;<span>10</span>
-									</span> <span class="my-review__modify__file__guide">사진은 최대
-										20MB 이하의 JPG, PNG, GIF 파일 10장까지 첨부 가능합니다.</span>
-								</div>
-
-								<div
-									class="my-review__modify__file__list-wrap
-                
-                    
-                
-                    _image-attach-list-container">
-									<ul>
-
-									</ul>
-								</div>
-
-
-								<div
-									class="my-review__modify__file__frame _image-attach-modify-iframe-container"
-									data-token="d5fb1655-50ef-4a21-83fb-b733cafc012a"
-									data-url="//fileupload.coupang.com/fileupload?token=d5fb1655-50ef-4a21-83fb-b733cafc012a&amp;serviceInfo=PRODUCTREVIEW&amp;resizeOrigin=true"
-									data-param-name="files" data-serviceinfo=""
-									data-thumbnail-path="https://ts.coupangcdn.com/thumbnails/local/320/">
-									<iframe class="my-review__iframe js_reviewIframeContainer"
-										src="//fileupload.coupang.com/fileupload?token=d5fb1655-50ef-4a21-83fb-b733cafc012a&amp;serviceInfo=PRODUCTREVIEW&amp;resizeOrigin=true"></iframe>
-								</div>
-							</div>
-						</div>
-
-
-					</div>
-
-				</div>
-			</div>
-
-
-			<!-- 이전에 사용하던 템플릿 -->
-			<div class="product-review _product-review-container"
-				data-product-id="7123594005"
-				data-completed-order-vendor-item-id="8782955344"
-				data-vendor-item-id="85006094776" data-category-id="7997">
-				<div class="my-review__modify js_registerContainer">
-					<div class="review-intake-form">
-						<div class="review-intake-form__head">
-							<div class="review-intake-form__title">
-								<img
-									src="https://image6.coupangcdn.com/image/productreview/badge/review/write/product/product_icon-xxhdpi.png"
-									class="review-intake-form__logo"><span
-									class="review-intake-form__text">상품 품질 리뷰</span>
-							</div>
-							<div class="review-intake-form__subtitle">
-								<span class="review-intake-form__sub-text">이 상품의 품질에 대해서
-									얼마나 만족하시나요?</span>
-							</div>
-						</div>
-
-						<div class="review-intake-form__rating">
-							<div class="review-table">
-								<div class="review-table__cell review-intake-head title">
-<!--  									<img
-										src="https://thumbnail10.coupangcdn.com/thumbnails/remote/250x250ex/image/vendor_inventory/0f59/079f83c28f7b6e30471b0a1362ade5d17daa7bb95a551e9b7218dd0389ce.png"
-										width="100" height="100" title="2023 시나공 정보처리기사 실기, 길벗"
-										alt="2023 시나공 정보처리기사 실기, 길벗">-->
-								</div>
-								<div class="review-table__cell description">
-									<div class="review-intake-form__product-title">2023 시나공
-										정보처리기사 실기, 길벗</div>
-
-									<div
-										class="my-review__modify__star js_reviewModifyStarContainer"
-										data-star="" data-text="최고">
-										<div class="my-review__modify__star__content">
-
-											<div>
-												<button
-													class="my-review__modify__star__content__value js_reviewModifyStarBtn"
-													type="button" value="1" data-text="나쁨"></button>
-												<button
-													class="my-review__modify__star__content__value js_reviewModifyStarBtn"
-													type="button" value="2" data-text="별로"></button>
-												<button
-													class="my-review__modify__star__content__value js_reviewModifyStarBtn"
-													type="button" value="3" data-text="보통"></button>
-												<button
-													class="my-review__modify__star__content__value js_reviewModifyStarBtn"
-													type="button" value="4" data-text="좋음"></button>
-												<button
-													class="my-review__modify__star__content__value js_reviewModifyStarBtn"
-													type="button" value="5" data-text="최고"></button>
-												<span
-													class="my-review__modify__star__content__status js_reviewModifyStatus default-review-star">(필수)<em>*</em></span>
-											</div>
-
-
-
-										</div>
-									</div>
-
-								</div>
-							</div>
-						</div>
-
-
-
-						<div class="review-intake-form__detail-review">
-
-
-							<div class="my-review__modify__review">
-								<div class="my-review__modify__field__title">상세리뷰</div>
-
-								<div class="my-review__modify__review__content">
-
-									<div class="my-review__modify__review__content__text-wrap">
-										<textarea
-											class="my-review__modify__review__content__text-area js_reviewModifyTextArea"
-											placeholder="다른 고객님에게 도움이 되도록 상품에 대한 솔직한 평가를 남겨주세요.
-(상품 품질과 관계 없는 배송, 포장, 질문 응대, 상품 가격 등은 판매자 서비스 평가에 남겨주세요.)"
-											rows="5"></textarea>
-									</div>
-
-
-									<div class="my-review__flip-write-tooltip"
-										style="perspective: 28px; position: relative; transform-style: preserve-3d;">
-										상품 품질과 관계 없는 내용은 비공개 처리될 수 있습니다.</div>
-
-									<div class="my-review__modify__review__content__count">
-										<span class="js_reviewModifyTextCount">0</span>
-									</div>
-								</div>
-							</div>
-
-
-
-							<div class="my-review__modify__file">
-								<div class="my-review__modify__field__title">사진첨부</div>
-								<div
-									class="my-review__modify__file__content js_reviewModifyFileContainer"
-									data-attachment-max-size="10">
-									<div>
-										<button
-											class="my-review__modify__file__upload-btn  js_reviewModifyFileUploadBtn"
-											type="button">사진 첨부하기</button>
-										<span class="my-review__modify__file__count"> <strong
-											class="js_reviewModifyFileUploadCount">1</strong>&nbsp;/&nbsp;<span>10</span>
-										</span> <span class="my-review__modify__file__guide">사진은 최대
-											20MB 이하의 JPG, PNG, GIF 파일 10장까지 첨부 가능합니다.</span>
-									</div>
-
-									<div class="my-review__modify__file__list-wrapjs_reviewModifyImageListContainer" style="display: block;">
-										<ul>
-
-
-											<li class="js_reviewModifyImageList">
-												<div class="my-review__attachment__thumbnail">
-													<img
-														class="my-review__modify__file__list__image js_reviewFileListImage"
-														src="//thumbnail9.coupangcdn.com/thumbnails/local/512x512/image2/PRODUCTREVIEW/202307/14/2537988746326471346/bdb95832-3a1c-4179-9bf6-4ee935ef4c96.jpg"
-														data-uploaded-file-path="image2/PRODUCTREVIEW/202307/14/2537988746326471346/bdb95832-3a1c-4179-9bf6-4ee935ef4c96.jpg"
-														style="width: 100%; height: auto; margin-top: -8.45854px; opacity: 1;">
-												</div>
-												<div class="attachment__caption__container">
-													<textarea rows="3" class="caption__text"
-														placeholder="이 사진의 설명글을 작성해보세요." maxlength="150"></textarea>
-												</div>
-												<div class="attachment__caption__right">
-													<span class="word__count"><span
-														class="word__count_data">0</span>/150</span> <a
-														class="caption__btn js_reviewFileListDeleteBtn"
-														href="javascript:void(0);">삭제</a>
-												</div>
-											</li>
-										</ul>
-									</div>
-
-
-									<div
-										class="my-review__modify__file__frame js_reviewModifyIframeContainer"
-										data-token="d5fb1655-50ef-4a21-83fb-b733cafc012a"
-										data-url="//fileupload.coupang.com/fileupload?token=d5fb1655-50ef-4a21-83fb-b733cafc012a&amp;serviceInfo=PRODUCTREVIEW&amp;resizeOrigin=true"
-										data-param-name="files" data-serviceinfo=""
-										data-thumbnail-path="https://ts.coupangcdn.com/thumbnails/local/320/">
-										<iframe class="my-review__iframe js_reviewIframeContainer"
-											src="//fileupload.coupang.com/fileupload?token=d5fb1655-50ef-4a21-83fb-b733cafc012a&amp;serviceInfo=PRODUCTREVIEW&amp;resizeOrigin=true"></iframe>
-									</div>
-								</div>
-							</div>
-
-
-
-
-						</div>
-					</div>
-				</div>
-			</div>
-
-
-			<div class="review-intake-register">
-				<button class="cancel-button _review-cancel" type="button">취소하기</button>
-				<button class="submit-button _review-submit" type="button">등록하기</button>
-			</div>
-
-		</div>
-	</section>
+</script>
+</body>

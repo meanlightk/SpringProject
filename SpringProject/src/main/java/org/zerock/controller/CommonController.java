@@ -27,11 +27,7 @@ public class CommonController {
 	
 	@Autowired
 	ClaimService claimService;
-	
-	@RequestMapping("/")
-	public String main() {
-		return "redirect:/home";
-	}
+
 	
 	@RequestMapping("/home")
 	public String mainPage(Model model) {
@@ -111,10 +107,6 @@ public class CommonController {
 		return "test";
 	}
 	
-	@GetMapping("/review/form")
-	public String reviewForm() {
-		return "/review/form";
-	}
 	
 	@RequestMapping("/sample/member")
 	public String membersample() {

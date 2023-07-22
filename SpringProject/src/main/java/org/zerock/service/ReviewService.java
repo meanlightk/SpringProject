@@ -1,9 +1,12 @@
 package org.zerock.service;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.zerock.domain.Common;
 import org.zerock.domain.Review;
 import org.zerock.mapper.ReviewMapper;
 
@@ -17,8 +20,15 @@ public class ReviewService {
 	private ReviewMapper reviewMapper;
 	
 	
-	public List<Review> getReviewList() {
-		return reviewMapper.selectReviewList();
+	public List<Review> getReviewList(Common common,int gno) {
+		Map<String,Object> map = new HashMap<String, Object>();
+		map.put("section", common.getSection());
+		map.put("pageNum", common.getPageNum());
+		map.put("gno", gno);
+		common.setNo(gno);
+		
+		
+		return reviewMapper.selectReviewList(common);
 	}
 	
 	public Review getReview(int reviewNo) {

@@ -19,7 +19,7 @@ public class OrderList {
 	private String waybill_num;
 	private String parcel_cd;
 	
-/*	to ji(¾µ¸ğ ¾ø´øÁş) 
+/*	to ji(ì“¸ëª¨ ì—†ë˜ì§“) 
 	int orderlistNo;
 	
 	String memId;
@@ -32,9 +32,9 @@ public class OrderList {
 
 	String dstatus;
 	
-	String waybillNum; // ¼ÛÀå¹øÈ£
+	String waybillNum; // ì†¡ì¥ë²ˆí˜¸
 	
-	String parcelCd; // ÅÃ¹è ÄÚµå
+	String parcelCd; // íƒë°° ì½”ë“œ
 */ 
 	
 }

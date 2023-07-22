@@ -99,9 +99,52 @@ $(document).ready(function(){
 </script>
 </head>
 <body>
+
+<div class="container">
+  <h2>상품 리스트</h2>
+  <p>여기다 뭘 쓸수도 있음</p>
+  <c:if test="${!empty orderList}">
+    <table class="table">
+    <thead>
+      <tr>
+        <th>썸네일</th>
+        <th>이름</th>
+        <th>카테고리</th>
+        <th>가격</th>
+        <th>택배회사명</th>
+        <th>송장</th>
+      </tr>
+    </thead>
+    <tbody>
+    <c:forEach var="good" items="${orderList}">
+      <tr>
+        <td><img src="upload/main/${good.simagepath}"></img></td>
+        <td>${good.pname}</td>
+        <td>${good.category}</td>
+        <td>${good.sellPrice}</td>
+        <td>	
+        	<span id="tekbeCompnayName">택배회사명: </span>
+			<select id="tekbeCompnayList" name="tekbeCompnayList">
+			</select>
+		</td>
+        <td>        
+        	<span id="invoiceNumber">운송장번호: </span>
+			<input type="text" id="invoiceNumberText" name="invoiceNumberText"><br/><br/>
+			<button id="myButton1">등록 </button>    
+        </td>
+      </tr>
+    </c:forEach>
+    </tbody>
+  </table>
+  </c:if>        
+
+</div>
+
 	<span id="tekbeCompnayName">택배회사명: </span>
 		<select id="tekbeCompnayList" name="tekbeCompnayList">
-		</select><br/><br/>
+	</select>
+		
+		<br/><br/>
 
 	<span id="invoiceNumber">운송장번호: </span>
 	<input type="text" id="invoiceNumberText" name="invoiceNumberText"><br/><br/>
@@ -115,5 +158,7 @@ $(document).ready(function(){
 	<div>
 		<table id="myPtag2"></table>
 	</div>
+	
+	
 </body>
 </html>
