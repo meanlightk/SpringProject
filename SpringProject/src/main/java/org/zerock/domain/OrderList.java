@@ -10,6 +10,7 @@ import lombok.ToString;
 @Setter
 @ToString 
 public class OrderList {
+
 	private int orderlist_no;
 	private String mem_id;
 	private int totprice;
@@ -17,4 +18,23 @@ public class OrderList {
 	private String dsstatus;
 	private String waybill_num;
 	private String parcel_cd;
+	
+/*	to ji(쓸모 없던짓) 
+	int orderlistNo;
+	
+	String memId;
+	
+	int topprice;
+	
+	Date regidate;
+	
+	String regiDateStr;
+
+	String dstatus;
+	
+	String waybillNum; // 송장번호
+	
+	String parcelCd; // 택배 코드
+*/ 
+	
 }
