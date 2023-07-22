@@ -6,20 +6,35 @@
 
 <mapper namespace="org.zerock.mapper.CartMapper">
 
-<select id="selectCart" resultType="org.zerock.domain.Cart">
-	select * from cart where mem_id = ${id}
-</select>
+	<select id="selectCart" resultType="org.zerock.domain.Cart">
+		select * from cart where
+		mem_id = #{id} AND ordernum is null
+	</select>
 
-<insert id="insertCart">
-	insert into cart(mem_id, goods_no, ordernum, regidate) values(#{mem_id},#{goods_no},#{ordernum},#{regidate})
-</insert>
+	<insert id="insertCart">
+		insert into cart(mem_id, goods_no, ordernum,
+		regidate)
+		values(#{mem_id},#{goods_no},#{ordernum},#{regidate})
+	</insert>
 
-<delete id="deleteCart">
-	delete cart where cno = #{cno}
-</delete>
+	<delete id="deleteCart">
+		delete cart where cno = #{cno}
+	</delete>
 
-<select id="selectCartCount" resultType="int">
-	select count(*) from cart where mem_id = ${id}
-</select>
+	<select id="selectCartCount" resultType="int">
+		select count(*) from
+		cart where mem_id = ${id}
+	</select>
+
+	<update id="updateCart">
+		UPDATE cart SET quantity = #{quantity} WHERE mem_id =
+		#{id} AND cart_no =
+		#{cartNo} AND ordernum IS NULL
+	</update>
+
+	<update id="updateCartOrderNo">
+		UPDATE cart SET ordernum=#{orderNo} WHERE mem_id =
+		#{memberId}
+	</update>
 
 </mapper>

@@ -54,17 +54,6 @@ public class GoodsController {
 		return "item";
 	}	
 	
-	@GetMapping("/put")
-	public String putCart(Model model) {
-		
-		/*
-		 * for(Goods good: goodsList) { service.putCart(good.getPno()); }
-		 * 
-		 * model.addAttribute("cartList", goodsList);
-		 */
-		
-		return "mycart"; 	// tiles 적용
-	}
 	
 	/*
 	 * @GetMapping("/delete/${pno}") public String removeCart(@RequestParam("pno")
@@ -91,7 +80,7 @@ public class GoodsController {
 		List<Goods> list = new ArrayList<>();
 		String uploadFolder = "C:\\upload\\main";
 
-		System.out.println("내가 받은 상품 번호: ");
+		System.out.println("�궡媛� 諛쏆� �긽�뭹 踰덊샇: ");
 		String uploadFolderPath = String.format("%d", goods.getGno());
 
 		
@@ -99,11 +88,11 @@ public class GoodsController {
 		
 
 		// make folder ---------
-		File uploadPath = new File(uploadFolder, uploadFolderPath); // 상품 번호로 경로를 만듦
+		File uploadPath = new File(uploadFolder, uploadFolderPath); // �긽�뭹 踰덊샇濡� 寃쎈줈瑜� 留뚮벀
 		log.info("upload path: " + uploadPath);
 
-		if (uploadPath.exists() == false) { // 해당 상품 폴더가 없으면
-			uploadPath.mkdirs(); // 해당 경로에 폴더를 만든다.
+		if (uploadPath.exists() == false) { // �빐�떦 �긽�뭹 �뤃�뜑媛� �뾾�쑝硫�
+			uploadPath.mkdirs(); // �빐�떦 寃쎈줈�뿉 �뤃�뜑瑜� 留뚮뱺�떎.
 		}
 		// make gno folder
 
@@ -125,16 +114,16 @@ public class GoodsController {
 			uploadFileName = uploadFileName.substring(uploadFileName.lastIndexOf("\\") + 1);
 			log.info("only file name: " + uploadFileName);
 
-			UUID uuid = UUID.randomUUID(); // 첨부파일은 randomUUID를 이용해서 임의의 값을 생성할 수 있다.
+			UUID uuid = UUID.randomUUID(); // 泥⑤��뙆�씪�� randomUUID瑜� �씠�슜�빐�꽌 �엫�쓽�쓽 媛믪쓣 �깮�꽦�븷 �닔 �엳�떎.
 
-			uploadFileName = uuid.toString() + "_" + uploadFileName; // 생성된 값은 원래의 파일 이름과 구분할 수 있도록 중간에 '_'를 추가할 수 있음
+			uploadFileName = uuid.toString() + "_" + uploadFileName; // �깮�꽦�맂 媛믪� �썝�옒�쓽 �뙆�씪 �씠由꾧낵 援щ텇�븷 �닔 �엳�룄濡� 以묎컙�뿉 '_'瑜� 異붽��븷 �닔 �엳�쓬
 
 			// File saveFile = new File(uploadFolder, uploadFileName);
 
 			try {
 
-				File saveFile = new File(uploadPath, uploadFileName); // c:upload/main/{상품 번호 폴더}/파일이름으로 최종 경로 생성
-				multipartFile.transferTo(saveFile); // 파일을 최종 경로로 이동
+				File saveFile = new File(uploadPath, uploadFileName); // c:upload/main/{�긽�뭹 踰덊샇 �뤃�뜑}/�뙆�씪�씠由꾩쑝濡� 理쒖쥌 寃쎈줈 �깮�꽦
+				multipartFile.transferTo(saveFile); // �뙆�씪�쓣 理쒖쥌 寃쎈줈濡� �씠�룞
 
 				int gno2 = goods.getGno();
 				goods.setUuid(uploadFileName);
@@ -144,12 +133,12 @@ public class GoodsController {
 				//service.updateFilePath(goods);
 				list.add(goods);
 
-				// 만일 이미지 타입이라면 섬네일을 생성하도록 한다.
+				// 留뚯씪 �씠誘몄� ���엯�씠�씪硫� �꽟�꽕�씪�쓣 �깮�꽦�븯�룄濡� �븳�떎.
 				// check image type file
 				if (checkImageType(saveFile)) {
-					// FileOutputStream :데이터를 파일에 바이트 스트림으로 저장
-					// File 클래스는 파일과 디렉터리를 다룸. 그래서 File 인스턴스는 파일일 수도 있고 디렉터리 일수도 있다.
-					// File(String parent, String child) - parent 폴더 경로의 child라는 파일에 대한 File 객체 생성
+					// FileOutputStream :�뜲�씠�꽣瑜� �뙆�씪�뿉 諛붿씠�듃 �뒪�듃由쇱쑝濡� ���옣
+					// File �겢�옒�뒪�뒗 �뙆�씪怨� �뵒�젆�꽣由щ�� �떎猷�. 洹몃옒�꽌 File �씤�뒪�꽩�뒪�뒗 �뙆�씪�씪 �닔�룄 �엳怨� �뵒�젆�꽣由� �씪�닔�룄 �엳�떎.
+					// File(String parent, String child) - parent �뤃�뜑 寃쎈줈�쓽 child�씪�뒗 �뙆�씪�뿉 ���븳 File 媛앹껜 �깮�꽦
 					FileOutputStream thumbnail = new FileOutputStream(new File(uploadPath, "s_" + uploadFileName));
 
 					Thumbnailator.createThumbnail(multipartFile.getInputStream(), thumbnail, 100, 100);
@@ -170,7 +159,7 @@ public class GoodsController {
 		//Goods goods = new Goods();
 		
 			/*
-			 * int gno = service.getGno() + 1; System.out.println("내가 보낸 gno:" + gno);
+			 * int gno = service.getGno() + 1; System.out.println("�궡媛� 蹂대궦 gno:" + gno);
 			 * goods.setGno(gno); goods.setPname(pname); goods.setStock(stock2); int
 			 * realprice = Integer.parseInt(price); // goods.setPrice(realprice);
 			 */		 
