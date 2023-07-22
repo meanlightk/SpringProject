@@ -1,9 +1,86 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <!DOCTYPE mapper
-
  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
- 
-  <mapper namespace="org.zerock.mapper.OrderListMapper">
- 
- </mapper>
+
+<mapper namespace="org.zerock.mapper.OrderListMapper">
+
+	<insert id="insertOrder"
+		parameterType="org.zerock.domain.OrderList" useGeneratedKeys="true"
+		keyProperty="orderlist_no">
+		INSERT INTO orderlist (mem_id, totprice) VALUES
+		(#{mem_id}, #{totprice})
+	</insert>
+
+	<insert id="insertOrderPayment"
+		parameterType="org.zerock.domain.OrderPayment">
+		INSERT INTO order_payment(order_no, imp_uid) VALUES
+		(#{order_no}, #{imp_uid})
+	</insert>
+
+	<insert id="insertOrderAddress"
+		parameterType="org.zerock.domain.OrderAddress">
+		INSERT INTO order_address(order_no, `name`, phone, addr1, addr2,
+		memo)
+		VALUES (#{order_no}, #{name}, #{phone}, #{addr1}, #{addr2}, #{memo})
+	</insert>
+	
+	<sql id="info">
+			orderlist_no as orderlist_no,
+			mem_id as mem_id,
+			totprice,
+			dstatus,
+			waybill_num as waybill_num,
+			parcel_cd as parcel_cd,
+			DATE_FORMAT(regiDate,'%Y%m%d') as regiDateStr,
+			ROW_NUMBER() over(ORDER BY regDate desc) AS rownum,
+			count(1) over() AS totalCount 			
+	</sql>
+
+	<sql id="where">
+	</sql>
+
+	<select id="selectOrderList" parameterType="org.zerock.domain.Common" resultType="org.zerock.domain.OrderList">
+		select * 
+		from (
+			select
+				<include refid="info"/> 
+			from orderlist
+		)
+		where rownum BETWEEN (#{section}-1)*10*100+(#{pageNum}-1)*10+1 AND (#{section}-1)*100+#{pageNum}*10
+		order by rownum
+		
+	</select>
+	<select id="selectOrderId" resultType="org.zerock.domain.OrderList">
+		select
+		<include refid="info"/> 
+		from orderlist	
+		where orderlistNo = #{orderlistNo}
+	</select>
+	<insert id="insertOrderList" parameterType="org.zerock.domain.OrderList">
+		insert into orderlist(mem_id,totprice,dstatus)
+		values(#{memId},#{topprice},#{dstatus})
+	</insert>
+
+
+	<update id="updateOrderList" parameterType="org.zerock.domain.OrderList">
+		update orderlist
+			set topprice = #{topprice},
+			dstatus = #{dstatus}
+		where orderlist_no = #{orderlistNo}
+	</update>
+
+	<delete id="deleteOrderList" parameterType="org.zerock.domain.OrderList">
+		delete from orderlist 
+		where orderlist_no = #{orderlistNo}
+	</delete>
+	
+	
+	<update id="updateWaybillData" parameterType="org.zerock.domain.OrderList">
+		update orderlist
+			set waybill_num = #{waybillNum},
+			parcel_cd = #{parcelCd}
+		where orderlist_no = #{orderlistNo}
+	</update>
+
+</mapper>
