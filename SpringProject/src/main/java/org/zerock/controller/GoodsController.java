@@ -15,10 +15,12 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
+import org.zerock.domain.Common;
 import org.zerock.domain.Goods;
+import org.zerock.domain.Review;
 import org.zerock.service.GoodsService;
+import org.zerock.service.ReviewService;
 
 import lombok.extern.log4j.Log4j;
 import net.coobird.thumbnailator.Thumbnailator;
@@ -30,6 +32,10 @@ public class GoodsController {
 	
 	@Autowired
 	private GoodsService service;
+	
+	@Autowired
+	private ReviewService reviewService;
+
 	
 	@GetMapping("/list")
 	public String showItemList(Model model) {
@@ -208,13 +214,20 @@ public class GoodsController {
 	
 	
 	@GetMapping("/goodsDetail/{gno}")
-	public String goodsDetail(Model model, @PathVariable("gno") int gno) {
+	public String goodsDetail(Model model, Common common, @PathVariable("gno") int gno) {
 		log.info("goods detail");
+
 		Goods goods = service.showOneItem(gno);
-		String optionList = goods.getOption_list();
-		String[] optionListAll = optionList.split("\n");
-		goods.setOption_list_split(optionListAll);
+		List<Review> reviewList = reviewService.getReviewList(common,gno);
+		
+	//	String optionList = goods.getOption_list();
+	//	String[] optionListAll = optionList.split("\n");
+	//	goods.setOption_list_split(optionListAll);
 		model.addAttribute("goods", goods);
+		model.addAttribute("reviewList", reviewList);
+		model.addAttribute("gno", goods.getGno());
+
+		
 		return "/goods/goodsDetail";
 	}
 }
