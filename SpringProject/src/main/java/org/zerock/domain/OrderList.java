@@ -19,7 +19,7 @@ public class OrderList {
 	private String waybill_num;
 	private String parcel_cd;
 	
-/*	to ji(쓸모 없던짓) 
+/*	to ji 수정버전
 	int orderlistNo;
 	
 	String memId;

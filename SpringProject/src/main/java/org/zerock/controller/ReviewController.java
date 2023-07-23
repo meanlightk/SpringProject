@@ -30,7 +30,8 @@ public class ReviewController {
 		review.setMemId("test");
 		reviewService.insertReview(review);
 		
-		return "redirect://goodsDetail/" + review.getGoodsNo();
+		return "redirect:/goodsDetail/" + review.getGoodsNo();
+
 	}
 	
 	
@@ -57,7 +58,6 @@ public class ReviewController {
 		model.addAttribute("reviewList", reviewList);		
 		model.addAttribute("gno", gno);
 
-		
 		return "/review/list";
 	}
 
