@@ -112,7 +112,7 @@
 				</tr>
 				<tr>
 					<td>아이디</td>
-					<td></td>
+					<td>${gclaim.id }</td>
 				</tr>
 				<tr>
 					<td>날짜</td>
@@ -124,7 +124,7 @@
 				</tr>
 				<tr>
 					<td>상품id</td>
-					<td>(script예정)</td>
+					<td>${gclaim.gno }</td>
 				</tr>
 				<tr class="fixed-height">
 					<td>내용</td>

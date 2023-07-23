@@ -77,6 +77,8 @@
   display: table-cell;
   text-align: left;
   vertical-align: top;
+   
+  white-space: nowrap; /* 글자를 자동으로 줄바꿈하지 않도록 설정 */
 }
 
 
