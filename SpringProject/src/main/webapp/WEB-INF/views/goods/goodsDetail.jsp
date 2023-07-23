@@ -11,6 +11,7 @@
 	crossorigin="anonymous">
 </script>
 <!-- CSS only -->
+<link rel="stylesheet" type="text/css" href="../resources/css/reviewlist.css">
 <link rel="stylesheet"
 	href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css"
 	integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk"
@@ -178,14 +179,12 @@
 				onclick="fn_GoodsOrder()">구매하기</button>
 			<br>
 
-			<!-- <button id="update" onclick="fn_update()">수정하기</button> -->
-		
+			<!-- <button id="update" onclick="fn_update()">수정하기</button> -->		
 		</div> 
-	</div> 
-	
 	</div>
-	<script>
-		const 
-	</script>
+	<jsp:include page="../review/list.jsp"></jsp:include>
+
+
+
 </body>
 </html>
