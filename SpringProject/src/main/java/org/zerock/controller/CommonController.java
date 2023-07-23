@@ -89,20 +89,6 @@ public class CommonController {
 	
 	@RequestMapping("/test")
 	public String test(Model model) {
-		log.info("test() called");
-		
-		
-		
-		return "test";
-	}
-	
-	@RequestMapping("/test2")
-	public String test2(Model model, int answer_no) {
-		log.info("test2() called");
-		
-		AnswerClaim answer = claimService.showOneAnswer(answer_no);
-		
-		model.addAttribute("answer", answer);
 		
 		return "test";
 	}

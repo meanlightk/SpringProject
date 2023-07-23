@@ -116,7 +116,7 @@
 				</tr>
 				<tr>
 					<td>날짜</td>
-					<td>${answer.regidate }</td>
+					<td><fmt:formatDate pattern="yy/MM/dd HH:mm" value="${answer.regidate}"/></td>
 				</tr>
 				<tr>
 					<td>절차단계</td>
@@ -124,7 +124,7 @@
 				</tr>
 				<tr>
 					<td>상품id</td>
-					<td></td>
+					<td>(script예정)</td>
 				</tr>
 				<tr class="fixed-height">
 					<td>내용</td>
@@ -138,7 +138,7 @@
 				</tr>
 				<tr>
 					<td>제목</td>
-					<td>${answer.title }</td>
+					<td></td>
 				</tr>
 				<tr>
 					<td>고객ID</td>
@@ -146,7 +146,7 @@
 				</tr>
 				<tr>
 					<td>날짜</td>
-					<td>${claim.regidate }</td>
+					<td><fmt:formatDate pattern="yy/MM/dd HH:mm" value="${claim.regidate}"/></td>
 				</tr>
 				<tr>
 					<td>절차단계</td>
@@ -168,4 +168,3 @@
 </div>
 </body>
 </html>
-

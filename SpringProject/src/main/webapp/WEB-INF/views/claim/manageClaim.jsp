@@ -47,12 +47,13 @@
 .w3-table-all {
   border-collapse: collapse;
   border-spacing: 0;
-  width: 100%;
+  width: 50%;
   display: table;
 }
 
 .w3-table-all {
   border: 1px solid #ccc;
+  margin: 0 auto;
 }
 
 .w3-bordered tr,
@@ -76,6 +77,11 @@
   display: table-cell;
   text-align: left;
   vertical-align: top;
+}
+
+
+.w3-table-all td.dlevel-2{
+  text-align: center;
 }
 
 .w3-table th:first-child,
@@ -167,15 +173,14 @@
 
   <div class="w3-container">
   
-    <h2>테스트 게시판</h2>
+    <h2>클레임 관리 게시판</h2>
     <div class="w3-responsive">
       <table class="w3-table-all">
       	<thead>
 	        <tr>
 	          <th>번호</th>
-	          <th>LEVEL</th>
-	          <th>게시글</th>
 	          <th>고객ID</th>
+	          <th>게시글</th>
 	          <th>작성일</th>
 	          <th>상태</th>
 	        </tr>
@@ -207,24 +212,42 @@
 					<c:forEach var="item" items="${claimlist }" varStatus="articleNum">
 						<tr>
 							<td>${articleNum.count}</td>
-							<td>${item.level }</td>
+							<td>${item.mem_id}</td>
 							<td>
 								<div class="level-${item.level }">
 								<c:if test="${item.level == 1 }">
-									<a href="#">
-										${fn:substring(item.content, 0, 10)}${fn:length(item.content) > 10 ? '...' : ''}
+									<a href="/admin/claims/claim?gclaim_no=${item.gclaim_no }">
+										${fn:substring(item.content, 0, 20)}${fn:length(item.content) > 20 ? '...' : ''}
 									</a>
 								</c:if>								
 								<c:if test="${item.level == 2 }">
-									<a href="/test2?answer_no=${item.answer_no}">
-										${fn:substring(item.content, 0, 10)}${fn:length(item.content) > 10 ? '...' : ''}
+									<a href="/admin/claims/answer?answer_no=${item.answer_no}">
+										${fn:substring(item.content, 0, 17)}${fn:length(item.content) > 17 ? '...' : ''}
 									</a>
 								</c:if>
 								</div>
 							</td>
-							<td>${item.mem_id}</td>
-							<td><fmt:formatDate pattern="yy/MM/dd/HH:mm" value="${item.regidate}"/></td>
-							<td>${item.status}</td>
+							<td><fmt:formatDate pattern="yy/MM/dd HH:mm" value="${item.regidate}"/></td>
+							<td class="dlevel-${item.level }">
+								<c:if test="${item.level == 1 && item.status == 1 }">
+									변심
+								</c:if>
+								<c:if test="${item.level == 1 && item.status == 2 }">
+									제품하자
+								</c:if>
+								<c:if test="${item.level == 1 && item.status == 3 }">
+									사이즈
+								</c:if>
+								<c:if test="${item.level == 1 && item.status == 4 }">
+									오배송
+								</c:if>
+								<c:if test="${item.level == 1 && item.status == 5 }">
+									기타
+								</c:if>
+								<c:if test="${item.level == 2}">
+									${item.status }단계
+								</c:if>
+							</td>
 						</tr>
 					</c:forEach>
 				</c:when>
@@ -244,11 +267,11 @@
 					<c:when test="${tot > 100 }">
 						<c:forEach var="page" begin="1" end="10" step="1">
 							<c:if test="${section > 1 && page==1 }">
-								<li><a href="/#?section=${section-1}&pagenum=${(section-1)*10 +1 }">&laquo;</a></li>
+								<li><a href="/#?section=${section-1}&pageNum=${(section-1)*10 +1 }">&laquo;</a></li>
 							</c:if>
-							<li><a href="/board/list.do?section=${section}&pagenum=${page}">${(section-1)*10 +page }</a></li>
+							<li><a href="/board/list.do?section=${section}&pageNum=${page}">${(section-1)*10 +page }</a></li>
 							<c:if test="${page == 10 }">
-								<li><a href="/#?section=${section+1}&pagenum=${section*10+1}">&raquo;</a></li>
+								<li><a href="/#?section=${section+1}&pageNum=${section*10+1}">&raquo;</a></li>
 							</c:if>
 						</c:forEach>
 						
@@ -262,11 +285,11 @@
 					<c:when test="${tot<100 }">
 						<c:forEach var="page" begin="1" end="${tot/10 + 1 }" step="1">
 							<c:choose>
-								<c:when test="${page==pagenum }">
-									<li><a class="w3-green" href="/#?section=${section}&pagenum=${page}">${page }</a></li>
+								<c:when test="${page==pageNum }">
+									<li><a class="w3-green" href="/#?section=${section}&pageNum=${page}">${page }</a></li>
 								</c:when>
 								<c:otherwise>
-									<li><a href="/#?section=${section }&pagenum=${page}">${page }</a></li>
+									<li><a href="/#?section=${section }&pageNum=${page}">${page }</a></li>
 								</c:otherwise>
 							</c:choose>
 						</c:forEach>

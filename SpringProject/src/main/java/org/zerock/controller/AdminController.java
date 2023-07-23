@@ -8,7 +8,9 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.zerock.domain.Adminclaim;
+import org.zerock.domain.AnswerClaim;
 import org.zerock.domain.Common;
+import org.zerock.domain.Gclaim;
 import org.zerock.service.AdminService;
 import org.zerock.service.ClaimService;
 
@@ -47,6 +49,28 @@ public class AdminController {
 		if(claimlist.size() > 0)
 			model.addAttribute("tot", claimlist.get(0).getTotal());
 		return "/claim/manageClaim";
+	}
+	
+	@GetMapping("/claims/claim")
+	public String viewClaim(Model model, int gclaim_no) {
+		log.info("viewClaim() called");
+		
+		Gclaim claim = claimService.showOneClaim(gclaim_no);
+		
+		model.addAttribute("claim", claim);
+		
+		return "/claim/view";
+	}
+	
+	@GetMapping("/claims/answer")
+	public String viewAnswer(Model model, int answer_no) {
+		log.info("viewAnswer() called");
+		
+		AnswerClaim answer = claimService.showOneAnswer(answer_no);
+		
+		model.addAttribute("answer", answer);
+		
+		return "/claim/view";
 	}
 	
 }
