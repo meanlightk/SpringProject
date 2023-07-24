@@ -218,16 +218,11 @@ public class GoodsController {
 		log.info("goods detail");
 
 		Goods goods = service.showOneItem(gno);
-		List<Review> reviewList = reviewService.getReviewList(common,gno);
-		
-	//	String optionList = goods.getOption_list();
-	//	String[] optionListAll = optionList.split("\n");
-	//	goods.setOption_list_split(optionListAll);
+		log.info("콘텐츠"+goods.getContent());
+		String optionList = goods.getOption_list();
+		String[] optionListAll = optionList.split("\n");
+		goods.setOption_list_split(optionListAll);
 		model.addAttribute("goods", goods);
-		model.addAttribute("reviewList", reviewList);
-		model.addAttribute("gno", goods.getGno());
-
-		
-		return "/goods/goodsDetail";
+		return "detail";
 	}
 }

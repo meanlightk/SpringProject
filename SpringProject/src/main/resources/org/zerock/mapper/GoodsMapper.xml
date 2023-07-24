@@ -10,6 +10,7 @@
 	select
 	goods_no as gno,
 	category,
+	content,
 	pname,
 	sellPrice,
 	skintype,
