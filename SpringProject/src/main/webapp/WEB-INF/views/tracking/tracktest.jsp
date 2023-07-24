@@ -1,5 +1,9 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
+    
 <!DOCTYPE html>
 <html>
 <head>
@@ -102,15 +106,14 @@ $(document).ready(function(){
 
 <div class="container">
   <h2>상품 리스트</h2>
-  <p>여기다 뭘 쓸수도 있음</p>
   <c:if test="${!empty orderList}">
     <table class="table">
     <thead>
       <tr>
-        <th>썸네일</th>
-        <th>이름</th>
-        <th>카테고리</th>
+        <th></th>
+        <th>유저</th>
         <th>가격</th>
+        <th>등록일</th>
         <th>택배회사명</th>
         <th>송장</th>
       </tr>
@@ -118,10 +121,10 @@ $(document).ready(function(){
     <tbody>
     <c:forEach var="good" items="${orderList}">
       <tr>
-        <td><img src="upload/main/${good.simagepath}"></img></td>
-        <td>${good.pname}</td>
-        <td>${good.category}</td>
-        <td>${good.sellPrice}</td>
+        <td></td>
+        <td>${good.mem_id}</td>
+        <td>${good.totprice}</td>
+        <td>${good.regidate}</td>
         <td>	
         	<span id="tekbeCompnayName">택배회사명: </span>
 			<select id="tekbeCompnayList" name="tekbeCompnayList">
@@ -141,7 +144,7 @@ $(document).ready(function(){
 </div>
 
 	<span id="tekbeCompnayName">택배회사명: </span>
-		<select id="tekbeCompnayList" name="tekbeCompnayList">
+	<select id="tekbeCompnayList" name="tekbeCompnayList">
 	</select>
 		
 		<br/><br/>

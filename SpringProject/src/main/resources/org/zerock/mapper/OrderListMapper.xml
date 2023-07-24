@@ -33,7 +33,7 @@
 			waybill_num as waybill_num,
 			parcel_cd as parcel_cd,
 			DATE_FORMAT(regiDate,'%Y%m%d') as regiDateStr,
-			ROW_NUMBER() over(ORDER BY regDate desc) AS rownum,
+			ROW_NUMBER() over(ORDER BY regiDate desc) AS rownum,
 			count(1) over() AS totalCount 			
 	</sql>
 
@@ -41,12 +41,12 @@
 	</sql>
 
 	<select id="selectOrderList" parameterType="org.zerock.domain.Common" resultType="org.zerock.domain.OrderList">
-		select * 
+		select t.* 
 		from (
 			select
 				<include refid="info"/> 
 			from orderlist
-		)
+		) t
 		where rownum BETWEEN (#{section}-1)*10*100+(#{pageNum}-1)*10+1 AND (#{section}-1)*100+#{pageNum}*10
 		order by rownum
 		

@@ -7,20 +7,7 @@
 
 <link rel="stylesheet" href="/resources/css/reviewlist.css">
 
-    
-    
-    
 	<div align="center">
-		<ul class="nav nav-tabs" id="myTab" role="tablist" style="width: 60%">
-			<li class="nav-item" role="presentation" style="width: 25%" ><a
-				 id="home-tab"  href="#home3"
-				role="tab" aria-controls="home3" aria-selected="false" onClick="fnMove(1)">상세정보</a>
-			</li>
-			<li class="nav-item" role="presentation" style="width: 25%" id="f4"><a
-				class="nav-link active" id="contact-tab" data-toggle="tab"
-				href="#re3" role="tab" aria-controls="re3" aria-selected="true" onClick="fnMove(4)">상품평</a>
-			</li>
-		</ul>
 		<!-- 상품평 -->
 		<div class="review">
 			<nav><h1>상품리뷰</h1></nav>
@@ -44,16 +31,8 @@
 		<div style="margin-left: 1050px">
 			<button type="button" class="btn btn-secondary btn-sm"
 				onclick="fn_Review('/review/form.do',${gno})">WRITE</button>
-		</div>
-			
-	
+		</div>	
 	</div>
-
-			
-	
-	
-	
-		
 	<script>	
 		 function fn_Review(url,data){
 			var form = document.createElement("form");

@@ -1,17 +1,10 @@
 package org.zerock.controller;
 
-import java.util.List;
-
-import org.apache.ibatis.annotations.Param;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.zerock.domain.Adminclaim;
-import org.zerock.domain.AnswerClaim;
-import org.zerock.domain.Common;
-import org.zerock.domain.Gclaim;
 import org.zerock.service.ClaimService;
 import org.zerock.service.GoodsService;
 
@@ -92,6 +85,12 @@ public class CommonController {
 		
 		return "test";
 	}
+
+	@RequestMapping("/qna")
+	public String qna() {
+		return "qna";
+	}
+
 	
 	
 	@RequestMapping("/sample/member")
