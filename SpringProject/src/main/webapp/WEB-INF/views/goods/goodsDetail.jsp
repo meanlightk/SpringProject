@@ -858,6 +858,7 @@ button{
 								<c:forEach var="option_each" items="${goods.option_list_split}"
 									varStatus="status">
 									<option id="option_box_${status.count}"   name="option" value="${option_each}" class="option_each">${option_each}</option>
+									<input type="hidden" name="option_box_name" value="${status.count}">
 								</c:forEach>
 						</select></td>
 					</tr>
@@ -1117,8 +1118,8 @@ button{
 			    $(this).parent().addClass('tab_open');
 			    $("#myTabContent"+tab_id).addClass('current');
 			})
-	
 		})
+		
 	
 	// 매개 변수로 사용시 swiper가 초기화 될 때 동작합니다.
 	    var swiper = new Swiper(".swiper", {
@@ -1148,38 +1149,40 @@ button{
 	</script>
 	<script>
 	var i = 1;
-	console.log(i);
+
 	var arr = [];
+	var mymap = new Map();
+	
 	function changeOptionSelect(){
 	    var optionSelect = document.getElementById("option");
-	    var price = ${goods.sellPrice};
 	    var option_box_id = optionSelect.options[optionSelect.selectedIndex].id;
 	    if(option_box_id === 'option_box_0') return;
 	    if(arr.includes(option_box_id)){
 	    	return;
 	    }
 	    
-	    arr += option_box_id;
+	    arr.push(option_box_id);
 	    console.log(arr);
 	    // select element에서 선택된 option의 value가 저장된다.
 	    var selectValue = optionSelect.options[optionSelect.selectedIndex].value;
-	 
+	 	
+	    console.log(selectValue);
 	    var optionProducts = document.getElementById("option_products");
 
 	    let html = optionProducts.innerHTML;
 	  
-	    html += "<tr class='option_product' data-option-index='"+ i + "' target-key='238'><td>" +
+	    html += "<tr class='option_product' id='data-option" + i + "' data-option-index='"+ i + "' target-key='238'><td>" +
 		"<input type='hidden' class='option_box_id'  value='#' name='option_code' data-item-add-option data-item-reserved='N' data-option-id='00PF' data-option-index='1'>" +
 		"<p class='product'>" + "${goods.pname}" + "<br><span>" + selectValue + "</span></span></p></td><td>" +
 			"<span class='quantity' style='width:65px;'>" + 
 				"<input type='text' name='quantity_opt[]' class='quantity_opt eProductQuantityClass' value='1' product-no=" + "'" + ${goods.gno} + "'"  + "style='border:1;'/>" + 
- 					'<a href="#none" class="up eProductQuantityUpClass" data-target="option_box'+ i + '_up">' +
-					'<img src="./../../../resources/img/up.png" id="option_box1_up" class="option_box_up" alt="수량증가">' + 
-				'</a><a href="#none" class="down eProductQuantityDownClass" data-target="option_box' + i_down">' +
-				'<img src="./../../../resources/img/down.png" id="option_box1_down" class="option_box_down" alt="수량감소">' + 
+ 					'<a href="#none" class="up eProductQuantityUpClass" data-target="option_box_'+ i + '_up">' +
+					'<img src="./../../../resources/img/up.png" id="option_box_'+ i + '_up" class="option_box_up" alt="수량증가">' + 
+				'</a><a href="#none" class="down eProductQuantityDownClass" data-target="option_box_' + i + '_down">' +
+				'<img src="./../../../resources/img/down.png" id="option_box_'+ i + '_down" class="option_box_down" alt="수량감소">' + 
 				'</a>' +  
 			'</span><a href="#none" class="delete">' + 
-				'<img src="./../../../resources/img/x.png" alt="삭제" id="option_box1_del" class="option_box_del">' + 
+				'<img src="./../../../resources/img/x.png" alt="삭제" id="option_box_' + i + '_del" data-target="data-option"'+ i + ' class="option_box_del" onclick="deleteOption()">' + 
 			'</a></td>' +
 		'<td class="right">' + 
 			'<span>' + 
@@ -1192,8 +1195,21 @@ button{
 	}
 	
 	function deleteOption(){
-		
-		var selectedOption = this.
+		var deleteObj = event.target.id;
+		console.log(deleteObj);
+		var deleteObject = deleteObj.slice(11,12);
+		console.log(deleteObject);
+		var delTarget = document.getElementById("data-option" + deleteObject);
+		var deleteThing = "option_box_" + deleteObject;
+		delTarget.style.display = "none";
+		let filtered = arr.filter((element) => element !== deleteThing);
+		arr = filtered;
+		console.log(arr);
+		if(arr.length === 0){
+			var option_box = document.getElementById("option_box_0");
+			console.log(option_box);
+			option_box.setAttribute('selected', 'selected');
+		}
 	}
 	</script>
 </body>
