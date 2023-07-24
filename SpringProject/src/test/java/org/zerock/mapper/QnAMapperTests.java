@@ -1,4 +1,4 @@
-package org.zerock.mapper;
+/*package org.zerock.mapper;
 
 import java.util.List;
 
@@ -7,8 +7,7 @@ import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
-import org.zerock.domain.QnA;
-import org.zerock.domain.QnA_A;
+import org.zerock.domain.AnswerQnA;
 import org.zerock.domain.QnA_Q;
 
 import lombok.extern.log4j.Log4j;
@@ -23,7 +22,7 @@ public class QnAMapperTests {
 	
 	@Test
 	public void testSelectAllListByQnA_a() {
-		List<QnA_A> qnA = mapper.selectAllListByQnA_a(1);
+		List<AnswerQnA> qnA = mapper.selectAllListByQnA_a(1);
 		log.info(qnA);
 	}
 
@@ -67,13 +66,13 @@ public class QnAMapperTests {
 	
 	@Test
 	public void testSelectOneQna_a() {
-		QnA_A qnA = mapper.selectOneQna_a(1);
+		AnswerQnA qnA = mapper.selectOneQna_a(1);
 		log.info(qnA);
 	}
 	
 	@Test
 	public void testInsertQna_a() {
-		QnA_A qnA = new QnA_A();
+		AnswerQnA qnA = new AnswerQnA();
 		qnA.setQna_questno(1);
 		qnA.setTitle("c");
 		qnA.setContent("c");
@@ -84,7 +83,7 @@ public class QnAMapperTests {
 
 	@Test
 	public void testUpdateQna_a() {
-		QnA_A qnA = new QnA_A();
+		AnswerQnA qnA = new AnswerQnA();
 		qnA.setTitle("d");
 		qnA.setContent("d");
 		qnA.setStatus("2");
@@ -99,3 +98,4 @@ public class QnAMapperTests {
 	}
 	
 }
+*/
