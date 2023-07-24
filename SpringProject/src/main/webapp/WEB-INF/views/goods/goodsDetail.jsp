@@ -696,6 +696,16 @@ button{
 .xans-product-detail .imgArea {
 	width: 615px;
 }
+
+.tab-content {
+	display:none;
+}
+
+.current.current{
+	display:block;
+}
+
+
 </style>
 <link rel="stylesheet"
 	href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css">
@@ -967,16 +977,16 @@ button{
 					<div class="detail_tab">
 						<ul class="cboth title_detail">
 							<li class="tab_open">
-								<a href="#datail">상품상세정보</a>
+								<a href="#datail" data-tab="1">상품상세정보</a>
 							</li>
 							<li>
-								<a href="#review" class="crema-product-reviews-count crema-applied" data-product-code="634" data-format="리뷰 ({{{count}}})">리뷰 (11,997)</a>
+								<a href="#review" data-tab="2" class="crema-product-reviews-count crema-applied" data-product-code="634" data-format="리뷰 ({{{count}}})">리뷰 (11,997)</a>
  							</li>
  							<li>
- 								<a href="#guide">구매유의사항</a>
+ 								<a href="#guide" data-tab="3">구매유의사항</a>
  							</li>
  							<li>
- 								<a href="#qna">상품 Q&A</a>
+ 								<a href="#qna" data-tab="4">상품 Q&A</a>
  							</li>
 						</ul>
 					</div>
@@ -1111,19 +1121,38 @@ button{
 		<br>
 		<br><br><br><br>
  
-			
-		</div> 
-		<div class="tab-content" id="myTabContent" align="center" style="display:block;">
-			<div class="tab-pane fade show active" id="home" role="tabpanel"
-				aria-labelledby="home-tab">${goods.content}</div>
+		<div class="tab-content current" id="myTabContent1" align="center" style="">
+			<div class="tab-pane fade show active" id="home" role="tabpanel" aria-labelledby="home-tab">${goods.content}</div>
 			<!-- 상세정보 -->
 		</div>
-	</div>
+		<div class="tab-content" id="myTabContent2" align="center">
+			<jsp:include page="../review/list.jsp"></jsp:include>
+			<!-- 상세정보 -->
+		</div>
+				
+	</div> 
+
+	
+<!--  	</div>-->
 
 
 	<br>
 	<br>
 	<script>
+		$(document).ready(function(){
+			  
+			$('ul.title_detail li a').click(function(){
+			  	var tab_id = $(this).attr('data-tab');
+	
+			    $('ul.title_detail li').removeClass('tab_open');
+			    $('.tab-content').removeClass('current');
+	
+			    $(this).parent().addClass('tab_open');
+			    $("#myTabContent"+tab_id).addClass('current');
+			})
+	
+		})
+	
 	// 매개 변수로 사용시 swiper가 초기화 될 때 동작합니다.
 	    var swiper = new Swiper(".swiper", {
         spaceBetween: 30,    // 슬라이드 사이 여백
