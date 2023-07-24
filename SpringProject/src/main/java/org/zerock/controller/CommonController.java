@@ -1,10 +1,14 @@
 package org.zerock.controller;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.zerock.domain.Adminclaim;
+import org.zerock.domain.Common;
 import org.zerock.service.ClaimService;
 import org.zerock.service.GoodsService;
 
@@ -79,13 +83,6 @@ public class CommonController {
 		return "/customlogin";
 	}
 
-	
-	@RequestMapping("/test")
-	public String test(Model model) {
-		
-		return "test";
-	}
-
 	@RequestMapping("/qna")
 	public String qna() {
 		return "qna";
@@ -97,5 +94,15 @@ public class CommonController {
 	public String membersample() {
 		return "/sample/member";
 	}
+	
+	@GetMapping("/test")
+	public String test(Model model, Common common) {
+		log.info("test() called");
+		List<Adminclaim> claimlist = claimService.showlistAll(common);
+		model.addAttribute("claimlist", claimlist);
+		
+		return "test";
+	}
+
 
 }

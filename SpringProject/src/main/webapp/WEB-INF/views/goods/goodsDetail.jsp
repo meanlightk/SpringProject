@@ -1129,7 +1129,13 @@ button{
 			<jsp:include page="../review/list.jsp"></jsp:include>
 			<!-- 상세정보 -->
 		</div>
-				
+		<div class="tab-content" id="myTabContent3" align="center">	
+			<!-- 상세정보 -->
+		</div>
+		<div class="tab-content" id="myTabContent4" align="center">
+			<jsp:include page="customclaim.jsp"></jsp:include>
+			<!-- 상세정보 -->
+		</div>	
 	</div> 
 
 	

@@ -6,7 +6,7 @@
 <link rel="stylesheet" href="/resources/css/claim.css">
 <div class="claims">
 	<c:choose>
-		<c:when test="${claimlist == null }">
+		<c:when test="${claimlist == null}">
 			<span>등록된 글이 없습니다.</span>
 		</c:when>
 		<c:when test="${claimlist != null }">

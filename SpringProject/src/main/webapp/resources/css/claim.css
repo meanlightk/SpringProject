@@ -34,7 +34,7 @@ body, div {
 }
 
 .claim__wrap {
-    padding: 20px 10px 20px 4em
+    padding: 20px 5px 5px 4em
 }
 
 .claim__author {
@@ -47,7 +47,7 @@ body, div {
 }
 
 .claim__content,.claim__reply__content {
-    margin-top: 10px
+    margin: 0px 0px 0px 60px;
 }
 /* 
 .claim__reply__icon {
@@ -96,7 +96,7 @@ body, div {
 }
 
 .claim__reply__wrap {
-    padding: 20px 10px 20px 5.2em
+    padding: 20px 5px 5px 5.2em
 }
 
 .claim__reply__content {
