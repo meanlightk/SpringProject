@@ -33,8 +33,10 @@
 	</update>
 
 	<update id="updateCartOrderNo">
-		UPDATE cart SET ordernum=#{orderNo} WHERE mem_id =
-		#{memberId}
+		UPDATE cart SET ordernum=#{orderNo},
+			status = '2',
+			update_date = SYSDATE()
+		 WHERE mem_id = #{memberId}
 	</update>
 
 </mapper>

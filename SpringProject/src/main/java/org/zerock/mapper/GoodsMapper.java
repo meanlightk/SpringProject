@@ -26,6 +26,8 @@ public interface GoodsMapper {
 	public List<Goods> goodsList();
 	
 	public List<Goods> selectSearchList(Common common);
-	
+
+	public List<Goods> selectGoodsOrderList(Common common);
+
 	public void updateFilePath(Goods goods);
 }

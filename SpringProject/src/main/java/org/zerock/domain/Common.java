@@ -22,7 +22,7 @@ public class Common {
 
 	private String category;
 
-	
+	private String memId;
 	
 	
 }

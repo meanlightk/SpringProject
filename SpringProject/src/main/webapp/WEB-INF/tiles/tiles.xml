@@ -5,14 +5,18 @@
 
 <tiles-definitions>
 
-<definition name="layout" template="/WEB-INF/views/tiles/template.jsp">
-<put-attribute name="header" value="/WEB-INF/views/tiles/header.jsp" />
-<put-attribute name="body" value="" />
-<put-attribute name="footer" value="/WEB-INF/views/tiles/footer.jsp" />
+<definition name="layout" template="/WEB-INF/views/tiles/template.jsp" preparer="menuPreparer" >
+	<put-attribute name="header" value="/WEB-INF/views/tiles/header.jsp" />
+	<put-attribute name="body" value="" />
+	<put-attribute name="footer" value="/WEB-INF/views/tiles/footer.jsp" />
 </definition>
 
 
 
+<definition name="*/*" extends="layout">
+	<put-attribute name="title" value="shop" />
+	<put-attribute name="body" value="/WEB-INF/views/{1}/{2}.jsp" />
+</definition>
 
 <definition name="about" extends="layout">
 <put-attribute name="title" value="about" />
@@ -92,5 +96,7 @@
 	<put-attribute name="title" value="goodsDetail" />
 	<put-attribute name="body" value="/WEB-INF/views/goods/goodsDetail.jsp" />
 </definition>
+
+
 
 </tiles-definitions>

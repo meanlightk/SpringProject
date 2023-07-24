@@ -1122,19 +1122,19 @@ button{
 		<br><br><br><br>
  
 		<div class="tab-content current" id="myTabContent1" align="center" style="">
-			<div class="tab-pane fade show active" id="home" role="tabpanel" aria-labelledby="home-tab">${goods.content}</div>
 			<!-- 상세정보 -->
+			<div class="tab-pane fade show active" id="home" role="tabpanel" aria-labelledby="home-tab">${goods.content}</div>
 		</div>
 		<div class="tab-content" id="myTabContent2" align="center">
+			<!-- 리뷰 -->
 			<jsp:include page="../review/list.jsp"></jsp:include>
-			<!-- 상세정보 -->
 		</div>
 		<div class="tab-content" id="myTabContent3" align="center">	
-			<!-- 상세정보 -->
+			<!-- -->
 		</div>
 		<div class="tab-content" id="myTabContent4" align="center">
+			<!-- 클레임 or Qna -->
 			<jsp:include page="customclaim.jsp"></jsp:include>
-			<!-- 상세정보 -->
 		</div>	
 	</div> 
 

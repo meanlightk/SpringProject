@@ -14,6 +14,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 import org.zerock.domain.Adminclaim;
@@ -52,6 +53,18 @@ public class GoodsController {
 		return "/goods/goodsAdminList";
 		
 	}
+	
+	@RequestMapping("/showlist")
+	public String goodslist(Model model) {
+
+		List<Goods> goodsList = service.goodsList();
+		model.addAttribute("goodsList", goodsList);
+
+		
+		return "itemlist";
+	}
+
+	
 	
 	@GetMapping("/goods/search.do")
 	public String searchList(Model model, Common common) {
@@ -256,7 +269,7 @@ public class GoodsController {
 		
 		if(claimlist.size() > 0)
 			model.addAttribute("tot4", claimlist.get(0).getTotal());
-
+	
 		return "detail";
 	}
 }

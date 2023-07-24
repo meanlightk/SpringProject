@@ -65,6 +65,12 @@ public class GoodsService {
 		return mapper.selectSearchList(common);
 	}
 
+	
+	public List<Goods> getGoodsOrderList(Common common){
+		return mapper.selectGoodsOrderList(common);
+	}
+
+	
 	public void updateFilePath(Goods goods) {
 		mapper.updateFilePath(goods);
 	}

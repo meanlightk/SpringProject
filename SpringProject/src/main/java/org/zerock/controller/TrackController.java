@@ -19,7 +19,7 @@ import org.zerock.service.OrderService;
  * �������� �ù踦 �����ȣ�� �ù� �ڵ带 ����ϱ� ���� ���
  */
 
-@RequestMapping("/track/*")
+@RequestMapping("/track/")
 @Controller
 @Log4j
 public class TrackController {

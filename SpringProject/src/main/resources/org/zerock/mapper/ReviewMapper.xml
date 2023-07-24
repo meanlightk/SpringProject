@@ -1,9 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <!DOCTYPE mapper
-
-
-
  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
 <mapper namespace="org.zerock.mapper.ReviewMapper">
@@ -17,7 +14,7 @@
 			DATE_FORMAT(regiDate,'%Y%m%d') as regiDateStr,
 			DATE_FORMAT(updateDate,'%Y%m%d') as updateDateStr,
 			ROW_NUMBER() over(ORDER BY regidate desc) AS rownum,
-			count(1) over() AS totalCount 			
+			count(1) over() AS totalCount
 	</sql>
 	<sql id="whereorder">
 	</sql>

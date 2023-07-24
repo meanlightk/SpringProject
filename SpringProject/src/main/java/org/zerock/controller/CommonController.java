@@ -48,10 +48,6 @@ public class CommonController {
 		return "/main/home3";
 	}
 	
-	@RequestMapping("/showlist")
-	public String goodslist() {
-		return "itemlist";
-	}
 	
 	@RequestMapping("/list/goods")
 	public String goods() {

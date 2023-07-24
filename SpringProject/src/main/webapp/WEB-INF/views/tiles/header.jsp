@@ -1,6 +1,9 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-    
+<%@taglib prefix="tiles" uri="http://tiles.apache.org/tags-tiles" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
+
 
 
 <!--===============================================================================================-->	
@@ -77,9 +80,9 @@
 					<!-- Menu desktop -->
 					<div class="menu-desktop">
 						<ul class="main-menu">
-							<li class="active-menu">
-								<a href="/home">Home</a>
-								<ul class="sub-menu">
+							 <li class="active-menu">
+								<a href="/home?menu=1">Home</a>
+ 								<ul class="sub-menu">
 									<li><a href="/home">Homepage 1</a></li>
 									<li><a href="/home2">Homepage 2</a></li>
 									<li><a href="/home3">Homepage 3</a></li>
@@ -91,7 +94,7 @@
 							</li>
 
 							<li class="label1" data-label1="hot">
-								<a href="/put">Features</a>
+								<a href="/cart/view">Features</a>
 							</li>
 
 							<li>
@@ -105,7 +108,24 @@
 							<li>
 								<a href="/contact">Contact</a>
 							</li>
-						</ul>
+				
+						<!--	<tiles:importAttribute name="menuList"/>
+							<c:forEach var="menu"  items="${menuList}"> 
+								<c:choose>
+									<c:when test="${menu.check1 == 1 }">
+										<li class="active-menu">
+											<a href="${menu.menuUrl}?menu=${menu.menuCd}">${menuName}</a>
+										</li>
+									</c:when>
+									<c:otherwise>
+										<li>
+											<a href="${menu.menuUrl}?menu=${menu.menuCd}">${menuName}</a>
+										</li>
+									</c:otherwise>
+								</c:choose>
+								<a href="${menu.menuUrl}?menu=${menu.menuCd}">${menuName}</a>
+							</c:forEach>
+						</ul>-->
 					</div>	
 
 					<!-- Icon header -->
@@ -205,7 +225,7 @@
 				</li>
 
 				<li>
-					<a href="/put" class="label1 rs1" data-label1="hot">Features</a>
+					<a href="/cart/view" class="label1 rs1" data-label1="hot">Features</a>
 				</li>
 
 				<li>
@@ -313,7 +333,7 @@
 					</div>
 
 					<div class="header-cart-buttons flex-w w-full">
-						<a href="/put" class="flex-c-m stext-101 cl0 size-107 bg3 bor2 hov-btn3 p-lr-15 trans-04 m-r-8 m-b-10">
+						<a href="/cart/view" class="flex-c-m stext-101 cl0 size-107 bg3 bor2 hov-btn3 p-lr-15 trans-04 m-r-8 m-b-10">
 							View Cart
 						</a>
 

@@ -17,8 +17,6 @@ public class CustomPasswordEncoder implements PasswordEncoder {
 	
 		log.warn("before encode: " + rawPassword);
 		
-		
-		
 		String encodedPassword=sha256(rawPassword.toString());
 	
 		return encodedPassword;
@@ -33,6 +31,4 @@ public class CustomPasswordEncoder implements PasswordEncoder {
 		
 		return password.equals(encodedPassword);
 	}
-	
-
 }

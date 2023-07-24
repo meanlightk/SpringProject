@@ -16,7 +16,7 @@ import org.zerock.domain.Review;
 import org.zerock.service.ReviewService;
 
 
-@RequestMapping("/review/*")
+@RequestMapping("/review/")
 @Controller
 @Log4j
 public class ReviewController {
