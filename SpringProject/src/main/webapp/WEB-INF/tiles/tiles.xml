@@ -52,6 +52,12 @@
 <put-attribute name="body" value="/WEB-INF/views/goods/list.jsp" />
 </definition>
 
+<definition name="searchlist" extends="layout">
+<put-attribute name="title" value="Goods List" />
+<put-attribute name="body" value="/WEB-INF/views/goods/searchlist.jsp" />
+</definition>
+
+
 
 <definition name="/review/form" extends="layout">
 	<put-attribute name="title" value="home" />

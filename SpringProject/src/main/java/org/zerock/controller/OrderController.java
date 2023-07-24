@@ -3,6 +3,7 @@ package org.zerock.controller;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -18,7 +19,7 @@ import lombok.extern.slf4j.Slf4j;
 
 @Slf4j
 @RestController
-@RequestMapping("/order/")
+@RequestMapping("/order/*")
 public class OrderController {
 	@Autowired
 	CartService cartService;
@@ -65,4 +66,22 @@ public class OrderController {
 	
 		}
 	}
+	
+	@GetMapping("/list.do")
+	public String main(@RequestBody UpdateCartItem cartItem) {
+		String id = null;
+		
+		//로그인 유저 체크
+		Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+		if(auth.getName() == null || auth.getName().equals("") || auth.getName().equals("anonymousUser")) {
+			//미로그인 상태
+			return "redirect:/login";
+		}
+		
+		
+		
+		
+		return "/order/list";
+	}
+	
 }

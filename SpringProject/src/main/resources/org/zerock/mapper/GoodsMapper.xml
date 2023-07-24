@@ -120,6 +120,28 @@
 			concat(goods_no,'/s_',uuid) as simagepath
 		 from goods g
 	</select>
+	<select id="selectSearchList" parameterType="org.zerock.domain.Common" resultType="org.zerock.domain.Goods">
+		select 
+			goods_no as gno, 
+			g.*,
+			concat(goods_no,'/s_',uuid) as simagepath
+		 from goods g
+		 where 1=1
+			<if test='searchId != null and searchId != ""'>
+				and ${searchId} 
+			</if>
+			<if test='searchText != null and searchText != ""'>
+				like concat('%',#{searchText},'%')
+			</if>
+			<if test='category != null and category != ""'>
+				and category like concat('%',#{category},'%')
+			</if>
+			<if test='price1 != 0 and price2 != 0'>
+			</if>
+
+
+	</select>
+	
 <update id="updateFilePath" parameterType="org.zerock.domain.Goods">
 	update goods set imagepath=#{imagepath}, uuid=#{uuid} where goods_no = #{gno}
 </update>

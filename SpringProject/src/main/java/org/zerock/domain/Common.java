@@ -16,4 +16,13 @@ public class Common {
 	private int no;
 
 	
+	private int price1;
+
+	private int price2;
+
+	private String category;
+
+	
+	
+	
 }
