@@ -10,10 +10,10 @@
   rel="stylesheet"
   href="https://cdn.jsdelivr.net/npm/swiper@10/swiper-bundle.min.css"
 />
-<script src="https://code.jquery.com/jquery-3.5.1.min.js"
+<!-- <!-- <script src="https://code.jquery.com/jquery-3.5.1.min.js"
 	integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj"
-	crossorigin="anonymous">
-</script>
+	crossorigin="anonymous"> -->
+</script> -->
 <script src="https://cdn.jsdelivr.net/npm/swiper@10/swiper-bundle.min.js"></script>
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/css/bootstrap.min.css">
   <script src="https://cdn.jsdelivr.net/npm/jquery@3.6.4/dist/jquery.slim.min.js"></script>
@@ -578,7 +578,7 @@ td{
 	border: 0;
 }
 #totalProducts tbody td img{
-	vertical-align: middle;
+	/* vertical-align: middle; */
 }
 #option_box1_up{
 	vertical-align: middle;
@@ -601,10 +601,7 @@ img {
 #totalProducts tbody td .quantity .down{
 	position: absolute;
 	left: 22px;
-	top: 5px;
-}
-#totalProducts tbody td img {
-	vertical-align: middle; 
+	top: 11px;
 }
 .xans-product-detail .imgArea {
 	display: inline-block;
@@ -704,20 +701,22 @@ button{
 .current.current{
 	display:block;
 }
-
+.down img{
+	vertical-align: top;
+}
 
 </style>
 <link rel="stylesheet"
 	href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css">
 <!-- JS, Popper.js, and jQuery -->
-<script
+<!-- <script
 	src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"
 	integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo"
 	crossorigin="anonymous"></script>
 <script
 	src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js"
 	integrity="sha384-OgVRvuATP1z7JjHLkuOU7Xw704+h835Lr+6QL9UvYjZE3Ipu6Tp75j7Bh/kR0JKI"
-	crossorigin="anonymous"></script>
+	crossorigin="anonymous"></script> -->
 
 <meta charset="UTF-8">
 <title>Insert title here</title>
@@ -728,7 +727,7 @@ button{
 	<div style="width:100%; position:relative; left:calc(50% - 600px); height:600px; display:inline">
 		
 		<div style="float:left; width:500;">
-			<table border="0">
+			<table style="border:0;">
 				<tr>
 					<td><img src="/upload/main/${goods.imagepath}" width="500"
 						height="500" /></td>
@@ -739,28 +738,28 @@ button{
 					<div class="xans-element- xans-product xans-product-addimage listImg cboth" style="position: relative; margin-top: 10px; height: 134px; overflow: visible;">
 						<ul style="position: absolute; left: 0px; top: 0px; width: 660px; display: inline-block; padding-inline-start: 0px;">
 							<li class="xans-record-" style="float: left;">
-								<img src="/upload/main/${goods.imagepath}" style="width:100px;" class="ThumbImage" alt>
+								<img src="/upload/main/${goods.imagepath}" style="width:100px;" class="ThumbImage">
 							</li>
 							<li class="xans-record-" style="float: left;">
-								<img src="./../../../resources/img/product1.png" class="ThumbImage" alt>
+								<img src="./../../../resources/img/product1.png" class="ThumbImage">
 							</li>
 							<li class="xans-record-" style="float: left;">
-								<img src="./../../../resources/img/product2.png" class="ThumbImage" alt>
+								<img src="./../../../resources/img/product2.png" class="ThumbImage">
 							</li>
 							<li class="xans-record-" style="float: left;">
-								<img src="./../../../resources/img/product3.png" class="ThumbImage" alt>
+								<img src="./../../../resources/img/product3.png" class="ThumbImage">
 							</li>
 							<li class="xans-record-" style="float: left;">
-								<img src="./../../../resources/img/product4.png" class="ThumbImage" alt>
+								<img src="./../../../resources/img/product4.png" class="ThumbImage">
 							</li>
 							<li class="xans-record-" style="float: left;">
-								<img src="./../../../resources/img/product5.png" class="ThumbImage" alt>
+								<img src="./../../../resources/img/product5.png" class="ThumbImage">
 							</li>
 							<li class="xans-record-" style="float: left;">
-								<img src="./../../../resources/img/product6.png" class="ThumbImage" alt>
+								<img src="./../../../resources/img/product6.png" class="ThumbImage">
 							</li>
 							<li class="xans-record-" style="float: left;">
-								<img src="./../../../resources/img/product7.png" class="ThumbImage" alt>
+								<img src="./../../../resources/img/product7.png" class="ThumbImage">
 							</li>
 						</ul>
 						<button type="button" class="prev" style="display: none;">이전</button>
@@ -771,7 +770,7 @@ button{
 		</div>
 
 		<div style="float:left; margin-left:30px; width:682;">
-			<table border="0">
+			<table style="border: 0px;">
  
 				<tr>
 					<td>
@@ -848,6 +847,8 @@ button{
 					<td>
 				</tr>
 			</table>
+
+			<c:set var="list" value="${goods.option_list_split}" />			
 			<div id="item_option">
 				<table>
 					<tr>
@@ -855,12 +856,11 @@ button{
 							class='org.zerock.domain.Goods'  onclick="changeOptionSelect()"
 							style="width: 600px; height: 30px;">
 								<option id="option_box_0" value="">== (필수)옵션: 세부 사항 선택 ==</option>
-								<c:forEach var="option_each" items="${goods.option_list_split}"
-									varStatus="status">
-									<option id="option_box_${status.count}"   name="option" value="${option_each}" class="option_each">${option_each}</option>
-									<input type="hidden" name="option_box_name" value="${status.count}">
+								<c:forEach var="option_each" items="${list}" varStatus="status">
+									<option id="option_box_${status.count}" value="${option_each}" class="option_each">${option_each}</option>
 								</c:forEach>
-						</select></td>
+							</select>
+						</td>
 					</tr>
 				</table>
 			</div>
@@ -1100,7 +1100,7 @@ button{
 				
 	</div> 
 
-	
+	<input type="hidden" id="hii" value="${goods.discountPrice}" />
 <!--  	</div>-->
 
 
@@ -1128,7 +1128,7 @@ button{
         slidesPerView : 'auto', // 한 슬라이드에 보여줄 갯수
         centeredSlides: true,    //센터모드
         autoplay: {     //자동슬라이드 (false-비활성화)
-          delay: 30000000, // 시간 설정
+          delay: 1000, // 시간 설정
           disableOnInteraction: false, // false-스와이프 후 자동 재생
         },
 
@@ -1148,16 +1148,25 @@ button{
       });
 	</script>
 	<script>
-	var i = 1;
-
+	console.log('test');
+	console.log(document.getElementById('hii').value);
 	var arr = [];
 	var mymap = new Map();
 	
+	const number = document.getElementById('option').childElementCount - 1;
+	for(var i = 1; i <= number; i++){
+		var option_name = document.getElementById("option_box_" + i).value;
+		mymap.set(option_name, i);
+	}
+	console.log(mymap);
+	
 	function changeOptionSelect(){
+		
 	    var optionSelect = document.getElementById("option");
 	    var option_box_id = optionSelect.options[optionSelect.selectedIndex].id;
 	    if(option_box_id === 'option_box_0') return;
 	    if(arr.includes(option_box_id)){
+	    	document.getElementById("option_box_0").selected = true;
 	    	return;
 	    }
 	    
@@ -1171,46 +1180,92 @@ button{
 
 	    let html = optionProducts.innerHTML;
 	  
-	    html += "<tr class='option_product' id='data-option" + i + "' data-option-index='"+ i + "' target-key='238'><td>" +
+	    html += "<tr class='option_product' id='data-option" + mymap.get(selectValue) + "' data-option-index='"+ mymap.get(selectValue) + "' target-key='238'><td>" +
 		"<input type='hidden' class='option_box_id'  value='#' name='option_code' data-item-add-option data-item-reserved='N' data-option-id='00PF' data-option-index='1'>" +
 		"<p class='product'>" + "${goods.pname}" + "<br><span>" + selectValue + "</span></span></p></td><td>" +
 			"<span class='quantity' style='width:65px;'>" + 
-				"<input type='text' name='quantity_opt[]' class='quantity_opt eProductQuantityClass' value='1' product-no=" + "'" + ${goods.gno} + "'"  + "style='border:1;'/>" + 
- 					'<a href="#none" class="up eProductQuantityUpClass" data-target="option_box_'+ i + '_up">' +
-					'<img src="./../../../resources/img/up.png" id="option_box_'+ i + '_up" class="option_box_up" alt="수량증가">' + 
-				'</a><a href="#none" class="down eProductQuantityDownClass" data-target="option_box_' + i + '_down">' +
-				'<img src="./../../../resources/img/down.png" id="option_box_'+ i + '_down" class="option_box_down" alt="수량감소">' + 
-				'</a>' +  
-			'</span><a href="#none" class="delete">' + 
-				'<img src="./../../../resources/img/x.png" alt="삭제" id="option_box_' + i + '_del" data-target="data-option"'+ i + ' class="option_box_del" onclick="deleteOption()">' + 
+				"<input type='text' id='input_box_" +mymap.get(selectValue)+ "' name='quantity_opt[]' class='quantity_opt eProductQuantityClass' value='1' product-no=" + "'" + ${goods.gno} + "'"  + "style='border:1;'/>" + 
+ 				'<a href="#none" class="up eProductQuantityUpClass" data-target="option_box_'+ mymap.get(selectValue) + '_up">' +
+					'<img src="./../../../resources/img/up.png" id="option_box_'+ mymap.get(selectValue) + '_up" class="option_box_up" alt="수량증가" onclick="valueUp()"></a>' + 
+				'<a href="#none" class="down eProductQuantityDownClass" data-target="option_box_' + mymap.get(selectValue) + '_down">' +
+					'<img src="./../../../resources/img/down.png" id="option_box_'+ mymap.get(selectValue) + '_down" class="option_box_down" alt="수량감소" onclick="valueDown()"></a>' +  
+			'</span>' + 
+			'<a href="#none" class="delete">' + 
+				'<img src="./../../../resources/img/x.png" alt="삭제" id="option_box_' + mymap.get(selectValue) + '_del" data-target="data-option"'+ mymap.get(selectValue) + ' class="option_box_del" onclick="deleteOption()">' + 
 			'</a></td>' +
 		'<td class="right">' + 
 			'<span>' + 
-				'<input type="hidden" class="option_box_price" value="' + ${goods.discountPrice} + '" product-no="' + ${goods.gno} + '"' + 
+				'<input type="hidden" id="option_box_price'+ mymap.get(selectValue) + '" class="option_box_price" value="' + ${goods.discountPrice} + '" product-no="' + ${goods.gno} + '"' + 
 				'item_code="P00000JE00PF">' + 
-				'<span class="ec-front-product-item-price" code="P000000JE00PF" product-no="' + ${goods.gno} + '">' + 
-				"<fmt:formatNumber value='${goods.sellPrice}' pattern='##,###' /> 원" + "</span></span></td></tr>";
+				'<span id="option_box_price2_' + mymap.get(selectValue) + '" class="ec-front-product-item-price" code="P000000JE00PF" product-no="' + ${goods.gno} + '">' + 
+				"<fmt:formatNumber value='${goods.discountPrice}' pattern='##,###' /> 원" + "</span></span></td></tr>";
 		optionProducts.innerHTML = html;
-		i++;
+		document.getElementById("option_box_0").selected = true;
 	}
 	
-	function deleteOption(){
+ 	function deleteOption(){
 		var deleteObj = event.target.id;
 		console.log(deleteObj);
 		var deleteObject = deleteObj.slice(11,12);
 		console.log(deleteObject);
 		var delTarget = document.getElementById("data-option" + deleteObject);
-		var deleteThing = "option_box_" + deleteObject;
-		delTarget.style.display = "none";
+		console.log(delTarget);
+		delTarget.remove();
+		var deleteThing = 'option_box_' + deleteObject;
 		let filtered = arr.filter((element) => element !== deleteThing);
 		arr = filtered;
 		console.log(arr);
 		if(arr.length === 0){
-			var option_box = document.getElementById("option_box_0");
-			console.log(option_box);
-			option_box.setAttribute('selected', 'selected');
+			console.log('안쪽');
+			document.getElementById("option_box_0").selected = true;
 		}
+	} 
+	
+	function valueUp(){	
+		var targetNum = event.target.id;
+		var num = targetNum.slice(11,12);
+		var inputbox = document.getElementById("input_box_" + num);
+		var number = Number(inputbox.value);
+		if(number <= 9){
+			inputbox.setAttribute('value',number + 1);
+		}else{
+			return false;
+		}
+		calculateSub(num);
 	}
+	
+	function valueDown(){
+		
+		var targetNum = event.target.id;
+		var num = targetNum.slice(11,12);
+		var inputbox = document.getElementById("input_box_" + num);
+		var number = Number(inputbox.value);
+		if(number >= 2){
+			inputbox.setAttribute('value',number - 1);
+		}else{
+			return false;
+		}
+		calculateSub(num);
+	} 
+	
+  	function calculateSub(num){
+		var numTarget = document.getElementById("input_box_" + num);
+		var quantity = Number(numTarget.value);
+		var price = Number(document.getElementById("option_box_price"+num).value);
+		console.log(quantity * price);
+		
+		/* document.getElementById("option_box_price"+num).setAttribute('value', (quantity * price)); */
+		document.getElementById("option_box_price2_"+num).setAttribute('value', (quantity * price));
+		document.getElementById("option_box_price2_" + num).innerHTML = Number(quantity * price).toLocaleString()+" 원";
+	}
+  	
+  	function calculateTot(){
+  		const sections = querySelectorAll(".ec-front-product-item-price");
+  		for(var i = 0; i < sections.length; i++){
+  			
+  		}
+  	}
+		
 	</script>
 </body>
 </html>
