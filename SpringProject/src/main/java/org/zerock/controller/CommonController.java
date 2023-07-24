@@ -3,10 +3,14 @@ package org.zerock.controller;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.zerock.domain.Adminclaim;
 import org.zerock.domain.Common;
 import org.zerock.service.ClaimService;
@@ -96,13 +100,26 @@ public class CommonController {
 	}
 	
 	@GetMapping("/test")
-	public String test(Model model, Common common) {
-		log.info("test() called");
-		List<Adminclaim> claimlist = claimService.showlistAll(common);
-		model.addAttribute("claimlist", claimlist);
+	public String test() {
+		
 		
 		return "test";
 	}
-
-
+	
+	@GetMapping("/test2")
+	public String test2() {
+		Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+		String id = auth.getName();
+		
+		log.info("id:"+id);
+		
+		return "/claim/writeClaim";
+	}
+	
+	@PostMapping("/test3")
+	@ResponseBody
+	public String test3() {
+		
+		return "test";
+	}
 }

@@ -11,7 +11,7 @@
 		</c:when>
 		<c:when test="${claimlist != null }">
 			<c:forEach var="item" items="${claimlist }" varStatus="articleNum">
-				<c:if test="${item.level == 1 }">
+				<c:if test="${item.level == 1 && item.goods_no == cgno}">
 					<div class="claim">
 						<em class="claim__label">클레임</em>
 						<div class="claim__wrap">
@@ -26,7 +26,7 @@
 						</div>
 					</div>
 				</c:if>
-				<c:if test="${item.level == 2 }">
+				<c:if test="${item.level == 2 && item.goods_no == cgno }">
 					<div class="claim__reply">
 						<em class="claim__reply__label">처리중</em>
 						<div class="claim__reply__wrap">
