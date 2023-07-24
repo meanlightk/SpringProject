@@ -1144,9 +1144,9 @@ button{
 		"<p class='product'>" + "${goods.pname}" + "<br><span>" + selectValue + "</span></span></p></td><td>" +
 			"<span class='quantity' style='width:65px;'>" + 
 				"<input type='text' name='quantity_opt[]' class='quantity_opt eProductQuantityClass' value='1' product-no=" + "'" + ${goods.gno} + "'"  + "style='border:1;'/>" + 
- 					'<a href="#none" class="up eProductQuantityUpClass" data-target="option_box1_up">' +
+ 					'<a href="#none" class="up eProductQuantityUpClass" data-target="option_box'+ i + '_up">' +
 					'<img src="./../../../resources/img/up.png" id="option_box1_up" class="option_box_up" alt="수량증가">' + 
-				'</a><a href="#none" class="down eProductQuantityDownClass" data-target="option_box1_down">' +
+				'</a><a href="#none" class="down eProductQuantityDownClass" data-target="option_box' + i_down">' +
 				'<img src="./../../../resources/img/down.png" id="option_box1_down" class="option_box_down" alt="수량감소">' + 
 				'</a>' +  
 			'</span><a href="#none" class="delete">' + 
@@ -1160,6 +1160,11 @@ button{
 				"<fmt:formatNumber value='${goods.sellPrice}' pattern='##,###' /> 원" + "</span></span></td></tr>";
 		optionProducts.innerHTML = html;
 		i++;
+	}
+	
+	function deleteOption(){
+		
+		var selectedOption = this.
 	}
 	</script>
 </body>
