@@ -168,138 +168,166 @@
   padding-left: 32px;
 }
 
+header{
+  height: 40px;
+  border-bottom: 1px solid black;
+  display: flex;
+  align-items: center;
+}
+
+header div{
+  margin: 0;
+}
+
+header div.a{
+  width: 70%;
+}
+
+.notice td {
+	text-align: center;
+}
+
 </style>
 </head>
 <body>
 
+<header>
+<div class="logo-mobile">
+<a href="/home"><img src="../resources/images/icons/logo-01.png" alt="IMG-LOGO"></a>
+</div>
+<div class="a"></div>
+<div class="b">
+<form action="/logout.do" method='post'>
+	<input type="hidden" name="${_csrf.parameterName }" value="${_csrf.token }" >
+	<button>로그아웃</button>
+</form>
+</div>
+</header>
 
-  <div class="w3-container">
-  
-    <h2>클레임 관리 게시판</h2>
-    <div class="w3-responsive">
-      <table class="w3-table-all">
-      	<thead>
-	        <tr>
-	          <th>번호</th>
-	          <th>고객ID</th>
-	          <th>게시글</th>
-	          <th>작성일</th>
-	          <th>상태</th>
-	        </tr>
-        </thead>
-        <tbody>
-        	<!-- 매니저/관리자 전용 공지사항 테이블 필요? -->
-        	<%-- 
-        	<c:forEach var="item2" items="${noticelist }" varStatus="articleNum">
-				<tr class="notice" align="center">
-					<!-- 다른곳에서 복붙하지말고 여기에 추가해주세요  -->
-					<td width="4%">[공지]</td>
-					<td width="20%"><a
-						href="#">${item2.title}</a></td>
-					<td width="30%"><fmt:formatDate pattern="yy-MM-dd" value="${item2.regDate}"/></td>
-					<td width="10%">${item2.cnt}</td>
-			</c:forEach>
-			--%>
-			<c:choose>
-				<c:when test="${claimlist == null }">
-					<tr height="10">
-						<td colspan="6">
-							<p align="center">
-								<b><span style="font-size: 9pt;">등록된 글이 없습니다.</span></b>
-							</p>
+
+<div class="w3-container">
+ 
+   <h2>클레임 관리 게시판</h2>
+   <div class="w3-responsive">
+     <table class="w3-table-all">
+     	<thead>
+        <tr>
+          <th>번호</th>
+          <th>고객ID</th>
+          <th>게시글</th>
+          <th>작성일</th>
+          <th>상태</th>
+        </tr>
+       </thead>
+       <tbody>
+       	<!-- 매니저/관리자 전용 공지사항 테이블 필요? -->
+
+
+			<tr class="notice" align="center">
+				<!-- 다른곳에서 복붙하지말고 여기에 추가해주세요  -->
+				<td colspan="5">[공지] 친절한 고객 응대 [공지]</td>
+			</tr>
+
+
+		<c:choose>
+			<c:when test="${claimlist == null }">
+				<tr height="10">
+					<td colspan="6">
+						<p align="center">
+							<b><span style="font-size: 9pt;">등록된 글이 없습니다.</span></b>
+						</p>
+					</td>
+				</tr>
+			</c:when>
+			<c:when test="${claimlist != null }">
+				<c:forEach var="item" items="${claimlist }" varStatus="articleNum">
+					<tr>
+						<td>${articleNum.count}</td>
+						<td>${item.mem_id}</td>
+						<td>
+							<div class="level-${item.level }">
+							<c:if test="${item.level == 1 }">
+								<a href="/admin/claims/claim?gclaim_no=${item.gclaim_no }">
+									${fn:substring(item.content, 0, 20)}${fn:length(item.content) > 20 ? '...' : ''}
+								</a>
+							</c:if>								
+							<c:if test="${item.level == 2 }">
+								<a href="/admin/claims/answer?answer_no=${item.answer_no}">
+									${fn:substring(item.content, 0, 17)}${fn:length(item.content) > 17 ? '...' : ''}
+								</a>
+							</c:if>
+							</div>
+						</td>
+						<td><fmt:formatDate pattern="yy/MM/dd HH:mm" value="${item.regidate}"/></td>
+						<td class="dlevel-${item.level }">
+							<c:if test="${item.level == 1 && item.status == 1 }">
+								변심
+							</c:if>
+							<c:if test="${item.level == 1 && item.status == 2 }">
+								제품하자
+							</c:if>
+							<c:if test="${item.level == 1 && item.status == 3 }">
+								사이즈
+							</c:if>
+							<c:if test="${item.level == 1 && item.status == 4 }">
+								오배송
+							</c:if>
+							<c:if test="${item.level == 1 && item.status == 5 }">
+								기타
+							</c:if>
+							<c:if test="${item.level == 2}">
+								${item.status }단계
+							</c:if>
 						</td>
 					</tr>
+				</c:forEach>
+			</c:when>
+		</c:choose>
+       </tbody>
+     </table>
+   </div>
+   
+   <br />
+
+<!-- pagination -->
+<div class="w3-center">
+	<c:if test="${tot != null }">
+		<ul class="w3-pagination">
+			<c:choose>
+				<c:when test="${tot > 100 }">
+					<c:forEach var="page" begin="1" end="10" step="1">
+						<c:if test="${section > 1 && page==1 }">
+							<li><a href="/admin/claims?section=${section-1}&pageNum=${(section-1)*10 +1 }">&laquo;</a></li>
+						</c:if>
+						<li><a href="/admin/claims.do?section=${section}&pageNum=${page}">${(section-1)*10 +page }</a></li>
+						<c:if test="${page == 10 }">
+							<li><a href="/admin/claims?section=${section+1}&pageNum=${section*10+1}">&raquo;</a></li>
+						</c:if>
+					</c:forEach>
+					
 				</c:when>
-				<c:when test="${claimlist != null }">
-					<c:forEach var="item" items="${claimlist }" varStatus="articleNum">
-						<tr>
-							<td>${articleNum.count}</td>
-							<td>${item.mem_id}</td>
-							<td>
-								<div class="level-${item.level }">
-								<c:if test="${item.level == 1 }">
-									<a href="/admin/claims/claim?gclaim_no=${item.gclaim_no }">
-										${fn:substring(item.content, 0, 20)}${fn:length(item.content) > 20 ? '...' : ''}
-									</a>
-								</c:if>								
-								<c:if test="${item.level == 2 }">
-									<a href="/admin/claims/answer?answer_no=${item.answer_no}">
-										${fn:substring(item.content, 0, 17)}${fn:length(item.content) > 17 ? '...' : ''}
-									</a>
-								</c:if>
-								</div>
-							</td>
-							<td><fmt:formatDate pattern="yy/MM/dd HH:mm" value="${item.regidate}"/></td>
-							<td class="dlevel-${item.level }">
-								<c:if test="${item.level == 1 && item.status == 1 }">
-									변심
-								</c:if>
-								<c:if test="${item.level == 1 && item.status == 2 }">
-									제품하자
-								</c:if>
-								<c:if test="${item.level == 1 && item.status == 3 }">
-									사이즈
-								</c:if>
-								<c:if test="${item.level == 1 && item.status == 4 }">
-									오배송
-								</c:if>
-								<c:if test="${item.level == 1 && item.status == 5 }">
-									기타
-								</c:if>
-								<c:if test="${item.level == 2}">
-									${item.status }단계
-								</c:if>
-							</td>
-						</tr>
+				<c:when test="${tot==100 }">
+					<c:forEach var="page" begin="1" end="10" step="1">
+						<li><a href="/admin/claims?section=${section }&pageNum=${page}">${page }</a></li>
+					</c:forEach>
+				</c:when>
+				
+				<c:when test="${tot<100 }">
+					<c:forEach var="page" begin="1" end="${tot/10 + 1 }" step="1">
+						<c:choose>
+							<c:when test="${page==pageNum }">
+								<li><a class="w3-green" href="/admin/claims?section=${section}&pageNum=${page}">${page }</a></li>
+							</c:when>
+							<c:otherwise>
+								<li><a href="/admin/claims?section=${section }&pageNum=${page}">${page }</a></li>
+							</c:otherwise>
+						</c:choose>
 					</c:forEach>
 				</c:when>
 			</c:choose>
-        </tbody>
-      </table>
-    </div>
-
-
-    <br />
-
-	<!-- pagination -->
-	<div class="w3-center">
-		<c:if test="${tot != null }">
-			<ul class="w3-pagination">
-				<c:choose>
-					<c:when test="${tot > 100 }">
-						<c:forEach var="page" begin="1" end="10" step="1">
-							<c:if test="${section > 1 && page==1 }">
-								<li><a href="/#?section=${section-1}&pageNum=${(section-1)*10 +1 }">&laquo;</a></li>
-							</c:if>
-							<li><a href="/board/list.do?section=${section}&pageNum=${page}">${(section-1)*10 +page }</a></li>
-							<c:if test="${page == 10 }">
-								<li><a href="/#?section=${section+1}&pageNum=${section*10+1}">&raquo;</a></li>
-							</c:if>
-						</c:forEach>
-						
-					</c:when>
-					<c:when test="${tot==100 }">
-						<c:forEach var="page" begin="1" end="10" step="1">
-							<li><a href="#">${page }</a></li>
-						</c:forEach>
-					</c:when>
-					
-					<c:when test="${tot<100 }">
-						<c:forEach var="page" begin="1" end="${tot/10 + 1 }" step="1">
-							<c:choose>
-								<c:when test="${page==pageNum }">
-									<li><a class="w3-green" href="/#?section=${section}&pageNum=${page}">${page }</a></li>
-								</c:when>
-								<c:otherwise>
-									<li><a href="/#?section=${section }&pageNum=${page}">${page }</a></li>
-								</c:otherwise>
-							</c:choose>
-						</c:forEach>
-					</c:when>
-				</c:choose>
-			</ul>
-		</c:if>
-	</div>
+		</ul>
+	</c:if>
+</div>
 </div>  
 </body>
 </html>

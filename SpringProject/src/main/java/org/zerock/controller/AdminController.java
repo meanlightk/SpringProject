@@ -11,8 +11,10 @@ import org.zerock.domain.Adminclaim;
 import org.zerock.domain.AnswerClaim;
 import org.zerock.domain.Common;
 import org.zerock.domain.Gclaim;
+import org.zerock.domain.Goods;
 import org.zerock.service.AdminService;
 import org.zerock.service.ClaimService;
+import org.zerock.service.GoodsService;
 
 import lombok.extern.log4j.Log4j;
 
@@ -26,6 +28,9 @@ public class AdminController {
 	
 	@Autowired
 	private ClaimService claimService;
+	
+	@Autowired
+	private GoodsService goodsService;
 	
 	@RequestMapping("/mod")
 	public String modPage() {
@@ -68,9 +73,11 @@ public class AdminController {
 		
 		AnswerClaim answer = claimService.showOneAnswer(answer_no);
 		Gclaim gclaim = claimService.showOneClaim(answer.getGlno());
+		Goods goods = goodsService.showOneItem(gclaim.getGno());
 		
 		model.addAttribute("answer", answer);
 		model.addAttribute("gclaim", gclaim);
+		model.addAttribute("goods", goods);
 		
 		return "/claim/view";
 	}

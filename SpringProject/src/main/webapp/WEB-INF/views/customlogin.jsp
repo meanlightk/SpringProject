@@ -25,27 +25,30 @@
 </head>
 <body>
 </head>
-	<body>
-		<div class="wrapper fadeInDown">
-			<div id="formContent">
-				<!-- Tabs Titles -->
-				<h2 class="active">로그인</h2>
-				<!-- Login Form -->
-				<form action="/login" method="post">
-					<input type="text" id="username" class="fadeIn second" name="username" placeholder="아이디"> 
-					<input type="password" id="password" class="fadeIn third" name="password" placeholder="비밀번호" autocomplete="off"> 
-					<input type="submit" class="fadeIn fourth" value="로그인">
-					<input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}" />
-					<input type="hidden" id="errMsg" value='${sessionScope["SPRING_SECURITY_LAST_EXCEPTION"].message}' />
-				</form>
-				<!-- Signup Link -->
-				<div id="formFooter">
-					<a class="underlineHover" href="/member/join">회원가입</a>
-				</div>
-			</div>
+<body>
+<header>
+<div class="logo-mobile">
+<a href="/home"><img src="../resources/images/icons/logo-01.png" alt="IMG-LOGO"></a>
+</div>
+</header>
+
+<div class="wrapper fadeInDown">
+	<div id="formContent">
+		<!-- Tabs Titles -->
+		<h2 class="active">로그인</h2>
+		<!-- Login Form -->
+		<form action="/login" method="post">
+			<input type="text" id="username" class="fadeIn second" name="username" placeholder="아이디"> 
+			<input type="password" id="password" class="fadeIn third" name="password" placeholder="비밀번호" autocomplete="off"> 
+			<input type="submit" class="fadeIn fourth" value="로그인">
+			<input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}" />
+			<input type="hidden" id="errMsg" value='${sessionScope["SPRING_SECURITY_LAST_EXCEPTION"].message}' />
+		</form>
+		<!-- Signup Link -->
+		<div id="formFooter">
+			<a class="underlineHover" href="/member/join">회원가입</a>
 		</div>
-
-
-
+	</div>
+</div>
 </body>
 </html>

@@ -37,6 +37,7 @@
 
 .w3-table-all {
 	border: 1px solid #ccc;
+	margin: 0 auto;
 }
 
 .w3-bordered tr, .w3-table-all tr {
@@ -93,78 +94,94 @@
 	transition: background-color 0.25s, color 0.15s, box-shadow 0.15s,
 		opacity 0.25s, filter 0.25s, border 0.15s;
 }
+
+.a {
+  position: fixed;
+  left: 200px;
+}
+
+.containerA{
+	width: 500px;
+	margin: 0 auto;
+}
+
+ul.tabsA{
+	margin: 0px;
+	padding: 0px;
+	list-style: none;
+}
+ul.tabsA li{
+	background: none;
+	color: #222;
+	display: inline-block;
+	padding: 10px 15px;
+	cursor: pointer;
+}
+
+ul.tabsA li.current{
+	background: #ededed;
+	color: #222;
+}
+
+.tab-content{
+	display: none;
+	background: #ededed;
+	padding: 15px;
+}
+
+.tab-content.current{
+	display: inherit;
+}   
+
 </style>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.0/jquery.min.js"></script>
+
+<script>
+$(document).ready(function(){
+	
+	$('ul.tabsA li').click(function(){
+		var tab_id = $(this).attr('data-tab');
+
+		$('ul.tabsA li').removeClass('current');
+		$('.tab-content').removeClass('current');
+
+		$(this).addClass('current');
+		$("#"+tab_id).addClass('current');
+	})
+
+})
+
+</script>
 </head>
 <body>
 <div class="w3-container">
 <h2>테스트 게시판</h2>
 <div class="w3-responsive">
-	<table class="w3-table-all">
-		<c:choose>
-			<c:when test="${answer != null || claim == null }">
-				<tr>
-					<td>번호</td>
-					<td>${answer.anscno }</td>
-				</tr>
-				<tr>
-					<td>제목</td>
-					<td>${answer.title }</td>
-				</tr>
-				<tr>
-					<td>아이디</td>
-					<td>${gclaim.id }</td>
-				</tr>
-				<tr>
-					<td>날짜</td>
-					<td><fmt:formatDate pattern="yy/MM/dd HH:mm" value="${answer.regidate}"/></td>
-				</tr>
-				<tr>
-					<td>절차단계</td>
-					<td>${answer.status }</td>
-				</tr>
-				<tr>
-					<td>상품id</td>
-					<td>${gclaim.gno }</td>
-				</tr>
-				<tr class="fixed-height">
-					<td>내용</td>
-					<td>${answer.content }</td>
-				</tr>
-			</c:when>
-			<c:when test="${claim != null || answer == null }">
-				<tr>
-					<td>고유번호</td>
-					<td>${claim.glno }</td>
-				</tr>
-				<tr>
-					<td>제목</td>
-					<td></td>
-				</tr>
-				<tr>
-					<td>고객ID</td>
-					<td>${claim.id }</td>
-				</tr>
-				<tr>
-					<td>날짜</td>
-					<td><fmt:formatDate pattern="yy/MM/dd HH:mm" value="${claim.regidate}"/></td>
-				</tr>
-				<tr>
-					<td>절차단계</td>
-					<td>${claim.status }</td>
-				</tr>
-				<tr>
-					<td>상품id</td>
-					<td>${claim.gno }</td>
-				</tr>
-				<tr class="fixed-height">
-					<td>내용</td>
-					<td>${claim.content }</td>
-				</tr>
-			</c:when>
-		</c:choose>
-	</table>
+	
+	
+	
+	
+    <div class="containerA">
+
+        <ul class="tabsA">
+            <li class="tab-link current" data-tab="tab-1">메뉴_하나</li>
+            <li class="tab-link" data-tab="tab-2">메뉴_둘</li>
+        </ul>
+    
+        <div id="tab-1" class="tab-content current">
+   			<jsp:include page="text.jsp"></jsp:include>
+        </div>
+        <div id="tab-2" class="tab-content">
+        	<jsp:include page="goodsinfo.jsp"></jsp:include>
+        </div>
+    
+    </div>
 </div>
-<a href="/admin/claims">임시목록</a>
+
+	<br>
+	<br>
+	<br>
+	<a class="a" href="/admin/claims">목록</a>
 </div>
 </body>
 </html>
