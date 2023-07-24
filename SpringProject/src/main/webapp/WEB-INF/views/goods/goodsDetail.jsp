@@ -842,12 +842,12 @@ button{
 				<table>
 					<tr>
 						<td><select name="option" id="option"
-							class='org.zerock.domain.Goods'
+							class='org.zerock.domain.Goods'  onclick="changeOptionSelect()"
 							style="width: 600px; height: 30px;">
-								<option value="">==(필수)옵션: 세부 사항 선택 ==</option>
+								<option id="option_box_0" value="">== (필수)옵션: 세부 사항 선택 ==</option>
 								<c:forEach var="option_each" items="${goods.option_list_split}"
-									varStatus="index">
-									<option name="option" value="${option_each}">${option_each}</option>
+									varStatus="status">
+									<option id="option_box_${status.count}"   name="option" value="${option_each}" class="option_each">${option_each}</option>
 								</c:forEach>
 						</select></td>
 					</tr>
@@ -869,41 +869,8 @@ button{
 					</tr>
 				</thead>
 
-				<tbody class="option_products">
-					<tr class="option_product" data-option-index="1" target-key="238">
-						<td>
-							<input type="hidden" class="option_box_id" id="option_box1_id" value="#" name="item_code[]" data-item-add-option data-item-reserved="N" data-option-id="00PF"
-							data-option-index="1">
-							<p class="product">
-								[밀크터치] 글로시 젤리오 립틴트
-								<br>
-								<span>체리베어</span>
-							</p>
-						</td>
-						<td>
-							<span class="quantity" style="width:65px;">
-								<input type="text" id="option_box1_quantity" name="quantity_opt[]" class="quantity_opt eProductQuantityClass" value="1" product-no="59" style="border:1;"/>
- 								<a href="#none" class="up eProductQuantityUpClass" data-target="option_box1_up">
-									<img src="./../../../resources/img/up.png" id="option_box1_up" class="option_box_up" alt="수량증가">
-								</a>
-								<a href="#none" class="down eProductQuantityDownClass" data-target="option_box1_down">
-									<img src="./../../../resources/img/down.png" id="option_box1_down" class="option_box_down" alt="수량감소">
-								</a> 
-							</span>
- 							<a href="#none" class="delete">
-								<img src="./../../../resources/img/x.png" alt="삭제" id="option_box1_del" class="option_box_del">
-							</a> 
-						</td>
-						<td class="right">
-							<span id="option_box1_price">
-								<input type="hidden" class="option_box_price" value="9900" product-no="59"
-								item_code="P00000JE00PF">
-								<span class="ec-front-product-item-price" code="P000000JE00PF" product-no="59">
-									9,900원
-								</span>
-							</span>
-						</td>
-					</tr>
+				<tbody class="option_products" id="option_products">
+
 				</tbody>
 			</table>
 		</div>
@@ -1150,6 +1117,50 @@ button{
         },
       });
 	</script>
-	
+	<script>
+	var i = 1;
+	console.log(i);
+	var arr = [];
+	function changeOptionSelect(){
+	    var optionSelect = document.getElementById("option");
+	    var price = ${goods.sellPrice};
+	    var option_box_id = optionSelect.options[optionSelect.selectedIndex].id;
+	    if(option_box_id === 'option_box_0') return;
+	    if(arr.includes(option_box_id)){
+	    	return;
+	    }
+	    
+	    arr += option_box_id;
+	    console.log(arr);
+	    // select element에서 선택된 option의 value가 저장된다.
+	    var selectValue = optionSelect.options[optionSelect.selectedIndex].value;
+	 
+	    var optionProducts = document.getElementById("option_products");
+
+	    let html = optionProducts.innerHTML;
+	  
+	    html += "<tr class='option_product' data-option-index='"+ i + "' target-key='238'><td>" +
+		"<input type='hidden' class='option_box_id'  value='#' name='option_code' data-item-add-option data-item-reserved='N' data-option-id='00PF' data-option-index='1'>" +
+		"<p class='product'>" + "${goods.pname}" + "<br><span>" + selectValue + "</span></span></p></td><td>" +
+			"<span class='quantity' style='width:65px;'>" + 
+				"<input type='text' name='quantity_opt[]' class='quantity_opt eProductQuantityClass' value='1' product-no=" + "'" + ${goods.gno} + "'"  + "style='border:1;'/>" + 
+ 					'<a href="#none" class="up eProductQuantityUpClass" data-target="option_box1_up">' +
+					'<img src="./../../../resources/img/up.png" id="option_box1_up" class="option_box_up" alt="수량증가">' + 
+				'</a><a href="#none" class="down eProductQuantityDownClass" data-target="option_box1_down">' +
+				'<img src="./../../../resources/img/down.png" id="option_box1_down" class="option_box_down" alt="수량감소">' + 
+				'</a>' +  
+			'</span><a href="#none" class="delete">' + 
+				'<img src="./../../../resources/img/x.png" alt="삭제" id="option_box1_del" class="option_box_del">' + 
+			'</a></td>' +
+		'<td class="right">' + 
+			'<span>' + 
+				'<input type="hidden" class="option_box_price" value="' + ${goods.discountPrice} + '" product-no="' + ${goods.gno} + '"' + 
+				'item_code="P00000JE00PF">' + 
+				'<span class="ec-front-product-item-price" code="P000000JE00PF" product-no="' + ${goods.gno} + '">' + 
+				"<fmt:formatNumber value='${goods.sellPrice}' pattern='##,###' /> 원" + "</span></span></td></tr>";
+		optionProducts.innerHTML = html;
+		i++;
+	}
+	</script>
 </body>
 </html>
