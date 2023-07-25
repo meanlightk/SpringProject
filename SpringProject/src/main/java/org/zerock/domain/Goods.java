@@ -29,4 +29,16 @@ public class Goods {
 	private Integer discountPrice;
 	private String uuid;
 	private String[] option_list_split;
+	
+	private String parcelDate;
+	private String dstatus;
+	private String dstatusStr;
+	
+	private String payDate;
+
+	
+	private String waybillNum;
+	private String parcelCd;
+
+	
 }

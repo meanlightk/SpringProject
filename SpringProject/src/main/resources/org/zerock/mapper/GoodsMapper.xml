@@ -126,22 +126,31 @@
 			</if>
 			<if test='price1 != 0 and price2 != 0'>
 			</if>
-
-
 	</select>
 
-	<update id="updateFilePath"
-		parameterType="org.zerock.domain.Goods">
+	<update id="updateFilePath" parameterType="org.zerock.domain.Goods">
 		update goods set imagepath=#{imagepath}, uuid=#{uuid}
 		where goods_no = #{gno}
 	</update>
 
 	<select id="selectGoodsOrderList" parameterType="org.zerock.domain.Common" resultType="org.zerock.domain.Goods">
 		select
-			c.update_date,
-			<include refid="info"/>  
+			c.update_date as parcelDate,
+			dstatus,
+			case
+			    when o.dstatus= '1' then '배송전'
+			    when o.dstatus= '2' then '출고완료'
+			    when o.dstatus= '3' then '배송중'
+			   	when o.dstatus= '4' then '배송완료'
+			    else '배송정보사용불가'
+			end as dstatusStr,
+			DATE_FORMAT(o.regiDate,'%Y.%m.%d') as payDate,
+			o.waybill_num as waybillNum,
+			o.parcel_cd as parcelCd,
+			<include refid="info"/>
 		from goods g
 		inner join cart c on(g.goods_no = c.goods_no)
+		inner join orderlist o on(o.orderlist_no = c.ordernum)
 		where c.mem_id = #{memId}
 	</select>
 

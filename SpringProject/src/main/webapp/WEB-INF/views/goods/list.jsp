@@ -5,7 +5,6 @@
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 
 <body class="animsition">
-
 	<!-- Product -->
 	<div class="bg0 m-t-23 p-b-140">
 		<div class="container">
@@ -287,7 +286,6 @@
 									</div>
 								</div>
 							</div>			
-					
 						</c:forEach>
 					</c:when>
 				</c:choose>

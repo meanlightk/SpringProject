@@ -57,6 +57,4 @@
 		where review_no = #{reviewNo}
 	</delete>
 	
-	
-
 </mapper>

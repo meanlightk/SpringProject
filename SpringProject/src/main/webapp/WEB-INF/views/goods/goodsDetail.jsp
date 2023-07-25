@@ -10,6 +10,11 @@
   rel="stylesheet"
   href="https://cdn.jsdelivr.net/npm/swiper@10/swiper-bundle.min.css"
 />
+<link rel="stylesheet" type="text/css" href="../resources/css/reviewlist.css">
+<link rel="stylesheet"
+	href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css"
+	integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk">
+
 <script src="https://code.jquery.com/jquery-3.5.1.min.js"
 	integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj"
 	crossorigin="anonymous">
@@ -606,7 +611,7 @@ img {
 #totalProducts tbody td img {
 	vertical-align: middle; 
 }
-.xans-product-detail .imgArea {
+.imgArea {
 	display: inline-block;
 	position: relative;
 	width: 570px;
@@ -614,26 +619,25 @@ img {
 	text-align: center;
 	float: left;
 }
-.xans-product-detail .imgArea .listImg{
+.imgArea .listImg{
 	width: 100%;
 	margin: 6px auto 0;
 }
-.xans-product-detail .imgArea .listImg{
+ .imgArea .listImg{
 	overflow: hidden;
-	width: 346px;
 	margin: 30px auto 0;
 }
-.xans-product-detail .imgArea > div {
+ .imgArea > div {
 	display: block;
 }
-.xans-product-detail .imgArea .listImg ul{
+ .imgArea .listImg ul{
 	min-width: 400px;
 	height: 77px;
 	margin: 0 0 0 2px;
 	font-size: 0;
 	line-height: 0;
 }
-.xans-product-detail .imgArea .listImg li{
+ .imgArea .listImg li{
 	float: left;
 	margin: 0 10px 0 0;
 	display: inline-block;
@@ -642,17 +646,17 @@ img {
 	line-height: 14px;
 	vertical-align: top;
 }
-.xans-product-detail .imgArea .listImg li img{
+ .imgArea .listImg li img{
 	width: 100px;
 	height: auto;
 	border: 0px solid #d9d9d9;
 	cursor: pointer;
 }
-.xans-product-detail .imgArea .listImg .prev{
+ .imgArea .listImg .prev{
 	left: 0;
 	background-position: 0 0;
 }
-.xans-product-detail .imgArea .listImg button{
+ .imgArea .listImg button{
 	position: absolute;
 	top: 0;
 	width: 30px;
@@ -681,13 +685,13 @@ button{
 	align-items: flex-start;
 	box-sizing: border-box;
 }
-.xans-product-detail .imgArea .listImg .next{
+.imgArea .listImg .next{
 	background-position: -39px 0;
 }
-.xans-product-detail .imgArea .listImage .next{
+.imgArea .listImage .next{
 	right: 0;
 }
-.xans-product- detail .detailArea:after{
+.detailArea:after{
 	content: "";
 	display: block;
 	clear: both;
@@ -726,245 +730,281 @@ button{
 	<br>
 	<br>
 	<div style="width:100%; position:relative; left:calc(50% - 600px); height:600px; display:inline">
-		
-		<div style="float:left; width:500;">
-			<table border="0">
-				<tr>
-					<td><img src="/upload/main/${goods.imagepath}" width="500"
-						height="500" /></td>
-				</tr>
-			</table>
-			<div class="detailArea">
-				<div class="xans-element- xans-product xans-product-image imgArea">
-					<div class="xans-element- xans-product xans-product-addimage listImg cboth" style="position: relative; margin-top: 10px; height: 134px; overflow: visible;">
-						<ul style="position: absolute; left: 0px; top: 0px; width: 660px; display: inline-block; padding-inline-start: 0px;">
-							<li class="xans-record-" style="float: left;">
+
+		<div class="detailArea">
+			<div class="xans-element- xans-product xans-product-image imgArea">
+				<div style="width:500;">
+					<table border="0">
+						<tr>
+							<td><img src="/upload/main/${goods.imagepath}" width="500" height="500" /></td>
+						</tr>
+					</table>
+					<div id="test-swiper" class="swiper-container xans-element- xans-product xans-product-addimage listImg cboth" style="position: relative; margin-top: 10px; height: 134px; overflow: visible;">
+						<ul class="swiper-wrapper">
+							<li class="swiper-slide">
+								<div style="float: left;">
+									<img src="./../../../resources/img/product1.png" class="ThumbImage" alt>
+									<img src="./../../../resources/img/product2.png" class="ThumbImage" alt>
+									<img src="./../../../resources/img/product3.png" class="ThumbImage" alt>
+									<img src="./../../../resources/img/product4.png" class="ThumbImage" alt>
+									<img src="./../../../resources/img/product5.png" class="ThumbImage" alt>
+								</div>							
+							</li>
+						    <li class="swiper-slide">
+								<div style="float: left;">
+									<img src="./../../../resources/img/product6.png" class="ThumbImage" alt>
+									<img src="./../../../resources/img/product7.png" class="ThumbImage" alt>
+								</div>
+						    </li>
+						</ul>
+						<!--  <div class="swiper-wrapper">
+							<div class="swiper-slide" style="justify: center;">
+								<div class="container" style="float: left; max-width: 200px;">
+									<img src="/upload/main/${goods.imagepath}" style="width:100px;" class="ThumbImage" alt>
+								</div>
+								<div class="container" style="float: left; max-width: 200px;">
+									<img src="/upload/main/${goods.imagepath}" style="width:100px;" class="ThumbImage" alt>
+								</div>
+								<div class="container" style="float: left; max-width: 200px;">
+									<img src="/upload/main/${goods.imagepath}" style="width:100px;" class="ThumbImage" alt>
+								</div>
+								<div class="container" style="float: left; max-width: 200px;">
+									<img src="/upload/main/${goods.imagepath}" style="width:100px;" class="ThumbImage" alt>
+								</div>
+
+							</div>
+						</div>-->
+<!--  						<ul style="position: absolute; left: 0px; top: 0px; width: 660px; display: inline-block; padding-inline-start: 0px;">
+							<li class="xans-record-">
 								<img src="/upload/main/${goods.imagepath}" style="width:100px;" class="ThumbImage" alt>
 							</li>
-							<li class="xans-record-" style="float: left;">
+							<li class="xans-record-">
 								<img src="./../../../resources/img/product1.png" class="ThumbImage" alt>
 							</li>
-							<li class="xans-record-" style="float: left;">
+							<li class="xans-record-" >
 								<img src="./../../../resources/img/product2.png" class="ThumbImage" alt>
 							</li>
-							<li class="xans-record-" style="float: left;">
+							<li class="xans-record-">
 								<img src="./../../../resources/img/product3.png" class="ThumbImage" alt>
 							</li>
-							<li class="xans-record-" style="float: left;">
+							<li class="xans-record-">
 								<img src="./../../../resources/img/product4.png" class="ThumbImage" alt>
 							</li>
-							<li class="xans-record-" style="float: left;">
+							<li class="xans-record-">
 								<img src="./../../../resources/img/product5.png" class="ThumbImage" alt>
 							</li>
-							<li class="xans-record-" style="float: left;">
+							<li class="xans-record-">
 								<img src="./../../../resources/img/product6.png" class="ThumbImage" alt>
 							</li>
-							<li class="xans-record-" style="float: left;">
+							<li class="xans-record-">
 								<img src="./../../../resources/img/product7.png" class="ThumbImage" alt>
 							</li>
 						</ul>
+						-->
 						<button type="button" class="prev" style="display: none;">이전</button>
 						<button type="button" class="next"></button>				
 					</div>
 				</div>
 			</div>
-		</div>
-
-		<div style="float:left; margin-left:30px; width:682;">
-			<table border="0">
- 
-				<tr>
-					<td>
-						<div id="sale_bg" style="display: block;">
-							<span class="sale_text">23%</span>
-							SALE
+				<div style="float:left; margin-left:30px; width:682;">
+						<table border="0">
+			 
+							<tr>
+								<td>
+									<div id="sale_bg" style="display: block;">
+										<span class="sale_text">23%</span>
+										SALE
+									</div>
+								</td>
+							</tr>
+			
+							<tr>
+								<td id="pname"><font size="5"
+									style="box-sizing: border-box; position: relative;"><h2>${goods.pname}</h2></font></td>
+							</tr>
+									
+							<tr>
+								<td><hr style="border-top: 1px solid #bbb;" width=670px>
+								<td>
+							</tr>
+						
+			
+			<%-- 				<tr>
+								<td><font size="3">${ColorSize}color</font></td>
+							</tr> --%>
+			
+							<tr>
+								<td></td>
+							</tr>
+			
+							<tr style="display: inline-block; flex:left;">
+								<td id="sellPrice" width="200px"
+									style="font-weight: 600px; font-Size: 18px; line-height: 42px;">
+									판매가격 
+								</td>
+								<td id="test">
+									<fmt:formatNumber value="${goods.sellPrice}" pattern="#,###" />원
+								</td>
+			
+							</tr>
+							
+							<tr>
+								<td id="discountPrice" 
+									style="font-weight: 600px; font-Size: 24px; line-height: 42px; color: red;">
+									할인가격 <fmt:formatNumber value="${goods.discountPrice}" pattern="#,###" />원
+								</td>
+								<!-- <td>3만원 이상 구매시 할인가격 구매 가능</td> -->
+							</tr>
+						</table>
+			
+			<!-- 			<table>
+							<tr>
+								<td><hr style="border-top: 1px solid #bbb;" width=670px>
+								<td>
+							</tr>
+						</table> -->
+			
+						<br>
+					
+						<table>
+							<tr class="option_section">
+								<td width="340px"><font size="3">배송비</font></td>
+								<td><font size="3">선불 3,000원(50,000원 이상 무료배송)</font></td>
+							</tr>
+						</table>
+						<table>
+							<tr class="option_section">
+								<td width="537px"><font size="3">배송종류</font></td>
+								<td><font size="3">&nbsp;국내배송</font></td>
+							</tr>
+						</table>
+			 			<table>
+							<tr>
+								<td><hr style="border-top: 1px solid #bbb;" width=670px>
+								<td>
+							</tr>
+						</table>
+						<div id="item_option">
+							<table>
+								<tr>
+									<td><select name="option" id="option"
+										class='org.zerock.domain.Goods'
+										style="width: 600px; height: 30px;">
+											<option value="">==(필수)옵션: 세부 사항 선택 ==</option>
+											<c:forEach var="option_each" items="${goods.option_list_split}"
+												varStatus="index">
+												<option name="option" value="${option_each}">${option_each}</option>
+											</c:forEach>
+									</select></td>
+								</tr>
+							</table>
 						</div>
-					</td>
-				</tr>
-
-				<tr>
-					<td id="pname"><font size="5"
-						style="box-sizing: border-box; position: relative;"><h2>${goods.pname}</h2></font></td>
-				</tr>
-						
-				<tr>
-					<td><hr style="border-top: 1px solid #bbb;" width=670px>
-					<td>
-				</tr>
+					<div id="totalProducts">
+						<table border="1" summary>
+							<caption>상품 목록</caption>
+							<colgroup>
+								<col style="width:284px;">
+								<col style="width:80px;">
+								<col style="width:110px;">
+							</colgroup>
+							<thead>
+								<tr class="displaynone">
+									<th scope="col">상품명</th>
+									<th scope="col">상품수</th>
+									<th scope="col">가격</th>
+								</tr>
+							</thead>
 			
-
-<%-- 				<tr>
-					<td><font size="3">${ColorSize}color</font></td>
-				</tr> --%>
-
-				<tr>
-					<td></td>
-				</tr>
-
-				<tr style="display: inline-block; flex:left;">
-					<td id="sellPrice" width="200px"
-						style="font-weight: 600px; font-Size: 18px; line-height: 42px;">
-						판매가격 
-					</td>
-					<td id="test">
-						<fmt:formatNumber value="${goods.sellPrice}" pattern="#,###" />원
-					</td>
-
-				</tr>
-				
-				<tr>
-					<td id="discountPrice" 
-						style="font-weight: 600px; font-Size: 24px; line-height: 42px; color: red;">
-						할인가격 <fmt:formatNumber value="${goods.discountPrice}" pattern="#,###" />원
-					</td>
-					<!-- <td>3만원 이상 구매시 할인가격 구매 가능</td> -->
-				</tr>
-			</table>
-
-<!-- 			<table>
-				<tr>
-					<td><hr style="border-top: 1px solid #bbb;" width=670px>
-					<td>
-				</tr>
-			</table> -->
-
-			<br>
-		
-			<table>
-				<tr class="option_section">
-					<td width="340px"><font size="3">배송비</font></td>
-					<td><font size="3">선불 3,000원(50,000원 이상 무료배송)</font></td>
-				</tr>
-			</table>
-			<table>
-				<tr class="option_section">
-					<td width="537px"><font size="3">배송종류</font></td>
-					<td><font size="3">&nbsp;국내배송</font></td>
-				</tr>
-			</table>
- 			<table>
-				<tr>
-					<td><hr style="border-top: 1px solid #bbb;" width=670px>
-					<td>
-				</tr>
-			</table>
-			<div id="item_option">
-				<table>
-					<tr>
-						<td><select name="option" id="option"
-							class='org.zerock.domain.Goods'
-							style="width: 600px; height: 30px;">
-								<option value="">==(필수)옵션: 세부 사항 선택 ==</option>
-								<c:forEach var="option_each" items="${goods.option_list_split}"
-									varStatus="index">
-									<option name="option" value="${option_each}">${option_each}</option>
-								</c:forEach>
-						</select></td>
-					</tr>
-				</table>
-			</div>
-		<div id="totalProducts">
-			<table border="1" summary>
-				<caption>상품 목록</caption>
-				<colgroup>
-					<col style="width:284px;">
-					<col style="width:80px;">
-					<col style="width:110px;">
-				</colgroup>
-				<thead>
-					<tr class="displaynone">
-						<th scope="col">상품명</th>
-						<th scope="col">상품수</th>
-						<th scope="col">가격</th>
-					</tr>
-				</thead>
-
-				<tbody class="option_products">
-					<tr class="option_product" data-option-index="1" target-key="238">
-						<td>
-							<input type="hidden" class="option_box_id" id="option_box1_id" value="#" name="item_code[]" data-item-add-option data-item-reserved="N" data-option-id="00PF"
-							data-option-index="1">
-							<p class="product">
-								[밀크터치] 글로시 젤리오 립틴트
-								<br>
-								<span>체리베어</span>
-							</p>
-						</td>
-						<td>
-							<span class="quantity" style="width:65px;">
-								<input type="text" id="option_box1_quantity" name="quantity_opt[]" class="quantity_opt eProductQuantityClass" value="1" product-no="59" style="border:1;"/>
- 								<a href="#none" class="up eProductQuantityUpClass" data-target="option_box1_up">
-									<img src="./../../../resources/img/up.png" id="option_box1_up" class="option_box_up" alt="수량증가">
-								</a>
-								<a href="#none" class="down eProductQuantityDownClass" data-target="option_box1_down">
-									<img src="./../../../resources/img/down.png" id="option_box1_down" class="option_box_down" alt="수량감소">
-								</a> 
-							</span>
- 							<a href="#none" class="delete">
-								<img src="./../../../resources/img/x.png" alt="삭제" id="option_box1_del" class="option_box_del">
-							</a> 
-						</td>
-						<td class="right">
-							<span id="option_box1_price">
-								<input type="hidden" class="option_box_price" value="9900" product-no="59"
-								item_code="P00000JE00PF">
-								<span class="ec-front-product-item-price" code="P000000JE00PF" product-no="59">
-									9,900원
-								</span>
-							</span>
-						</td>
-					</tr>
-				</tbody>
-			</table>
+							<tbody class="option_products">
+								<tr class="option_product" data-option-index="1" target-key="238">
+									<td>
+										<input type="hidden" class="option_box_id" id="option_box1_id" value="#" name="item_code[]" data-item-add-option data-item-reserved="N" data-option-id="00PF"
+										data-option-index="1">
+										<p class="product">
+											[밀크터치] 글로시 젤리오 립틴트
+											<br>
+											<span>체리베어</span>
+										</p>
+									</td>
+									<td>
+										<span class="quantity" style="width:65px;">
+											<input type="text" id="option_box1_quantity" name="quantity_opt[]" class="quantity_opt eProductQuantityClass" value="1" product-no="59" style="border:1;"/>
+			 								<a href="#none" class="up eProductQuantityUpClass" data-target="option_box1_up">
+												<img src="./../../../resources/img/up.png" id="option_box1_up" class="option_box_up" alt="수량증가">
+											</a>
+											<a href="#none" class="down eProductQuantityDownClass" data-target="option_box1_down">
+												<img src="./../../../resources/img/down.png" id="option_box1_down" class="option_box_down" alt="수량감소">
+											</a> 
+										</span>
+			 							<a href="#none" class="delete">
+											<img src="./../../../resources/img/x.png" alt="삭제" id="option_box1_del" class="option_box_del">
+										</a> 
+									</td>
+									<td class="right">
+										<span id="option_box1_price">
+											<input type="hidden" class="option_box_price" value="9900" product-no="59"
+											item_code="P00000JE00PF">
+											<span class="ec-front-product-item-price" code="P000000JE00PF" product-no="59">
+												9,900원
+											</span>
+										</span>
+									</td>
+								</tr>
+							</tbody>
+						</table>
+					</div>
+						
+						<form id="frm" name="frm" method="post">
+			
+							<div>
+								<table style="border:1px;" id="dynamicTable">
+									<thead>
+									</thead>
+			
+									<tbody id="dynamicTbody">
+			
+									</tbody>
+									
+								</table>
+							</div>
+			
+						</form>
+						
+						<div class="totals-item totals-item-total" style="float:left; margin-left:400px;">
+				      		<label class="total_price">총상품금액</label>&nbsp;&nbsp;
+				     		 <div class="total_price" style="float:right;">원</div>
+				      		<div class="totals-value" id="cart-total" style="float:right;">0</div>
+				   	    </div>
+						<br><br>
+						
+						<table>
+							<tr>
+								<td><hr style="border-top: 1px solid #bbb;" width=670px>
+								<td>
+							</tr>
+						</table>
+			
+						<button style="width: 124px; height: 58px;"
+							class="btn btn-outline-danger" id="insertLike"
+							onclick="fn_InsertLike()">
+							<font size="5px">♥</font>
+						</button>
+						<button style="width: 270px; height: 58px;"
+							class="btn btn-outline-danger" id="insertBasket"
+							onclick="fn_InsertBasket()">장바구니</button>
+						<button style="width: 270px; height: 58px;"
+							class="btn btn-outline-danger" id="goodsOrder"
+							onclick="fn_GoodsOrder()">구매하기</button>
+						<br>
+			
+						<!-- <button id="update" onclick="fn_update()">수정하기</button> -->
+					
+					</div> 
+				</div> 
+			
 		</div>
-			
-			<form id="frm" name="frm" method="post">
 
-				<div>
-					<table style="border:1px;" id="dynamicTable">
-						<thead>
-						</thead>
 
-						<tbody id="dynamicTbody">
-
-						</tbody>
-						
-					</table>
-				</div>
-
-			</form>
-			
-			<div class="totals-item totals-item-total" style="float:left; margin-left:400px;">
-	      		<label class="total_price">총상품금액</label>&nbsp;&nbsp;
-	     		 <div class="total_price" style="float:right;">원</div>
-	      		<div class="totals-value" id="cart-total" style="float:right;">0</div>
-	   	    </div>
-			<br><br>
-			
-			<table>
-				<tr>
-					<td><hr style="border-top: 1px solid #bbb;" width=670px>
-					<td>
-				</tr>
-			</table>
-
-			<button style="width: 124px; height: 58px;"
-				class="btn btn-outline-danger" id="insertLike"
-				onclick="fn_InsertLike()">
-				<font size="5px">♥</font>
-			</button>
-			<button style="width: 270px; height: 58px;"
-				class="btn btn-outline-danger" id="insertBasket"
-				onclick="fn_InsertBasket()">장바구니</button>
-			<button style="width: 270px; height: 58px;"
-				class="btn btn-outline-danger" id="goodsOrder"
-				onclick="fn_GoodsOrder()">구매하기</button>
-			<br>
-
-			<!-- <button id="update" onclick="fn_update()">수정하기</button> -->
-		
-		</div> 
-	</div> 
 		<div style="clear: both;"></div>
 
 	<br><br><br><br><br>
@@ -1156,6 +1196,30 @@ button{
 			    $(this).parent().addClass('tab_open');
 			    $("#myTabContent"+tab_id).addClass('current');
 			})
+			
+		    var swiper = new Swiper("#test-swiper", {
+		        spaceBetween: 1,    // 슬라이드 사이 여백
+
+		        slidesPerView : 'auto', // 한 슬라이드에 보여줄 갯수
+		        autoplay: {     //자동슬라이드 (false-비활성화)
+		          delay: 30000000, // 시간 설정
+		          disableOnInteraction: false, // false-스와이프 후 자동 재생
+		        },
+
+		        loop : false,   // 슬라이드 반복 여부
+		        loopAdditionalSlides : 1,
+
+		 		// 슬라이드 반복 시 마지막 슬라이드에서 다음 슬라이드가 보여지지 않는 현상 수정
+		        pagination: { // 호출(pager) 여부
+		          el: ".swiper-pagination", //버튼을 담을 태그 설정
+		          clickable: true, // 버튼 클릭 여부
+		        },
+		        navigation: {   // 버튼
+		          nextEl: ".swiper-button-next",
+		          prevEl: ".swiper-button-prev",
+		        },
+		      });
+
 	
 		})
 	

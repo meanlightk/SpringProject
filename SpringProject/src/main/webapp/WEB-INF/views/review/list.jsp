@@ -5,9 +5,7 @@
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 
 
-<link rel="stylesheet" href="/resources/css/reviewlist.css">
 
-	<div align="center">
 		<!-- 상품평 -->
 		<div class="review">
 			<nav><h1>상품리뷰</h1></nav>
@@ -32,7 +30,6 @@
 			<button type="button" class="btn btn-secondary btn-sm"
 				onclick="fn_Review('/review/form.do',${gno})">WRITE</button>
 		</div>	
-	</div>
 	<script>	
 		 function fn_Review(url,data){
 			var form = document.createElement("form");
