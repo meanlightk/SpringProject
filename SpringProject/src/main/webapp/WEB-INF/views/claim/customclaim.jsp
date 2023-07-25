@@ -24,13 +24,27 @@
 							${item.content }
 						</div>
 						<div class="claim__time">
+							<c:if test="${id==item.mem_id }">
+								<button type="button" class="btn btn-secondary btn-sm"
+										onclick="fn_Review2('/writeclaim/modify/${gno }', ${item.gclaim_no })">글수정</button>&nbsp;&nbsp;&nbsp;
+							</c:if>
 							<fmt:formatDate pattern="yy/MM/dd HH:mm" value="${item.regidate}"/>
 						</div>
 					</div>
 				</c:if>
 				<c:if test="${item.level == 2 }">
 					<div class="claim__reply">
-						<em class="claim__reply__label">처리중</em>
+						<em class="claim__reply__label">
+							<c:if test="${item.status == 1 }" >
+								처리대기
+							</c:if>
+							<c:if test="${item.status == 2 }" >
+								처리중
+							</c:if>
+							<c:if test="${item.status == 3 }" >
+								처리완료
+							</c:if>
+						</em>
 						<div class="claim__reply__wrap">
 							<strong class="claim__reply__author">회사명</strong>
 							<div class="claim__reply__selected-option"></div>
@@ -89,3 +103,42 @@
 		</ul>
 	</c:if>
 </div>
+<div style="margin-left: 1050px">
+	<button type="button" class="btn btn-secondary btn-sm"
+		onclick="fn_Review('/writeclaim/write/${gno }',${gno})">클레임</button>
+</div>
+<script>
+function fn_Review2(url,data){
+	var form = document.createElement("form");
+	form.setAttribute("method", "get");
+	form.setAttribute("action", url);
+	var parentNOInput = document.createElement("input");
+	parentNOInput.setAttribute("type","hidden");
+	parentNOInput.setAttribute("value",data);
+	parentNOInput.setAttribute("name","gclaim_no");
+	
+	form.appendChild(parentNOInput);
+	document.body.appendChild(form);
+	  
+	console.log(form);
+		
+	form.submit();
+}
+
+function fn_Review(url,data){
+	var form = document.createElement("form");
+	form.setAttribute("method", "get");
+	form.setAttribute("action", url);
+	var parentNOInput = document.createElement("input");
+	parentNOInput.setAttribute("type","hidden");
+	parentNOInput.setAttribute("value",data);
+	parentNOInput.setAttribute("name","gno");
+	
+	form.appendChild(parentNOInput);
+	document.body.appendChild(form);
+	  
+	console.log(form);
+		
+	form.submit();
+}
+</script>

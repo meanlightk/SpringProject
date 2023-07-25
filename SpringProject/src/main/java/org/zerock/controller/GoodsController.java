@@ -9,6 +9,8 @@ import java.util.List;
 import java.util.UUID;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -270,6 +272,12 @@ public class GoodsController {
 		if(claimlist.size() > 0)
 			model.addAttribute("tot4", claimlist.get(0).getTotal());
 	
+		Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+		String id = auth.getName();
+		model.addAttribute("id", id);
+		
 		return "detail";
 	}
+	
+	
 }

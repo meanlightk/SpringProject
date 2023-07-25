@@ -80,7 +80,7 @@
 					<!-- Menu desktop -->
 					<div class="menu-desktop">
 						<ul class="main-menu">
-						<!--  	<li class="active-menu">
+							 <li class="active-menu">
 								<a href="/home?menu=1">Home</a>
  								<ul class="sub-menu">
 									<li><a href="/home">Homepage 1</a></li>
@@ -107,23 +107,25 @@
 
 							<li>
 								<a href="/contact">Contact</a>
-							</li>-->
-							<tiles:importAttribute name="menuList" />
+							</li>
+				
+						<!--	<tiles:importAttribute name="menuList"/>
 							<c:forEach var="menu"  items="${menuList}"> 
 								<c:choose>
 									<c:when test="${menu.check1 == 1 }">
 										<li class="active-menu">
-											<a href="${menu.menuUrl}?menu=${menu.menuCd}">${menu.menuName}</a>
+											<a href="${menu.menuUrl}?menu=${menu.menuCd}">${menuName}</a>
 										</li>
 									</c:when>
 									<c:otherwise>
 										<li>
-											<a href="${menu.menuUrl}?menu=${menu.menuCd}">${menu.menuName}</a>
+											<a href="${menu.menuUrl}?menu=${menu.menuCd}">${menuName}</a>
 										</li>
 									</c:otherwise>
 								</c:choose>
+								<a href="${menu.menuUrl}?menu=${menu.menuCd}">${menuName}</a>
 							</c:forEach>
-						</ul>
+						</ul>-->
 					</div>	
 
 					<!-- Icon header -->
