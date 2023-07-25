@@ -274,6 +274,7 @@ public class GoodsController {
 	
 		Authentication auth = SecurityContextHolder.getContext().getAuthentication();
 		String id = auth.getName();
+		log.info("id: "+id);
 		model.addAttribute("id", id);
 		
 		return "detail";

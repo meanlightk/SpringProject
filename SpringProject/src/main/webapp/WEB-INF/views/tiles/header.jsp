@@ -1,10 +1,12 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<%@taglib prefix="tiles" uri="http://tiles.apache.org/tags-tiles" %>
+<%@ taglib prefix="tiles" uri="http://tiles.apache.org/tags-tiles" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
-
-
+<%@ page import="org.springframework.security.core.Authentication" %>
+<%@ page import="org.springframework.security.core.context.SecurityContextHolder" %>
+<%@ page import="org.springframework.security.core.userdetails.UserDetails" %>
+<%@ page import="java.util.*" %>
 
 <!--===============================================================================================-->	
 	<link rel="icon" type="image/png" href="../resources/images/icons/favicon.png"/>
@@ -40,13 +42,29 @@
 
 <!-- Header -->
 	<header class="header-v4">
+<%
+	Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+	String id = auth.getName();
+	request.setAttribute("userId", id);
+%>
+
+<style>
+.logoutbtn{
+	margin: 0px 0px 0px 10px;
+	height: 100%;
+	color: #fff; /* 글자 색상을 설정합니다. */
+    background-color: transparent; /* 배경을 투명하게 만듭니다. */
+    border: none; /* 테두리를 제거합니다. */
+    font-size: 11px;
+}
+</style>
 		<!-- Header desktop -->
 		<div class="container-menu-desktop">
 			<!-- Topbar -->
 			<div class="top-bar">
 				<div class="content-topbar flex-sb-m h-full container">
 					<div class="left-top-bar">
-						Free shipping for standard order over $100
+						<p>나비, 피부에 다가오다</p>
 					</div>
 
 					<div class="right-top-bar flex-w h-full">
@@ -54,17 +72,19 @@
 							Help & FAQs
 						</a>
 
-						<a href="#" class="flex-c-m trans-04 p-lr-25">
-							My Account
-						</a>
-
-						<a href="#" class="flex-c-m trans-04 p-lr-25">
-							EN
-						</a>
-
-						<a href="#" class="flex-c-m trans-04 p-lr-25">
-							USD
-						</a>
+						<c:choose>
+							<c:when test='${userId == "anonymousUser" }'>
+								<a href="/member/login" class="flex-c-m p-lr-10 trans-04">
+									로그인
+								</a>
+							</c:when>
+							<c:when test='${userId != "anonymousUser" }'>
+								<form action="/logout.do" method='post'>
+									<input type="hidden" name="${_csrf.parameterName }" value="${_csrf.token }" >
+									<button class="logoutbtn">로그아웃</button>
+								</form>
+							</c:when>
+						</c:choose>
 					</div>
 				</div>
 			</div>
@@ -180,7 +200,7 @@
 			<ul class="topbar-mobile">
 				<li>
 					<div class="left-top-bar">
-						Free shipping for standard order over $100
+						<p>나비, 피부에 다가오다</p>
 					</div>
 				</li>
 
@@ -189,18 +209,19 @@
 						<a href="#" class="flex-c-m p-lr-10 trans-04">
 							Help & FAQs
 						</a>
-
-						<a href="#" class="flex-c-m p-lr-10 trans-04">
-							My Account
-						</a>
-
-						<a href="#" class="flex-c-m p-lr-10 trans-04">
-							EN
-						</a>
-
-						<a href="#" class="flex-c-m p-lr-10 trans-04">
-							USD
-						</a>
+						<c:choose>
+							<c:when test='${userId == "anonymousUser" }'>
+								<a href="/member/login" class="flex-c-m p-lr-10 trans-04">
+									로그인
+								</a>
+							</c:when>
+							<c:when test='${userId != "anonymousUser" }'>
+								<form action="/logout.do" method='post'>
+									<input type="hidden" name="${_csrf.parameterName }" value="${_csrf.token }" >
+									<button class="logoutbtn">로그아웃</button>
+								</form>
+							</c:when>
+						</c:choose>
 					</div>
 				</li>
 			</ul>

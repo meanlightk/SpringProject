@@ -73,22 +73,11 @@ public class CommonController {
 	public String blog() {
 		return "blog";
 	}
-	
-	@GetMapping("/login")
-	public String loginInput(String error, String logout, Model model) {
-
-		log.info("error: " + error);
-		log.info("logout: " + logout);
-		
-		return "customlogin";
-	}
 
 	@RequestMapping("/qna")
 	public String qna() {
 		return "qna";
 	}
-
-	
 	
 	@RequestMapping("/sample/member")
 	public String membersample() {

@@ -104,8 +104,14 @@
 	</c:if>
 </div>
 <div style="margin-left: 1050px">
-	<button type="button" class="btn btn-secondary btn-sm"
-		onclick="fn_Review('/writeclaim/write/${gno }',${gno})">클레임</button>
+<c:choose>
+	<c:when test='${id == "anonymousUser" }'>
+	</c:when>
+	<c:when test='${id != "anonymousUser" }'>
+			<button type="button" class="btn btn-secondary btn-sm"
+				onclick="fn_Review('/writeclaim/write/${gno }',${gno})">클레임</button>
+	</c:when>
+</c:choose>
 </div>
 <script>
 function fn_Review2(url,data){

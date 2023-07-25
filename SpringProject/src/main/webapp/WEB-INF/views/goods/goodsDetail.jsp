@@ -1174,7 +1174,7 @@ button{
 		</div>
 		<div class="tab-content" id="myTabContent4" align="center">
 			<!-- 클레임 or Qna -->
-			<jsp:include page="customclaim.jsp"></jsp:include>
+			<jsp:include page="../claim/customclaim.jsp"></jsp:include>
 		</div>	
 	</div> 
 

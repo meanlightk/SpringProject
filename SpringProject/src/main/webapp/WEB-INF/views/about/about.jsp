@@ -16,20 +16,28 @@
 				<div class="col-md-7 col-lg-8">
 					<div class="p-t-7 p-r-85 p-r-15-lg p-r-0-md">
 						<h3 class="mtext-111 cl2 p-b-16">
-							Our Story
+							xxx에 대하여
 						</h3>
 
 						<p class="stext-113 cl6 p-b-26">
-							Lorem ipsum dolor sit amet, consectetur adipiscing elit. Mauris consequat consequat enim, non auctor massa ultrices non. Morbi sed odio massa. Quisque at vehicula tellus, sed tincidunt augue. Orci varius natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Maecenas varius egestas diam, eu sodales metus scelerisque congue. Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Maecenas gravida justo eu arcu egestas convallis. Nullam eu erat bibendum, tempus ipsum eget, dictum enim. Donec non neque ut enim dapibus tincidunt vitae nec augue. Suspendisse potenti. Proin ut est diam. Donec condimentum euismod tortor, eget facilisis diam faucibus et. Morbi a tempor elit.
+							아름다운 자리에 아름다운 것이 다녀온다고 저희 xxx는 믿습니다. 이러한 신념	으로 저희 XXX는 고객님들의 만족을 위해서 언제나 최선을 다하고 있습니다.
+							XXX는 자체적인 시스템을 구축하여 제품과 제품 회사의 신뢰성을 검사하고,
+							고객님들의 마음을 탐색하고, 더 나은 경험을 제공하기 위해 물신양면을 쏟고
+							있습니다. 저희는 최고 전문가들로 구성된 심사위원, 원료 파악을 위한 조사팀,
+							요동치는 시장에 민감하게 대처하기 위한 빅데이터 연구팀, 제품과 고객 만족도를
+							관리하는 고객 응대팀 등으로 구성하여 언제나 업계 최고들과 손잡고 고객님들의
+							아름다움을 제공해왔으며 앞으로도 저희는 변하지 않을 겁니다.
 						</p>
 
 						<p class="stext-113 cl6 p-b-26">
-							Donec gravida lorem elit, quis condimentum ex semper sit amet. Fusce eget ligula magna. Aliquam aliquam imperdiet sodales. Ut fringilla turpis in vehicula vehicula. Pellentesque congue ac orci ut gravida. Aliquam erat volutpat. Donec iaculis lectus a arcu facilisis, eu sodales lectus sagittis. Etiam pellentesque, magna vel dictum rutrum, neque justo eleifend elit, vel tincidunt erat arcu ut sem. Sed rutrum, turpis ut commodo efficitur, quam velit convallis ipsum, et maximus enim ligula ac ligula. 
+						
+							나비가 수많은 꽃을 다녀가는 것처럼 더욱 다양하고 기분 좋은 경험을 위해 저희는
+							모두 경험할 수 있는 제품부터 아무도 경험할 수 없는 제품까지 그 재고를 확보
+							하기 위해 꿀벌보다 더욱 바쁘게 움직이고 있습니다. 아름다운 사람들은 언제나
+							예민하고 바쁩니다. 나비가 섬세하게 날갯짓하는 것처럼 고객님들의 여리고 다급한
+							마음을 언제나 헤아리며 앞으로도 저희와 고객님은 사랑과 함께 삶의 여정을 함께하길 기원합니다. 
 						</p>
 
-						<p class="stext-113 cl6 p-b-26">
-							Any questions? Let us know in store at 8th floor, 379 Hudson St, New York, NY 10018 or call us on (+1) 96 716 6879
-						</p>
 					</div>
 				</div>
 
@@ -46,20 +54,28 @@
 				<div class="order-md-2 col-md-7 col-lg-8 p-b-30">
 					<div class="p-t-7 p-l-85 p-l-15-lg p-l-0-md">
 						<h3 class="mtext-111 cl2 p-b-16">
-							Our Mission
+							우리들의 이야기
 						</h3>
 
 						<p class="stext-113 cl6 p-b-26">
-							Mauris non lacinia magna. Sed nec lobortis dolor. Vestibulum rhoncus dignissim risus, sed consectetur erat. Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Nullam maximus mauris sit amet odio convallis, in pharetra magna gravida. Praesent sed nunc fermentum mi molestie tempor. Morbi vitae viverra odio. Pellentesque ac velit egestas, luctus arcu non, laoreet mauris. Sed in ipsum tempor, consequat odio in, porttitor ante. Ut mauris ligula, volutpat in sodales in, porta non odio. Pellentesque tempor urna vitae mi vestibulum, nec venenatis nulla lobortis. Proin at gravida ante. Mauris auctor purus at lacus maximus euismod. Pellentesque vulputate massa ut nisl hendrerit, eget elementum libero iaculis.
+							2004년 처음으로 회사를 설립한지 오래되지 않아서 저희는 직원
+							중 한명이 일본 여행 중에 고인의 얼굴을 직접 화장해주는 사람을
+							만나본 적 있다는 얘기를 듣게 되었습니다. 그것은 분명 특별한 경험이었다고 합니다. 화장품은
+							살아있는 사람의 전유물로 생각하기 쉽지만 사실 아름다움은 삶의
+							가장 마지막 순간을 넘어서 죽음에 이르렀을 때도 언제나 있기
+							마련입니다. 저희는 깊은 생각에 잠겼습니다.
+							우리는 사랑했어야 하는 아름다움을 놓쳤던 게 아닐까라는 생각 말이죠.
+							그리고 18년이 지났습니다. 저희는 아직까지도 이 이야기를 간직하고 있습니다.
+							아름다움을 놓치면 사랑도 놓치는 것처럼 말이죠.
 						</p>
 
 						<div class="bor16 p-l-29 p-b-9 m-t-22">
 							<p class="stext-114 cl6 p-r-40 p-b-11">
-								Creativity is just connecting things. When you ask creative people how they did something, they feel a little guilty because they didn't really do it, they just saw something. It seemed obvious to them after a while.
+								아름다움은 어디에나 있다
 							</p>
 
 							<span class="stext-111 cl8">
-								- Steve Job’s 
+								- 오귀스트 로댕 
 							</span>
 						</div>
 					</div>

@@ -25,6 +25,16 @@ public class MemberController {
 	@Autowired
 	private MemberService service;
 	
+	
+	@GetMapping("/login")
+	public String loginInput(String error, String logout, Model model) {
+
+		log.info("error: " + error);
+		log.info("logout: " + logout);
+		
+		return "customlogin";
+	}
+	
 	@GetMapping("/join")
 	public String joinform() {
 		log.info("=========join========");
