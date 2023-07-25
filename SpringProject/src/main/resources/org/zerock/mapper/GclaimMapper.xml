@@ -21,6 +21,11 @@ SELECT * FROM(
 	    0 AS answer_no,
 	    1 AS level
 	  FROM gclaim
+	  <where>
+	  	<if test="goods_no != 0">
+	  		goods_no = #{goods_no}
+	  	</if>
+	  </where>
 	  
 	  UNION ALL
 	  

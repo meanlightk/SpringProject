@@ -6,12 +6,14 @@
 <link rel="stylesheet" href="/resources/css/claim.css">
 <div class="claims">
 	<c:choose>
-		<c:when test="${claimlist == null}">
-			<span>등록된 글이 없습니다.</span>
+		<c:when test="${claimlist[0].goods_no == null}">
+			<div>
+				<span>등록된 글이 없습니다.</span>
+			</div>
 		</c:when>
 		<c:when test="${claimlist != null }">
 			<c:forEach var="item" items="${claimlist }" varStatus="articleNum">
-				<c:if test="${item.level == 1 && item.goods_no == cgno}">
+				<c:if test="${item.level == 1 }">
 					<div class="claim">
 						<em class="claim__label">클레임</em>
 						<div class="claim__wrap">
@@ -26,7 +28,7 @@
 						</div>
 					</div>
 				</c:if>
-				<c:if test="${item.level == 2 && item.goods_no == cgno }">
+				<c:if test="${item.level == 2 }">
 					<div class="claim__reply">
 						<em class="claim__reply__label">처리중</em>
 						<div class="claim__reply__wrap">

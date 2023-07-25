@@ -25,4 +25,6 @@ public class Common {
 	private String memId;
 	
 	
+	private int goods_no;
+	
 }
