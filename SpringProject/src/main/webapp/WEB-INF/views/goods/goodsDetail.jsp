@@ -6,6 +6,8 @@
 <!DOCTYPE html>
 <html>
 <head>
+<meta name="_csrf" content="${_csrf.token}">
+<meta name="_csrf_header" content="${_csrf.headerName}">
 <link
   rel="stylesheet"
   href="https://cdn.jsdelivr.net/npm/swiper@10/swiper-bundle.min.css"
@@ -584,11 +586,20 @@ td{
 	vertical-align: middle;
 }
 img {
+ 	/* height: 100%; */
+	object-fit: cover; 
 	overflow-clip-margin: content-box;
 	overflow: clip;
 	border: none;
 	vertical-align: top;
+	display: block;
 }
+
+#home img {
+ 	/* height: 100%; */
+ 	width:700px;
+}
+
 /* #totalProducts tbody.option_products tr td .quantity .down, #totalProducts tbody.add_products tr td .quantity .down{
 	bottom: 0;
 	top: auto;
@@ -783,7 +794,11 @@ button{
 
 				<tr>
 					<td id="pname"><font size="5"
-						style="box-sizing: border-box; position: relative;"><h2>${goods.pname}</h2></font></td>
+						style="box-sizing: border-box; position: relative;"><h2>${goods.pname}</h2></font>
+						<input type="hidden" id="goodsNo" value="${goods.gno}" />
+						<input type="hidden" id="realpname"	 value="${goods.pname}" />
+					</td>
+					
 				</tr>
 						
 				<tr>
@@ -923,7 +938,7 @@ button{
 			</button>
 			<button style="width: 270px; height: 58px;"
 				class="btn btn-outline-danger" id="insertBasket"
-				onclick="fn_InsertBasket()">장바구니</button>
+				onclick="goToCart()">장바구니</button>
 			<button style="width: 270px; height: 58px;"
 				class="btn btn-outline-danger" id="goodsOrder"
 				onclick="fn_GoodsOrder()">구매하기</button>
@@ -961,135 +976,164 @@ button{
 				</div>
 			</div>
 		</div>
-		<div class="swiper">
-			<div class="swiper-wrapper">
-				<div class="swiper-slide" style="justify: center;">
-					 <div class="container" style="float: left; max-width: 200px;">
-						<div class="card" style="width: 200px">
-							<img class="card-img-top" src="./../../../resources/img/up.png" alt="Card image"
-								style="width: 200px; height: 200px;">
-							<div> <!-- class="card-body" -->
-								<p style="padding-top: 0; padding-bottom:5px; color: black; white-space:nowrap; overflow: hidden; text-overflow:ellipsis; font-size:12px; margin:0;">제목</p>
-								<p id="choo" style="display: inline-block; margin:0; padding:0; display: flex; justify-content: space-between;">
-									<span style="float: left; max-width: 55px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; font-size: 11px; line-height: 16px;">아이디</span>
-									<span style="float: right; display:block; margin: 0; color:#767676; font-size: 11px; line-height: 16px;">날짜</span>
-								</p>
-							</div>
-						</div>
-						<br>
-					</div>
-					 <div class="container" style="float: left; max-width: 200px;">
-						<div class="card" style="width: 200px">
-							<img class="card-img-top" src="./../../../resources/img/up.png" alt="Card image"
-								style="width: 200px; height: 200px;">
-							<div> <!-- class="card-body" -->
-								<p class="card-text">제목</p>
-								<p class="card-text">아이디</p>
-							</div>
-						</div>
-						<br>
-					</div>
-					 <div class="container" style="float: left; max-width: 200px;">
-						<div class="card" style="width: 200px">
-							<img class="card-img-top" src="./../../../resources/img/up.png" alt="Card image"
-								style="width: 200px; height: 200px;">
-							<div> <!-- class="card-body" -->
-								<p class="card-text">제목</p>
-								<p class="card-text">아이디</p>
-							</div>
-						</div>
-						<br>
-					</div>
-					 <div class="container" style="float: left; max-width: 200px;">
-						<div class="card" style="width: 200px">
-							<img class="card-img-top" src="./../../../resources/img/up.png" alt="Card image"
-								style="width: 200px; height: 200px;">
-							<div> <!-- class="card-body" -->
-								<p class="card-text">제목</p>
-								<p class="card-text">아이디</p>
-							</div>
-						</div>
-						<br>
-					</div>
-					 <div class="container" style="float: left; max-width: 200px;">
-						<div class="card" style="width: 200px">
-							<img class="card-img-top" src="./../../../resources/img/up.png" alt="Card image"
-								style="width: 200px; height: 200px;">
-							<div> <!-- class="card-body" -->
-								<p class="card-text">제목</p>
-								<p class="card-text">아이디</p>
-							</div>
-						</div>
-						<br>
-					</div>
-				</div>
-				<div class="swiper-slide">
-					 <div class="container" style="float: left; max-width: 200px;">
-						<div class="card" style="width: 200px">
-							<img class="card-img-top" src="./../../../resources/img/up.png" alt="Card image"
-								style="width: 200px; height: 200px;">
-							<div> <!-- class="card-body" -->
-								<p class="card-text">제목</p>
-								<p class="card-text">아이디</p>
-							</div>
-						</div>
-						<br>
-					</div>
-					 <div class="container" style="float: left; max-width: 200px;">
-						<div class="card" style="width: 200px">
-							<img class="card-img-top" src="./../../../resources/img/up.png" alt="Card image"
-								style="width: 200px; height: 200px;">
-							<div> <!-- class="card-body" -->
-								<p class="card-text">제목</p>
-								<p class="card-text">아이디</p>
-							</div>
-						</div>
-						<br>
-					</div>
-					 <div class="container" style="float: left; max-width: 200px;">
-						<div class="card" style="width: 200px">
-							<img class="card-img-top" src="./../../../resources/img/up.png" alt="Card image"
-								style="width: 200px; height: 200px;">
-							<div> <!-- class="card-body" -->
-								<p class="card-text">제목</p>
-								<p class="card-text">아이디</p>
-							</div>
-						</div>
-						<br>
-					</div>
-					 <div class="container" style="float: left; max-width: 200px;">
-						<div class="card" style="width: 200px">
-							<img class="card-img-top" src="./../../../resources/img/up.png" alt="Card image"
-								style="width: 200px; height: 200px;">
-							<div> <!-- class="card-body" -->
-								<p class="card-text">제목</p>
-								<p class="card-text">아이디</p>
-							</div>
-						</div>
-						<br>
-					</div>
-					 <div class="container" style="float: left; max-width: 200px;">
-						<div class="card" style="width: 200px">
-							<img class="card-img-top" src="./../../../resources/img/up.png" alt="Card image"
-								style="width: 200px; height: 200px;">
-							<div> <!-- class="card-body" -->
-								<p class="card-text">제목</p>
-								<p class="card-text">아이디</p>
-							</div>
-						</div>
-						<br>
-					</div>
-				</div>
-			</div>
-		<br>
-		<br>
-		<div class="swiper-pagination"></div>
-			
-		</div>
+		
 		<br>
 		<br><br><br><br>
  
 		<div class="tab-content current" id="myTabContent1" align="center" style="">
+			<div class="swiper">
+				<div class="swiper-wrapper">
+					<div class="swiper-slide" style="justify: center;">
+						 <div class="container" style="display:inline-block; max-width: 200px; margin-right: 20px;">
+							<div class="card" style="width: 200px">
+								<img class="card-img-top" src="./../../../resources/img/up.png" alt="Card image"
+									style="width: 200px; height: 200px;">
+								<div> <!-- class="card-body" -->
+									<p style="padding-top: 0; padding-bottom:5px; color: black; white-space:nowrap; overflow: hidden; text-overflow:ellipsis; font-size:12px; margin:0;">제목</p>
+									<p id="choo" style="display: inline-block; margin:0; padding:0; display: flex; justify-content: space-between;">
+										<span style="float: left; max-width: 55px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; font-size: 11px; line-height: 16px;">아이디</span>
+										<span style="float: right; display:block; margin: 0; color:#767676; font-size: 11px; line-height: 16px;">날짜</span>
+									</p>
+								</div>
+							</div>
+							<br>
+						</div>
+						 <div class="container" style="display:inline-block; max-width: 200px;  margin-right: 20px;">
+							<div class="card" style="width: 200px">
+								<img class="card-img-top" src="./../../../resources/img/up.png" alt="Card image"
+									style="width: 200px; height: 200px;">
+								<div> <!-- class="card-body" -->
+									<p style="padding-top: 0; padding-bottom:5px; color: black; white-space:nowrap; overflow: hidden; text-overflow:ellipsis; font-size:12px; margin:0;">제목</p>
+									<p id="choo" style="display: inline-block; margin:0; padding:0; display: flex; justify-content: space-between;">
+										<span style="float: left; max-width: 55px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; font-size: 11px; line-height: 16px;">아이디</span>
+										<span style="float: right; display:block; margin: 0; color:#767676; font-size: 11px; line-height: 16px;">날짜</span>
+									</p>
+								</div>
+							</div>
+							<br>
+						</div>
+						 <div class="container" style="display:inline-block; max-width: 200px;  margin-right: 20px;">
+							<div class="card" style="width: 200px">
+								<img class="card-img-top" src="./../../../resources/img/up.png" alt="Card image"
+									style="width: 200px; height: 200px;">
+								<div> <!-- class="card-body" -->
+									<p style="padding-top: 0; padding-bottom:5px; color: black; white-space:nowrap; overflow: hidden; text-overflow:ellipsis; font-size:12px; margin:0;">제목</p>
+									<p id="choo" style="display: inline-block; margin:0; padding:0; display: flex; justify-content: space-between;">
+										<span style="float: left; max-width: 55px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; font-size: 11px; line-height: 16px;">아이디</span>
+										<span style="float: right; display:block; margin: 0; color:#767676; font-size: 11px; line-height: 16px;">날짜</span>
+									</p>
+								</div>
+							</div>
+							<br>
+						</div>
+						 <div class="container" style="display:inline-block; max-width: 200px;  margin-right: 20px;">
+							<div class="card" style="width: 200px">
+								<img class="card-img-top" src="./../../../resources/img/up.png" alt="Card image"
+									style="width: 200px; height: 200px;">
+								<div> <!-- class="card-body" -->
+									<p style="padding-top: 0; padding-bottom:5px; color: black; white-space:nowrap; overflow: hidden; text-overflow:ellipsis; font-size:12px; margin:0;">제목</p>
+									<p id="choo" style="display: inline-block; margin:0; padding:0; display: flex; justify-content: space-between;">
+										<span style="float: left; max-width: 55px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; font-size: 11px; line-height: 16px;">아이디</span>
+										<span style="float: right; display:block; margin: 0; color:#767676; font-size: 11px; line-height: 16px;">날짜</span>
+									</p>
+								</div>
+							</div>
+							<br>
+						</div>
+						 <div class="container" style="display:inline-block; max-width: 200px;  margin-right: 20px;">
+							<div class="card" style="width: 200px">
+								<img class="card-img-top" src="./../../../resources/img/up.png" alt="Card image"
+									style="width: 200px; height: 200px;">
+								<div> <!-- class="card-body" -->
+									<p style="padding-top: 0; padding-bottom:5px; color: black; white-space:nowrap; overflow: hidden; text-overflow:ellipsis; font-size:12px; margin:0;">제목</p>
+									<p id="choo" style="display: inline-block; margin:0; padding:0; display: flex; justify-content: space-between;">
+										<span style="float: left; max-width: 55px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; font-size: 11px; line-height: 16px;">아이디</span>
+										<span style="float: right; display:block; margin: 0; color:#767676; font-size: 11px; line-height: 16px;">날짜</span>
+									</p>
+								</div>
+							</div>
+							<br>
+						</div>
+					</div>
+					<div class="swiper-slide">
+						 <div class="container" style="display:inline-block; max-width: 200px;  margin-right: 20px;">
+							<div class="card" style="width: 200px">
+								<img class="card-img-top" src="./../../../resources/img/up.png" alt="Card image"
+									style="width: 200px; height: 200px;">
+								<div> <!-- class="card-body" -->
+									<p style="padding-top: 0; padding-bottom:5px; color: black; white-space:nowrap; overflow: hidden; text-overflow:ellipsis; font-size:12px; margin:0;">제목</p>
+									<p id="choo" style="display: inline-block; margin:0; padding:0; display: flex; justify-content: space-between;">
+										<span style="float: left; max-width: 55px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; font-size: 11px; line-height: 16px;">아이디</span>
+										<span style="float: right; display:block; margin: 0; color:#767676; font-size: 11px; line-height: 16px;">날짜</span>
+									</p>
+								</div>
+							</div>
+							<br>
+						</div>
+						 <div class="container" style="display:inline-block; max-width: 200px;  margin-right: 20px;">
+							<div class="card" style="width: 200px">
+								<img class="card-img-top" src="./../../../resources/img/up.png" alt="Card image"
+									style="width: 200px; height: 200px;">
+								<div> <!-- class="card-body" -->
+									<p style="padding-top: 0; padding-bottom:5px; color: black; white-space:nowrap; overflow: hidden; text-overflow:ellipsis; font-size:12px; margin:0;">제목</p>
+									<p id="choo" style="display: inline-block; margin:0; padding:0; display: flex; justify-content: space-between;">
+										<span style="float: left; max-width: 55px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; font-size: 11px; line-height: 16px;">아이디</span>
+										<span style="float: right; display:block; margin: 0; color:#767676; font-size: 11px; line-height: 16px;">날짜</span>
+									</p>
+								</div>
+							</div>
+							<br>
+						</div>
+						 <div class="container" style="display:inline-block; max-width: 200px;  margin-right: 20px;">
+							<div class="card" style="width: 200px">
+								<img class="card-img-top" src="./../../../resources/img/up.png" alt="Card image"
+									style="width: 200px; height: 200px;">
+								<div> <!-- class="card-body" -->
+									<p style="padding-top: 0; padding-bottom:5px; color: black; white-space:nowrap; overflow: hidden; text-overflow:ellipsis; font-size:12px; margin:0;">제목</p>
+									<p id="choo" style="display: inline-block; margin:0; padding:0; display: flex; justify-content: space-between;">
+										<span style="float: left; max-width: 55px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; font-size: 11px; line-height: 16px;">아이디</span>
+										<span style="float: right; display:block; margin: 0; color:#767676; font-size: 11px; line-height: 16px;">날짜</span>
+									</p>
+								</div>
+							</div>
+							<br>
+						</div>
+						 <div class="container" style="display:inline-block; max-width: 200px;  margin-right: 20px;">
+							<div class="card" style="width: 200px">
+								<img class="card-img-top" src="./../../../resources/img/up.png" alt="Card image"
+									style="width: 200px; height: 200px;">
+								<div> <!-- class="card-body" -->
+									<p style="padding-top: 0; padding-bottom:5px; color: black; white-space:nowrap; overflow: hidden; text-overflow:ellipsis; font-size:12px; margin:0;">제목</p>
+									<p id="choo" style="display: inline-block; margin:0; padding:0; display: flex; justify-content: space-between;">
+										<span style="float: left; max-width: 55px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; font-size: 11px; line-height: 16px;">아이디</span>
+										<span style="float: right; display:block; margin: 0; color:#767676; font-size: 11px; line-height: 16px;">날짜</span>
+									</p>
+								</div>
+							</div>
+							<br>
+						</div>
+						 <div class="container" style="display:inline-block; max-width: 200px;  margin-right: 20px;">
+							<div class="card" style="width: 200px">
+								<img class="card-img-top" src="./../../../resources/img/up.png" alt="Card image"
+									style="width: 200px; height: 200px;">
+								<div> <!-- class="card-body" -->
+									<p style="padding-top: 0; padding-bottom:5px; color: black; white-space:nowrap; overflow: hidden; text-overflow:ellipsis; font-size:12px; margin:0;">제목</p>
+									<p id="choo" style="display: inline-block; margin:0; padding:0; display: flex; justify-content: space-between;">
+										<span style="float: left; max-width: 55px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; font-size: 11px; line-height: 16px;">아이디</span>
+										<span style="float: right; display:block; margin: 0; color:#767676; font-size: 11px; line-height: 16px;">날짜</span>
+									</p>
+								</div>
+							</div>
+							<br>
+						</div>
+					</div>
+				</div>
+			<br>
+			<br>
+			<div class="swiper-pagination"></div>
+				
+			</div>
+		
 			<div class="tab-pane fade show active" id="home" role="tabpanel" aria-labelledby="home-tab">${goods.content}</div>
 			<!-- 상세정보 -->
 		</div>
@@ -1128,7 +1172,7 @@ button{
         slidesPerView : 'auto', // 한 슬라이드에 보여줄 갯수
         centeredSlides: true,    //센터모드
         autoplay: {     //자동슬라이드 (false-비활성화)
-          delay: 1000, // 시간 설정
+          delay: 1000000, // 시간 설정
           disableOnInteraction: false, // false-스와이프 후 자동 재생
         },
 
@@ -1148,6 +1192,8 @@ button{
       });
 	</script>
 	<script>
+	var token = $("meta[name='_csrf']").attr("content");
+	var header = $("meta[name='_csrf_header']").attr("content");
 	console.log('test');
 	console.log(document.getElementById('hii').value);
 	var arr = [];
@@ -1201,6 +1247,7 @@ button{
 				"<fmt:formatNumber value='${goods.discountPrice}' pattern='##,###' /> 원" + "</span></span></td></tr>";
 		optionProducts.innerHTML = html;
 		document.getElementById("option_box_0").selected = true;
+		calculateTot();
 	}
 	
  	function deleteOption(){
@@ -1219,6 +1266,7 @@ button{
 			console.log('안쪽');
 			document.getElementById("option_box_0").selected = true;
 		}
+		calculateTot();
 	} 
 	
 	function valueUp(){	
@@ -1232,6 +1280,7 @@ button{
 			return false;
 		}
 		calculateSub(num);
+		calculateTot();
 	}
 	
 	function valueDown(){
@@ -1246,6 +1295,7 @@ button{
 			return false;
 		}
 		calculateSub(num);
+		calculateTot();
 	} 
 	
   	function calculateSub(num){
@@ -1257,14 +1307,80 @@ button{
 		/* document.getElementById("option_box_price"+num).setAttribute('value', (quantity * price)); */
 		document.getElementById("option_box_price2_"+num).setAttribute('value', (quantity * price));
 		document.getElementById("option_box_price2_" + num).innerHTML = Number(quantity * price).toLocaleString()+" 원";
+		
 	}
   	
-  	function calculateTot(){
-  		const sections = querySelectorAll(".ec-front-product-item-price");
-  		for(var i = 0; i < sections.length; i++){
-  			
-  		}
+  	function imgStyleDel(){
+  		console.log('실행!!!!!');
+  		var images = document.querySelectorAll(".tab-pane p img");
+  		images.forEach((element) => {element.style=''});
   	}
+  	function calculateTot(){
+  		var calResult = 0;
+  		console.log('실행됨');
+  		const sections = document.querySelectorAll(".ec-front-product-item-price");
+  		console.log(sections);
+  		for(var i = 0; i < sections.length; i++){
+  			var sp = sections[i].innerHTML;
+  			sp = sp.replace(',','');
+  			sp = sp.substr(0,sp.length-2);
+  			console.log('sp' + sp);
+  			calResult += Number(sp);
+  		}
+  		console.log(calResult);
+  		var cartTotal = document.getElementById("cart-total");
+  		cartTotal.innerHTML = Number(calResult).toLocaleString();
+  		return calResult;
+  	}
+  	imgStyleDel();
+  	calculateTot();
+  	
+  	function goToCart(){
+  		
+  		var pname = document.getElementById("realpname").value;
+  		console.log('pname:' + pname);
+  		var gno = document.getElementById("goodsNo").value;
+  		console.log(gno);
+  		
+  		var totalprice = calculateTot();
+  		console.log('price:' + totalprice);
+  		console.log('arr:' + arr);
+  		for(var i = 1; i <= arr.length; i++){
+  			var option_name = document.getElementById("option_box_" + i).value;
+  			console.log('option_name:' + option_name);
+  			var option_price = document.getElementById("option_box_price2_" + i).innerHTML;
+  			console.log(option_price);
+  			option_price = option_price.replace(',','');
+  			option_price = option_price.substr(0, option_price.length - 2);
+  			var numTarget = document.getElementById("input_box_" + i);
+  			var quantity = Number(numTarget.value);
+  			console.log(quantity);
+
+  		}	 
+  	}
+  	
+		$.ajax({
+	  			url: '/putCart',
+	  			processData: false,
+	  			contentType: false,  //이것때문에 오류. contentType: "application/json",파일보낼 때 이렇게 씀
+	  			data: {"pname": pname, "gno": gno, "option_name": option_name, "option_price": option_price, "quantity": quantity},
+	  			type: 'post',
+	  			dataType: 'json',
+	  			beforeSend: function(xhr) { //XMLHttpRequest (XHR)은 AJAX 요청을 생성하는 JavaScript API이다. XHR의 메서드로 브라우저와 서버간의 네트워크 요청을 전송할 수 있다.
+	  				xhr.setRequestHeader(header, token); //csrf 전송하지 않으면 아예 ajax가 되지 않는 문제가 생김.
+	  			},
+	  			success: function(result){
+	  				console.log(result);
+	  				alert('upload');
+	  				
+	  				showUploadedFile(result);
+	  				$(".uploadDiv").html(cloneObj.html());
+	  			},
+	  			error: function(error){
+	  				console.log(error);
+	  			}
+	  		}); 
+
 		
 	</script>
 </body>
