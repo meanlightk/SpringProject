@@ -9,6 +9,8 @@ import java.util.List;
 import java.util.UUID;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -109,11 +111,17 @@ public class GoodsController {
 	
 		goods.setStatus("1");
 		
+	
+
 		List<Goods> list = new ArrayList<>();
 		String uploadFolder = "C:\\upload\\main";
 
 		System.out.println("�궡媛� 諛쏆� �긽�뭹 踰덊샇: ");
 		String uploadFolderPath = String.format("%d", goods.getGno());
+
+		
+		
+		
 
 		// make folder ---------
 		File uploadPath = new File(uploadFolder, uploadFolderPath); // 상품 번호로 경로를 만듦
@@ -180,6 +188,9 @@ public class GoodsController {
 				e.printStackTrace();
 			} // end catch
 		} // end for
+
+		
+		
 		
 		//Goods goods = new Goods();
 		
@@ -191,6 +202,8 @@ public class GoodsController {
 		service.registerItem(goods); 
 		 
 		return "redirect:/goodsWrite/write";
+		 
+		 
 	}
 	
 	@GetMapping("/registerGoods2")
@@ -211,8 +224,6 @@ public class GoodsController {
 	
 	@PostMapping("/search")	
 	public String search(Common common) {
-		
-		
 		
 		
 		return "search";
@@ -261,6 +272,12 @@ public class GoodsController {
 		if(claimlist.size() > 0)
 			model.addAttribute("tot4", claimlist.get(0).getTotal());
 	
+		Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+		String id = auth.getName();
+		model.addAttribute("id", id);
+		
 		return "detail";
 	}
+	
+	
 }

@@ -80,7 +80,7 @@ public class CommonController {
 		log.info("error: " + error);
 		log.info("logout: " + logout);
 		
-		return "/customlogin";
+		return "customlogin";
 	}
 
 	@RequestMapping("/qna")
