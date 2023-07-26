@@ -38,7 +38,7 @@ public class CartService {
 		mapper.deleteCart(cart);
 	}
 
-	public void showCartCount(String id) {
+	public void showCartCount(String memid) {
 		log.info("-- cart count --");
 
 	}

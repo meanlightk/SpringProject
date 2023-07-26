@@ -11,25 +11,24 @@
 		mem_id = #{id} AND ordernum is null
 	</select>
 
-	<insert id="insertCart">
-		insert into cart(mem_id, goods_no, ordernum,
-		regidate)
-		values(#{mem_id},#{goods_no},#{ordernum},#{regidate})
+	<insert id="insertCart" parameterType="org.zerock.domain.Cart">
+		insert into cart(mem_id, goods_no, optionName, totalPrice, quantity, pname)
+		values(#{memid},#{goods_no}, #{optionName}, #{totalPrice}, #{quantity}, #{pname})
 	</insert>
 
 	<delete id="deleteCart">
-		delete cart where cno = #{cno}
+		delete cart where cart_no = #{cart_no}
 	</delete>
 
 	<select id="selectCartCount" resultType="int">
 		select count(*) from
-		cart where mem_id = ${id}
+		cart where mem_id = ${memid}
 	</select>
 
 	<update id="updateCart">
 		UPDATE cart SET quantity = #{quantity} WHERE mem_id =
 		#{id} AND cart_no =
-		#{cartNo} AND ordernum IS NULL
+		#{cart_no}
 	</update>
 
 	<update id="updateCartOrderNo">
