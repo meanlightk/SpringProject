@@ -9,16 +9,23 @@ import java.util.List;
 import java.util.UUID;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
+import org.zerock.domain.Adminclaim;
+import org.zerock.domain.Common;
 import org.zerock.domain.Goods;
+import org.zerock.domain.Review;
+import org.zerock.service.ClaimService;
 import org.zerock.service.GoodsService;
+import org.zerock.service.ReviewService;
 
 import lombok.extern.log4j.Log4j;
 import net.coobird.thumbnailator.Thumbnailator;
@@ -31,8 +38,15 @@ public class GoodsController {
 	@Autowired
 	private GoodsService service;
 	
+	@Autowired
+	private ReviewService reviewService;
+	
+	@Autowired
+	private ClaimService claimService;
+
+	
 	@GetMapping("/list")
-	public String showItemList(Model model) {
+	public String showItemList(Model model, Common common) {
 		log.info("show Admin List start...");
 		
 		List<Goods> goodsList = service.goodsList();
@@ -40,6 +54,28 @@ public class GoodsController {
 		
 		return "/goods/goodsAdminList";
 		
+	}
+	
+	@RequestMapping("/showlist")
+	public String goodslist(Model model) {
+
+		List<Goods> goodsList = service.goodsList();
+		model.addAttribute("goodsList", goodsList);
+
+		
+		return "itemlist";
+	}
+
+	
+	
+	@GetMapping("/goods/search.do")
+	public String searchList(Model model, Common common) {
+
+		System.out.println(common);
+		List<Goods> goodsList = service.getSearchGoodsList(common);
+		model.addAttribute("goodsList", goodsList);
+
+		return "searchlist";
 	}
 	
 	@GetMapping("/showItem")
@@ -54,17 +90,6 @@ public class GoodsController {
 		return "item";
 	}	
 	
-	@GetMapping("/put")
-	public String putCart(Model model) {
-		
-		/*
-		 * for(Goods good: goodsList) { service.putCart(good.getPno()); }
-		 * 
-		 * model.addAttribute("cartList", goodsList);
-		 */
-		
-		return "mycart"; 	// tiles 적용
-	}
 	
 	/*
 	 * @GetMapping("/delete/${pno}") public String removeCart(@RequestParam("pno")
@@ -91,7 +116,7 @@ public class GoodsController {
 		List<Goods> list = new ArrayList<>();
 		String uploadFolder = "C:\\upload\\main";
 
-		System.out.println("내가 받은 상품 번호: ");
+		System.out.println("�궡媛� 諛쏆� �긽�뭹 踰덊샇: ");
 		String uploadFolderPath = String.format("%d", goods.getGno());
 
 		
@@ -133,7 +158,7 @@ public class GoodsController {
 
 			try {
 
-				File saveFile = new File(uploadPath, uploadFileName); // c:upload/main/{상품 번호 폴더}/파일이름으로 최종 경로 생성
+				File saveFile = new File(uploadPath, uploadFileName); // c:upload/main/{상품 번호 폴더}/파일 이름으로 최종 경로 생성
 				multipartFile.transferTo(saveFile); // 파일을 최종 경로로 이동
 
 				int gno2 = goods.getGno();
@@ -170,7 +195,7 @@ public class GoodsController {
 		//Goods goods = new Goods();
 		
 			/*
-			 * int gno = service.getGno() + 1; System.out.println("내가 보낸 gno:" + gno);
+			 * int gno = service.getGno() + 1; System.out.println("�궡媛� 蹂대궦 gno:" + gno);
 			 * goods.setGno(gno); goods.setPname(pname); goods.setStock(stock2); int
 			 * realprice = Integer.parseInt(price); // goods.setPrice(realprice);
 			 */		 
@@ -197,6 +222,14 @@ public class GoodsController {
 		return "/goods/goodsWrite";
 	}
 	
+	@PostMapping("/search")	
+	public String search(Common common) {
+		
+		
+		return "search";
+	} 
+
+	
 	private String fileUpload() {
 		
 		return null;
@@ -219,13 +252,33 @@ public class GoodsController {
 	
 	
 	@GetMapping("/goodsDetail/{gno}")
-	public String goodsDetail(Model model, @PathVariable("gno") int gno) {
+	public String goodsDetail(Model model, Common common, @PathVariable("gno") int gno) {
 		log.info("goods detail");
+		Common common4 = new Common();
 		Goods goods = service.showOneItem(gno);
-		String optionList = goods.getOption_list();
-		String[] optionListAll = optionList.split("\n");
-		goods.setOption_list_split(optionListAll);
+		log.info("콘텐츠"+goods.getContent());
+//		String optionList = goods.getOption_list();
+//		String[] optionListAll = optionList.split("\n");
+//		goods.setOption_list_split(optionListAll);
+		
+		List<Review> list = reviewService.getReviewList(common, gno);
 		model.addAttribute("goods", goods);
-		return "/goods/goodsDetail";
+		model.addAttribute("reviewList", list);
+
+		common4.setGoods_no(gno);
+		List<Adminclaim> claimlist = claimService.showlistAll(common4);
+		model.addAttribute("claimlist", claimlist);
+		
+		if(claimlist.size() > 0)
+			model.addAttribute("tot4", claimlist.get(0).getTotal());
+	
+		Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+		String id = auth.getName();
+		log.info("id: "+id);
+		model.addAttribute("id", id);
+		
+		return "detail";
 	}
+	
+	
 }

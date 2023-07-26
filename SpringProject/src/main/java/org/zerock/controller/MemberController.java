@@ -11,7 +11,6 @@ import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.zerock.domain.Member;
 import org.zerock.service.MemberService;
@@ -26,10 +25,20 @@ public class MemberController {
 	@Autowired
 	private MemberService service;
 	
+	
+	@GetMapping("/login")
+	public String loginInput(String error, String logout, Model model) {
+
+		log.info("error: " + error);
+		log.info("logout: " + logout);
+		
+		return "customlogin";
+	}
+	
 	@GetMapping("/join")
 	public String joinform() {
 		log.info("=========join========");
-		return "/join";
+		return "join";
 	}
 	
 	@PostMapping("/join.do")

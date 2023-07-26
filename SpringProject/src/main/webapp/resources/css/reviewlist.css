@@ -1,0 +1,93 @@
+@charset "utf-8";
+
+#myTabContent2 .review ul {
+	padding: 10px;
+	box-sizing: border-box;
+	list-style-type: none;
+}
+
+#myTabContent2 .review ul>li {
+	padding-top: 16px;
+	border-bottom: 1px solid #ececec;
+	box-sizing: border-box;
+	width:80%;
+}
+
+#myTabContent2 .review ul>li>div {
+	overflow: hidden;
+}
+
+#myTabContent2 .review ul>li>div span {
+	float: right;
+	color: #555;
+}
+
+#myTabContent2 .review ul>li>div h5 {
+	float: left;
+}
+
+#product h5.rating {
+	width: 150px;
+	height: 20px;
+	font-size: 0px;
+	background-image: url(./img/ico_rating_star.png);
+	background-repeat: no-repeat;
+	background-position: 36px 0px;
+	text-indent: 86px;
+}
+
+#myTabContent2 .review ul>li h3 {
+	color: #555;
+	margin-top: 6px;
+}
+
+#myTabContent2 .review ul>li p {
+	text-align:left;
+	width: 100%;
+	color: #555;
+	font-size: 14px;
+	line-height: 19px;
+	word-break: break-all;
+	word-wrap: break-word;
+	margin-top: 10px;
+}
+
+#myTabContent2 .review .paging {
+	width: 100%;
+	padding: 30px 0;
+	text-align: center;
+}
+
+#notice .notice {
+	margin: 20px 0;
+	padding: 21px 26px 20px 19px;
+	line-height: 20px;
+	font-size: 14px;
+	color: #757c8a;
+	background: #fafafa;
+	border-radius: 2px;
+	white-space: normal;
+}
+
+#myTabContent2 .review .paging span a {
+	color: #777;
+	font-size: 11px;
+	letter-spacing: -1px;
+}
+
+#myTabContent2 .review .paging .num a {
+	display: inline-block;
+	min-width: 14px;
+	margin: 0 2px;
+	padding: 8px 9px;
+	border: 1px solid #c4c4c4;
+	color: #000;
+	font-size: 12px;
+	text-align: center;
+	text-decoration: none;
+}
+
+#myTabContent2 .review .paging .num a.on {
+	color: #fe434c;
+	font-weight: bold;
+}

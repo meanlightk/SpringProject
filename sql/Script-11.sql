@@ -182,6 +182,7 @@ SELECT * FROM(
 	    regidate,
 	    updatedate,
 	    status,
+	    0 AS answer_no,
 	    1 AS level
 	  FROM gclaim
 	  
@@ -195,6 +196,7 @@ SELECT * FROM(
 	    ac.regidate,
 	    ac.updatedate,
 	    ac.status,
+	    ac.answer_no,
 	    ch.level + 1 AS level
 	  FROM answer_claim ac
 	  JOIN ClaimHierarchy ch ON ac.gclaim_no = ch.gclaim_no
@@ -206,11 +208,13 @@ SELECT * FROM(
 	  gclaim_no,
 	  goods_no,
 	  mem_id,
-	  CONCAT(SPACE(4*(LEVEL-1)), content) AS content,
+	  content,
 	  regidate,
 	  updatedate,
 	  status,
-	  ROW_NUMBER() over(ORDER BY regidate desc) AS rownum
+	  answer_no,
+	  ROW_NUMBER() over(ORDER BY regidate desc) AS rownum,
+	  count(1) over() AS total
 	FROM ClaimHierarchy
 	ORDER BY gclaim_no, LEVEL
 )b

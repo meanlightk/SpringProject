@@ -1,5 +1,9 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
+    
 <!DOCTYPE html>
 <html>
 <head>
@@ -99,9 +103,51 @@ $(document).ready(function(){
 </script>
 </head>
 <body>
+
+<div class="container">
+  <h2>상품 리스트</h2>
+  <c:if test="${!empty orderList}">
+    <table class="table">
+    <thead>
+      <tr>
+        <th></th>
+        <th>유저</th>
+        <th>가격</th>
+        <th>등록일</th>
+        <th>택배회사명</th>
+        <th>송장</th>
+      </tr>
+    </thead>
+    <tbody>
+    <c:forEach var="good" items="${orderList}">
+      <tr>
+        <td></td>
+        <td>${good.mem_id}</td>
+        <td>${good.totprice}</td>
+        <td>${good.regidate}</td>
+        <td>	
+        	<span id="tekbeCompnayName">택배회사명: </span>
+			<select id="tekbeCompnayList" name="tekbeCompnayList">
+			</select>
+		</td>
+        <td>        
+        	<span id="invoiceNumber">운송장번호: </span>
+			<input type="text" id="invoiceNumberText" name="invoiceNumberText"><br/><br/>
+			<button id="myButton1">등록 </button>    
+        </td>
+      </tr>
+    </c:forEach>
+    </tbody>
+  </table>
+  </c:if>        
+
+</div>
+
 	<span id="tekbeCompnayName">택배회사명: </span>
-		<select id="tekbeCompnayList" name="tekbeCompnayList">
-		</select><br/><br/>
+	<select id="tekbeCompnayList" name="tekbeCompnayList">
+	</select>
+		
+		<br/><br/>
 
 	<span id="invoiceNumber">운송장번호: </span>
 	<input type="text" id="invoiceNumberText" name="invoiceNumberText"><br/><br/>
@@ -115,5 +161,7 @@ $(document).ready(function(){
 	<div>
 		<table id="myPtag2"></table>
 	</div>
+	
+	
 </body>
 </html>

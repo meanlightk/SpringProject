@@ -1,7 +1,13 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-    
-
+<%@ taglib prefix="tiles" uri="http://tiles.apache.org/tags-tiles" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
+<%@ page import="org.springframework.security.core.Authentication" %>
+<%@ page import="org.springframework.security.core.context.SecurityContextHolder" %>
+<%@ page import="org.springframework.security.core.userdetails.UserDetails" %>
+<%@ page import="org.springframework.security.core.GrantedAuthority" %>
+<%@ page import="java.util.*" %>
 
 <!--===============================================================================================-->	
 	<link rel="icon" type="image/png" href="../resources/images/icons/favicon.png"/>
@@ -37,31 +43,65 @@
 
 <!-- Header -->
 	<header class="header-v4">
+<%
+	Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+	String id = auth.getName();
+	request.setAttribute("userId", id);
+	
+	boolean hasRole = auth.getAuthorities().stream()
+            .map(GrantedAuthority::getAuthority)
+            .anyMatch(role -> role.equals("ROLE_MANAGER"));
+	
+	if(hasRole){
+		request.setAttribute("role", "ROLE_MANAGER");
+	}
+%>
+
+<style>
+.logoutbtn{
+	margin: 0px 0px 0px 10px;
+	height: 100%;
+	color: #fff; /* 글자 색상을 설정합니다. */
+    background-color: transparent; /* 배경을 투명하게 만듭니다. */
+    border: none; /* 테두리를 제거합니다. */
+    font-size: 11px;
+}
+</style>
 		<!-- Header desktop -->
 		<div class="container-menu-desktop">
 			<!-- Topbar -->
 			<div class="top-bar">
 				<div class="content-topbar flex-sb-m h-full container">
 					<div class="left-top-bar">
-						Free shipping for standard order over $100
+						<p>나비, 피부에 다가오다</p>
 					</div>
 
 					<div class="right-top-bar flex-w h-full">
 						<a href="#" class="flex-c-m trans-04 p-lr-25">
 							Help & FAQs
 						</a>
-
-						<a href="#" class="flex-c-m trans-04 p-lr-25">
-							My Account
-						</a>
-
-						<a href="#" class="flex-c-m trans-04 p-lr-25">
-							EN
-						</a>
-
-						<a href="#" class="flex-c-m trans-04 p-lr-25">
-							USD
-						</a>
+						<c:choose>
+							<c:when test='${role != "ROLE_MANAGER" }'>
+							</c:when>
+							<c:when test='${role == "ROLE_MANAGER" }'>
+								<a href="/admin/claims" class="flex-c-m trans-04 p-lr-25">
+									고객관리
+								</a>
+							</c:when>
+						</c:choose>
+						<c:choose>
+							<c:when test='${userId == "anonymousUser" }'>
+								<a href="/member/login" class="flex-c-m p-lr-10 trans-04">
+									로그인
+								</a>
+							</c:when>
+							<c:when test='${userId != "anonymousUser" }'>
+								<form action="/logout.do" method='post'>
+									<input type="hidden" name="${_csrf.parameterName }" value="${_csrf.token }" >
+									<button class="logoutbtn">로그아웃</button>
+								</form>
+							</c:when>
+						</c:choose>
 					</div>
 				</div>
 			</div>
@@ -77,21 +117,21 @@
 					<!-- Menu desktop -->
 					<div class="menu-desktop">
 						<ul class="main-menu">
-							<li>
-								<a href="/home">Home</a>
-								<ul class="sub-menu">
+						<!--  	<li class="active-menu">
+								<a href="/home?menu=1">Home</a>
+ 								<ul class="sub-menu">
 									<li><a href="/home">Homepage 1</a></li>
 									<li><a href="/home2">Homepage 2</a></li>
 									<li><a href="/home3">Homepage 3</a></li>
 								</ul>
 							</li>
 
-							<li class="active-menu">
+							<li>
 								<a href="/showlist">Shop</a>
 							</li>
 
 							<li class="label1" data-label1="hot">
-								<a href="/put">Features</a>
+								<a href="/cart/view">Features</a>
 							</li>
 
 							<li>
@@ -104,7 +144,22 @@
 
 							<li>
 								<a href="/contact">Contact</a>
-							</li>
+							</li>-->
+							<tiles:importAttribute name="menuList" />
+							<c:forEach var="menu"  items="${menuList}"> 
+								<c:choose>
+									<c:when test="${menu.check1 == 1 }">
+										<li class="active-menu">
+											<a href="${menu.menuUrl}?menu=${menu.menuCd}">${menu.menuName}</a>
+										</li>
+									</c:when>
+									<c:otherwise>
+										<li>
+											<a href="${menu.menuUrl}?menu=${menu.menuCd}">${menu.menuName}</a>
+										</li>
+									</c:otherwise>
+								</c:choose>
+							</c:forEach>
 						</ul>
 					</div>	
 
@@ -162,7 +217,7 @@
 			<ul class="topbar-mobile">
 				<li>
 					<div class="left-top-bar">
-						Free shipping for standard order over $100
+						<p>나비, 피부에 다가오다</p>
 					</div>
 				</li>
 
@@ -171,18 +226,19 @@
 						<a href="#" class="flex-c-m p-lr-10 trans-04">
 							Help & FAQs
 						</a>
-
-						<a href="#" class="flex-c-m p-lr-10 trans-04">
-							My Account
-						</a>
-
-						<a href="#" class="flex-c-m p-lr-10 trans-04">
-							EN
-						</a>
-
-						<a href="#" class="flex-c-m p-lr-10 trans-04">
-							USD
-						</a>
+						<c:choose>
+							<c:when test='${userId == "anonymousUser" }'>
+								<a href="/member/login" class="flex-c-m p-lr-10 trans-04">
+									로그인
+								</a>
+							</c:when>
+							<c:when test='${userId != "anonymousUser" }'>
+								<form action="/logout.do" method='post'>
+									<input type="hidden" name="${_csrf.parameterName }" value="${_csrf.token }" >
+									<button class="logoutbtn">로그아웃</button>
+								</form>
+							</c:when>
+						</c:choose>
 					</div>
 				</li>
 			</ul>
@@ -205,7 +261,7 @@
 				</li>
 
 				<li>
-					<a href="/put" class="label1 rs1" data-label1="hot">Features</a>
+					<a href="/cart/view" class="label1 rs1" data-label1="hot">Features</a>
 				</li>
 
 				<li>
@@ -229,11 +285,13 @@
 					<img src="../resources/images/icons/icon-close2.png" alt="CLOSE">
 				</button>
 
-				<form class="wrap-search-header flex-w p-l-15">
+				<form action="/goods/search.do"  class="wrap-search-header flex-w p-l-15">
 					<button class="flex-c-m trans-04">
 						<i class="zmdi zmdi-search"></i>
 					</button>
-					<input class="plh3" type="text" name="search" placeholder="Search...">
+					<input class="plh3" type="text" name="searchText" placeholder="Search...">
+					<input type="hidden" name="searchId" value="pname">
+					
 				</form>
 			</div>
 		</div>
@@ -311,7 +369,7 @@
 					</div>
 
 					<div class="header-cart-buttons flex-w w-full">
-						<a href="/put" class="flex-c-m stext-101 cl0 size-107 bg3 bor2 hov-btn3 p-lr-15 trans-04 m-r-8 m-b-10">
+						<a href="/cart/view" class="flex-c-m stext-101 cl0 size-107 bg3 bor2 hov-btn3 p-lr-15 trans-04 m-r-8 m-b-10">
 							View Cart
 						</a>
 

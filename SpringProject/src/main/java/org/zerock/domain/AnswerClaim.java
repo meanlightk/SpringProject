@@ -14,4 +14,7 @@ public class AnswerClaim {
 	private Date regidate;
 	private Date updatedate;
 	private String status;
+	
+	private int rownum;
+	private int total;
 }

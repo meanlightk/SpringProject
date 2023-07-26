@@ -1,10 +1,19 @@
 package org.zerock.controller;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
+import org.zerock.domain.Adminclaim;
+import org.zerock.domain.Common;
+import org.zerock.service.ClaimService;
 import org.zerock.service.GoodsService;
 
 import lombok.extern.log4j.Log4j;
@@ -17,10 +26,9 @@ public class CommonController {
 	@Autowired
 	GoodsService service;
 	
-	@RequestMapping("/")
-	public String main() {
-		return "redirect:/home";
-	}
+	@Autowired
+	ClaimService claimService;
+
 	
 	@RequestMapping("/home")
 	public String mainPage(Model model) {
@@ -40,10 +48,6 @@ public class CommonController {
 		return "/main/home3";
 	}
 	
-	@RequestMapping("/showlist")
-	public String goodslist() {
-		return "itemlist";
-	}
 	
 	@RequestMapping("/list/goods")
 	public String goods() {
@@ -69,30 +73,38 @@ public class CommonController {
 	public String blog() {
 		return "blog";
 	}
-	
-	@GetMapping("/login")
-	public String loginInput(String error, String logout, Model model) {
 
-		log.info("error: " + error);
-		log.info("logout: " + logout);
-		
-		return "/customlogin";
-	}
-
-	
-	@RequestMapping("/test")
-	public String test() {
-		return "test";
-	}
-	
-	@GetMapping("/review/form")
-	public String reviewForm() {
-		return "/review/form";
+	@RequestMapping("/qna")
+	public String qna() {
+		return "qna";
 	}
 	
 	@RequestMapping("/sample/member")
 	public String membersample() {
 		return "/sample/member";
 	}
-
+	
+	@GetMapping("/test")
+	public String test() {
+		
+		
+		return "test";
+	}
+	
+	@GetMapping("/test2")
+	public String test2() {
+		Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+		String id = auth.getName();
+		
+		log.info("id:"+id);
+		
+		return "/claim/writeClaim";
+	}
+	
+	@PostMapping("/test3")
+	@ResponseBody
+	public String test3() {
+		
+		return "test";
+	}
 }

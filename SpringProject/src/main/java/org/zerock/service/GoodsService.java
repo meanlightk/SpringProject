@@ -4,6 +4,7 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.zerock.domain.Common;
 import org.zerock.domain.Goods;
 import org.zerock.mapper.GoodsMapper;
 
@@ -59,6 +60,16 @@ public class GoodsService {
 	public List<Goods> goodsList(){
 		return mapper.goodsList();
 	}
+	
+	public List<Goods> getSearchGoodsList(Common common){
+		return mapper.selectSearchList(common);
+	}
+
+	
+	public List<Goods> getGoodsOrderList(Common common){
+		return mapper.selectGoodsOrderList(common);
+	}
+
 	
 	public void updateFilePath(Goods goods) {
 		mapper.updateFilePath(goods);

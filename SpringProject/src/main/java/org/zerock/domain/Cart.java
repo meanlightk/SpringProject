@@ -10,9 +10,9 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @NoArgsConstructor
 public class Cart {
-	private int cno;
+	private int cart_no;
 	private String memid;
-	private int gno;
+	private int goods_no;
 	private int ordernum;
 	private Date regidate;
 	private String option_name;

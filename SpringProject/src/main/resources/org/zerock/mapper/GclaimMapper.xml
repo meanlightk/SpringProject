@@ -18,8 +18,14 @@ SELECT * FROM(
 	    regidate,
 	    updatedate,
 	    status,
+	    0 AS answer_no,
 	    1 AS level
 	  FROM gclaim
+	  <where>
+	  	<if test="goods_no != 0">
+	  		goods_no = #{goods_no}
+	  	</if>
+	  </where>
 	  
 	  UNION ALL
 	  
@@ -31,6 +37,7 @@ SELECT * FROM(
 	    ac.regidate,
 	    ac.updatedate,
 	    ac.status,
+	    ac.answer_no,
 	    ch.level + 1 AS level
 	  FROM answer_claim ac
 	  JOIN ClaimHierarchy ch ON ac.gclaim_no = ch.gclaim_no
@@ -42,15 +49,17 @@ SELECT * FROM(
 	  gclaim_no,
 	  goods_no,
 	  mem_id,
-	  CONCAT(SPACE(4*(LEVEL-1)), content) AS content,
+	  content,
 	  regidate,
 	  updatedate,
 	  status,
-	  ROW_NUMBER() over(ORDER BY regidate desc) AS rownum
+	  answer_no,
+	  ROW_NUMBER() over(ORDER BY gclaim_no, answer_no desc) AS rownum,
+	  count(1) over() AS total
 	FROM ClaimHierarchy
-	ORDER BY gclaim_no, LEVEL
+	ORDER BY gclaim_no, answer_no
 )b
-WHERE rownum BETWEEN (#{section}-1)*100+(#{pagenum}-1)*10+1 AND (#{section}-1)*100+#{pagenum}*10;
+WHERE rownum BETWEEN (#{section}-1)*100+(#{pageNum}-1)*10+1 AND (#{section}-1)*100+#{pageNum}*10;
 </select>
 
 
@@ -89,7 +98,7 @@ WHERE rownum BETWEEN (#{section}-1)*100+(#{pagenum}-1)*10+1 AND (#{section}-1)*1
  	update gclaim
  	set
  	content=#{content},
- 	status
+ 	status=#{status}
  	where gclaim_no=#{glno}
  </update>
  
@@ -139,7 +148,7 @@ WHERE rownum BETWEEN (#{section}-1)*100+(#{pagenum}-1)*10+1 AND (#{section}-1)*1
 </update>
 
 <delete id="deleteClaimAnswer">
-	delete from answer_no=#{anscno}
+	delete from answer_claim where answer_no=#{anscno}
 </delete>
  
  

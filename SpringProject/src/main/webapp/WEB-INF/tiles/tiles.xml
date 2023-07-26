@@ -5,10 +5,10 @@
 
 <tiles-definitions>
 
-<definition name="layout" template="/WEB-INF/views/tiles/template.jsp">
-<put-attribute name="header" value="/WEB-INF/views/tiles/header.jsp" />
-<put-attribute name="body" value="" />
-<put-attribute name="footer" value="/WEB-INF/views/tiles/footer.jsp" />
+<definition name="layout" template="/WEB-INF/views/tiles/template.jsp" preparer="menuPreparer" >
+	<put-attribute name="header" value="/WEB-INF/views/tiles/header.jsp" />
+	<put-attribute name="body" value="" />
+	<put-attribute name="footer" value="/WEB-INF/views/tiles/footer.jsp" />
 </definition>
 
 
@@ -29,15 +29,15 @@
 <put-attribute name="body" value="/WEB-INF/views/blog/bloglist.jsp" />
 </definition>
 
-<definition name="mycart" extends="layout">
-<put-attribute name="title" value="Cart" />
-<put-attribute name="body" value="/WEB-INF/views/cart/myCart.jsp" />
+<definition name="cart" extends="layout">
+<put-attribute name="title" value="장바구니" />
+<put-attribute name="body" value="/WEB-INF/views/cart/cartList.jsp" />
 </definition>
 
 
 <definition name="contact" extends="layout">
 <put-attribute name="title" value="Contact" />
-<put-attribute name="body" value="/WEB-INF/views/contact/contact.jsp" />
+<put-attribute name="body" value="/WEB-INF/views/claim/contact.jsp" />
 </definition>
 
 
@@ -51,6 +51,12 @@
 <put-attribute name="title" value="Goods List" />
 <put-attribute name="body" value="/WEB-INF/views/goods/list.jsp" />
 </definition>
+
+<definition name="searchlist" extends="layout">
+<put-attribute name="title" value="Goods List" />
+<put-attribute name="body" value="/WEB-INF/views/goods/searchlist.jsp" />
+</definition>
+
 
 
 <definition name="/review/form" extends="layout">
@@ -80,6 +86,18 @@
 	<put-attribute name="title" value="Contact" />
 	<put-attribute name="body" value="/WEB-INF/views/qna/qna.jsp" />
 </definition>
+
+
+<definition name="detail" extends="layout">
+	<put-attribute name="title" value="goodsDetail" />
+	<put-attribute name="body" value="/WEB-INF/views/goods/goodsDetail.jsp" />
+</definition>
+
+<definition name="*/*" extends="layout">
+	<put-attribute name="title" value="shop" />
+	<put-attribute name="body" value="/WEB-INF/views/{1}/{2}.jsp" />
+</definition>
+
 
 
 </tiles-definitions>

@@ -5,121 +5,154 @@
  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
 <mapper namespace="org.zerock.mapper.GoodsMapper">
+	<sql id="info">
+		g.goods_no as gno,
+		category,
+		content,
+		pname,
+		sellPrice,
+		skintype,
+		g.regidate,
+		updatedate,
+		stock,
+		g.status,
+		imagepath,
+		originalPrice,
+		discountPrice,
+		uuid,
+		option_list,
+		ROW_NUMBER() over(ORDER BY g.regidate desc) AS rownum,
+		count(1) over() AS totalCount
+	</sql>
 
-<select id="selectOneItem" resultType="org.zerock.domain.Goods">
-	select
-	goods_no as gno,
-	category,
-	pname,
-	sellPrice,
-	skintype,
-	regidate,
-	updatedate,
-	stock,
-	status,
-	imagepath,
-	originalPrice,
-	discountPrice,
-	uuid,
-	option_list
-	from goods where goods_no = #{gno}
-</select>
 
-<select id="selectListByCategory" resultType="org.zerock.domain.Goods">
-	select
-	goods_no as gno,
-	category,
-	pname,
-	content,
-	sellPrice,
-	skintype,
-	regidate,
-	updatedate,
-	stock,
-	status,
-	imagepath,
-	originalPrice,
-	discountPrice,
-	uuid,
-	option_list
-	from goods where category = #{category} 
-</select>
 
-<select id="selectListByCateAndSkin" resultType="org.zerock.domain.Goods">
-	select
-	goods_no as gno,
-	category,
-	pname,
-	content,
-	sellPrice,
-	skintype,
-	regidate,
-	updatedate,
-	stock,
-	status,
-	imagepath,
-	originalPrice,
-	discountPrice,
-	uuid,
-	option_list
-	from goods where category=#{category} and skintype=#{skintype}
-</select>
+	<select id="selectOneItem" resultType="org.zerock.domain.Goods">
+		select
+			<include refid="info"/>  
+		from goods g
+		where goods_no = #{gno}
+	</select>
 
-<!-- <insert id="insertItem" parameterType="org.zerock.domain.Goods" >
+	<select id="selectListByCategory" resultType="org.zerock.domain.Goods">
+		select
+			<include refid="info"/>  
+		from goods g where category = #{category}
+	</select>
 
-	insert into goods(category, pname, price, skintype, stock, status)
-	values(#{category}, #{pname}, #{price}, #{skintype}, #{stock}, #{status}) 
+	<select id="selectListByCateAndSkin"
+		resultType="org.zerock.domain.Goods">
+		select
+			<include refid="info"/>  
+		from goods g where category=#{category} and skintype=#{skintype}
+	</select>
 
-</insert> -->
+	<!-- <insert id="insertItem" parameterType="org.zerock.domain.Goods" > insert 
+		into goods(category, pname, price, skintype, stock, status) values(#{category}, 
+		#{pname}, #{price}, #{skintype}, #{stock}, #{status}) </insert> -->
 
-<update id="updateItem" parameterType="org.zerock.domain.Goods" >
-	update goods set category=#{category}, pname=#{pname}, sellPrice=#{sellPrice}, originalPrice=#{originalPrice},
-	discountPrice=#{discountPrice},content=#{content},imagepath=#{imagepath},
-	skintype=#{skintype}, stock=#{stock}, status=#{status},uuid=#{uuid},option_list=#{option_list} where goods_no=#{gno}
-</update>
+	<update id="updateItem" parameterType="org.zerock.domain.Goods">
+		update goods 
+		set category=#{category}, 
+			pname=#{pname},
+			sellPrice=#{sellPrice}, 
+			originalPrice=#{originalPrice},
+			discountPrice=#{discountPrice},
+			content=#{content},
+			imagepath=#{imagepath},
+			skintype=#{skintype}, 
+			stock=#{stock},
+			status=#{status},
+			uuid=#{uuid},
+			option_list=#{option_list} 
+		where goods_no=#{gno}
+	</update>
 
-<delete id="deleteItem">
-	delete from goods where goods_no = #{gno}
-</delete>
-<!-- 
-<select id="selectImageList" resultType="org.zerock.domain.Goods">
-	select * from goodsImage where goods_no = #{gno}
-</select>
- -->
- 
-<insert id="insertItem" parameterType="org.zerock.domain.Goods">
-   <selectKey keyProperty="gno" resultType="int" order="BEFORE">
-		SELECT IFNULL(max(goods_no)+1,1) FROM goods
-   </selectKey>
-   INSERT INTO goods (category, pname, content, sellPrice, skintype, stock, status, imagepath, originalPrice, discountPrice, uuid, option_list)
-   VALUES ( 
-   		#{category},
-   		#{pname},
-   		#{content},
-   		#{sellPrice},
-   		#{skintype},
-   		#{stock},
-   		#{status},
-   		#{imagepath},
-      #{originalPrice}, 
-      #{discountPrice},
-      #{uuid},
-      #{option_list}      
-   )
-</insert>
+	<delete id="deleteItem">
+		delete from goods where goods_no = #{gno}
+	</delete>
+	<!-- <select id="selectImageList" resultType="org.zerock.domain.Goods"> 
+		select * from goodsImage where goods_no = #{gno} </select> -->
 
-<select id="getGoodsNo" resultType="int">
-	SELECT max(last_insert_id(goods_no))+1 FROM goods
-</select>
+	<insert id="insertItem" parameterType="org.zerock.domain.Goods">
+		<selectKey keyProperty="gno" resultType="int" order="BEFORE">
+			SELECT IFNULL(max(goods_no)+1,1) FROM goods
+		</selectKey>
+		INSERT INTO goods (category, pname, content, sellPrice, skintype,
+		stock, status, imagepath, originalPrice, discountPrice, uuid,
+		option_list)
+		VALUES (
+		#{category},
+		#{pname},
+		#{content},
+		#{sellPrice},
+		#{skintype},
+		#{stock},
+		#{status},
+		#{imagepath},
+		#{originalPrice},
+		#{discountPrice},
+		#{uuid},
+		#{option_list}
+		)
+	</insert>
+
+	<select id="getGoodsNo" resultType="int">
+		SELECT max(last_insert_id(goods_no))+1 FROM goods
+	</select>
 
 	<select id="goodsList" resultType="org.zerock.domain.Goods">
-		select 
-			goods_no as gno, 
+		select
+		goods_no as gno,
+		g.*,
+		concat(goods_no,'/s_',uuid) as simagepath
+		from goods g
+	</select>
+	<select id="selectSearchList" parameterType="org.zerock.domain.Common" resultType="org.zerock.domain.Goods">
+		select
+			goods_no as gno,
 			g.*,
 			concat(goods_no,'/s_',uuid) as simagepath
-		 from goods g
+		from goods g
+		where 1=1
+			<if test='searchId != null and searchId != ""'>
+				and ${searchId}
+			</if>
+			<if test='searchText != null and searchText != ""'>
+				like concat('%',#{searchText},'%')
+			</if>
+			<if test='category != null and category != ""'>
+				and category like concat('%',#{category},'%')
+			</if>
+			<if test='price1 != 0 and price2 != 0'>
+			</if>
 	</select>
-<update id="updateFilePath" parameterType="org.zerock.domain.Goods">
-	update goods set imagepath=#{imagepath}, uuid=#{uuid} where goods_no = #{gno}
-</update>
+
+	<update id="updateFilePath" parameterType="org.zerock.domain.Goods">
+		update goods set imagepath=#{imagepath}, uuid=#{uuid}
+		where goods_no = #{gno}
+	</update>
+
+	<select id="selectGoodsOrderList" parameterType="org.zerock.domain.Common" resultType="org.zerock.domain.Goods">
+		select
+			c.update_date as parcelDate,
+			dstatus,
+			case
+			    when o.dstatus= '1' then '배송전'
+			    when o.dstatus= '2' then '출고완료'
+			    when o.dstatus= '3' then '배송중'
+			   	when o.dstatus= '4' then '배송완료'
+			    else '배송정보사용불가'
+			end as dstatusStr,
+			DATE_FORMAT(o.regiDate,'%Y.%m.%d') as payDate,
+			o.waybill_num as waybillNum,
+			o.parcel_cd as parcelCd,
+			<include refid="info"/>
+		from goods g
+		inner join cart c on(g.goods_no = c.goods_no)
+		inner join orderlist o on(o.orderlist_no = c.ordernum)
+		where c.mem_id = #{memId}
+	</select>
+
+
 </mapper>
