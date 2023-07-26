@@ -169,7 +169,7 @@ public class GoodsController {
 	private String fileUpload(Goods goods, MultipartFile[] uploadFile) {
 		String uploadFolder = filePath + "/main";
 
-		System.out.println("�궡媛� 諛쏆� �긽�뭹 踰덊샇: ");
+		System.out.println("상품 번호: ");
 		String uploadFolderPath = String.format("%d", goods.getGno());
 
 		// make folder ---------
@@ -348,10 +348,7 @@ public class GoodsController {
 		Common common4 = new Common();
 		Goods goods = service.showOneItem(gno);
 		log.info("콘텐츠"+goods.getContent());
-		String optionList = goods.getOption_list();
-		String[] optionListAll = optionList.split("\n");
 		goods.setOption_list_split(optionListAll);
-		
 		List<Review> list = reviewService.getReviewList(common, gno);
 		model.addAttribute("goods", goods);
 		model.addAttribute("reviewList", list);

@@ -38,9 +38,33 @@ public class CartService {
 		mapper.deleteCart(cart);
 	}
 
-	public void showCartCount(String id) {
+	public void showCartCount(String memid) {
 		log.info("-- cart count --");
 
+	}
+	
+	public List<CartItem> getDirectCartItem(List<Integer> cartNoList){
+		List<CartItem> cartItemList = new ArrayList<>();
+		
+		for(Integer cartNo : cartNoList) {
+			List<Cart> cartList = mapper.selectCartNo(cartNo);
+			for (int i = 0; i < cartList.size(); i++) {
+				Cart cart = cartList.get(i);
+				Goods goods = goodsMapper.selectOneItem(cart.getGoods_no());
+	
+				CartItem cartItem = new CartItem();
+				cartItem.setCartNo(cart.getCart_no());
+				cartItem.setQuantity(cart.getQuantity());
+				cartItem.setGoodsNo(cart.getGoods_no());
+				cartItem.setGoodsName(goods.getPname());
+				cartItem.setGoodsImage(goods.getImagepath());
+				cartItem.setGoodsPrice(goods.getSellPrice());
+	
+				cartItemList.add(cartItem);
+			}
+		}
+
+		return cartItemList;
 	}
 
 	/***
