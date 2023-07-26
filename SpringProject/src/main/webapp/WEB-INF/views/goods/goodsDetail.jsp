@@ -739,7 +739,7 @@ button{
 							<td><img src="/upload/main/${goods.imagepath}" width="500" height="500" /></td>
 						</tr>
 					</table>
-					<div id="test-swiper" class="swiper-container xans-element- xans-product xans-product-addimage listImg cboth" style="position: relative; margin-top: 10px; height: 134px; overflow: visible;">
+					<div id="test-swiper" class="swiper-container xans-element- xans-product xans-product-addimage listImg cboth" style="position: relative; margin-top: 10px; height: 134px;">
 						<ul class="swiper-wrapper">
 							<li class="swiper-slide">
 								<div style="float: left;">
@@ -750,12 +750,12 @@ button{
 									<img src="./../../../resources/img/product5.png" class="ThumbImage" alt>
 								</div>							
 							</li>
-<!--  						    <li class="swiper-slide">
+  						    <li class="swiper-slide">
 								<div style="float: left;">
 									<img src="./../../../resources/img/product6.png" class="ThumbImage" alt>
 									<img src="./../../../resources/img/product7.png" class="ThumbImage" alt>
 								</div>
-						    </li>-->
+						    </li>
 						</ul>
 						<!--  <div class="swiper-wrapper">
 							<div class="swiper-slide" style="justify: center;">
