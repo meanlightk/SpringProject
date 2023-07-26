@@ -42,12 +42,12 @@ public class CartContoller {
 	@Autowired
 	CartService cartService;
 	
-	Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+
 	
 	@GetMapping("/view")
 	public String viewCart(Model model) {
 		//로그인 유저 체크
-		
+		Authentication auth = SecurityContextHolder.getContext().getAuthentication();		
 		if(auth.getName() == null || auth.getName().equals("") || auth.getName().equals("anonymousUser")) {
 			//미로그인 상태
 			return "redirect:/login";
