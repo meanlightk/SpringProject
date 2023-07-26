@@ -9,7 +9,7 @@
 		g.goods_no as gno,
 		category,
 		content,
-		pname,
+		g.pname,
 		sellPrice,
 		skintype,
 		g.regidate,
@@ -24,8 +24,6 @@
 		ROW_NUMBER() over(ORDER BY g.regidate desc) AS rownum,
 		count(1) over() AS totalCount
 	</sql>
-
-
 
 	<select id="selectOneItem" resultType="org.zerock.domain.Goods">
 		select
@@ -147,6 +145,7 @@
 			DATE_FORMAT(o.regiDate,'%Y.%m.%d') as payDate,
 			o.waybill_num as waybillNum,
 			o.parcel_cd as parcelCd,
+			o.orderlist_no as orderNo,
 			<include refid="info"/>
 		from goods g
 		inner join cart c on(g.goods_no = c.goods_no)

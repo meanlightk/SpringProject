@@ -5,6 +5,19 @@
 
 <mapper namespace="org.zerock.mapper.OrderListMapper">
 
+	<sql id="info">
+		orderlist_no as orderlist_no,
+		mem_id as mem_id,
+		totprice,
+		dstatus,
+		waybill_num as waybill_num,
+		parcel_cd as parcel_cd,
+		DATE_FORMAT(regiDate,'%Y%m%d') as regiDateStr,
+		ROW_NUMBER() over(ORDER BY regiDate desc) AS rownum,
+		count(1) over() AS totalCount 			
+	</sql>
+
+
 	<insert id="insertOrder"
 		parameterType="org.zerock.domain.OrderList" useGeneratedKeys="true"
 		keyProperty="orderlist_no">
@@ -25,17 +38,6 @@
 		VALUES (#{order_no}, #{name}, #{phone}, #{addr1}, #{addr2}, #{memo})
 	</insert>
 	
-	<sql id="info">
-			orderlist_no as orderlist_no,
-			mem_id as mem_id,
-			totprice,
-			dstatus,
-			waybill_num as waybill_num,
-			parcel_cd as parcel_cd,
-			DATE_FORMAT(regiDate,'%Y%m%d') as regiDateStr,
-			ROW_NUMBER() over(ORDER BY regiDate desc) AS rownum,
-			count(1) over() AS totalCount 			
-	</sql>
 
 	<sql id="where">
 	</sql>
@@ -51,11 +53,17 @@
 		order by rownum
 		
 	</select>
-	<select id="selectOrderId" resultType="org.zerock.domain.OrderList">
+	<select id="selectOrderId" resultType="java.util.HashMap">
 		select
-		<include refid="info"/> 
-		from orderlist	
-		where orderlistNo = #{orderlistNo}
+			name,
+			phone,
+			a.addr1,
+			addr2 as Daddr,
+			memo,
+			<include refid="info"/> 
+		from orderlist l
+		INNER JOIN order_address a ON(l.orderlist_no = a.order_no)
+		where orderlist_no = #{orderlistNo}
 	</select>
 	<insert id="insertOrderList" parameterType="org.zerock.domain.OrderList">
 		insert into orderlist(mem_id,totprice,dstatus)

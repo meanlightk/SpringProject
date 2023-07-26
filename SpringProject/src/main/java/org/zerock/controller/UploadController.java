@@ -20,6 +20,7 @@ import javax.servlet.http.HttpServletResponse;
 
 import org.apache.commons.lang.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.core.io.FileSystemResource;
 import org.springframework.core.io.Resource;
 import org.springframework.http.HttpHeaders;
@@ -49,8 +50,12 @@ import net.coobird.thumbnailator.Thumbnailator;
 @Log4j 
 public class UploadController {
 
-	private static final String filePath = "C:\\upload";
+	
 
+	@Value("${file.path}")
+	private String filePath;
+
+	
 	@Autowired
 	GoodsService service;
 
@@ -353,7 +358,7 @@ public class UploadController {
 	}
 	
 	
-	@RequestMapping(value = "/fileReviewUpload.do", method = RequestMethod.POST)
+	@PostMapping(value = "/fileReviewUpload.do")
 	@ResponseBody
 	public String fileReviewUpload(HttpServletRequest req, HttpServletResponse resp, MultipartHttpServletRequest multiFile)
 			throws Exception {
@@ -383,7 +388,7 @@ public class UploadController {
 						fileName = CommonUtils.getRandomString() + fileName1;
 						// fileName = UUID.randomUUID().toString();
 						System.out.println("fileName=" + fileName);
-						uploadPath = uploadPath + "/" + fileName;
+						uploadPath = uploadPath + "/review/" + fileName;
 						System.out.println("uploadPath=" + uploadPath);
 						out = new FileOutputStream(new File(uploadPath));
 						out.write(bytes);
@@ -392,7 +397,7 @@ public class UploadController {
 						System.out.println("printWriter=" + printWriter);
 
 						resp.setContentType("text/html");
-						String fileUrl = req.getContextPath() + "/upload/review" + fileName;
+						String fileUrl = req.getContextPath() + "/upload/review/" + fileName;
 						System.out.println("fileUrl=" + fileUrl);
 
 						// json 데이터로 등록

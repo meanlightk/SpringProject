@@ -4,265 +4,10 @@
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 
 <style>
-.content {
-	width: 1200px;
-	border-radius: 12px;
-	box-shadow: rgba(0, 0, 0, 0.08) 0px 2px 4px 0px, rgba(0, 0, 0, 0.16) 0px
-		0px 1px 0px;
-	background-color: rgb(255, 255, 255);
-	margin-bottom: 20px;
-	padding: 24px 24px 16px;
-}
 
-.content-head {
-	height: 28px;
-	display: flex;
-	-webkit-box-pack: justify;
-	justify-content: space-between;
-}
-
-.update-date {
-	display: inline-block;
-	width: 50%;
-	height: 28px;
-	font-size: 20px;
-	font-weight: bold;
-	font-stretch: normal;
-	font-style: normal;
-	line-height: 1.4;
-	letter-spacing: -0.5px;
-	color: rgb(17, 17, 17);
-}
-
-.head-data {
-	text-align: right;
-	font-size: 16px;
-	font-weight: normal;
-	font-stretch: normal;
-	font-style: normal;
-	line-height: 1.5;
-	letter-spacing: -0.5px;
-	color: rgb(52, 106, 255);
-	display: inline-flex;
-	vertical-align: middle;
-	position: relative;
-	width: auto;
-	-webkit-box-pack: end;
-	justify-content: flex-end;
-}
-
-.head-text {
-	height: 16px;
-	line-height: 1;
-	margin: auto;
-	font-family: 나눔고딕, nanumgothic, 돋움, dotum, sans-serif;
-}
-
-.card {
-	border-radius: 8px;
-	border: 1px solid rgb(238, 238, 238);
-	background-color: rgb(255, 255, 255);
-	margin-top: 16px;
-}
-
-.tablerow {
-	height: 100%;
-	padding: 20px;
-	vertical-align: top;
-}
-
-.gbTJl {
-	width: 200px;
-	height: 100%;
-	text-align: center;
-	border-left: 1px solid rgb(238, 238, 238);
-}
-
-.bCQoer {
-	display: flex;
-	flex-flow: column wrap;
-	height: 100%;
-	-webkit-box-align: center;
-	align-items: center;
-	-webkit-box-pack: justify;
-	justify-content: space-between;
-	padding: 20px;
-}
-
-.fUUUKW {
-	display: inline-flex;
-	-webkit-box-pack: center;
-	justify-content: center;
-	-webkit-box-align: center;
-	align-items: center;
-	padding-left: 12px;
-	padding-right: 12px;
-	user-select: none;
-	cursor: pointer;
-	text-decoration: none;
-	outline: none;
-	appearance: none;
-	height: 2.25rem;
-	width: 100%;
-	border-radius: 4px;
-	color: rgb(52, 106, 255);
-	background-color: rgb(255, 255, 255);
-	border: 1px solid rgb(52, 106, 255);
-	-webkit-tap-highlight-color: rgba(52, 106, 255, 0.1);
-	font-size: 0.875rem;
-}
-
-.iiEWkt {
-	min-height: 2.25rem;
-	font-size: 0.875rem;
-	width: 160px;
-	margin: 5px 0px;
-}
-
-.gcWEbw {
-	margin-top: 10px;
-}
-
-.left-head {
-    display: flex;
-    -webkit-box-align: center;
-    align-items: center;
-    margin-bottom: 4px;
-}
-
-.left-data {
-    -webkit-box-pack: start;
-    justify-content: flex-start;
-    -webkit-box-align: center;
-    align-items: center;
-    width: 100%;
-    display: flex;
-    line-height: 1.5;
-}
-
-.SWzAJ {
-    position: relative;
-    display: inline-flex;
-    -webkit-box-pack: center;
-    justify-content: center;
-    -webkit-box-align: center;
-    align-items: center;
-    width: 4px;
-    height: 1em;
-    vertical-align: middle;
-    margin-left: 6px;
-    margin-right: 6px;
-}
-.font-size125 {
-    font-size: 1.25rem;
-}
-.font-green {
-    font-size: 1rem;
-    font-weight: normal;
-    color: rgb(0, 140, 0);
-}
-
-.text-form {
-    user-select: none;
-    overflow: hidden;
-    flex: 1 1 0%;
-    display: flex;
-}
-.margin-top:first-child {
-    margin-top: 20px;
-}
-.margin-top {
-    margin-top: 16px;
-}
-
-.order-data {
-    display: flex;
-    flex-direction: row;
-}
-
-.image-form {
-    display: flex;
-    width: 64px;
-    position: relative;
-    margin-right: 16px;
-}
-.yma-DD {
-    display: flex;
-    line-height: 1.5;
-}
-.yma-DD:not(:last-child) {
-    margin-bottom: 4px;
-}
-
-.iDQVMP {
-    -webkit-box-align: center;
-    align-items: center;
-    -webkit-box-pack: justify;
-    justify-content: space-between;
-}
-
-.kftgZM {
-    font-size: 1rem;
-    font-weight: normal;
-}
-
-.iCTfhh {
-    display: inline-flex;
-    -webkit-box-pack: center;
-    justify-content: center;
-    -webkit-box-align: center;
-    align-items: center;
-    padding-left: 12px;
-    padding-right: 12px;
-    user-select: none;
-    cursor: pointer;
-    text-decoration: none;
-    outline: none;
-    appearance: none;
-    height: 2.25rem;
-    border-radius: 4px;
-    color: rgb(17, 17, 17);
-    background-color: rgb(255, 255, 255);
-    border: 1px solid rgb(221, 221, 221);
-    -webkit-tap-highlight-color: rgba(52, 106, 255, 0.1);
-    font-size: 0.875rem;
-}
-.bZaQeF {
-    min-height: 2.25rem;
-    padding: 0px 12px;
-}
-
-.kiiuoA {
-    min-height: 2.25rem;
-    font-size: 0.875rem;
-    width: 160px;
-    margin: 4px 0px;
-}
-
-.fTrGbC {
-    display: inline-flex;
-    -webkit-box-pack: center;
-    justify-content: center;
-    -webkit-box-align: center;
-    align-items: center;
-    padding-left: 12px;
-    padding-right: 12px;
-    user-select: none;
-    cursor: pointer;
-    text-decoration: none;
-    outline: none;
-    appearance: none;
-    height: 2.25rem;
-    width: 100%;
-    border-radius: 4px;
-    color: rgb(17, 17, 17);
-    background-color: rgb(255, 255, 255);
-    border: 1px solid rgb(221, 221, 221);
-    -webkit-tap-highlight-color: rgba(52, 106, 255, 0.1);
-    font-size: 0.875rem;
-}
 
 </style>
+<link rel="stylesheet" type="text/css" href="../resources/css/orderlist.css">
 
 
 
@@ -271,7 +16,7 @@
 	<section class="bg0 p-t-23 p-b-140">
 		<div class="container">
 			<div class="p-b-10">
-				<h3 class="ltext-103 cl5">주문 내역</h3>
+				<h3 class="ltext-103 cl5">배송 조회</h3>
 			</div>
 
 			<div class="flex-w flex-sb-m p-b-52">
@@ -342,8 +87,10 @@
 										</td>
 										<td class="sc-gnmni8-6 gbTJl">
 											<div class="sc-gnmni8-7 bCQoer">
-												<button id="myButton1" class="sc-1k9quwu-0 fUUUKW sc-4d0nwb-0 iiEWkt">배송조회</button>
-												<button class="sc-1k9quwu-0 fTrGbC sc-gnmni8-8 kiiuoA" onclick="fn_Review('/review/form.do',${gno})">리뷰 작성하기</button>
+												<c:if test="${item.dstatus ne '1'}">
+													<button id="myButton1" class="sc-1k9quwu-0 fUUUKW sc-4d0nwb-0 iiEWkt" onclick="fn_Track('/track/list.do',${item.orderNo})">배송조회</button>
+												</c:if>
+												<button class="sc-1k9quwu-0 fTrGbC sc-gnmni8-8 kiiuoA" onclick="fn_Review('/review/form.do',${item.gno})">리뷰 작성하기</button>
 												<input type="hidden" id="code" value="${item.parcelCd}">
 												<input type="hidden" id="invoice" value="${item.waybillNum}">
 											</div>
@@ -383,6 +130,24 @@
 	 	
 		form.submit();
 	 }
+	
+	function fn_Track(url,data){
+		var form = document.createElement("form");
+		form.setAttribute("method", "get");
+		form.setAttribute("action", url);
+	    var parentNOInput = document.createElement("input");
+	    parentNOInput.setAttribute("type","hidden");
+	    parentNOInput.setAttribute("value",data);
+	    parentNOInput.setAttribute("name","orderlistNo");
+	
+	    form.appendChild(parentNOInput);
+	 	document.body.appendChild(form);
+	    
+	 	console.log(form);
+	 	
+		form.submit();
+	 }
+
 	
 	$(document).ready(function(){
 	    var myKey = "1IpHWyVmFmT5fjba9CLngQ"; // sweet tracker에서 발급받은 자신의 키 넣는다.

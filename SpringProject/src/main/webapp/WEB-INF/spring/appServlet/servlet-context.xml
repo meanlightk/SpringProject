@@ -53,6 +53,13 @@
 	<!-- 파일 업로더 -->
 	<beans:bean id="multipartResolver" class="org.springframework.web.multipart.support.StandardServletMultipartResolver" />
 	
+	 <beans:bean class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer">
+        <beans:property name="location" value="/WEB-INF/config/config.properties"/>
+        <beans:property name="fileEncoding" value="UTF-8" />
+    </beans:bean>
+ 	
+	
+	
 	<!-- Tiles Start -->
 	<!-- 
 	<beans:bean id="tilesConfigurer" class="org.springframework.web.servlet.view.tiles3.TilesConfigurer"

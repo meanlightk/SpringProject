@@ -167,7 +167,7 @@ h1 {
 				<br> <input type="file" name="uploadFile" id="mainImage" >
 			</div>
 	
-			<div id="previewContainer" style="width: 30%;">
+			<div id="previewContainer" style="width: 30%;"></div>
 		</div>
 	
 	<br>	
