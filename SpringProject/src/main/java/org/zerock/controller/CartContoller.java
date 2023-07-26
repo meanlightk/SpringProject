@@ -3,6 +3,7 @@ package org.zerock.controller;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -13,6 +14,7 @@ import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
 import org.json.simple.parser.ParseException;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.MediaType;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
@@ -58,30 +60,17 @@ public class CartContoller {
 		return "cart"; 
 	}
 	
-	@PostMapping("/putCart")
+	@PostMapping(path="/putCart", consumes = MediaType.APPLICATION_JSON_VALUE)
 	@ResponseBody
-	public void putCart(@RequestBody String jsonData, HttpServletResponse response) throws IOException {
+	public void putCart(@RequestBody List<Cart> jsonData, HttpServletResponse response) throws IOException {
 		log.info("putcart 실행");
+		Authentication auth = SecurityContextHolder.getContext().getAuthentication();
 
-		
-	    JSONParser jsonParser = new JSONParser();
-	    log.info(jsonData.toString());
-	    try {
-			JSONObject insertParam = (JSONObject) jsonParser.parse(jsonData);
-			String name = (String)insertParam.get("pname");
-			log.info(name);
-		} catch (ParseException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-		
-		PrintWriter writer = response.getWriter();
-		AjaxRes res = AjaxRes.builder()
-				.message("success").build();
-		Map<String, Object> map = new HashMap<>();
-		map.put("result", "success!!!!");
-		map.put("data", res);
-		
-		writer.print(map);
+	    for(int i = 0; i < jsonData.size(); i++) {
+	    	Cart cart = jsonData.get(i);
+	    	cart.setMemid(auth.getName());
+	    	log.info(cart);
+	    	cartService.putCart(cart);
+	    }		
 	}
 }

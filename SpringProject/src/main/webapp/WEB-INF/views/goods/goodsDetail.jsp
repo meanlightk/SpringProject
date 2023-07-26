@@ -1165,24 +1165,37 @@ button{
 			
 		  	
 		    $("#insertBasket").click(function(){
-		    	 
-	   			var pname = $("#pname").val();
+		    	var dataList = []; 
+	   			var pname = $("#pname").attr('value'); 
 	   			var gno = $("#gno").val();
 	   			
-	   			var optionName = $("option_name_").val();
-	   			//map에서 option_name번호를 가져와야 optionName을 보낼 수 있음.
-	            var jsonData = {
-	                      pname : pname,
-	                      gno : gno,
-	                      optionName : optionName,
-	                      
-	            }
-	            console.log(jsonData);    
-	        	$.ajax({
+	   			//옵션별 넣어주어야 할 내용
+	   			for(var i = 0; i < arr.length; i++){
+	   				var option_num = arr[i].slice(-1);
+	   				
+	   				var option_name = $("#option_name_" + option_num).attr('value');
+	   				var sub_price = $('#option_box_price2_' + option_num).text();
+	   				var quantity = $("#input_box_" + option_num).val();
+	   				sub_price = sub_price.replaceAll(',','');
+	   				sub_price = sub_price.replace(' 원','');
+	   				var jsonData = {
+		                      pname : pname,
+		                      goods_no : gno,
+		                      optionName : option_name,
+		                      totalPrice : sub_price,
+		    				  quantity : quantity                 
+		            }
+	   				dataList.push(jsonData); 
+
+	   			}	   			
+	   		
+				console.log(dataList);
+				console.log(JSON.stringify(dataList));
+ 	        	$.ajax({
 	        		url: '/cart/putCart',
 	        		processData: false,
-	        		contentType: false,
-	        		data: JSON.stringify(jsonData),
+	        		contentType: 'application/json',
+	        		data: JSON.stringify(dataList),
 	        		type: 'POST',
 	        		dataType: false,
 	        		beforeSend: function(xhr) { //XMLHttpRequest (XHR)은 AJAX 요청을 생성하는 JavaScript API이다. XHR의 메서드로 브라우저와 서버간의 네트워크 요청을 전송할 수 있다.
@@ -1190,7 +1203,8 @@ button{
 	        		},
 	        		success: function(result){
 	        			console.log(result);
-	        			alert('upload');
+	        			alert('장바구니에 추가되었습니다.');
+	        			$("#option_products").html('');
 	        		},
 	    			error: function(jqXHR, textStatus, errorThrown) {
 	    				alert("ERROR : " + textStatus + " : " + errorThrown);
@@ -1240,7 +1254,6 @@ button{
 	}
 	
 	function changeOptionSelect(){
-		console.log(mymap);
 	    var optionSelect = document.getElementById("option");
 	    var option_box_id = optionSelect.options[optionSelect.selectedIndex].id;
 	    if(option_box_id === 'option_box_0') return;
@@ -1254,7 +1267,7 @@ button{
 	    var selectValue = optionSelect.options[optionSelect.selectedIndex].value;
 	 	
 	    var optionProducts = document.getElementById("option_products");
-	
+		console.log(arr);
 	    
 	    let html = optionProducts.innerHTML;
 	  
@@ -1358,11 +1371,6 @@ button{
   	imgStyleDel();
   	calculateTot();
   	
-
-
-
-
-		
 	</script>
 </body>
 </html>
