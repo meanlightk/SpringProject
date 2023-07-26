@@ -6,7 +6,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.zerock.domain.Adminclaim;
 import org.zerock.domain.AnswerClaim;
 import org.zerock.domain.Common;
@@ -82,4 +85,68 @@ public class AdminController {
 		return "/claim/view";
 	}
 	
+	@GetMapping("/answerToClaim/write")
+	public String answerToClaim(Model model, @RequestParam("glno")int glno) {
+		log.info("answerToClaim() called");
+		
+		log.info("glno: " + glno);
+		
+		model.addAttribute("type", "write");
+		model.addAttribute("glno", glno);
+		
+		return "/claim/answerClaim";
+	}
+	
+	@GetMapping("/answerToClaim/modify")
+	public String updateAnswer(Model model, @RequestParam("answer_no")int anscno) {
+		log.info("updateAnswer() called");
+		
+		log.info("anscno: " + anscno);
+		
+		AnswerClaim answer = claimService.showOneAnswer(anscno);
+				
+		model.addAttribute("type", "modify");
+		model.addAttribute("anscno", anscno);
+		model.addAttribute("answer", answer);
+		model.addAttribute("glno", answer.getGlno());
+		
+		return "/claim/answerClaim";
+	}
+	
+	@PostMapping("/reganswer.do")
+	public String processAnswer(AnswerClaim answer) {
+		claimService.answerToClaim(answer);
+		
+		String gclaim_no = String.valueOf(answer.getGlno());
+			
+		return "redirect:/admin/claims/claim?gclaim_no="+gclaim_no;
+	}
+	
+	@PostMapping("/updatepro.do")
+	public String updateAnswer(AnswerClaim answer) {
+		log.info("updateAnswer() called");
+		
+		claimService.updateprocess(answer);
+		
+		String answer_no = String.valueOf(answer.getAnscno());
+		
+		return "redirect:/admin/claims/answer?answer_no="+answer_no;
+	}
+	
+	@PostMapping("/deleteAnswer")
+	public String deleteAnswer(int anscno) {
+		
+		claimService.deleteClaimAnswer(anscno);
+		
+		return "redirect:/admin/claims";
+	}
+	
+	@PostMapping("/clearcase")
+	public String deletecase(int glno) {
+		
+		claimService.clearClaim(glno);
+		
+		return "redirect:/admin/claims";
+	}
+
 }

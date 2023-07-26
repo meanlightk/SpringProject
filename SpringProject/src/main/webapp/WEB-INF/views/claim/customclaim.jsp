@@ -4,6 +4,10 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 
 <link rel="stylesheet" href="/resources/css/claim.css">
+
+
+
+
 <div class="claims">
 	<c:choose>
 		<c:when test="${claimlist[0].goods_no == null}">
@@ -18,15 +22,17 @@
 						<em class="claim__label">클레임</em>
 						<div class="claim__wrap">
 							<strong class="claim__author"></strong>
-							<div class="claim__selected-option">상품명+종류</div>
+							<div class="claim__selected-option">${goods.pname }</div>
 						</div>
 						<div class="claim__content">
 							${item.content }
 						</div>
 						<div class="claim__time">
 							<c:if test="${id==item.mem_id }">
+								<%-- <button type="button" class="btn btn-secondary btn-sm"
+										onclick="fn_Review3('/deleteClaim', ${item.gclaim_no })">삭제</button> --%>
 								<button type="button" class="btn btn-secondary btn-sm"
-										onclick="fn_Review2('/writeclaim/modify/${gno }', ${item.gclaim_no })">글수정</button>&nbsp;&nbsp;&nbsp;
+										onclick="fn_Review2('/writeclaim/modify/${gno }', ${item.gclaim_no })">수정</button>&nbsp;&nbsp;&nbsp;
 							</c:if>
 							<fmt:formatDate pattern="yy/MM/dd HH:mm" value="${item.regidate}"/>
 						</div>
@@ -147,4 +153,29 @@ function fn_Review(url,data){
 		
 	form.submit();
 }
+/*
+function fn_Review3(url,data){
+	var form = document.createElement("form");
+	form.setAttribute("method", "post");
+	form.setAttribute("action", url);
+	
+	var csrfInput = document.createElement("input");
+	csrfInput.setAttribute("type", "hidden");
+	csrfInput.setAttribute("name",  "${_csrf.parameterName}"); // csrf 토큰을 보내는 필드 이름 (서버에서 사용하는 이름과 동일해야 합니다)
+	csrfInput.setAttribute("value", "${_csrf.token}");
+	form.appendChild(csrfInput);
+	
+	var parentNOInput = document.createElement("input");
+	parentNOInput.setAttribute("type","hidden");
+	parentNOInput.setAttribute("value",data);
+	parentNOInput.setAttribute("name","glno");
+	
+	form.appendChild(parentNOInput);
+	document.body.appendChild(form);
+	  
+	console.log(form);
+		
+	form.submit();
+}
+ */
 </script>

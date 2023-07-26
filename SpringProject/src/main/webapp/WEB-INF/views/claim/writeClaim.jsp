@@ -93,7 +93,7 @@ div.col-sm-6.col-lg-3.p-b-50 {
 </head>
 <body>
 
-<header class="header-v4">
+	<header class="header-v4">
 		<!-- Header desktop -->
 		<div class="container-menu-desktop">
 				<nav class="limiter-menu-desktop container">
@@ -384,6 +384,8 @@ $(document).ready(function() {
 function fn_updateGoods(){
 	var comSubmit = new ComSubmit("frm");
 	comSubmit.setUrl("<c:url value='/editclaim.do?glno=${claim.glno}' />");
+	let editorContent=CKEDITOR.instances.content.getData();
+	let convertContent = editorContent.replace(/(<([^>]+)>)/ig, "");
 	comSubmit.submit();
 }
 

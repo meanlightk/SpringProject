@@ -6,6 +6,7 @@
 <%@ page import="org.springframework.security.core.Authentication" %>
 <%@ page import="org.springframework.security.core.context.SecurityContextHolder" %>
 <%@ page import="org.springframework.security.core.userdetails.UserDetails" %>
+<%@ page import="org.springframework.security.core.GrantedAuthority" %>
 <%@ page import="java.util.*" %>
 
 <!--===============================================================================================-->	
@@ -46,6 +47,14 @@
 	Authentication auth = SecurityContextHolder.getContext().getAuthentication();
 	String id = auth.getName();
 	request.setAttribute("userId", id);
+	
+	boolean hasRole = auth.getAuthorities().stream()
+            .map(GrantedAuthority::getAuthority)
+            .anyMatch(role -> role.equals("ROLE_MANAGER"));
+	
+	if(hasRole){
+		request.setAttribute("role", "ROLE_MANAGER");
+	}
 %>
 
 <style>
@@ -71,7 +80,15 @@
 						<a href="#" class="flex-c-m trans-04 p-lr-25">
 							Help & FAQs
 						</a>
-
+						<c:choose>
+							<c:when test='${role != "ROLE_MANAGER" }'>
+							</c:when>
+							<c:when test='${role == "ROLE_MANAGER" }'>
+								<a href="/admin/claims" class="flex-c-m trans-04 p-lr-25">
+									고객관리
+								</a>
+							</c:when>
+						</c:choose>
 						<c:choose>
 							<c:when test='${userId == "anonymousUser" }'>
 								<a href="/member/login" class="flex-c-m p-lr-10 trans-04">

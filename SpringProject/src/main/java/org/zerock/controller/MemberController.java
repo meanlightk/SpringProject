@@ -38,7 +38,7 @@ public class MemberController {
 	@GetMapping("/join")
 	public String joinform() {
 		log.info("=========join========");
-		return "/join";
+		return "join";
 	}
 	
 	@PostMapping("/join.do")

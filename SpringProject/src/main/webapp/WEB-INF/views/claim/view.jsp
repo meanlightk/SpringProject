@@ -2,6 +2,25 @@
 	pageEncoding="UTF-8"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ page import="org.springframework.security.core.Authentication" %>
+<%@ page import="org.springframework.security.core.context.SecurityContextHolder" %>
+<%@ page import="org.springframework.security.core.userdetails.UserDetails" %>
+<%@ page import="org.springframework.security.core.GrantedAuthority" %>
+<%@ page import="java.util.*" %>
+<%
+	Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+	String id = auth.getName();
+	request.setAttribute("userId", id);
+	
+	boolean hasRole = auth.getAuthorities().stream()
+            .map(GrantedAuthority::getAuthority)
+            .anyMatch(role -> role.equals("ROLE_ADMIN"));
+	
+	if(hasRole){
+		request.setAttribute("role", "ROLE_ADMIN");
+	}
+%>
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -96,7 +115,7 @@
 }
 
 .a {
-  position: fixed;
+  position: relative;
   left: 200px;
 }
 
@@ -156,32 +175,135 @@ $(document).ready(function(){
 <body>
 <div class="w3-container">
 <h2>테스트 게시판</h2>
-<div class="w3-responsive">
+	<div class="w3-responsive">
+	    <div class="containerA">
 	
+	        <ul class="tabsA">
+	            <li class="tab-link current" data-tab="tab-1">메뉴_하나</li>
+	            <li class="tab-link" data-tab="tab-2">메뉴_둘</li>
+	        </ul>
+	    
+	        <div id="tab-1" class="tab-content current">
+	   			<jsp:include page="text.jsp"></jsp:include>
+	        </div>
+	        <div id="tab-2" class="tab-content">
+	        	<jsp:include page="goodsinfo.jsp"></jsp:include>
+	        </div>
+	    
+	    </div>
 	
-	
-	
-    <div class="containerA">
+	</div>
 
-        <ul class="tabsA">
-            <li class="tab-link current" data-tab="tab-1">메뉴_하나</li>
-            <li class="tab-link" data-tab="tab-2">메뉴_둘</li>
-        </ul>
-    
-        <div id="tab-1" class="tab-content current">
-   			<jsp:include page="text.jsp"></jsp:include>
-        </div>
-        <div id="tab-2" class="tab-content">
-        	<jsp:include page="goodsinfo.jsp"></jsp:include>
-        </div>
-    
-    </div>
-</div>
+<br><br>
 
-	<br>
-	<br>
-	<br>
-	<a class="a" href="/admin/claims">목록</a>
+    	<a class="a" href="/admin/claims">목록</a>
+   	<c:choose>
+   		<c:when test='${claim != null }'>
+			<button type="button" class="btn btn-secondary btn-sm"
+					onclick="fn_Review('/admin/answerToClaim/write',${claim.glno})">답변하기</button>
+		</c:when>
+		<c:when test='${claim == null }'>
+			<button type="button" class="btn btn-secondary btn-sm"
+					onclick="fn_Review2('/admin/answerToClaim/modify',${answer.anscno})">답변수정</button>
+		</c:when>
+	</c:choose>
+	<c:choose>
+		<c:when test='${role == "ROLE_ADMIN" }'>
+			<c:if test="${answer != null }">
+				<button type="button" class="btn btn-secondary btn-sm"
+							onclick="fn_Review3('/admin/deleteAnswer',${answer.anscno})">삭제하기</button>
+			</c:if>
+			<c:if test="${answer == null }">
+				<button type="button" class="btn btn-secondary btn-sm"
+							onclick="fn_Review4('/admin/clearcase',${claim.glno })">삭제하기</button>
+			</c:if>			
+		</c:when>
+		<c:when test='${role != "ROLE_ADMIN" }'>
+		</c:when>
+	</c:choose>
 </div>
 </body>
+<script>
+function fn_Review(url,data){
+	var form = document.createElement("form");
+	form.setAttribute("method", "get");
+	form.setAttribute("action", url);
+	var parentNOInput = document.createElement("input");
+	parentNOInput.setAttribute("type","hidden");
+	parentNOInput.setAttribute("value",data);
+	parentNOInput.setAttribute("name","glno");
+	
+	form.appendChild(parentNOInput);
+	document.body.appendChild(form);
+	  
+	console.log(form);
+		
+	form.submit();
+}
+
+function fn_Review2(url,data){
+	var form = document.createElement("form");
+	form.setAttribute("method", "get");
+	form.setAttribute("action", url);
+	var parentNOInput = document.createElement("input");
+	parentNOInput.setAttribute("type","hidden");
+	parentNOInput.setAttribute("value",data);
+	parentNOInput.setAttribute("name","answer_no");
+	
+	form.appendChild(parentNOInput);
+	document.body.appendChild(form);
+	  
+	console.log(form);
+		
+	form.submit();
+}
+
+function fn_Review3(url,data){
+	var form = document.createElement("form");
+	form.setAttribute("method", "post");
+	form.setAttribute("action", url);
+	
+	var csrfInput = document.createElement("input");
+	csrfInput.setAttribute("type", "hidden");
+	csrfInput.setAttribute("name", "${_csrf.parameterName}"); // csrf 토큰을 보내는 필드 이름 (서버에서 사용하는 이름과 동일해야 합니다)
+	csrfInput.setAttribute("value", "${_csrf.token}");
+	form.appendChild(csrfInput);
+	
+	var parentNOInput = document.createElement("input");
+	parentNOInput.setAttribute("type","hidden");
+	parentNOInput.setAttribute("value",data);
+	parentNOInput.setAttribute("name","anscno");
+	
+	form.appendChild(parentNOInput);
+	document.body.appendChild(form);
+	  
+	console.log(form);
+		
+	form.submit();
+}
+
+function fn_Review4(url,data){
+	var form = document.createElement("form");
+	form.setAttribute("method", "post");
+	form.setAttribute("action", url);
+	
+	var csrfInput = document.createElement("input");
+	csrfInput.setAttribute("type", "hidden");
+	csrfInput.setAttribute("name",  "${_csrf.parameterName}"); // csrf 토큰을 보내는 필드 이름 (서버에서 사용하는 이름과 동일해야 합니다)
+	csrfInput.setAttribute("value", "${_csrf.token}");
+	form.appendChild(csrfInput);
+	
+	var parentNOInput = document.createElement("input");
+	parentNOInput.setAttribute("type","hidden");
+	parentNOInput.setAttribute("value",data);
+	parentNOInput.setAttribute("name","glno");
+	
+	form.appendChild(parentNOInput);
+	document.body.appendChild(form);
+	  
+	console.log(form);
+		
+	form.submit();
+}
+</script>
 </html>

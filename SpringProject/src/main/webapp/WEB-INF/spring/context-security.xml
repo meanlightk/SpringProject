@@ -5,10 +5,12 @@
 	xsi:schemaLocation="http://www.springframework.org/schema/security http://www.springframework.org/schema/security/spring-security.xsd
 		http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
 
-	<bean id="customAccessDenied" class="org.zerock.security.CustomAccessDeniedHandler"></bean>
 	<bean id="loginSuccess" class="org.zerock.security.LoginSuccessHandler"></bean>
 	<bean id="customPasswordEncoder" class="org.zerock.security.CustomPasswordEncoder"></bean>
 	<bean id="customUserDetailService" class="org.zerock.security.CustomUserDetailsService"></bean>
+	
+	<bean id="customAccessDenied" class="org.zerock.security.CustomAccessDeniedHandler"></bean>
+	
  	
 	<security:http>
 		  
@@ -19,13 +21,16 @@
 		<security:intercept-url pattern="/sample/admin" access="hasRole('ROLE_ADMIN')"/>
 		<security:intercept-url pattern="/sample/manager" access="hasRole('ROLE_MANAGER')"/>
 		<security:intercept-url pattern="/admin/*" access="hasRole('ROLE_ADMIN')"/>
+		<security:intercept-url pattern="/admin/*/*" access="hasRole('ROLE_ADMIN')"/>
 		<security:intercept-url pattern="/admin/*" access="hasRole('ROLE_MANAGER')"/>
+		<security:intercept-url pattern="/admin/*/*" access="hasRole('ROLE_MANAGER')"/>
 		<security:intercept-url pattern="/writeclaim/*/*" access="hasRole('ROLE_MEMBER')"/>
 		  -->
 		<security:form-login login-page="/member/login" authentication-success-handler-ref="loginSuccess" />
 		<security:logout logout-url="/logout.do" invalidate-session="true" />
 		
 		<!-- <security:access-denied-handler error-page="/accessError"/> -->
+		
 		<security:access-denied-handler ref="customAccessDenied"/>
 	</security:http>
 
@@ -35,6 +40,7 @@
 		<security:authentication-provider  user-service-ref="customUserDetailService" >	
 			<security:password-encoder ref="customPasswordEncoder"/>
 		</security:authentication-provider>
+		
 	</security:authentication-manager>
 
 </beans>
