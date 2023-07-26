@@ -28,7 +28,7 @@ public class CartContoller {
 		Authentication auth = SecurityContextHolder.getContext().getAuthentication();
 		if(auth.getName() == null || auth.getName().equals("") || auth.getName().equals("anonymousUser")) {
 			//미로그인 상태
-			return "redirect:/login";
+			return "redirect:/member/login";
 		}
 		
 		String userId = auth.getName();

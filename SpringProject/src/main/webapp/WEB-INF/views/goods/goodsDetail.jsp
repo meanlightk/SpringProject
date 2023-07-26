@@ -750,12 +750,12 @@ button{
 									<img src="./../../../resources/img/product5.png" class="ThumbImage" alt>
 								</div>							
 							</li>
-						    <li class="swiper-slide">
+<!--  						    <li class="swiper-slide">
 								<div style="float: left;">
 									<img src="./../../../resources/img/product6.png" class="ThumbImage" alt>
 									<img src="./../../../resources/img/product7.png" class="ThumbImage" alt>
 								</div>
-						    </li>
+						    </li>-->
 						</ul>
 						<!--  <div class="swiper-wrapper">
 							<div class="swiper-slide" style="justify: center;">
@@ -1179,7 +1179,7 @@ button{
 	</div> 
 
 	
-<!--  	</div>-->
+<!--</div>-->
 
 
 	<br>

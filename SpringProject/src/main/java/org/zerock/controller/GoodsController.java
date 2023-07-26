@@ -9,6 +9,7 @@ import java.util.List;
 import java.util.UUID;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
@@ -44,6 +45,10 @@ public class GoodsController {
 	@Autowired
 	private ClaimService claimService;
 
+	@Value("${file.path}")
+	private String filePath;
+
+	
 	
 	@GetMapping("/list")
 	public String showItemList(Model model, Common common) {
@@ -111,17 +116,11 @@ public class GoodsController {
 	
 		goods.setStatus("1");
 		
-	
-
 		List<Goods> list = new ArrayList<>();
-		String uploadFolder = "C:\\upload\\main";
+		String uploadFolder = filePath + "/main";
 
 		System.out.println("�궡媛� 諛쏆� �긽�뭹 踰덊샇: ");
 		String uploadFolderPath = String.format("%d", goods.getGno());
-
-		
-		
-		
 
 		// make folder ---------
 		File uploadPath = new File(uploadFolder, uploadFolderPath); // 상품 번호로 경로를 만듦

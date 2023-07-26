@@ -41,6 +41,16 @@
 <!--===============================================================================================-->
 
 
+<style>
+.logoutbtn{
+	margin: 0px 0px 0px 10px;
+	height: 100%;
+	color: #fff; /* 글자 색상을 설정합니다. */
+    background-color: transparent; /* 배경을 투명하게 만듭니다. */
+    border: none; /* 테두리를 제거합니다. */
+    font-size: 11px;
+}
+</style>
 <!-- Header -->
 	<header class="header-v4">
 <%
@@ -57,16 +67,9 @@
 	}
 %>
 
-<style>
-.logoutbtn{
-	margin: 0px 0px 0px 10px;
-	height: 100%;
-	color: #fff; /* 글자 색상을 설정합니다. */
-    background-color: transparent; /* 배경을 투명하게 만듭니다. */
-    border: none; /* 테두리를 제거합니다. */
-    font-size: 11px;
-}
-</style>
+
+
+
 		<!-- Header desktop -->
 		<div class="container-menu-desktop">
 			<!-- Topbar -->

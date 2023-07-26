@@ -12,6 +12,7 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 public class Goods {
 	private Integer gno;
+
 	private String category;
 	private String pname;
 	private String content;
@@ -36,6 +37,9 @@ public class Goods {
 	
 	private String payDate;
 
+	private int orderNo;
+
+	
 	
 	private String waybillNum;
 	private String parcelCd;

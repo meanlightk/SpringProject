@@ -176,6 +176,9 @@ h1 {
 	<form id="commonForm" name="commonForm"></form>
 
 	<script type="text/javascript">
+		var token = $("meta[name='_csrf']").attr("content");
+		var header = $("meta[name='_csrf_header']").attr("content");
+
 		$(function() {
 			CKEDITOR
 					.replace(
@@ -183,7 +186,7 @@ h1 {
 							{
 								width : '120%',
 								height : '400px',
-								filebrowserUploadUrl : '${pageContext.request.contextPath }/fileReviewUpload.do'
+								filebrowserUploadUrl : "<c:url value="/fileReviewUpload.do?"/>${_csrf.parameterName}=${_csrf.token}"
 
 							});
 		});

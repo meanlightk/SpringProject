@@ -1,6 +1,7 @@
 package org.zerock.mapper;
 
 import java.util.List;
+import java.util.Map;
 
 import org.zerock.domain.Common;
 import org.zerock.domain.OrderAddress;
@@ -16,7 +17,7 @@ public interface OrderListMapper {
 
 	public List<OrderList> selectOrderList(Common com);
 	
-	public OrderList selectOrderId(int orderlistNo);
+	public Map<String,Object> selectOrderId(int orderlistNo);
 
 	public int insertOrderList(OrderList orderlist);
 	
@@ -25,6 +26,5 @@ public interface OrderListMapper {
 	public int deleteOrderList(int orderlistNo);
 
 	public int updateWaybillData(OrderList orderlist);
-
 
 }
