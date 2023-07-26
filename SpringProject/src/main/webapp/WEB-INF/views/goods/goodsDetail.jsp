@@ -744,18 +744,39 @@ button{
 							<li class="swiper-slide">
 								<div style="float: left;">
 									<img src="./../../../resources/img/product1.png" class="ThumbImage" alt>
-									<img src="./../../../resources/img/product2.png" class="ThumbImage" alt>
-									<img src="./../../../resources/img/product3.png" class="ThumbImage" alt>
-									<img src="./../../../resources/img/product4.png" class="ThumbImage" alt>
-									<img src="./../../../resources/img/product5.png" class="ThumbImage" alt>
 								</div>							
 							</li>
   						    <li class="swiper-slide">
 								<div style="float: left;">
+									<img src="./../../../resources/img/product2.png" class="ThumbImage" alt>
+								</div>
+						    </li>
+  						    <li class="swiper-slide">
+								<div style="float: left;">
+									<img src="./../../../resources/img/product3.png" class="ThumbImage" alt>
+								</div>
+						    </li>
+  						    <li class="swiper-slide">
+								<div style="float: left;">
+									<img src="./../../../resources/img/product4.png" class="ThumbImage" alt>
+								</div>
+						    </li>
+  						    <li class="swiper-slide">
+								<div style="float: left;">
+									<img src="./../../../resources/img/product5.png" class="ThumbImage" alt>
+								</div>
+						    </li>
+  						    <li class="swiper-slide">
+								<div style="float: left;">
 									<img src="./../../../resources/img/product6.png" class="ThumbImage" alt>
+								</div>
+						    </li>
+  						    <li class="swiper-slide">
+								<div style="float: left;">
 									<img src="./../../../resources/img/product7.png" class="ThumbImage" alt>
 								</div>
 						    </li>
+
 						</ul>
 						<!--  <div class="swiper-wrapper">
 							<div class="swiper-slide" style="justify: center;">
@@ -1200,7 +1221,7 @@ button{
 		    var swiper = new Swiper("#test-swiper", {
 		        spaceBetween: 1,    // 슬라이드 사이 여백
 
-		        slidesPerView : 'auto', // 한 슬라이드에 보여줄 갯수
+		        slidesPerView : 5, // 한 슬라이드에 보여줄 갯수
 		        autoplay: {     //자동슬라이드 (false-비활성화)
 		          delay: 30000000, // 시간 설정
 		          disableOnInteraction: false, // false-스와이프 후 자동 재생
