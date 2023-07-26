@@ -15,6 +15,8 @@ public class Cart {
 	private int goods_no;
 	private int ordernum;
 	private Date regidate;
-	private String option_name;
 	private int quantity;
+	private String optionName;  //추가(옵션 이름)
+	private int totalPrice;  //추가(총가격)
+	private String pname;  //추가(상품 이름)
 }

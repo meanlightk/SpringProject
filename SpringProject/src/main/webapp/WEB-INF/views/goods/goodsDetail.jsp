@@ -6,19 +6,16 @@
 <!DOCTYPE html>
 <html>
 <head>
+<meta name="_csrf" content="${_csrf.token}">
+<meta name="_csrf_header" content="${_csrf.headerName}">
 <link
   rel="stylesheet"
   href="https://cdn.jsdelivr.net/npm/swiper@10/swiper-bundle.min.css"
 />
-<link rel="stylesheet" type="text/css" href="../resources/css/reviewlist.css">
-<link rel="stylesheet"
-	href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css"
-	integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk">
-
-<script src="https://code.jquery.com/jquery-3.5.1.min.js"
+<!-- <!-- <script src="https://code.jquery.com/jquery-3.5.1.min.js"
 	integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj"
-	crossorigin="anonymous">
-</script>
+	crossorigin="anonymous"> -->
+</script> -->
 <script src="https://cdn.jsdelivr.net/npm/swiper@10/swiper-bundle.min.js"></script>
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/css/bootstrap.min.css">
   <script src="https://cdn.jsdelivr.net/npm/jquery@3.6.4/dist/jquery.slim.min.js"></script>
@@ -583,17 +580,26 @@ td{
 	border: 0;
 }
 #totalProducts tbody td img{
-	vertical-align: middle;
+	/* vertical-align: middle; */
 }
 #option_box1_up{
 	vertical-align: middle;
 }
 img {
+ 	/* height: 100%; */
+	object-fit: cover; 
 	overflow-clip-margin: content-box;
 	overflow: clip;
 	border: none;
 	vertical-align: top;
+	display: block;
 }
+
+#home img {
+ 	/* height: 100%; */
+ 	width:700px;
+}
+
 /* #totalProducts tbody.option_products tr td .quantity .down, #totalProducts tbody.add_products tr td .quantity .down{
 	bottom: 0;
 	top: auto;
@@ -606,12 +612,9 @@ img {
 #totalProducts tbody td .quantity .down{
 	position: absolute;
 	left: 22px;
-	top: 5px;
+	top: 11px;
 }
-#totalProducts tbody td img {
-	vertical-align: middle; 
-}
-.imgArea {
+.xans-product-detail .imgArea {
 	display: inline-block;
 	position: relative;
 	width: 570px;
@@ -708,20 +711,22 @@ button{
 .current.current{
 	display:block;
 }
-
+.down img{
+	vertical-align: top;
+}
 
 </style>
 <link rel="stylesheet"
 	href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css">
 <!-- JS, Popper.js, and jQuery -->
-<script
+<!-- <script
 	src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"
 	integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo"
 	crossorigin="anonymous"></script>
 <script
 	src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js"
 	integrity="sha384-OgVRvuATP1z7JjHLkuOU7Xw704+h835Lr+6QL9UvYjZE3Ipu6Tp75j7Bh/kR0JKI"
-	crossorigin="anonymous"></script>
+	crossorigin="anonymous"></script> -->
 
 <meta charset="UTF-8">
 <title>Insert title here</title>
@@ -730,74 +735,41 @@ button{
 	<br>
 	<br>
 	<div style="width:100%; position:relative; left:calc(50% - 600px); height:600px; display:inline">
-
-		<div class="detailArea">
-			<div class="xans-element- xans-product xans-product-image imgArea">
-				<div style="width:500;">
-					<table border="0">
-						<tr>
-							<td><img src="/upload/main/${goods.imagepath}" width="500" height="500" /></td>
-						</tr>
-					</table>
-					<div id="test-swiper" class="swiper-container xans-element- xans-product xans-product-addimage listImg cboth" style="position: relative; margin-top: 10px; height: 134px; overflow: visible;">
-						<ul class="swiper-wrapper">
-							<li class="swiper-slide">
-								<div style="float: left;">
-									<img src="./../../../resources/img/product1.png" class="ThumbImage" alt>
-									<img src="./../../../resources/img/product2.png" class="ThumbImage" alt>
-									<img src="./../../../resources/img/product3.png" class="ThumbImage" alt>
-									<img src="./../../../resources/img/product4.png" class="ThumbImage" alt>
-									<img src="./../../../resources/img/product5.png" class="ThumbImage" alt>
-								</div>							
+		
+		<div style="float:left; width:500;">
+			<table style="border:0;">
+				<tr>
+					<td><img src="/upload/main/${goods.imagepath}" width="500"
+						height="500" /></td>
+				</tr>
+			</table>
+			<div class="detailArea">
+				<div class="xans-element- xans-product xans-product-image imgArea">
+					<div class="xans-element- xans-product xans-product-addimage listImg cboth" style="position: relative; margin-top: 10px; height: 134px; overflow: visible;">
+						<ul style="position: absolute; left: 0px; top: 0px; width: 660px; display: inline-block; padding-inline-start: 0px;">
+							<li class="xans-record-" style="float: left;">
+								<img src="/upload/main/${goods.imagepath}" style="width:100px;" class="ThumbImage">
 							</li>
-						    <li class="swiper-slide">
-								<div style="float: left;">
-									<img src="./../../../resources/img/product6.png" class="ThumbImage" alt>
-									<img src="./../../../resources/img/product7.png" class="ThumbImage" alt>
-								</div>
-						    </li>
-						</ul>
-						<!--  <div class="swiper-wrapper">
-							<div class="swiper-slide" style="justify: center;">
-								<div class="container" style="float: left; max-width: 200px;">
-									<img src="/upload/main/${goods.imagepath}" style="width:100px;" class="ThumbImage" alt>
-								</div>
-								<div class="container" style="float: left; max-width: 200px;">
-									<img src="/upload/main/${goods.imagepath}" style="width:100px;" class="ThumbImage" alt>
-								</div>
-								<div class="container" style="float: left; max-width: 200px;">
-									<img src="/upload/main/${goods.imagepath}" style="width:100px;" class="ThumbImage" alt>
-								</div>
-								<div class="container" style="float: left; max-width: 200px;">
-									<img src="/upload/main/${goods.imagepath}" style="width:100px;" class="ThumbImage" alt>
-								</div>
-
-							</div>
-						</div>-->
-<!--  						<ul style="position: absolute; left: 0px; top: 0px; width: 660px; display: inline-block; padding-inline-start: 0px;">
-							<li class="xans-record-">
-								<img src="/upload/main/${goods.imagepath}" style="width:100px;" class="ThumbImage" alt>
+							<li class="xans-record-" style="float: left;">
+								<img src="./../../../resources/img/product1.png" class="ThumbImage">
 							</li>
-							<li class="xans-record-">
-								<img src="./../../../resources/img/product1.png" class="ThumbImage" alt>
+							<li class="xans-record-" style="float: left;">
+								<img src="./../../../resources/img/product2.png" class="ThumbImage">
 							</li>
-							<li class="xans-record-" >
-								<img src="./../../../resources/img/product2.png" class="ThumbImage" alt>
+							<li class="xans-record-" style="float: left;">
+								<img src="./../../../resources/img/product3.png" class="ThumbImage">
 							</li>
-							<li class="xans-record-">
-								<img src="./../../../resources/img/product3.png" class="ThumbImage" alt>
+							<li class="xans-record-" style="float: left;">
+								<img src="./../../../resources/img/product4.png" class="ThumbImage">
 							</li>
-							<li class="xans-record-">
-								<img src="./../../../resources/img/product4.png" class="ThumbImage" alt>
+							<li class="xans-record-" style="float: left;">
+								<img src="./../../../resources/img/product5.png" class="ThumbImage">
 							</li>
-							<li class="xans-record-">
-								<img src="./../../../resources/img/product5.png" class="ThumbImage" alt>
+							<li class="xans-record-" style="float: left;">
+								<img src="./../../../resources/img/product6.png" class="ThumbImage">
 							</li>
-							<li class="xans-record-">
-								<img src="./../../../resources/img/product6.png" class="ThumbImage" alt>
-							</li>
-							<li class="xans-record-">
-								<img src="./../../../resources/img/product7.png" class="ThumbImage" alt>
+							<li class="xans-record-" style="float: left;">
+								<img src="./../../../resources/img/product7.png" class="ThumbImage">
 							</li>
 						</ul>
 						-->
@@ -806,160 +778,125 @@ button{
 					</div>
 				</div>
 			</div>
-				<div style="float:left; margin-left:30px; width:682;">
-						<table border="0">
-			 
-							<tr>
-								<td>
-									<div id="sale_bg" style="display: block;">
-										<span class="sale_text">23%</span>
-										SALE
-									</div>
-								</td>
-							</tr>
-			
-							<tr>
-								<td id="pname"><font size="5"
-									style="box-sizing: border-box; position: relative;"><h2>${goods.pname}</h2></font></td>
-							</tr>
-									
-							<tr>
-								<td><hr style="border-top: 1px solid #bbb;" width=670px>
-								<td>
-							</tr>
-						
-			
-			<%-- 				<tr>
-								<td><font size="3">${ColorSize}color</font></td>
-							</tr> --%>
-			
-							<tr>
-								<td></td>
-							</tr>
-			
-							<tr style="display: inline-block; flex:left;">
-								<td id="sellPrice" width="200px"
-									style="font-weight: 600px; font-Size: 18px; line-height: 42px;">
-									판매가격 
-								</td>
-								<td id="test">
-									<fmt:formatNumber value="${goods.sellPrice}" pattern="#,###" />원
-								</td>
-			
-							</tr>
-							
-							<tr>
-								<td id="discountPrice" 
-									style="font-weight: 600px; font-Size: 24px; line-height: 42px; color: red;">
-									할인가격 <fmt:formatNumber value="${goods.discountPrice}" pattern="#,###" />원
-								</td>
-								<!-- <td>3만원 이상 구매시 할인가격 구매 가능</td> -->
-							</tr>
-						</table>
-			
-			<!-- 			<table>
-							<tr>
-								<td><hr style="border-top: 1px solid #bbb;" width=670px>
-								<td>
-							</tr>
-						</table> -->
-			
-						<br>
-					
-						<table>
-							<tr class="option_section">
-								<td width="340px"><font size="3">배송비</font></td>
-								<td><font size="3">선불 3,000원(50,000원 이상 무료배송)</font></td>
-							</tr>
-						</table>
-						<table>
-							<tr class="option_section">
-								<td width="537px"><font size="3">배송종류</font></td>
-								<td><font size="3">&nbsp;국내배송</font></td>
-							</tr>
-						</table>
-			 			<table>
-							<tr>
-								<td><hr style="border-top: 1px solid #bbb;" width=670px>
-								<td>
-							</tr>
-						</table>
-						<div id="item_option">
-							<table>
-								<tr>
-									<td><select name="option" id="option"
-										class='org.zerock.domain.Goods'
-										style="width: 600px; height: 30px;">
-											<option value="">==(필수)옵션: 세부 사항 선택 ==</option>
-											<c:forEach var="option_each" items="${goods.option_list_split}"
-												varStatus="index">
-												<option name="option" value="${option_each}">${option_each}</option>
-											</c:forEach>
-									</select></td>
-								</tr>
-							</table>
+		</div>
+
+		<div style="float:left; margin-left:30px; width:682;">
+			<table style="border: 0px;">
+ 
+				<tr>
+					<td>
+						<div id="sale_bg" style="display: block;">
+							<span class="sale_text">23%</span>
+							SALE
 						</div>
-					<div id="totalProducts">
-						<table border="1" summary>
-							<caption>상품 목록</caption>
-							<colgroup>
-								<col style="width:284px;">
-								<col style="width:80px;">
-								<col style="width:110px;">
-							</colgroup>
-							<thead>
-								<tr class="displaynone">
-									<th scope="col">상품명</th>
-									<th scope="col">상품수</th>
-									<th scope="col">가격</th>
-								</tr>
-							</thead>
-			
-							<tbody class="option_products">
-								<tr class="option_product" data-option-index="1" target-key="238">
-									<td>
-										<input type="hidden" class="option_box_id" id="option_box1_id" value="#" name="item_code[]" data-item-add-option data-item-reserved="N" data-option-id="00PF"
-										data-option-index="1">
-										<p class="product">
-											[밀크터치] 글로시 젤리오 립틴트
-											<br>
-											<span>체리베어</span>
-										</p>
-									</td>
-									<td>
-										<span class="quantity" style="width:65px;">
-											<input type="text" id="option_box1_quantity" name="quantity_opt[]" class="quantity_opt eProductQuantityClass" value="1" product-no="59" style="border:1;"/>
-			 								<a href="#none" class="up eProductQuantityUpClass" data-target="option_box1_up">
-												<img src="./../../../resources/img/up.png" id="option_box1_up" class="option_box_up" alt="수량증가">
-											</a>
-											<a href="#none" class="down eProductQuantityDownClass" data-target="option_box1_down">
-												<img src="./../../../resources/img/down.png" id="option_box1_down" class="option_box_down" alt="수량감소">
-											</a> 
-										</span>
-			 							<a href="#none" class="delete">
-											<img src="./../../../resources/img/x.png" alt="삭제" id="option_box1_del" class="option_box_del">
-										</a> 
-									</td>
-									<td class="right">
-										<span id="option_box1_price">
-											<input type="hidden" class="option_box_price" value="9900" product-no="59"
-											item_code="P00000JE00PF">
-											<span class="ec-front-product-item-price" code="P000000JE00PF" product-no="59">
-												9,900원
-											</span>
-										</span>
-									</td>
-								</tr>
-							</tbody>
-						</table>
-					</div>
+					</td>
+				</tr>
+
+				<tr>
+					<td id="pname"><font size="5"
+						style="box-sizing: border-box; position: relative;"><h2>${goods.pname}</h2></font>
+						<input type="hidden" id="goodsNo" value="${goods.gno}" />
+						<input type="hidden" id="realpname"	 value="${goods.pname}" />
+					</td>
+					
+				</tr>
 						
 						<form id="frm" name="frm" method="post">
 			
-							<div>
-								<table style="border:1px;" id="dynamicTable">
-									<thead>
-									</thead>
+
+<%-- 				<tr>
+					<td><font size="3">${ColorSize}color</font></td>
+				</tr> --%>
+
+				<tr>
+					<td></td>
+				</tr>
+
+				<tr style="display: inline-block; flex:left;">
+					<td id="sellPrice" width="200px"
+						style="font-weight: 600px; font-Size: 18px; line-height: 42px;">
+						판매가격 
+					</td>
+					<td id="test">
+						<fmt:formatNumber value="${goods.sellPrice}" pattern="#,###" />원
+					</td>
+
+				</tr>
+				
+				<tr>
+					<td id="discountPrice" 
+						style="font-weight: 600px; font-Size: 24px; line-height: 42px; color: red;">
+						할인가격 <fmt:formatNumber value="${goods.discountPrice}" pattern="#,###" />원
+					</td>
+					<!-- <td>3만원 이상 구매시 할인가격 구매 가능</td> -->
+				</tr>
+			</table>
+
+<!-- 			<table>
+				<tr>
+					<td><hr style="border-top: 1px solid #bbb;" width=670px>
+					<td>
+				</tr>
+			</table> -->
+
+			<br>
+		
+			<table>
+				<tr class="option_section">
+					<td width="340px"><font size="3">배송비</font></td>
+					<td><font size="3">선불 3,000원(50,000원 이상 무료배송)</font></td>
+				</tr>
+			</table>
+			<table>
+				<tr class="option_section">
+					<td width="537px"><font size="3">배송종류</font></td>
+					<td><font size="3">&nbsp;국내배송</font></td>
+				</tr>
+			</table>
+ 			<table>
+				<tr>
+					<td><hr style="border-top: 1px solid #bbb;" width=670px>
+					<td>
+				</tr>
+			</table>
+
+			<c:set var="list" value="${goods.option_list_split}" />			
+			<div id="item_option">
+				<table>
+					<tr>
+						<td><select name="option" id="option"
+							class='org.zerock.domain.Goods'  onclick="changeOptionSelect()"
+							style="width: 600px; height: 30px;">
+								<option id="option_box_0" value="">== (필수)옵션: 세부 사항 선택 ==</option>
+								<c:forEach var="option_each" items="${list}" varStatus="status">
+									<option id="option_box_${status.count}" value="${option_each}" class="option_each">${option_each}</option>
+								</c:forEach>
+							</select>
+						</td>
+					</tr>
+				</table>
+			</div>
+		<div id="totalProducts">
+			<table border="1" summary>
+				<caption>상품 목록</caption>
+				<colgroup>
+					<col style="width:284px;">
+					<col style="width:80px;">
+					<col style="width:110px;">
+				</colgroup>
+				<thead>
+					<tr class="displaynone">
+						<th scope="col">상품명</th>
+						<th scope="col">상품수</th>
+						<th scope="col">가격</th>
+					</tr>
+				</thead>
+
+				<tbody class="option_products" id="option_products">
+
+				</tbody>
+			</table>
+		</div>
 			
 									<tbody id="dynamicTbody">
 			
@@ -1004,6 +941,18 @@ button{
 			
 		</div>
 
+			<button style="width: 124px; height: 58px;"
+				class="btn btn-outline-danger" id="insertLike"
+				onclick="fn_InsertLike()">
+				<font size="5px">♥</font>
+			</button>
+			<button style="width: 270px; height: 58px;"
+				class="btn btn-outline-danger" id="insertBasket"
+				onclick="goToCart()">장바구니</button>
+			<button style="width: 270px; height: 58px;"
+				class="btn btn-outline-danger" id="goodsOrder"
+				onclick="fn_GoodsOrder()">구매하기</button>
+			<br>
 
 		<div style="clear: both;"></div>
 
@@ -1033,136 +982,164 @@ button{
 				</div>
 			</div>
 		</div>
-		<div class="swiper">
-			<div class="swiper-wrapper">
-				<div class="swiper-slide" style="justify: center;">
-					 <div class="container" style="float: left; max-width: 200px;">
-						<div class="card" style="width: 200px">
-							<img class="card-img-top" src="./../../../resources/img/up.png" alt="Card image"
-								style="width: 200px; height: 200px;">
-							<div> <!-- class="card-body" -->
-								<p style="padding-top: 0; padding-bottom:5px; color: black; white-space:nowrap; overflow: hidden; text-overflow:ellipsis; font-size:12px; margin:0;">제목</p>
-								<p id="choo" style="display: inline-block; margin:0; padding:0; display: flex; justify-content: space-between;">
-									<span style="float: left; max-width: 55px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; font-size: 11px; line-height: 16px;">아이디</span>
-									<span style="float: right; display:block; margin: 0; color:#767676; font-size: 11px; line-height: 16px;">날짜</span>
-								</p>
-							</div>
-						</div>
-						<br>
-					</div>
-					 <div class="container" style="float: left; max-width: 200px;">
-						<div class="card" style="width: 200px">
-							<img class="card-img-top" src="./../../../resources/img/up.png" alt="Card image"
-								style="width: 200px; height: 200px;">
-							<div> <!-- class="card-body" -->
-								<p class="card-text">제목</p>
-								<p class="card-text">아이디</p>
-							</div>
-						</div>
-						<br>
-					</div>
-					 <div class="container" style="float: left; max-width: 200px;">
-						<div class="card" style="width: 200px">
-							<img class="card-img-top" src="./../../../resources/img/up.png" alt="Card image"
-								style="width: 200px; height: 200px;">
-							<div> <!-- class="card-body" -->
-								<p class="card-text">제목</p>
-								<p class="card-text">아이디</p>
-							</div>
-						</div>
-						<br>
-					</div>
-					 <div class="container" style="float: left; max-width: 200px;">
-						<div class="card" style="width: 200px">
-							<img class="card-img-top" src="./../../../resources/img/up.png" alt="Card image"
-								style="width: 200px; height: 200px;">
-							<div> <!-- class="card-body" -->
-								<p class="card-text">제목</p>
-								<p class="card-text">아이디</p>
-							</div>
-						</div>
-						<br>
-					</div>
-					 <div class="container" style="float: left; max-width: 200px;">
-						<div class="card" style="width: 200px">
-							<img class="card-img-top" src="./../../../resources/img/up.png" alt="Card image"
-								style="width: 200px; height: 200px;">
-							<div> <!-- class="card-body" -->
-								<p class="card-text">제목</p>
-								<p class="card-text">아이디</p>
-							</div>
-						</div>
-						<br>
-					</div>
-				</div>
-				<div class="swiper-slide">
-					 <div class="container" style="float: left; max-width: 200px;">
-						<div class="card" style="width: 200px">
-							<img class="card-img-top" src="./../../../resources/img/up.png" alt="Card image"
-								style="width: 200px; height: 200px;">
-							<div> <!-- class="card-body" -->
-								<p class="card-text">제목</p>
-								<p class="card-text">아이디</p>
-							</div>
-						</div>
-						<br>
-					</div>
-					 <div class="container" style="float: left; max-width: 200px;">
-						<div class="card" style="width: 200px">
-							<img class="card-img-top" src="./../../../resources/img/up.png" alt="Card image"
-								style="width: 200px; height: 200px;">
-							<div> <!-- class="card-body" -->
-								<p class="card-text">제목</p>
-								<p class="card-text">아이디</p>
-							</div>
-						</div>
-						<br>
-					</div>
-					 <div class="container" style="float: left; max-width: 200px;">
-						<div class="card" style="width: 200px">
-							<img class="card-img-top" src="./../../../resources/img/up.png" alt="Card image"
-								style="width: 200px; height: 200px;">
-							<div> <!-- class="card-body" -->
-								<p class="card-text">제목</p>
-								<p class="card-text">아이디</p>
-							</div>
-						</div>
-						<br>
-					</div>
-					 <div class="container" style="float: left; max-width: 200px;">
-						<div class="card" style="width: 200px">
-							<img class="card-img-top" src="./../../../resources/img/up.png" alt="Card image"
-								style="width: 200px; height: 200px;">
-							<div> <!-- class="card-body" -->
-								<p class="card-text">제목</p>
-								<p class="card-text">아이디</p>
-							</div>
-						</div>
-						<br>
-					</div>
-					 <div class="container" style="float: left; max-width: 200px;">
-						<div class="card" style="width: 200px">
-							<img class="card-img-top" src="./../../../resources/img/up.png" alt="Card image"
-								style="width: 200px; height: 200px;">
-							<div> <!-- class="card-body" -->
-								<p class="card-text">제목</p>
-								<p class="card-text">아이디</p>
-							</div>
-						</div>
-						<br>
-					</div>
-				</div>
-			</div>
-		<br>
-		<br>
-		<div class="swiper-pagination"></div>
-			
-		</div>
+		
 		<br>
 		<br><br><br><br>
  
 		<div class="tab-content current" id="myTabContent1" align="center" style="">
-			<!-- 상세정보 -->
+			<div class="swiper">
+				<div class="swiper-wrapper">
+					<div class="swiper-slide" style="justify: center;">
+						 <div class="container" style="display:inline-block; max-width: 200px; margin-right: 20px;">
+							<div class="card" style="width: 200px">
+								<img class="card-img-top" src="./../../../resources/img/up.png" alt="Card image"
+									style="width: 200px; height: 200px;">
+								<div> <!-- class="card-body" -->
+									<p style="padding-top: 0; padding-bottom:5px; color: black; white-space:nowrap; overflow: hidden; text-overflow:ellipsis; font-size:12px; margin:0;">제목</p>
+									<p id="choo" style="display: inline-block; margin:0; padding:0; display: flex; justify-content: space-between;">
+										<span style="float: left; max-width: 55px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; font-size: 11px; line-height: 16px;">아이디</span>
+										<span style="float: right; display:block; margin: 0; color:#767676; font-size: 11px; line-height: 16px;">날짜</span>
+									</p>
+								</div>
+							</div>
+							<br>
+						</div>
+						 <div class="container" style="display:inline-block; max-width: 200px;  margin-right: 20px;">
+							<div class="card" style="width: 200px">
+								<img class="card-img-top" src="./../../../resources/img/up.png" alt="Card image"
+									style="width: 200px; height: 200px;">
+								<div> <!-- class="card-body" -->
+									<p style="padding-top: 0; padding-bottom:5px; color: black; white-space:nowrap; overflow: hidden; text-overflow:ellipsis; font-size:12px; margin:0;">제목</p>
+									<p id="choo" style="display: inline-block; margin:0; padding:0; display: flex; justify-content: space-between;">
+										<span style="float: left; max-width: 55px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; font-size: 11px; line-height: 16px;">아이디</span>
+										<span style="float: right; display:block; margin: 0; color:#767676; font-size: 11px; line-height: 16px;">날짜</span>
+									</p>
+								</div>
+							</div>
+							<br>
+						</div>
+						 <div class="container" style="display:inline-block; max-width: 200px;  margin-right: 20px;">
+							<div class="card" style="width: 200px">
+								<img class="card-img-top" src="./../../../resources/img/up.png" alt="Card image"
+									style="width: 200px; height: 200px;">
+								<div> <!-- class="card-body" -->
+									<p style="padding-top: 0; padding-bottom:5px; color: black; white-space:nowrap; overflow: hidden; text-overflow:ellipsis; font-size:12px; margin:0;">제목</p>
+									<p id="choo" style="display: inline-block; margin:0; padding:0; display: flex; justify-content: space-between;">
+										<span style="float: left; max-width: 55px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; font-size: 11px; line-height: 16px;">아이디</span>
+										<span style="float: right; display:block; margin: 0; color:#767676; font-size: 11px; line-height: 16px;">날짜</span>
+									</p>
+								</div>
+							</div>
+							<br>
+						</div>
+						 <div class="container" style="display:inline-block; max-width: 200px;  margin-right: 20px;">
+							<div class="card" style="width: 200px">
+								<img class="card-img-top" src="./../../../resources/img/up.png" alt="Card image"
+									style="width: 200px; height: 200px;">
+								<div> <!-- class="card-body" -->
+									<p style="padding-top: 0; padding-bottom:5px; color: black; white-space:nowrap; overflow: hidden; text-overflow:ellipsis; font-size:12px; margin:0;">제목</p>
+									<p id="choo" style="display: inline-block; margin:0; padding:0; display: flex; justify-content: space-between;">
+										<span style="float: left; max-width: 55px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; font-size: 11px; line-height: 16px;">아이디</span>
+										<span style="float: right; display:block; margin: 0; color:#767676; font-size: 11px; line-height: 16px;">날짜</span>
+									</p>
+								</div>
+							</div>
+							<br>
+						</div>
+						 <div class="container" style="display:inline-block; max-width: 200px;  margin-right: 20px;">
+							<div class="card" style="width: 200px">
+								<img class="card-img-top" src="./../../../resources/img/up.png" alt="Card image"
+									style="width: 200px; height: 200px;">
+								<div> <!-- class="card-body" -->
+									<p style="padding-top: 0; padding-bottom:5px; color: black; white-space:nowrap; overflow: hidden; text-overflow:ellipsis; font-size:12px; margin:0;">제목</p>
+									<p id="choo" style="display: inline-block; margin:0; padding:0; display: flex; justify-content: space-between;">
+										<span style="float: left; max-width: 55px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; font-size: 11px; line-height: 16px;">아이디</span>
+										<span style="float: right; display:block; margin: 0; color:#767676; font-size: 11px; line-height: 16px;">날짜</span>
+									</p>
+								</div>
+							</div>
+							<br>
+						</div>
+					</div>
+					<div class="swiper-slide">
+						 <div class="container" style="display:inline-block; max-width: 200px;  margin-right: 20px;">
+							<div class="card" style="width: 200px">
+								<img class="card-img-top" src="./../../../resources/img/up.png" alt="Card image"
+									style="width: 200px; height: 200px;">
+								<div> <!-- class="card-body" -->
+									<p style="padding-top: 0; padding-bottom:5px; color: black; white-space:nowrap; overflow: hidden; text-overflow:ellipsis; font-size:12px; margin:0;">제목</p>
+									<p id="choo" style="display: inline-block; margin:0; padding:0; display: flex; justify-content: space-between;">
+										<span style="float: left; max-width: 55px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; font-size: 11px; line-height: 16px;">아이디</span>
+										<span style="float: right; display:block; margin: 0; color:#767676; font-size: 11px; line-height: 16px;">날짜</span>
+									</p>
+								</div>
+							</div>
+							<br>
+						</div>
+						 <div class="container" style="display:inline-block; max-width: 200px;  margin-right: 20px;">
+							<div class="card" style="width: 200px">
+								<img class="card-img-top" src="./../../../resources/img/up.png" alt="Card image"
+									style="width: 200px; height: 200px;">
+								<div> <!-- class="card-body" -->
+									<p style="padding-top: 0; padding-bottom:5px; color: black; white-space:nowrap; overflow: hidden; text-overflow:ellipsis; font-size:12px; margin:0;">제목</p>
+									<p id="choo" style="display: inline-block; margin:0; padding:0; display: flex; justify-content: space-between;">
+										<span style="float: left; max-width: 55px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; font-size: 11px; line-height: 16px;">아이디</span>
+										<span style="float: right; display:block; margin: 0; color:#767676; font-size: 11px; line-height: 16px;">날짜</span>
+									</p>
+								</div>
+							</div>
+							<br>
+						</div>
+						 <div class="container" style="display:inline-block; max-width: 200px;  margin-right: 20px;">
+							<div class="card" style="width: 200px">
+								<img class="card-img-top" src="./../../../resources/img/up.png" alt="Card image"
+									style="width: 200px; height: 200px;">
+								<div> <!-- class="card-body" -->
+									<p style="padding-top: 0; padding-bottom:5px; color: black; white-space:nowrap; overflow: hidden; text-overflow:ellipsis; font-size:12px; margin:0;">제목</p>
+									<p id="choo" style="display: inline-block; margin:0; padding:0; display: flex; justify-content: space-between;">
+										<span style="float: left; max-width: 55px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; font-size: 11px; line-height: 16px;">아이디</span>
+										<span style="float: right; display:block; margin: 0; color:#767676; font-size: 11px; line-height: 16px;">날짜</span>
+									</p>
+								</div>
+							</div>
+							<br>
+						</div>
+						 <div class="container" style="display:inline-block; max-width: 200px;  margin-right: 20px;">
+							<div class="card" style="width: 200px">
+								<img class="card-img-top" src="./../../../resources/img/up.png" alt="Card image"
+									style="width: 200px; height: 200px;">
+								<div> <!-- class="card-body" -->
+									<p style="padding-top: 0; padding-bottom:5px; color: black; white-space:nowrap; overflow: hidden; text-overflow:ellipsis; font-size:12px; margin:0;">제목</p>
+									<p id="choo" style="display: inline-block; margin:0; padding:0; display: flex; justify-content: space-between;">
+										<span style="float: left; max-width: 55px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; font-size: 11px; line-height: 16px;">아이디</span>
+										<span style="float: right; display:block; margin: 0; color:#767676; font-size: 11px; line-height: 16px;">날짜</span>
+									</p>
+								</div>
+							</div>
+							<br>
+						</div>
+						 <div class="container" style="display:inline-block; max-width: 200px;  margin-right: 20px;">
+							<div class="card" style="width: 200px">
+								<img class="card-img-top" src="./../../../resources/img/up.png" alt="Card image"
+									style="width: 200px; height: 200px;">
+								<div> <!-- class="card-body" -->
+									<p style="padding-top: 0; padding-bottom:5px; color: black; white-space:nowrap; overflow: hidden; text-overflow:ellipsis; font-size:12px; margin:0;">제목</p>
+									<p id="choo" style="display: inline-block; margin:0; padding:0; display: flex; justify-content: space-between;">
+										<span style="float: left; max-width: 55px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; font-size: 11px; line-height: 16px;">아이디</span>
+										<span style="float: right; display:block; margin: 0; color:#767676; font-size: 11px; line-height: 16px;">날짜</span>
+									</p>
+								</div>
+							</div>
+							<br>
+						</div>
+					</div>
+				</div>
+			<br>
+			<br>
+			<div class="swiper-pagination"></div>
+				
+			</div>
+		
 			<div class="tab-pane fade show active" id="home" role="tabpanel" aria-labelledby="home-tab">${goods.content}</div>
 		</div>
 		<div class="tab-content" id="myTabContent2" align="center">
@@ -1178,7 +1155,7 @@ button{
 		</div>	
 	</div> 
 
-	
+	<input type="hidden" id="hii" value="${goods.discountPrice}" />
 <!--  	</div>-->
 
 
@@ -1196,32 +1173,8 @@ button{
 			    $(this).parent().addClass('tab_open');
 			    $("#myTabContent"+tab_id).addClass('current');
 			})
-			
-		    var swiper = new Swiper("#test-swiper", {
-		        spaceBetween: 1,    // 슬라이드 사이 여백
-
-		        slidesPerView : 'auto', // 한 슬라이드에 보여줄 갯수
-		        autoplay: {     //자동슬라이드 (false-비활성화)
-		          delay: 30000000, // 시간 설정
-		          disableOnInteraction: false, // false-스와이프 후 자동 재생
-		        },
-
-		        loop : false,   // 슬라이드 반복 여부
-		        loopAdditionalSlides : 1,
-
-		 		// 슬라이드 반복 시 마지막 슬라이드에서 다음 슬라이드가 보여지지 않는 현상 수정
-		        pagination: { // 호출(pager) 여부
-		          el: ".swiper-pagination", //버튼을 담을 태그 설정
-		          clickable: true, // 버튼 클릭 여부
-		        },
-		        navigation: {   // 버튼
-		          nextEl: ".swiper-button-next",
-		          prevEl: ".swiper-button-prev",
-		        },
-		      });
-
-	
 		})
+		
 	
 	// 매개 변수로 사용시 swiper가 초기화 될 때 동작합니다.
 	    var swiper = new Swiper(".swiper", {
@@ -1230,7 +1183,7 @@ button{
         slidesPerView : 'auto', // 한 슬라이드에 보여줄 갯수
         centeredSlides: true,    //센터모드
         autoplay: {     //자동슬라이드 (false-비활성화)
-          delay: 30000000, // 시간 설정
+          delay: 1000000, // 시간 설정
           disableOnInteraction: false, // false-스와이프 후 자동 재생
         },
 
@@ -1249,6 +1202,197 @@ button{
         },
       });
 	</script>
+	<script>
+	var token = $("meta[name='_csrf']").attr("content");
+	var header = $("meta[name='_csrf_header']").attr("content");
+	console.log('test');
+	console.log(document.getElementById('hii').value);
+	var arr = [];
+	var mymap = new Map();
 	
+	const number = document.getElementById('option').childElementCount - 1;
+	for(var i = 1; i <= number; i++){
+		var option_name = document.getElementById("option_box_" + i).value;
+		mymap.set(option_name, i);
+	}
+	console.log(mymap);
+	
+	function changeOptionSelect(){
+		
+	    var optionSelect = document.getElementById("option");
+	    var option_box_id = optionSelect.options[optionSelect.selectedIndex].id;
+	    if(option_box_id === 'option_box_0') return;
+	    if(arr.includes(option_box_id)){
+	    	document.getElementById("option_box_0").selected = true;
+	    	return;
+	    }
+	    
+	    arr.push(option_box_id);
+	    console.log(arr);
+	    // select element에서 선택된 option의 value가 저장된다.
+	    var selectValue = optionSelect.options[optionSelect.selectedIndex].value;
+	 	
+	    console.log(selectValue);
+	    var optionProducts = document.getElementById("option_products");
+
+	    let html = optionProducts.innerHTML;
+	  
+	    html += "<tr class='option_product' id='data-option" + mymap.get(selectValue) + "' data-option-index='"+ mymap.get(selectValue) + "' target-key='238'><td>" +
+		"<input type='hidden' class='option_box_id'  value='#' name='option_code' data-item-add-option data-item-reserved='N' data-option-id='00PF' data-option-index='1'>" +
+		"<p class='product'>" + "${goods.pname}" + "<br><span>" + selectValue + "</span></span></p></td><td>" +
+			"<span class='quantity' style='width:65px;'>" + 
+				"<input type='text' id='input_box_" +mymap.get(selectValue)+ "' name='quantity_opt[]' class='quantity_opt eProductQuantityClass' value='1' product-no=" + "'" + ${goods.gno} + "'"  + "style='border:1;'/>" + 
+ 				'<a href="#none" class="up eProductQuantityUpClass" data-target="option_box_'+ mymap.get(selectValue) + '_up">' +
+					'<img src="./../../../resources/img/up.png" id="option_box_'+ mymap.get(selectValue) + '_up" class="option_box_up" alt="수량증가" onclick="valueUp()"></a>' + 
+				'<a href="#none" class="down eProductQuantityDownClass" data-target="option_box_' + mymap.get(selectValue) + '_down">' +
+					'<img src="./../../../resources/img/down.png" id="option_box_'+ mymap.get(selectValue) + '_down" class="option_box_down" alt="수량감소" onclick="valueDown()"></a>' +  
+			'</span>' + 
+			'<a href="#none" class="delete">' + 
+				'<img src="./../../../resources/img/x.png" alt="삭제" id="option_box_' + mymap.get(selectValue) + '_del" data-target="data-option"'+ mymap.get(selectValue) + ' class="option_box_del" onclick="deleteOption()">' + 
+			'</a></td>' +
+		'<td class="right">' + 
+			'<span>' + 
+				'<input type="hidden" id="option_box_price'+ mymap.get(selectValue) + '" class="option_box_price" value="' + ${goods.discountPrice} + '" product-no="' + ${goods.gno} + '"' + 
+				'item_code="P00000JE00PF">' + 
+				'<span id="option_box_price2_' + mymap.get(selectValue) + '" class="ec-front-product-item-price" code="P000000JE00PF" product-no="' + ${goods.gno} + '">' + 
+				"<fmt:formatNumber value='${goods.discountPrice}' pattern='##,###' /> 원" + "</span></span></td></tr>";
+		optionProducts.innerHTML = html;
+		document.getElementById("option_box_0").selected = true;
+		calculateTot();
+	}
+	
+ 	function deleteOption(){
+		var deleteObj = event.target.id;
+		console.log(deleteObj);
+		var deleteObject = deleteObj.slice(11,12);
+		console.log(deleteObject);
+		var delTarget = document.getElementById("data-option" + deleteObject);
+		console.log(delTarget);
+		delTarget.remove();
+		var deleteThing = 'option_box_' + deleteObject;
+		let filtered = arr.filter((element) => element !== deleteThing);
+		arr = filtered;
+		console.log(arr);
+		if(arr.length === 0){
+			console.log('안쪽');
+			document.getElementById("option_box_0").selected = true;
+		}
+		calculateTot();
+	} 
+	
+	function valueUp(){	
+		var targetNum = event.target.id;
+		var num = targetNum.slice(11,12);
+		var inputbox = document.getElementById("input_box_" + num);
+		var number = Number(inputbox.value);
+		if(number <= 9){
+			inputbox.setAttribute('value',number + 1);
+		}else{
+			return false;
+		}
+		calculateSub(num);
+		calculateTot();
+	}
+	
+	function valueDown(){
+		
+		var targetNum = event.target.id;
+		var num = targetNum.slice(11,12);
+		var inputbox = document.getElementById("input_box_" + num);
+		var number = Number(inputbox.value);
+		if(number >= 2){
+			inputbox.setAttribute('value',number - 1);
+		}else{
+			return false;
+		}
+		calculateSub(num);
+		calculateTot();
+	} 
+	
+  	function calculateSub(num){
+		var numTarget = document.getElementById("input_box_" + num);
+		var quantity = Number(numTarget.value);
+		var price = Number(document.getElementById("option_box_price"+num).value);
+		console.log(quantity * price);
+		
+		/* document.getElementById("option_box_price"+num).setAttribute('value', (quantity * price)); */
+		document.getElementById("option_box_price2_"+num).setAttribute('value', (quantity * price));
+		document.getElementById("option_box_price2_" + num).innerHTML = Number(quantity * price).toLocaleString()+" 원";
+		
+	}
+  	
+  	function imgStyleDel(){
+  		console.log('실행!!!!!');
+  		var images = document.querySelectorAll(".tab-pane p img");
+  		images.forEach((element) => {element.style=''});
+  	}
+  	function calculateTot(){
+  		var calResult = 0;
+  		console.log('실행됨');
+  		const sections = document.querySelectorAll(".ec-front-product-item-price");
+  		console.log(sections);
+  		for(var i = 0; i < sections.length; i++){
+  			var sp = sections[i].innerHTML;
+  			sp = sp.replace(',','');
+  			sp = sp.substr(0,sp.length-2);
+  			console.log('sp' + sp);
+  			calResult += Number(sp);
+  		}
+  		console.log(calResult);
+  		var cartTotal = document.getElementById("cart-total");
+  		cartTotal.innerHTML = Number(calResult).toLocaleString();
+  		return calResult;
+  	}
+  	imgStyleDel();
+  	calculateTot();
+  	
+  	function goToCart(){
+  		
+  		var pname = document.getElementById("realpname").value;
+  		console.log('pname:' + pname);
+  		var gno = document.getElementById("goodsNo").value;
+  		console.log(gno);
+  		
+  		var totalprice = calculateTot();
+  		console.log('price:' + totalprice);
+  		console.log('arr:' + arr);
+  		for(var i = 1; i <= arr.length; i++){
+  			var option_name = document.getElementById("option_box_" + i).value;
+  			console.log('option_name:' + option_name);
+  			var option_price = document.getElementById("option_box_price2_" + i).innerHTML;
+  			console.log(option_price);
+  			option_price = option_price.replace(',','');
+  			option_price = option_price.substr(0, option_price.length - 2);
+  			var numTarget = document.getElementById("input_box_" + i);
+  			var quantity = Number(numTarget.value);
+  			console.log(quantity);
+
+  		}	 
+  	}
+  	
+		$.ajax({
+	  			url: '/putCart',
+	  			processData: false,
+	  			contentType: false,  //이것때문에 오류. contentType: "application/json",파일보낼 때 이렇게 씀
+	  			data: {"pname": pname, "gno": gno, "option_name": option_name, "option_price": option_price, "quantity": quantity},
+	  			type: 'post',
+	  			dataType: 'json',
+	  			beforeSend: function(xhr) { //XMLHttpRequest (XHR)은 AJAX 요청을 생성하는 JavaScript API이다. XHR의 메서드로 브라우저와 서버간의 네트워크 요청을 전송할 수 있다.
+	  				xhr.setRequestHeader(header, token); //csrf 전송하지 않으면 아예 ajax가 되지 않는 문제가 생김.
+	  			},
+	  			success: function(result){
+	  				console.log(result);
+	  				alert('upload');
+	  				
+	  				showUploadedFile(result);
+	  				$(".uploadDiv").html(cloneObj.html());
+	  			},
+	  			error: function(error){
+	  				console.log(error);
+	  			}
+	  		}); 
+
+		
+	</script>
 </body>
 </html>
