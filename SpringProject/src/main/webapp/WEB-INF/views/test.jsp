@@ -3,87 +3,103 @@
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 
-<link rel="stylesheet" href="/resources/css/claim.css">
-<div class="claims">
-	<c:choose>
-		<c:when test="${claimlist == null }">
-			<span>등록된 글이 없습니다.</span>
-		</c:when>
-		<c:when test="${claimlist != null }">
-			<c:forEach var="item" items="${claimlist }" varStatus="articleNum">
-				<c:if test="${item.level == 1 }">
-					<div class="claim">
-						<em class="claim__label">클레임</em>
-						<div class="claim__wrap">
-							<strong class="claim__author"></strong>
-							<div class="claim__selected-option">상품명+종류</div>
-						</div>
-						<div class="claim__content">
-							${item.content }
-						</div>
-						<div class="claim__time">
-							<fmt:formatDate pattern="yy/MM/dd HH:mm" value="${item.regidate}"/>
-						</div>
-					</div>
-				</c:if>
-				<c:if test="${item.level == 2 }">
-					<div class="claim__reply">
-						<em class="claim__reply__label">처리중</em>
-						<div class="claim__reply__wrap">
-							<strong class="claim__reply__author">회사명</strong>
-							<div class="claim__reply__selected-option"></div>
-						</div>
-						<div class="claim__reply__content">
-							${item.content }
-						</div>
-						<div class="claim__reply__time">
-							<fmt:formatDate pattern="yy/MM/dd HH:mm" value="${item.regidate}"/>
-						</div>
-					</div>
-				</c:if>
-			</c:forEach>	
-		</c:when>
-	</c:choose>
-</div>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>Document</title>
+</head>
+<style>
+#myform fieldset{
+    display: inline-block;
+    direction: rtl;
+    border:0;
+}
+#myform fieldset legend{
+    text-align: right;
+}
+#myform input[type=radio]{
+    display: none;
+}
+#myform label{
+    font-size: 3em;
+    color: transparent;
+    text-shadow: 0 0 0 #f0f0f0;
+}
+#myform label:hover{
+    text-shadow: 0 0 0 rgba(250, 208, 0, 0.99);
+}
+#myform label:hover ~ label{
+    text-shadow: 0 0 0 rgba(250, 208, 0, 0.99);
+}
+#myform input[type=radio]:checked ~ label{
+    text-shadow: 0 0 0 rgba(250, 208, 0, 0.99);
+}
+#reviewContents {
+    width: 100%;
+    height: 150px;
+    padding: 10px;
+    box-sizing: border-box;
+    border: solid 1.5px #D3D3D3;
+    border-radius: 5px;
+    font-size: 16px;
+    resize: none;
+}
+</style>
+<body>
+	<form class="mb-3" name="myform" id="myform" method="post">
+		<!-- 제목 -->
+		<fieldset>
+			<span class="text-bold">별점을 선택해주세요</span>
+			<input type="radio" name="score" value="5" id="rate1"><label
+				for="rate1">★</label>
+			<input type="radio" name="score" value="4" id="rate2"><label
+				for="rate2">★</label>
+			<input type="radio" name="score" value="3" id="rate3"><label
+				for="rate3">★</label>
+			<input type="radio" name="score" value="2" id="rate4"><label
+				for="rate4">★</label>
+			<input type="radio" name="score" value="1" id="rate5"><label
+				for="rate5">★</label>
+		</fieldset>
+		<input type="hidden" name="mem_id" value=""> <!-- 로그인 값 auth -->
+		<input type="hidden" name="goods_no" value="">
+		<div>
+			<textarea class="col-auto form-control" type="text" id="reviewContents" name="content"
+					  placeholder="좋은 수강평을 남겨주시면 Cocolo에 큰 힘이 됩니다! 포인트 5000p도 지급!!"></textarea>
+		</div>
+		<input type="hidden" name="csrfToken" id="csrfToken" value="">
+		<button type="submit">1</button>
+	</form>	
+</body>
+<script>
+$(document).ready(function () {
+	let csrf;
+	let csrf_header;
 
-<!-- pagination -->
-<div class="w3-center">
-	<c:if test="${tot4 != null }">
-		<ul class="w3-pagination">
-			<c:choose>
-				<c:when test="${tot4 > 100 }">
-					<c:forEach var="page" begin="1" end="10" step="1">
-						<c:if test="${section > 1 && page==1 }">
-							<li><a href="#">&laquo;</a></li>
-						</c:if>
-						<li><a href="#">${(section-1)*10 +page }</a></li>
-						<c:if test="${page == 10 }">
-							<li><a href="#">&raquo;</a></li>
-						</c:if>
-					</c:forEach>
-					
-				</c:when>
-				<c:when test="${tot4==100 }">
-					<c:forEach var="page" begin="1" end="10" step="1">
-						<li><a href="#">${page }</a></li>
-					</c:forEach>
-				</c:when>
-				
-				<c:when test="${tot4<100 && tot4>10 }">
-					<c:forEach var="page" begin="1" end="${tot/10 + 1 }" step="1">
-						<c:choose>
-							<c:when test="${page==pageNum }">
-								<li><a class="w3-green" href="#">${page }</a></li>
-							</c:when>
-							<c:otherwise>
-								<li><a href="#">${page }</a></li>
-							</c:otherwise>
-						</c:choose>
-					</c:forEach>
-				</c:when>
-				<c:when test="${tot4<=10 }">
-				</c:when>
-			</c:choose>
-		</ul>
-	</c:if>
-</div>
+	$("#myform").submit(function(event){
+		event.preventDefault();
+
+		let data = $(this).serialize();
+		let csrfToken = $("#csrfToken").val();
+
+		$.ajax({
+			type:"post",
+			url: "",
+			data: "data",
+			beforeSend: function(xhr) {
+				xhr.setRequestHeader("X-CSRF-Token", csrfToken);
+			},
+			success: function (response) {
+				console.log("응답: "+response)
+			},
+			error: function (xhr, status, error) {
+				console.log(error)
+			}
+		})
+	})
+
+})
+</script>
+</html>

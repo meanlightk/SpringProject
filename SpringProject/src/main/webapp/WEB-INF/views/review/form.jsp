@@ -142,18 +142,24 @@ h1 {
 	<br>
 	<div align="center" class="board_list">
 		<form name="frm" id="frm" action="/review/save.do" method="post">
+			
+			<fieldset>
+				<span class="text-bold">별점을 선택해주세요</span>
+				<input type="radio" name="score" value="5" id="rate1"><label
+					for="rate1">★</label>
+				<input type="radio" name="score" value="4" id="rate2"><label
+					for="rate2">★</label>
+				<input type="radio" name="score" value="3" id="rate3"><label
+					for="rate3">★</label>
+				<input type="radio" name="score" value="2" id="rate4"><label
+					for="rate4">★</label>
+				<input type="radio" name="score" value="1" id="rate5"><label
+					for="rate5">★</label>
+			</fieldset>
+			<input type="hidden" name="mem_id" value=""> <!-- 로그인 값 auth -->
+			<input type="hidden" name="goods_no" value="">
+			
 			<table align="center" border="0">
-
-				<tr>
-					<th>제목</th>
-					<td><input type="text" id="title" name="title"
-						placeholder="제목입력" size="40" style="padding: 10px;"
-						value=<c:if test="${type eq 'modify'}">"${review.title}"</c:if>>
-					</td>
-				</tr>
-
-
-
 				<tr>
 					<th>상품내용</th>
 					<td><textarea rows="50" cols="250" id="content" name="content">
