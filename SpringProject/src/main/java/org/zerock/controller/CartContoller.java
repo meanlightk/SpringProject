@@ -61,17 +61,37 @@ public class CartContoller {
 		return "cart"; 
 	}
 	
+	
+	@GetMapping("/view/direct")
+	public String viewDirectCart(@RequestParam("cart_no") List<Integer> cartNoList, Model model) {
+		//로그인 유저 체크
+		Authentication auth = SecurityContextHolder.getContext().getAuthentication();		
+		if(auth.getName() == null || auth.getName().equals("") || auth.getName().equals("anonymousUser")) {
+			//미로그인 상태
+			return "redirect:/member/login";
+		}
+		
+		List<CartItem> cartList = cartService.getDirectCartItem(cartNoList);
+	
+		model.addAttribute("cartItemList", cartList);
+		return "cart"; 
+	}
+	
 	@PostMapping(path="/putCart", consumes = MediaType.APPLICATION_JSON_VALUE)
 	@ResponseBody
-	public void putCart(@RequestBody List<Cart> jsonData, HttpServletResponse response) throws IOException {
+	public List<Integer> putCart(@RequestBody List<Cart> jsonData, HttpServletResponse response) throws IOException {
 		log.info("putcart 실행");
 		Authentication auth = SecurityContextHolder.getContext().getAuthentication();
-
+		List<Integer> list = new ArrayList<Integer>();
+		
 	    for(int i = 0; i < jsonData.size(); i++) {
 	    	Cart cart = jsonData.get(i);
 	    	cart.setMemid(auth.getName());
 	    	log.info(cart);
 	    	cartService.putCart(cart);
-	    }		
+	    	list.add(cart.getCart_no());
+	    }
+		return list;	
+	    
 	}
 }

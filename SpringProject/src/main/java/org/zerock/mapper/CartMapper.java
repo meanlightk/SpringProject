@@ -9,6 +9,9 @@ public interface CartMapper {
 
 	public List<Cart> selectCart(String id);
 
+	public List<Cart> selectCartNo(int cartNo);
+
+	
 	public void insertCart(Cart cart);
 
 	public void deleteCart(Cart cart);

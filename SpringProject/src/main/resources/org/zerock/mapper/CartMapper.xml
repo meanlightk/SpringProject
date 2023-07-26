@@ -11,7 +11,13 @@
 		mem_id = #{id} AND ordernum is null
 	</select>
 
-	<insert id="insertCart" parameterType="org.zerock.domain.Cart">
+	<select id="selectCartNo" resultType="org.zerock.domain.Cart">
+		select * from cart where
+		cart_no = #{cartNo} AND ordernum is null
+	</select>
+
+	<insert id="insertCart" parameterType="org.zerock.domain.Cart" useGeneratedKeys="true"
+		keyProperty="cart_no">
 		insert into cart(mem_id, goods_no, optionName, totalPrice, quantity, pname)
 		values(#{memid},#{goods_no}, #{optionName}, #{totalPrice}, #{quantity}, #{pname})
 	</insert>
