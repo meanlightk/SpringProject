@@ -72,10 +72,7 @@
 	<!-- <select id="selectImageList" resultType="org.zerock.domain.Goods"> 
 		select * from goodsImage where goods_no = #{gno} </select> -->
 
-	<insert id="insertItem" parameterType="org.zerock.domain.Goods">
-		<selectKey keyProperty="gno" resultType="int" order="BEFORE">
-			SELECT IFNULL(max(goods_no)+1,1) FROM goods
-		</selectKey>
+	<insert id="insertItem" parameterType="org.zerock.domain.Goods" useGeneratedKeys="true" keyProperty="gno">
 		INSERT INTO goods (category, pname, content, sellPrice, skintype,
 		stock, status, imagepath, originalPrice, discountPrice, uuid,
 		option_list)

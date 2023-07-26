@@ -169,6 +169,18 @@ h1 {
 	
 			<div id="previewContainer" style="width: 30%;"></div>
 		</div>
+
+
+		<div class="image">
+			<div class="image-wrap">
+				<p>서브이미지</p>
+				<br> <input type="file" name="uploadFile2" id="subImage" >
+			</div>
+	
+			<div id="previewContainer" style="width: 30%;"></div>
+		</div>
+
+
 	
 	<br>	
 	<div align="center">

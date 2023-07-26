@@ -193,7 +193,8 @@ function submitData(){
 			success:function(data){
 				console.log("성공" + data);
 				console.log(data);
-				loadImage(data); 
+				loadImage(data);
+				loadSubImage(data);
 				location.href = '/registerGoods2'
 			},
 			error:function(){
