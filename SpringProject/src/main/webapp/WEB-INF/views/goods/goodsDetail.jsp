@@ -793,7 +793,7 @@ button{
 				</tr>
 
 				<tr>
-					<td id="pname"><font size="5"
+					<td id="pname" value="${goods.pname}"><font size="5"
 						style="box-sizing: border-box; position: relative;"><h2>${goods.pname}</h2></font>
 						<input type="hidden" id="goodsNo" value="${goods.gno}" />
 						<input type="hidden" id="realpname"	 value="${goods.pname}" />
@@ -909,7 +909,7 @@ button{
 						</thead>
 
 						<tbody id="dynamicTbody">
-
+							
 						</tbody>
 						
 					</table>
@@ -937,8 +937,7 @@ button{
 				<font size="5px">♥</font>
 			</button>
 			<button style="width: 270px; height: 58px;"
-				class="btn btn-outline-danger" id="insertBasket"
-				onclick="goToCart()">장바구니</button>
+				class="btn btn-outline-danger" id="insertBasket">장바구니</button>
 			<button style="width: 270px; height: 58px;"
 				class="btn btn-outline-danger" id="goodsOrder"
 				onclick="fn_GoodsOrder()">구매하기</button>
@@ -1150,6 +1149,7 @@ button{
 
 	<br>
 	<br>
+	<script src="https://code.jquery.com/jquery-3.5.1.js"></script>
 	<script>
 		$(document).ready(function(){
 			  
@@ -1162,6 +1162,41 @@ button{
 			    $(this).parent().addClass('tab_open');
 			    $("#myTabContent"+tab_id).addClass('current');
 			})
+			
+		  	
+		    $("#insertBasket").click(function(){
+		    	 
+	   			var pname = $("#pname").val();
+	   			var gno = $("#gno").val();
+	   			
+	   			var optionName = $("option_name_").val();
+	   			//map에서 option_name번호를 가져와야 optionName을 보낼 수 있음.
+	            var jsonData = {
+	                      pname : pname,
+	                      gno : gno,
+	                      optionName : optionName,
+	                      
+	            }
+	            console.log(jsonData);    
+	        	$.ajax({
+	        		url: '/cart/putCart',
+	        		processData: false,
+	        		contentType: false,
+	        		data: JSON.stringify(jsonData),
+	        		type: 'POST',
+	        		dataType: false,
+	        		beforeSend: function(xhr) { //XMLHttpRequest (XHR)은 AJAX 요청을 생성하는 JavaScript API이다. XHR의 메서드로 브라우저와 서버간의 네트워크 요청을 전송할 수 있다.
+	        			xhr.setRequestHeader(header, token); //csrf 전송하지 않으면 아예 ajax가 되지 않는 문제가 생김.
+	        		},
+	        		success: function(result){
+	        			console.log(result);
+	        			alert('upload');
+	        		},
+	    			error: function(jqXHR, textStatus, errorThrown) {
+	    				alert("ERROR : " + textStatus + " : " + errorThrown);
+	    			}
+	        	});  //$.ajax
+	        });
 		})
 		
 	
@@ -1194,8 +1229,7 @@ button{
 	<script>
 	var token = $("meta[name='_csrf']").attr("content");
 	var header = $("meta[name='_csrf_header']").attr("content");
-	console.log('test');
-	console.log(document.getElementById('hii').value);
+
 	var arr = [];
 	var mymap = new Map();
 	
@@ -1204,10 +1238,9 @@ button{
 		var option_name = document.getElementById("option_box_" + i).value;
 		mymap.set(option_name, i);
 	}
-	console.log(mymap);
 	
 	function changeOptionSelect(){
-		
+		console.log(mymap);
 	    var optionSelect = document.getElementById("option");
 	    var option_box_id = optionSelect.options[optionSelect.selectedIndex].id;
 	    if(option_box_id === 'option_box_0') return;
@@ -1217,18 +1250,18 @@ button{
 	    }
 	    
 	    arr.push(option_box_id);
-	    console.log(arr);
 	    // select element에서 선택된 option의 value가 저장된다.
 	    var selectValue = optionSelect.options[optionSelect.selectedIndex].value;
 	 	
-	    console.log(selectValue);
 	    var optionProducts = document.getElementById("option_products");
-
+	
+	    
 	    let html = optionProducts.innerHTML;
 	  
 	    html += "<tr class='option_product' id='data-option" + mymap.get(selectValue) + "' data-option-index='"+ mymap.get(selectValue) + "' target-key='238'><td>" +
+	    "<input type='hidden' id='gno' value='"+ ${goods.gno} +"'>" +
 		"<input type='hidden' class='option_box_id'  value='#' name='option_code' data-item-add-option data-item-reserved='N' data-option-id='00PF' data-option-index='1'>" +
-		"<p class='product'>" + "${goods.pname}" + "<br><span>" + selectValue + "</span></span></p></td><td>" +
+		"<p class='product'>" + "${goods.pname}" + "<br><span id='option_name_"+ mymap.get(selectValue) + "' value='"+ selectValue +"'>" + selectValue + "</span></span></p></td><td>" +
 			"<span class='quantity' style='width:65px;'>" + 
 				"<input type='text' id='input_box_" +mymap.get(selectValue)+ "' name='quantity_opt[]' class='quantity_opt eProductQuantityClass' value='1' product-no=" + "'" + ${goods.gno} + "'"  + "style='border:1;'/>" + 
  				'<a href="#none" class="up eProductQuantityUpClass" data-target="option_box_'+ mymap.get(selectValue) + '_up">' +
@@ -1252,18 +1285,13 @@ button{
 	
  	function deleteOption(){
 		var deleteObj = event.target.id;
-		console.log(deleteObj);
 		var deleteObject = deleteObj.slice(11,12);
-		console.log(deleteObject);
 		var delTarget = document.getElementById("data-option" + deleteObject);
-		console.log(delTarget);
 		delTarget.remove();
 		var deleteThing = 'option_box_' + deleteObject;
 		let filtered = arr.filter((element) => element !== deleteThing);
 		arr = filtered;
-		console.log(arr);
 		if(arr.length === 0){
-			console.log('안쪽');
 			document.getElementById("option_box_0").selected = true;
 		}
 		calculateTot();
@@ -1304,30 +1332,25 @@ button{
 		var price = Number(document.getElementById("option_box_price"+num).value);
 		console.log(quantity * price);
 		
-		/* document.getElementById("option_box_price"+num).setAttribute('value', (quantity * price)); */
 		document.getElementById("option_box_price2_"+num).setAttribute('value', (quantity * price));
 		document.getElementById("option_box_price2_" + num).innerHTML = Number(quantity * price).toLocaleString()+" 원";
 		
 	}
   	
   	function imgStyleDel(){
-  		console.log('실행!!!!!');
   		var images = document.querySelectorAll(".tab-pane p img");
   		images.forEach((element) => {element.style=''});
   	}
   	function calculateTot(){
   		var calResult = 0;
-  		console.log('실행됨');
   		const sections = document.querySelectorAll(".ec-front-product-item-price");
   		console.log(sections);
   		for(var i = 0; i < sections.length; i++){
   			var sp = sections[i].innerHTML;
   			sp = sp.replace(',','');
   			sp = sp.substr(0,sp.length-2);
-  			console.log('sp' + sp);
   			calResult += Number(sp);
   		}
-  		console.log(calResult);
   		var cartTotal = document.getElementById("cart-total");
   		cartTotal.innerHTML = Number(calResult).toLocaleString();
   		return calResult;
@@ -1335,51 +1358,9 @@ button{
   	imgStyleDel();
   	calculateTot();
   	
-  	function goToCart(){
-  		
-  		var pname = document.getElementById("realpname").value;
-  		console.log('pname:' + pname);
-  		var gno = document.getElementById("goodsNo").value;
-  		console.log(gno);
-  		
-  		var totalprice = calculateTot();
-  		console.log('price:' + totalprice);
-  		console.log('arr:' + arr);
-  		for(var i = 1; i <= arr.length; i++){
-  			var option_name = document.getElementById("option_box_" + i).value;
-  			console.log('option_name:' + option_name);
-  			var option_price = document.getElementById("option_box_price2_" + i).innerHTML;
-  			console.log(option_price);
-  			option_price = option_price.replace(',','');
-  			option_price = option_price.substr(0, option_price.length - 2);
-  			var numTarget = document.getElementById("input_box_" + i);
-  			var quantity = Number(numTarget.value);
-  			console.log(quantity);
 
-  		}	 
-  	}
-  	
-		$.ajax({
-	  			url: '/putCart',
-	  			processData: false,
-	  			contentType: false,  //이것때문에 오류. contentType: "application/json",파일보낼 때 이렇게 씀
-	  			data: {"pname": pname, "gno": gno, "option_name": option_name, "option_price": option_price, "quantity": quantity},
-	  			type: 'post',
-	  			dataType: 'json',
-	  			beforeSend: function(xhr) { //XMLHttpRequest (XHR)은 AJAX 요청을 생성하는 JavaScript API이다. XHR의 메서드로 브라우저와 서버간의 네트워크 요청을 전송할 수 있다.
-	  				xhr.setRequestHeader(header, token); //csrf 전송하지 않으면 아예 ajax가 되지 않는 문제가 생김.
-	  			},
-	  			success: function(result){
-	  				console.log(result);
-	  				alert('upload');
-	  				
-	  				showUploadedFile(result);
-	  				$(".uploadDiv").html(cloneObj.html());
-	  			},
-	  			error: function(error){
-	  				console.log(error);
-	  			}
-	  		}); 
+
+
 
 		
 	</script>
