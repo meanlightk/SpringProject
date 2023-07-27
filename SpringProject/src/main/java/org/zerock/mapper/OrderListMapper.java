@@ -3,6 +3,7 @@ package org.zerock.mapper;
 import java.util.List;
 import java.util.Map;
 
+import org.apache.ibatis.annotations.Param;
 import org.zerock.domain.Common;
 import org.zerock.domain.OrderAddress;
 import org.zerock.domain.OrderList;
@@ -17,7 +18,7 @@ public interface OrderListMapper {
 
 	public List<OrderList> selectOrderList(Common com);
 	
-	public Map<String,Object> selectOrderId(int orderlistNo);
+	public Map<String,Object> selectOrderId(@Param("orderlistNo") int orderlistNo, @Param("gno") int gno );
 
 	public int insertOrderList(OrderList orderlist);
 	

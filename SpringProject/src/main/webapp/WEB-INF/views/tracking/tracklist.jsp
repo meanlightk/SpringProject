@@ -63,8 +63,22 @@
 				<h3 class="ltext-103 cl5">배송 정보</h3>
 			</div>
 			<div class=" fURIKx">
-				<div class=" iTIHRg">7/20(목) 도착 완료</div>
-				<div class=" kgoUts">고객님이 주문하신 상품이 배송완료 되었습니다.</div>
+				<div class=" iTIHRg">${info.parcelDate}(${info.weekDay}) ${info.dstatusStr}</div>
+				<c:choose>
+					<c:when test="${info.dstatus eq '2'}">
+						<div class=" kgoUts">고객님이 주문하신 상품이 출고완료 되었습니다.</div>
+					</c:when>
+					<c:when test="${info.dstatus eq '3'}">
+						<div class=" kgoUts">고객님이 주문하신 상품이 배숭중입니다.</div>
+					</c:when>
+
+					<c:when test="${info.dstatus eq '4'}">
+						<div class=" kgoUts">고객님이 주문하신 상품이 배송완료 되었습니다.</div>
+					</c:when>
+					<c:otherwise>
+						<div class=" kgoUts">고객님이 주문하신 상품이 배송전 입니다.</div>
+					</c:otherwise>
+				</c:choose>
 			</div>
 			<div class="DataArea">
 				<div class=" bAsSRC"></div>
@@ -141,7 +155,6 @@ $(document).ready(function(){
 	var t_code = $('#conpanyCd').val();
 	var t_invoice = $('#invoiceNumberText').val();
 	
-	alert(t_code + "," + t_invoice + ',' + myKey)
 	    $.ajax({
 	        type:"GET",
 	        dataType : "json",

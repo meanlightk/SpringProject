@@ -83,8 +83,8 @@ public class OrderService {
 		return orderMapper.selectOrderList(common);
 	}
 	
-	public Map<String,Object> getOrder(int orderlistNo) {
-		return orderMapper.selectOrderId(orderlistNo);
+	public Map<String,Object> getOrder(int orderlistNo,int gno) {
+		return orderMapper.selectOrderId(orderlistNo,gno);
 	}
 	
 	public int save(OrderList order) {

@@ -7,13 +7,13 @@
 
 	<sql id="info">
 		orderlist_no as orderlist_no,
-		mem_id as mem_id,
+		l.mem_id as mem_id,
 		totprice,
 		dstatus,
 		waybill_num as waybill_num,
 		parcel_cd as parcel_cd,
-		DATE_FORMAT(regiDate,'%Y%m%d') as regiDateStr,
-		ROW_NUMBER() over(ORDER BY regiDate desc) AS rownum,
+		DATE_FORMAT(l.regiDate,'%Y%m%d') as regiDateStr,
+		ROW_NUMBER() over(ORDER BY l.regiDate desc) AS rownum,
 		count(1) over() AS totalCount 			
 	</sql>
 
@@ -47,7 +47,7 @@
 		from (
 			select
 				<include refid="info"/> 
-			from orderlist
+			from orderlist l
 		) t
 		where rownum BETWEEN (#{section}-1)*10*100+(#{pageNum}-1)*10+1 AND (#{section}-1)*100+#{pageNum}*10
 		order by rownum
@@ -60,10 +60,30 @@
 			a.addr1,
 			addr2 as Daddr,
 			memo,
+			DATE_FORMAT(update_date,'%m/%d') as parcelDate,
+			(case WEEKDAY(update_date)
+			    when '0' then '월'
+			    when '1' then '화'
+			    when '2' then '수'
+			    when '3' then '목'
+			    when '4' then '금'
+			    when '5' then '토'
+			    when '6' then '일'
+		    end) as weekDay,
+		    case
+			    when o.dstatus= '1' then '배송전'
+			    when o.dstatus= '2' then '출고완료'
+			    when o.dstatus= '3' then '배송중'
+			   	when o.dstatus= '4' then '배송완료'
+			    else '배송정보사용불가'
+			end as dstatusStr,
+		    
 			<include refid="info"/> 
 		from orderlist l
 		INNER JOIN order_address a ON(l.orderlist_no = a.order_no)
+		INNER JOIN cart c ON(l.orderlist_no = c.ordernum)
 		where orderlist_no = #{orderlistNo}
+		  and c.goods_no = #{gno}
 	</select>
 	<insert id="insertOrderList" parameterType="org.zerock.domain.OrderList">
 		insert into orderlist(mem_id,totprice,dstatus)
