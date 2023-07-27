@@ -348,7 +348,10 @@ public class GoodsController {
 		Common common4 = new Common();
 		Goods goods = service.showOneItem(gno);
 		log.info("콘텐츠"+goods.getContent());
+		String optionList = goods.getOption_list();
+		String[] optionListAll = optionList.split("\n");
 		goods.setOption_list_split(optionListAll);
+	
 		List<Review> list = reviewService.getReviewList(common, gno);
 		model.addAttribute("goods", goods);
 		model.addAttribute("reviewList", list);
