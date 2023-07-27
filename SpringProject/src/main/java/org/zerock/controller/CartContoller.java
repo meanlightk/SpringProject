@@ -49,10 +49,6 @@ public class CartContoller {
 	public String viewCart(Model model) {
 		//로그인 유저 체크
 		Authentication auth = SecurityContextHolder.getContext().getAuthentication();		
-		if(auth.getName() == null || auth.getName().equals("") || auth.getName().equals("anonymousUser")) {
-			//미로그인 상태
-			return "redirect:/member/login";
-		}
 		
 		String userId = auth.getName();
 		List<CartItem> cartList = cartService.getCartItemList(userId);
@@ -65,11 +61,7 @@ public class CartContoller {
 	@GetMapping("/view/direct")
 	public String viewDirectCart(@RequestParam("cart_no") List<Integer> cartNoList, Model model) {
 		//로그인 유저 체크
-		Authentication auth = SecurityContextHolder.getContext().getAuthentication();		
-		if(auth.getName() == null || auth.getName().equals("") || auth.getName().equals("anonymousUser")) {
-			//미로그인 상태
-			return "redirect:/member/login";
-		}
+		Authentication auth = SecurityContextHolder.getContext().getAuthentication();
 		
 		List<CartItem> cartList = cartService.getDirectCartItem(cartNoList);
 	

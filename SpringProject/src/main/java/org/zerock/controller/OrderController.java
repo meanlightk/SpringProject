@@ -46,10 +46,6 @@ public class OrderController {
 		
 		// 로그인 유저 체크
 		Authentication auth = SecurityContextHolder.getContext().getAuthentication();
-		if (auth.getName() == null || auth.getName().equals("") || auth.getName().equals("anonymousUser")) {
-			// 미로그인 상태
-			return AjaxRes.builder().status("FAIL").message("Not logged in").build();
-		}
 		
 		id = auth.getName();
 		PaymentItem paymentItem = orderService.newOrder(id, newOrder);
@@ -66,10 +62,6 @@ public class OrderController {
 		
 		// 로그인 유저 체크
 		Authentication auth = SecurityContextHolder.getContext().getAuthentication();
-		if (auth.getName() == null || auth.getName().equals("") || auth.getName().equals("anonymousUser")) {
-			// 미로그인 상태
-			return AjaxRes.builder().status("FAIL").message("Not logged in").build();
-		}
 		
 		id = auth.getName();
 		if(cartService.updateCart(id, cartItem)) {
@@ -82,13 +74,8 @@ public class OrderController {
 	
 	@GetMapping("/list.do")
 	public String main(Model model, Common common) {
-		String id = null;
 		
 		Authentication auth = SecurityContextHolder.getContext().getAuthentication();
-		if(auth.getName() == null || auth.getName().equals("") || auth.getName().equals("anonymousUser")) {
-			//미로그인 상태
-			return "redirect:/member/login";
-		}
 		
 		String userId = auth.getName();
 
