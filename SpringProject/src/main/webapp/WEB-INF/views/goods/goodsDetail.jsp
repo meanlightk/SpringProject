@@ -1316,8 +1316,8 @@ button{
 	        		success: function(result){
 	        			console.log(result);
 	        			alert('장바구니에 추가되었습니다.');
-	        			$("#option_products").html('');
-//	        			location.href='/view/direct?cart_no=' + result;
+	        			//$("#option_products").html('');
+	        			location.href='/cart/direct?cart_no=' + result;
 	        		},
 	    			error: function(jqXHR, textStatus, errorThrown) {
 	    				alert("ERROR : " + textStatus + " : " + errorThrown);
