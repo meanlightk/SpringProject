@@ -64,8 +64,9 @@ public class AdminController {
 		log.info("viewClaim() called");
 		
 		Gclaim claim = claimService.showOneClaim(gclaim_no);
-		
+		Goods goods = goodsService.showOneItem(claim.getGno());
 		model.addAttribute("claim", claim);
+		model.addAttribute("goods", goods);
 		
 		return "/claim/view";
 	}

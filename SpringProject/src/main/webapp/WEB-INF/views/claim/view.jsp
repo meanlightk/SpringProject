@@ -174,7 +174,7 @@ $(document).ready(function(){
 </head>
 <body>
 <div class="w3-container">
-<h2>테스트 게시판</h2>
+<h2>상세 조회</h2>
 	<div class="w3-responsive">
 	    <div class="containerA">
 	
