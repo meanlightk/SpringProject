@@ -65,7 +65,9 @@ a:link, a:visited {
 .board_view {
 	width: 50%;
 	border-top: 2px solid #252525;
-	border-bottom: 1px solid #ccc
+	border-bottom: 1px solid #ccc;
+	margin: auto;
+	
 }
 
 .board_view tbody th {
@@ -130,6 +132,34 @@ h1 {
 	font-size: 2em;
 	letter-spacing: 10px;
 }
+
+#frm fieldset{
+    display: inline-block; /* 하위 별점 이미지들이 있는 영역만 자리를 차지함.*/
+    direction: rtl; /* 이모지 순서 반전 */
+    border: 0; /* 필드셋 테두리 제거 */
+}
+#frm fieldset legend{
+    text-align: left;
+}
+#frm input[type=radio]{
+    display: none; /* 라디오박스 감춤 */
+}
+#frm label{
+    display: inline-block; /* 하위 별점 이미지들이 있는 영역만 자리를 차지함.*/
+
+    font-size: 3em; /* 이모지 크기 */
+    color: transparent; /* 기존 이모지 컬러 제거 */
+    text-shadow: 0 0 0 #f0f0f0; /* 새 이모지 색상 부여 */
+}
+#frm label:hover{
+    text-shadow: 0 0 0 #a00; /* 마우스 호버 */
+}
+#frm label:hover ~ label{
+    text-shadow: 0 0 0 #a00; /* 마우스 호버 뒤에오는 이모지들 */
+}
+#frm input[type=radio]:checked ~ label{
+    text-shadow: 0 0 0 #a00; /* 마우스 클릭 체크 */
+}
 </style>
 <body class="animsition">
 	<br>
@@ -142,28 +172,29 @@ h1 {
 	<br>
 	<div align="center" class="board_list">
 		<form name="frm" id="frm" action="/review/save.do" method="post">
-			
-			<fieldset>
-				<span class="text-bold">별점을 선택해주세요</span>
-				<input type="radio" name="score" value="5" id="rate1"><label
-					for="rate1">★</label>
-				<input type="radio" name="score" value="4" id="rate2"><label
-					for="rate2">★</label>
-				<input type="radio" name="score" value="3" id="rate3"><label
-					for="rate3">★</label>
-				<input type="radio" name="score" value="2" id="rate4"><label
-					for="rate4">★</label>
-				<input type="radio" name="score" value="1" id="rate5"><label
-					for="rate5">★</label>
-			</fieldset>
 			<input type="hidden" name="mem_id" value=""> <!-- 로그인 값 auth -->
 			<input type="hidden" name="goods_no" value="">
 			
-			<table align="center" border="0">
+			<table width="100%" align="center" border="0">
+				<tr>
+					<th>별점을 선택해주세요</th>
+					<td>
+					    <fieldset>
+					        <input type="radio" name="score" value="5" id="rate1"><label for="rate1">⭐</label>
+					        <input type="radio" name="score" value="4" id="rate2"><label for="rate2">⭐</label>
+					        <input type="radio" name="score" value="3" id="rate3"><label for="rate3">⭐</label>
+					        <input type="radio" name="score" value="2" id="rate4"><label for="rate4">⭐</label>
+					        <input type="radio" name="score" value="1" id="rate5"><label for="rate5">⭐</label>
+					    </fieldset>
+					</td>
+
+				</tr>
 				<tr>
 					<th>상품내용</th>
-					<td><textarea rows="50" cols="250" id="content" name="content">
-						</textarea></td>
+					<td>
+						<textarea id="content" name="content">
+						</textarea>
+					</td>
 				</tr>
 			</table>
 
@@ -190,7 +221,7 @@ h1 {
 					.replace(
 							'content',
 							{
-								width : '120%',
+								width : '100%',
 								height : '400px',
 								filebrowserUploadUrl : "<c:url value="/fileReviewUpload.do?"/>${_csrf.parameterName}=${_csrf.token}"
 

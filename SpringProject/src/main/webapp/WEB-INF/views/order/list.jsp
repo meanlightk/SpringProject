@@ -16,7 +16,7 @@
 	<section class="bg0 p-t-23 p-b-140">
 		<div class="container">
 			<div class="p-b-10">
-				<h3 class="ltext-103 cl5">배송 조회</h3>
+				<h3 class="ltext-103 cl5">주문 내역</h3>
 			</div>
 
 			<div class="flex-w flex-sb-m p-b-52">
@@ -88,7 +88,7 @@
 										<td class="sc-gnmni8-6 gbTJl">
 											<div class="sc-gnmni8-7 bCQoer">
 												<c:if test="${item.dstatus ne '1'}">
-													<button id="myButton1" class="sc-1k9quwu-0 fUUUKW sc-4d0nwb-0 iiEWkt" onclick="fn_Track('/track/list.do',${item.orderNo})">배송조회</button>
+													<button id="myButton1" class="sc-1k9quwu-0 fUUUKW sc-4d0nwb-0 iiEWkt" onclick="fn_Track('/track/list.do',${item.orderNo},${item.gno})">배송조회</button>
 												</c:if>
 												<button class="sc-1k9quwu-0 fTrGbC sc-gnmni8-8 kiiuoA" onclick="fn_Review('/review/form.do',${item.gno})">리뷰 작성하기</button>
 												<input type="hidden" id="code" value="${item.parcelCd}">
@@ -131,7 +131,7 @@
 		form.submit();
 	 }
 	
-	function fn_Track(url,data){
+	function fn_Track(url,data,data2){
 		var form = document.createElement("form");
 		form.setAttribute("method", "get");
 		form.setAttribute("action", url);
@@ -139,8 +139,16 @@
 	    parentNOInput.setAttribute("type","hidden");
 	    parentNOInput.setAttribute("value",data);
 	    parentNOInput.setAttribute("name","orderlistNo");
-	
+
 	    form.appendChild(parentNOInput);
+
+	    var parentNOInput2 = document.createElement("input");
+
+	    parentNOInput2.setAttribute("type","hidden");
+	    parentNOInput2.setAttribute("value",data2);
+	    parentNOInput2.setAttribute("name","gno");
+
+	    form.appendChild(parentNOInput2);
 	 	document.body.appendChild(form);
 	    
 	 	console.log(form);

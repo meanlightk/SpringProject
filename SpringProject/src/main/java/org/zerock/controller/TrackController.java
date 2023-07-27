@@ -44,9 +44,9 @@ public class TrackController {
 	}
 	
 	@RequestMapping("/list.do")
-	public String goodslist(Model model, @RequestParam("orderlistNo") int orderlistNo) {
+	public String goodslist(Model model, @RequestParam("orderlistNo") int orderlistNo,@RequestParam("gno") int gno) {
 
-		Map<String,Object> info = orderService.getOrder(orderlistNo);
+		Map<String,Object> info = orderService.getOrder(orderlistNo,gno);
 		
 		model.addAttribute("info",info);
 		
@@ -61,11 +61,5 @@ public class TrackController {
 	public void save() {
 		
 	}
-
-	
-	
-	
-
-	
 	
 }
