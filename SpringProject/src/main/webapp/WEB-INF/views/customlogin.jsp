@@ -22,17 +22,25 @@
 	});
 </script>
 
+<style>
+img {
+	width: 130px;
+	height: 100px;
+}
+</style>
+
 </head>
 <body>
 </head>
 <body>
 <header>
-<div class="logo-mobile">
-<a href="/home"><img src="../resources/images/icons/logo-01.png" alt="IMG-LOGO"></a>
-</div>
+
 </header>
 
 <div class="wrapper fadeInDown">
+	<div class="logo-mobile">
+	<a href="/home"><img src="../resources/images/icons/logo-01.png" alt="IMG-LOGO"></a>
+	</div>
 	<div id="formContent">
 		<!-- Tabs Titles -->
 		<h2 class="active">로그인</h2>
