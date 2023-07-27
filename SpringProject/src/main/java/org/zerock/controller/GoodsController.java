@@ -62,9 +62,13 @@ public class GoodsController {
 	public String showItemList(Model model, Common common) {
 		log.info("show Admin List start...");
 		
-		List<Goods> goodsList = service.goodsList();
+		List<Goods> goodsList = service.goodsList(common);
 		model.addAttribute("goodsList", goodsList);
+
 		
+		if(goodsList.size() > 0)
+			model.addAttribute("tot", goodsList.get(0).getTotalCount());
+
 		return "/goods/goodsAdminList";
 		
 	}
@@ -72,8 +76,10 @@ public class GoodsController {
 	@RequestMapping("/showlist")
 	public String goodslist(Model model) {
 
-		List<Goods> goodsList = service.goodsList();
-		model.addAttribute("goodsList", goodsList);
+	//.	List<Goods> goodsList = service.goodsList();
+	//	model.addAttribute("goodsList", goodsList);
+
+		
 
 		
 		return "itemlist";

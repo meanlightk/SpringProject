@@ -96,12 +96,19 @@
 		SELECT max(last_insert_id(goods_no))+1 FROM goods
 	</select>
 
-	<select id="goodsList" resultType="org.zerock.domain.Goods">
+	<select id="goodsList" parameterType="org.zerock.domain.Common" resultType="org.zerock.domain.Goods">
+	select * from (
 		select
-		goods_no as gno,
-		g.*,
-		concat(goods_no,'/s_',uuid) as simagepath
+			goods_no as gno,
+			g.*,
+			concat(goods_no,'/s_',uuid) as simagepath,
+			ROW_NUMBER() over(ORDER BY regidate desc) AS rownum,
+			count(1) over() AS totalCount 	
 		from goods g
+	) g
+	WHERE rownum BETWEEN (#{section}-1)*20*100+(#{pageNum}-1)*20+1 AND (#{section}-1)*100+#{pageNum}*20
+	order by rownum
+	
 	</select>
 	<select id="selectSearchList" parameterType="org.zerock.domain.Common" resultType="org.zerock.domain.Goods">
 		select

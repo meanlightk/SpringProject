@@ -181,8 +181,8 @@
 						<div class="icon-header-item cl2 hov-cl1 trans-04 p-l-22 p-r-11 icon-header-noti js-show-cart" data-notify="${cartCount}">
 							<i class="zmdi zmdi-shopping-cart"></i>
 						</div>
-
-						<a href="#" class="icon-header-item cl2 hov-cl1 trans-04 p-l-22 p-r-11 icon-header-noti" data-notify="0">
+						<tiles:importAttribute name="wishCount" />
+						<a href="#" class="icon-header-item cl2 hov-cl1 trans-04 p-l-22 p-r-11 icon-header-noti" data-notify="${wishCount}">
 							<i class="zmdi zmdi-favorite-outline"></i>
 						</a>
 					</div>

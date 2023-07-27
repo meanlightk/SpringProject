@@ -17,6 +17,7 @@ import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.ui.ModelMap;
 import org.zerock.mapper.CartMapper;
 import org.zerock.mapper.MenuMapper;
+import org.zerock.mapper.WishMapper;
  
 public class MenuPreparer implements ViewPreparer {
  
@@ -25,6 +26,9 @@ public class MenuPreparer implements ViewPreparer {
  
 	@Autowired
 	CartMapper cartMapper;
+	
+	@Autowired
+	WishMapper wishMapper;
 	@Override
     public void execute(Request contextrequest, AttributeContext attributeContext) throws PreparerException {
         HttpServletRequest servletRequest = ServletUtil.getServletRequest(contextrequest).getRequest();
@@ -33,15 +37,19 @@ public class MenuPreparer implements ViewPreparer {
         attributeContext.putAttribute("menuList", new Attribute(list), true);
         Authentication auth = SecurityContextHolder.getContext().getAuthentication();
         int cartCount = 0;
+        int wishCount = 0;
         try{
         	String memid = auth.getName();
         	if(!memid.equals("anonymousUser")) {
                 cartCount = cartMapper.selectCartCount(memid);
+                wishCount = wishMapper.selectWishCount(memid);
         		System.out.println(cartCount);
         	}else {
         		cartCount = 0;
+        		wishCount = 0;
         	}
         	attributeContext.putAttribute("cartCount", new Attribute(cartCount), true);
+        	attributeContext.putAttribute("wishCount", new Attribute(wishCount), true);
         }catch(Exception e) {
         	
         }

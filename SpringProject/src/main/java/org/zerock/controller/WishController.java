@@ -1,10 +1,15 @@
 package org.zerock.controller;
 
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.zerock.service.WishService;
 
 import lombok.extern.log4j.Log4j;
 
@@ -13,12 +18,34 @@ import lombok.extern.log4j.Log4j;
 @RequestMapping("/wish/*")
 public class WishController {
 	
-	@PostMapping("/addwish")
+	@Autowired
+	WishService service;
+	
+	@PostMapping("addwish")
 	@ResponseBody
-	public void addWish(@RequestBody int goods_no) {
+	public String addWish(@RequestParam Integer gno) {
+
+		Authentication auth = SecurityContextHolder.getContext().getAuthentication();
 		
-		log.info("addWish controller 실행");
+		String memid = auth.getName();
+	
 		
+		
+		int  i= service.getWishCount2(memid, gno);
+		
+		if(i == 0) {
+			service.addWish(memid, gno);
+			return "insert";
+		}
+		else if(i == 1) {
+			service.removeWish(memid, gno);
+			return "remove";
+
+		}
+		
+		return null;
+			
+				
 		
 	}
 

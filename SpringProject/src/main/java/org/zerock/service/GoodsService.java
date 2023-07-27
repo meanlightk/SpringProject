@@ -57,8 +57,8 @@ public class GoodsService {
 		return mapper.getGoodsNo();
 	}
 	
-	public List<Goods> goodsList(){
-		return mapper.goodsList();
+	public List<Goods> goodsList(Common common){
+		return mapper.goodsList(common);
 	}
 	
 	public List<Goods> getSearchGoodsList(Common common){

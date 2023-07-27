@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.zerock.domain.Adminclaim;
 import org.zerock.domain.Common;
+import org.zerock.domain.Goods;
 import org.zerock.service.CartService;
 import org.zerock.service.ClaimService;
 import org.zerock.service.GoodsService;
@@ -32,20 +33,26 @@ public class CommonController {
 
 	
 	@RequestMapping("/home")
-	public String mainPage(Model model) {
-		model.addAttribute("goodsList",service.goodsList());
+	public String mainPage(Model model, Common common) {
+
+		List<Goods> goodsList = service.goodsList(common);
+
+		model.addAttribute("goodsList",goodsList);
+		if(goodsList.size() > 0)
+			model.addAttribute("tot", goodsList.get(0).getTotalCount());
+
 		return "home";
 	}
 	
 	@RequestMapping("/home2")
 	public String homePage2(Model model) {
-		model.addAttribute("goodsList",service.goodsList());
+	//	model.addAttribute("goodsList",service.goodsList());
 		return "/main/home2";
 	}
 	
 	@RequestMapping("/home3")
 	public String homePage3(Model model) {
-		model.addAttribute("goodsList",service.goodsList());
+//		model.addAttribute("goodsList",service.goodsList());
 		return "/main/home3";
 	}
 	

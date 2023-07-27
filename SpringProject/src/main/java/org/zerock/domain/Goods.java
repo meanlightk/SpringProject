@@ -39,6 +39,7 @@ public class Goods {
 
 	private int orderNo;
 
+	private int totalCount;
 	
 	
 	private String waybillNum;

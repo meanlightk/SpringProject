@@ -750,7 +750,10 @@ button{
 				<div style="width:500;">
 					<table border="0">
 						<tr>
-							<td><img src="/upload/main/${goods.imagepath}" width="100%" height="500" /></td>
+							<td>
+								<img src="/upload/main/${goods.imagepath}" width="100%" height="500" />
+								<input type="hidden" id="goods_no_ajax" value="${goods.gno}" />
+							</td>
 						</tr>
 					</table>
 					<div id="test-swiper" class="swiper-container xans-element- xans-product xans-product-addimage listImg cboth" style="position: relative; margin-top: 10px; height: 134px;">
@@ -975,8 +978,7 @@ button{
 						</table>
 			
 						<button style="width: 124px; height: 58px;"
-							class="btn btn-outline-danger" id="insertLike"
-							onclick="fn_InsertLike()">
+							class="btn btn-outline-danger" id="insertLike">
 							<font size="5px">♥</font>
 						</button>
 						<button style="width: 270px; height: 58px;"
@@ -1351,18 +1353,15 @@ button{
 	        });	
 		    
 		    
-		    $("#insertLike").click(function(){
-	   			var gno = $("#gno").val();
+		     $("#insertLike").click(function(){
+		    	var gno = $("#goods_no_ajax").val();
 	   			
-   				var jsonData = { goods_no : gno }
-	   	
+   				var jsonData = { 'gno' : gno }
+	   			console.log(jsonData);
  	        	$.ajax({
 	        		url: '/wish/addwish',
-	        		processData: false,
-	        		contentType: 'application/json',
-	        		data: JSON.stringify(jsonData),
+	        		data: jsonData,
 	        		type: 'POST',
-	        		dataType: 'json',
 	        		beforeSend: function(xhr) { //XMLHttpRequest (XHR)은 AJAX 요청을 생성하는 JavaScript API이다. XHR의 메서드로 브라우저와 서버간의 네트워크 요청을 전송할 수 있다.
 	        			xhr.setRequestHeader(header, token); //csrf 전송하지 않으면 아예 ajax가 되지 않는 문제가 생김.
 	        		},
@@ -1375,7 +1374,7 @@ button{
 	    				alert("ERROR : " + textStatus + " : " + errorThrown);
 	    			}
 	        	});  //$.ajax
-	        });	
+	        });	 
 		})
 		
 	

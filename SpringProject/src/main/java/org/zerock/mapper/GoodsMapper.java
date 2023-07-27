@@ -23,7 +23,7 @@ public interface GoodsMapper {
 	
 	public int getGoodsNo();
 	
-	public List<Goods> goodsList();
+	public List<Goods> goodsList(Common common);
 	
 	public List<Goods> selectSearchList(Common common);
 

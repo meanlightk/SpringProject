@@ -2,22 +2,34 @@ package org.zerock.service;
 
 import java.util.List;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.zerock.domain.Wish;
+import org.zerock.mapper.WishMapper;
 
 @Service
 public class WishService {
 	
+	@Autowired
+	WishMapper mapper;
 	public int addWish(String memid, int gno) {
-		return 1;
+		return mapper.insertWish(memid, gno);
 	};
 	
 	public int removeWish(String memid, int gno) {
-		return 0;
+		return mapper.deleteWish(memid, gno);
 	}
 	
 	public List<Wish> showMyWishes(String memid){
-		return null;
+		return mapper.selectWishList(memid);
+	}
+	
+	public int getWishCount(String memid) {
+		return mapper.selectWishCount(memid);
+	}
+
+	public int getWishCount2(String memid,int gno) {
+		return mapper.selectWishCount2(memid,gno);
 	}
 
 }
