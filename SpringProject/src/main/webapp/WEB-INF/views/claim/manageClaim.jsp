@@ -191,9 +191,9 @@ header div.a{
 </head>
 <body>
 
-<header>
+<header style="height: 100px">
 <div class="logo-mobile">
-<a href="/home"><img src="../resources/images/icons/logo-01.png" alt="IMG-LOGO"></a>
+<a href="/home"><img style="height: 90px;" src="../resources/images/icons/logo-01.png" alt="IMG-LOGO"></a>
 </div>
 <div class="a"></div>
 <div class="b">
