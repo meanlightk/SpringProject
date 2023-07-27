@@ -1,5 +1,7 @@
 package org.zerock.service;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.zerock.domain.GoodsImage;
@@ -18,4 +20,14 @@ public class GoodsImageService {
 		log.info("goodsImage insert");
 		mapper.insert(goodsImage);
 	}
+
+	public List<GoodsImage> getImageList(int gno) {
+		log.info("goodsImage insert");
+		return mapper.findByGno(gno);
+	}
+
+	
+
 }
+
+

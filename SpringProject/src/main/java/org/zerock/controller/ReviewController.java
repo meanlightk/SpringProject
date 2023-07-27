@@ -3,17 +3,18 @@ package org.zerock.controller;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
-
-import lombok.extern.log4j.Log4j;
-
 import org.zerock.domain.Common;
 import org.zerock.domain.Review;
 import org.zerock.service.ReviewService;
+
+import lombok.extern.log4j.Log4j;
 
 
 @RequestMapping("/review/")
@@ -26,8 +27,11 @@ public class ReviewController {
 	
 	@PostMapping("/save.do")
 	public String review(Model model,Review review) {
+
+		Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+
 		System.out.println(review);		
-		review.setMemId("test");
+		review.setMemId(auth.getName());
 		reviewService.insertReview(review);
 		
 		return "redirect:/goodsDetail/" + review.getGoodsNo();
@@ -53,6 +57,13 @@ public class ReviewController {
 	@RequestMapping("/list.do")
 	public String list(Model model,Common common,@RequestParam("gno") int gno) {
 
+		Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+		if(auth.getName() == null || auth.getName().equals("") || auth.getName().equals("anonymousUser")) {
+			//미로그인 상태
+			return "redirect:/member/login";
+		}
+
+		
 		List<Review> reviewList = reviewService.getReviewList(common,gno);
 		
 		model.addAttribute("reviewList", reviewList);		

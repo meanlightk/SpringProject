@@ -5,20 +5,30 @@
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 
 
-
 	<!-- 상품평 -->
-<div class="review">
-	<nav><h1>상품리뷰</h1></nav>
+<div class="review" style="width: 70%">
 	<p class="desc">상품의 사용후기를 적어주세요.</p>
 	<ul>
 		<c:forEach var="item" items="${reviewList}">							
 			<li>
 		        <div>
-		        	<h5 class="rating star4">상품명</h5>
+		   			<fieldset>
+		   				<c:forEach var="num" begin="1" end="5">
+		   					<c:choose>
+		   						<c:when test="${num < item.score}">
+								    <input type="radio" name="score" value="${num}" id="rate5" checked><label for="rate5">⭐</label>
+							    </c:when>
+							    <c:otherwise>
+									<input type="radio" name="score" value="${num}" id="rate5"><label for="rate5">⭐</label>
+							    </c:otherwise>
+						    </c:choose>
+						</c:forEach>
+					 </fieldset>
 		            <span>${item.memId} ${item.regiDateStr}</span>
 		        </div>
-				<h3></h3>
-		         ${item.content}
+		        <h3>상품명1/BLUE/L</h3>
+			    ${item.content}
+				
 		    </li>
 	    </c:forEach>
 	</ul>
@@ -50,3 +60,8 @@
 </script>
 	
     
+    
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.js"></script>
+    <script src="https://kit.fontawesome.com/20962f3e4b.js" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/bxslider/4.2.12/jquery.bxslider.min.js"></script>

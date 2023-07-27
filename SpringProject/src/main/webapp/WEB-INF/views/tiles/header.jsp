@@ -92,6 +92,11 @@
 								</a>
 							</c:when>
 						</c:choose>
+						<c:if test='${userId != "anonymousUser" }'>
+							<a href="/order/list.do" class="flex-c-m trans-04 p-lr-25">
+								주문내역
+							</a>
+						</c:if>
 						<c:choose>
 							<c:when test='${userId == "anonymousUser" }'>
 								<a href="/member/login" class="flex-c-m p-lr-10 trans-04">

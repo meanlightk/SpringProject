@@ -4,7 +4,6 @@ import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.nio.file.Files;
-import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
 
@@ -18,7 +17,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 import org.zerock.domain.Adminclaim;
 import org.zerock.domain.Common;
@@ -115,8 +114,9 @@ public class GoodsController {
 	
 //	public Goods registerGoods(@RequestParam("sellPrice") String  sellPrice,@RequestParam("originalPrice") String  originalPrice,@RequestParam("pname") String pname, @RequestParam("stock") String stock,
 //			@RequestParam("skintype") String skintype, @RequestParam("category") String category, ) {
-	@PostMapping("/registerGoods")	
-	public String registerGoods(Goods goods, @RequestParam("uploadFile") MultipartFile[] uploadFile,@RequestParam("uploadSubFile") MultipartFile[] uploadFilesub) {
+	@PostMapping("/registerGoods")
+	@ResponseBody
+	public Goods registerGoods(Goods goods) {
 		log.info("registerGoods");
 		
 		log.info(goods); 		
@@ -128,8 +128,8 @@ public class GoodsController {
 		service.registerItem(goods); 
 		
 
-		fileUpload(goods,uploadFile);
-		fileUploadSub(goods,uploadFilesub);
+//		fileUpload(goods,uploadFile);
+//		fileUploadSub(goods,uploadFilesub);
 
 		//Goods goods = new Goods();
 		
@@ -139,7 +139,7 @@ public class GoodsController {
 			 * realprice = Integer.parseInt(price); // goods.setPrice(realprice);
 			 */		 
 		 
-		return "redirect:/goodsWrite/write";
+		return goods;
 	}
 	
 	@GetMapping("/registerGoods")
@@ -348,6 +348,7 @@ public class GoodsController {
 		Common common4 = new Common();
 		Goods goods = service.showOneItem(gno);
 		log.info("콘텐츠"+goods.getContent());
+	
 		String optionList = goods.getOption_list();
 		String[] optionListAll = optionList.split("\n");
 		goods.setOption_list_split(optionListAll);
@@ -360,6 +361,9 @@ public class GoodsController {
 		List<Adminclaim> claimlist = claimService.showlistAll(common4);
 		model.addAttribute("claimlist", claimlist);
 		
+		List<GoodsImage> imagelist = imageservice.getImageList(gno);
+		model.addAttribute("imagelist", imagelist);
+
 		if(claimlist.size() > 0)
 			model.addAttribute("tot4", claimlist.get(0).getTotal());
 	

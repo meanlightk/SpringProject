@@ -40,6 +40,8 @@ import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.multipart.MultipartHttpServletRequest;
 import org.zerock.common.CommonUtils;
 import org.zerock.domain.Goods;
+import org.zerock.domain.GoodsImage;
+import org.zerock.service.GoodsImageService;
 import org.zerock.service.GoodsService;
 
 import com.google.gson.JsonObject;
@@ -51,6 +53,8 @@ import net.coobird.thumbnailator.Thumbnailator;
 public class UploadController {
 
 	
+	@Autowired
+	private GoodsImageService imageservice;
 
 	@Value("${file.path}")
 	private String filePath;
@@ -76,14 +80,11 @@ public class UploadController {
 	public ResponseEntity<List<Goods>> uploadAjaxPost(@RequestParam("gno") String gno,
 			MultipartFile[] uploadFile) {
 
-		log.info("update ajax post.....");
+		String uploadFolder = filePath + "/main";
 
-		List<Goods> list = new ArrayList<>();
-		String uploadFolder = "C:\\upload\\main";
-
-		System.out.println("내가 받은 상품 번호: ");
-		String uploadFolderPath = gno;
 		
+		System.out.println("상품 번호: ");
+		String uploadFolderPath = String.format("%d", gno);
 
 		// make folder ---------
 		File uploadPath = new File(uploadFolder, uploadFolderPath); // 상품 번호로 경로를 만듦
@@ -93,8 +94,9 @@ public class UploadController {
 			uploadPath.mkdirs(); // 해당 경로에 폴더를 만든다.
 		}
 		// make gno folder
-
+		List<Goods> list = new ArrayList<Goods>();
 		for (MultipartFile multipartFile : uploadFile) {
+			Goods goods = new Goods();
 
 			int i = 1;
 
@@ -104,7 +106,7 @@ public class UploadController {
 			log.info("Upload File Name: " + multipartFile.getOriginalFilename());
 			log.info("Upload File Size: " + multipartFile.getSize());
 
-			Goods goods = new Goods();
+
 
 			String uploadFileName = multipartFile.getOriginalFilename();
 
@@ -120,16 +122,15 @@ public class UploadController {
 
 			try {
 
-				File saveFile = new File(uploadPath, uploadFileName); // 연월일경로에 파일이름으로 최종 경로 생성
+				File saveFile = new File(uploadPath, uploadFileName); // c:upload/main/{상품 번호 폴더}/파일 이름으로 최종 경로 생성
 				multipartFile.transferTo(saveFile); // 파일을 최종 경로로 이동
 
-				int gno2 = Integer.parseInt(gno);
-				goods.setUuid(uuid.toString());
+				int gno2 = goods.getGno();
+				goods.setUuid(uploadFileName);
 				goods.setImagepath(uploadFolderPath + "/" + uploadFileName);
 				
-
 				service.updateFilePath(goods);
-				list.add(goods);
+//				list.add(goods);
 
 				// 만일 이미지 타입이라면 섬네일을 생성하도록 한다.
 				// check image type file
@@ -143,9 +144,7 @@ public class UploadController {
 
 					thumbnail.close();
 
-					goods.setUuid(uuid.toString());
-					goods.setImagepath(uploadFolderPath + "/s_" + uploadFileName);
-
+					goods.setUuid(uuid.toString());	
 				}
 
 			} catch (Exception e) {
@@ -153,9 +152,102 @@ public class UploadController {
 			} // end catch
 		} // end for
 
+
 		return new ResponseEntity<>(list, HttpStatus.OK);
 	}
 
+	@PostMapping(value = "/uploadAjaxActionSub", produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
+	@ResponseBody
+	public ResponseEntity<List<Goods>> uploadAjaxPostSub(@RequestParam("gno") Integer gno,
+			MultipartFile[] uploadFile) {
+
+		String uploadFolder = filePath + "/sub";
+
+		System.out.println("�궡媛� 諛쏆� �긽�뭹 踰덊샇: ");
+		String uploadFolderPath = String.format("%d", gno);
+
+		// make folder ---------
+		File uploadPath = new File(uploadFolder, uploadFolderPath); // 상품 번호로 경로를 만듦
+		log.info("upload path: " + uploadPath);
+
+		if (uploadPath.exists() == false) { // 해당 상품 폴더가 없으면
+			uploadPath.mkdirs(); // 해당 경로에 폴더를 만든다.
+		}
+		// make gno folder
+		List<Goods> list = new ArrayList<Goods>();
+
+		for (MultipartFile multipartFile : uploadFile) {			
+			Goods goods = new Goods();
+			goods.setGno(gno);
+			
+			int i = 1;
+
+			log.info("test : i" + i++);
+
+			log.info("-----------------------------------");
+			log.info("Upload File Name: " + multipartFile.getOriginalFilename());
+			log.info("Upload File Size: " + multipartFile.getSize());
+
+
+
+			String uploadFileName = multipartFile.getOriginalFilename();
+
+			// IE has file path
+			uploadFileName = uploadFileName.substring(uploadFileName.lastIndexOf("/") + 1);
+			log.info("only file name: " + uploadFileName);
+
+			UUID uuid = UUID.randomUUID(); // 첨부파일은 randomUUID를 이용해서 임의의 값을 생성할 수 있다.
+
+			uploadFileName = uuid.toString() + "_" + uploadFileName; // 생성된 값은 원래의 파일 이름과 구분할 수 있도록 중간에 '_'를 추가할 수 있음
+
+			// File saveFile = new File(uploadFolder, uploadFileName);
+
+			try {
+
+				File saveFile = new File(uploadPath, uploadFileName); // c:upload/main/{상품 번호 폴더}/파일 이름으로 최종 경로 생성
+				multipartFile.transferTo(saveFile); // 파일을 최종 경로로 이동
+
+			//	int gno2 = goods.getGno();
+				goods.setUuid(uploadFileName);
+				goods.setImagepath(uploadFolderPath + "/" + uploadFileName);
+				
+//				service.updateFilePath(goods);
+//				list.add(goods);
+				
+				GoodsImage goodsImage = new GoodsImage();
+				goodsImage.setUuid(uuid.toString());
+				goodsImage.setImagepath(uploadFolderPath+"/"+ uploadFileName);
+				goodsImage.setGno(goods.getGno());
+				imageservice.insertGoodsImage(goodsImage);
+//				list.add(goodsImage);
+
+
+				// 만일 이미지 타입이라면 섬네일을 생성하도록 한다.
+				// check image type file
+				if (checkImageType(saveFile)) {
+					// FileOutputStream :데이터를 파일에 바이트 스트림으로 저장
+					// File 클래스는 파일과 디렉터리를 다룸. 그래서 File 인스턴스는 파일일 수도 있고 디렉터리 일수도 있다.
+					// File(String parent, String child) - parent 폴더 경로의 child라는 파일에 대한 File 객체 생성
+					FileOutputStream thumbnail = new FileOutputStream(new File(uploadPath, "s_" + uploadFileName));
+
+					Thumbnailator.createThumbnail(multipartFile.getInputStream(), thumbnail, 100, 100);
+
+					thumbnail.close();
+
+					goods.setUuid(uuid.toString());	
+				}
+
+			} catch (Exception e) {
+				e.printStackTrace();
+			} // end catch
+		} // end for
+
+
+		return new ResponseEntity<>(list, HttpStatus.OK);
+	}
+
+	
+	
 	
 	// 연.월.일 폴더를 만드는 함수
 	private String getFolder() {

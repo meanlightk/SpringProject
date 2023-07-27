@@ -224,7 +224,9 @@ a {
 	text-decoration: none;
 	color: #666;
 }
-
+.swiper-container-mainNav .swiper-wrapper .swiper-slide {
+  width: 50px !important;
+}
 h1 {
 	text-align: center;
 	padding: 50px 0;
@@ -331,7 +333,6 @@ ul{
 	margin-block-end: 1em;
 	margin-inline-start: 0px;
 	margin-inline-end: 0px;
-	padding-inline-start: 40px;
 }
 .title_detail .tab_open{
 	border-bottom: 2px solid #f3bbbd;
@@ -736,23 +737,60 @@ button{
 	<br>
 	<br>
 	<div style="width:100%; position:relative; left:calc(50% - 600px); height:600px; display:inline">
-		
-		<div style="float:left; width:500;">
-			<table style="border:0;">
-				<tr>
-					<td><img src="/upload/main/${goods.imagepath}" width="500"
-						height="500" /></td>
-				</tr>
-			</table>
-			<div class="detailArea">
-				<div class="xans-element- xans-product xans-product-image imgArea">
-					<div class="xans-element- xans-product xans-product-addimage listImg cboth" style="position: relative; margin-top: 10px; height: 134px; overflow: visible;">
-						<ul style="position: absolute; left: 0px; top: 0px; width: 660px; display: inline-block; padding-inline-start: 0px;">
-							<li class="xans-record-" style="float: left;">
-								<img src="/upload/main/${goods.imagepath}" style="width:100px;" class="ThumbImage">
-							</li>
-							<li class="xans-record-" style="float: left;">
-								<img src="./../../../resources/img/product1.png" class="ThumbImage">
+
+		<div class="detailArea">
+			<div class="xans-element- xans-product xans-product-image imgArea">
+				<div style="width:500;">
+					<table border="0">
+						<tr>
+							<td><img src="/upload/main/${goods.imagepath}" width="100%" height="500" /></td>
+						</tr>
+					</table>
+					<div id="test-swiper" class="swiper-container xans-element- xans-product xans-product-addimage listImg cboth" style="position: relative; margin-top: 10px; height: 134px;">
+						<ul class="swiper-wrapper">
+							<c:forEach var="item" items="${imagelist}">
+								<li class="swiper-slide">
+									<div style="float: left;">
+										<img src="/upload/sub/${item.imagepath}" class="ThumbImage" alt>
+									</div>							
+								</li>	 
+							</c:forEach>
+						
+<!--  						
+						    <li class="swiper-slide">
+								<div style="float: left;">
+									<img src="./../../../resources/img/product2.png" class="ThumbImage" alt>
+								</div>
+						    </li>
+						 	<li class="swiper-slide">
+								<div style="float: left;">
+									<img src="./../../../resources/img/product3.png" class="ThumbImage" alt>
+								</div>
+						    </li>
+						 	<li class="swiper-slide">
+								<div style="float: left;">
+									<img src="./../../../resources/img/product4.png" class="ThumbImage" alt>
+								</div>
+						    </li>
+  						    <li class="swiper-slide">
+								<div style="float: left;">
+									<img src="./../../../resources/img/product5.png" class="ThumbImage" alt>
+								</div>
+						    </li>
+  						    <li class="swiper-slide">
+								<div style="float: left;">
+									<img src="./../../../resources/img/product6.png" class="ThumbImage" alt>
+								</div>
+						    </li>
+  						    <li class="swiper-slide">
+								<div style="float: left;">
+									<img src="./../../../resources/img/product7.png" class="ThumbImage" alt>
+								</div>
+						    </li>-->
+						</ul>
+<!--  						<ul style="position: absolute; left: 0px; top: 0px; width: 660px; display: inline-block; padding-inline-start: 0px;">
+							<li class="xans-record-">
+								<img src="/upload/main/${goods.imagepath}" style="width:100px;" class="ThumbImage" alt>
 							</li>
 							<li class="xans-record-" style="float: left;">
 								<img src="./../../../resources/img/product2.png" class="ThumbImage">
@@ -975,10 +1013,6 @@ button{
 				</div>
 			</div>
 		</div>
-		
-		<br>
-		<br><br><br><br>
- 
 		<div class="tab-content current" id="myTabContent1" align="center" style="">
 			<div class="swiper">
 				<div class="swiper-wrapper">
@@ -1127,16 +1161,19 @@ button{
 						</div>
 					</div>
 				</div>
-			<br>
-			<br>
-			<div class="swiper-pagination"></div>
+				<div class="swiper-pagination"></div>
 				
 			</div>
-		
+			
+		</div>
+ 
+		<div class="tab-content current" id="myTabContent1" align="center" style="">
+			<!-- 상세정보 -->
 			<div class="tab-pane fade show active" id="home" role="tabpanel" aria-labelledby="home-tab">${goods.content}</div>
 			<!-- 상세정보 -->
 		</div>
-		<div class="tab-content" id="myTabContent2" align="center">
+		<div class="tab-content" id="myTabContent2" align="center" >
+			<!-- 리뷰 -->
 			<jsp:include page="../review/list.jsp"></jsp:include>
 			<!-- 상세정보 -->
 		</div>
@@ -1163,6 +1200,22 @@ button{
 			    $("#myTabContent"+tab_id).addClass('current');
 			})
 			
+			
+			var swiper = new Swiper("#test-swiper", {
+		        spaceBetween: 5,    // 슬라이드 사이 여백
+	
+		        slidesPerView : 5, // 한 슬라이드에 보여줄 갯수
+		        autoplay: {     //자동슬라이드 (false-비활성화)
+		          delay: 30000000, // 시간 설정
+		          disableOnInteraction: false, // false-스와이프 후 자동 재생
+		        },
+
+		        loop : false,   // 슬라이드 반복 여부
+		        loopAdditionalSlides : 1,
+
+		 	
+		      });
+
 		  	
 		    $("#insertBasket").click(function(){
 		    	var dataList = []; 
@@ -1211,6 +1264,7 @@ button{
 	    			}
 	        	});  //$.ajax
 	        });
+	        			console.log(result);
 		})
 		
 	

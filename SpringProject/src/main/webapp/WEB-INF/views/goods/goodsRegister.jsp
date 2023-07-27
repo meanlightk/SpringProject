@@ -121,7 +121,7 @@ p {
 		<div id="real">
 			<div id="price" class="all">
 				<p>상품가격</p>
-				<input type="text" name="price" id="priceReal" pattern="[0-9]+">
+				<input type="text" name="sellPrice" id="priceReal" pattern="[0-9]+">
 			</div>
 	
 			<div id="stock" class="all">
@@ -186,16 +186,16 @@ function submitData(){
 			url:"/registerGoods",		// servlet 
 			type: "post",
 			dataType: 'json',
-			data: {"price" : price, "pname": pname, "stock": stock, "skintype": skintype, "category": category},
+			data: {"sellPrice" : price, "pname": pname, "stock": stock, "skintype": skintype, "category": category},
 			beforeSend: function(xhr) { //XMLHttpRequest (XHR)은 AJAX 요청을 생성하는 JavaScript API이다. XHR의 메서드로 브라우저와 서버간의 네트워크 요청을 전송할 수 있다.
 				xhr.setRequestHeader(header, token); //csrf 전송하지 않으면 아예 ajax가 되지 않는 문제가 생김.
 			},
 			success:function(data){
 				console.log("성공" + data);
 				console.log(data);
-				loadImage(data);
+		//		loadImage(data);
 				loadSubImage(data);
-				location.href = '/registerGoods2'
+//				location.href = '/registerGoods'
 			},
 			error:function(){
 				alert("error");
@@ -297,7 +297,7 @@ function loadImage(Data){
 
 
 		$.ajax({
-			url: '/uploadAjaxAction',
+			url: '/uploadAjaxActionSub',
 			processData: false,
 			contentType: false,
 			data: formData,
