@@ -174,7 +174,7 @@ h1 {
 		<div class="image">
 			<div class="image-wrap">
 				<p>서브이미지</p>
-				<br> <input type="file" name="uploadFile2" id="subImage" >
+				<br> <input type="file" name="uploadSubFile" id="subImage" multiple>
 			</div>
 	
 			<div id="previewContainer" style="width: 30%;"></div>
@@ -252,11 +252,9 @@ $(document).ready(function() {
         if (file) {
             // FileReader 인스턴스 생성
             const reader = new FileReader();
-			alert("성공");
             // 파일 읽기 성공 시 미리보기 생성
             reader.onload = (e) => {
                 const imagePreview = document.createElement("img");
-                alert("성공");
                 imagePreview.src = e.target.result;
                 imagePreview.style.maxWidth = "200px"; // 미리보기 이미지 크기 제한 (선택사항)
                 previewContainer.innerHTML = ""; // 기존 미리보기 제거

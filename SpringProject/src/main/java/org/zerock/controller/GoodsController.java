@@ -17,6 +17,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 import org.zerock.domain.Adminclaim;
@@ -115,8 +116,7 @@ public class GoodsController {
 //	public Goods registerGoods(@RequestParam("sellPrice") String  sellPrice,@RequestParam("originalPrice") String  originalPrice,@RequestParam("pname") String pname, @RequestParam("stock") String stock,
 //			@RequestParam("skintype") String skintype, @RequestParam("category") String category, ) {
 	@PostMapping("/registerGoods")
-	@ResponseBody
-	public Goods registerGoods(Goods goods) {
+	public String registerGoods(Goods goods,@RequestParam("uploadFile") MultipartFile[] uploadFile,@RequestParam("uploadSubFile") MultipartFile[] uploadFilesub) {
 		log.info("registerGoods");
 		
 		log.info(goods); 		
@@ -128,8 +128,8 @@ public class GoodsController {
 		service.registerItem(goods); 
 		
 
-//		fileUpload(goods,uploadFile);
-//		fileUploadSub(goods,uploadFilesub);
+		fileUpload(goods,uploadFile);
+		fileUploadSub(goods,uploadFilesub);
 
 		//Goods goods = new Goods();
 		
@@ -139,7 +139,7 @@ public class GoodsController {
 			 * realprice = Integer.parseInt(price); // goods.setPrice(realprice);
 			 */		 
 		 
-		return goods;
+		return "redirect:/goodsWrite/write";
 	}
 	
 	@GetMapping("/registerGoods")

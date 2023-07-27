@@ -71,10 +71,10 @@
 			    when '6' then '일'
 		    end) as weekDay,
 		    case
-			    when o.dstatus= '1' then '배송전'
-			    when o.dstatus= '2' then '출고완료'
-			    when o.dstatus= '3' then '배송중'
-			   	when o.dstatus= '4' then '배송완료'
+			    when l.dstatus= '1' then '배송전'
+			    when l.dstatus= '2' then '출고완료'
+			    when l.dstatus= '3' then '배송중'
+			   	when l.dstatus= '4' then '배송완료'
 			    else '배송정보사용불가'
 			end as dstatusStr,
 		    
