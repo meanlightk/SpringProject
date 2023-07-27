@@ -356,7 +356,9 @@ public class GoodsController {
 		List<Review> list = reviewService.getReviewList(common, gno);
 		model.addAttribute("goods", goods);
 		model.addAttribute("reviewList", list);
+		model.addAttribute("ReviewCount", list.size());
 
+		
 		common4.setGoods_no(gno);
 		List<Adminclaim> claimlist = claimService.showlistAll(common4);
 		model.addAttribute("claimlist", claimlist);

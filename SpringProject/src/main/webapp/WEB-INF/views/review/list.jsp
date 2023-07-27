@@ -15,18 +15,18 @@
 		   			<fieldset>
 		   				<c:forEach var="num" begin="1" end="5">
 		   					<c:choose>
-		   						<c:when test="${num < item.score}">
-								    <input type="radio" name="score" value="${num}" id="rate5" checked><label for="rate5">⭐</label>
+		   						<c:when test="${num <= item.score}">
+								    <input type="radio" name="score" value="${num}" id="rate5" checked readonly><label for="rate5">⭐</label>
 							    </c:when>
 							    <c:otherwise>
-									<input type="radio" name="score" value="${num}" id="rate5"><label for="rate5">⭐</label>
+									<input type="radio" name="score" value="${num}" id="rate5" readonly><label for="rate5">⭐</label>
 							    </c:otherwise>
 						    </c:choose>
 						</c:forEach>
 					 </fieldset>
 		            <span>${item.memId} ${item.regiDateStr}</span>
 		        </div>
-		        <h3>상품명1/BLUE/L</h3>
+		        <h3>${item.title}</h3>
 			    ${item.content}
 				
 		    </li>
@@ -36,9 +36,6 @@
 		
 <div id="PAGE_NAVI"></div>
 <input type="hidden" id="PAGE_INDEX" name="PAGE_INDEX" />
-<div style="margin-left: 1050px">
-	<button type="button" class="btn btn-secondary btn-sm" onclick="fn_Review('/review/form.do',${gno})">WRITE</button>
-</div>
 
 <script>	
 	 function fn_Review(url,data){

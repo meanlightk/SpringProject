@@ -19,8 +19,8 @@
 
 <script src="https://code.jquery.com/jquery-3.5.1.min.js"
 	integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj"
-	crossorigin="anonymous"> -->
-</script> -->
+	crossorigin="anonymous"> 
+</script>
 <script src="https://cdn.jsdelivr.net/npm/swiper@10/swiper-bundle.min.js"></script>
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/css/bootstrap.min.css">
   <script src="https://cdn.jsdelivr.net/npm/jquery@3.6.4/dist/jquery.slim.min.js"></script>
@@ -1008,7 +1008,7 @@ button{
 								<a href="#datail" data-tab="1">상품상세정보</a>
 							</li>
 							<li>
-								<a href="#review" data-tab="2" class="crema-product-reviews-count crema-applied" data-product-code="634" data-format="리뷰 ({{{count}}})">리뷰 (11,997)</a>
+								<a href="#review" data-tab="2" class="crema-product-reviews-count crema-applied" data-product-code="634" data-format="리뷰 ({{{count}}})">리뷰 (${ReviewCount})</a>
  							</li>
  							<li>
  								<a href="#guide" data-tab="3">구매유의사항</a>
