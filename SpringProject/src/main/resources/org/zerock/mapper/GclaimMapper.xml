@@ -54,7 +54,7 @@ SELECT * FROM(
 	  updatedate,
 	  status,
 	  answer_no,
-	  ROW_NUMBER() over(ORDER BY gclaim_no, answer_no desc) AS rownum,
+	  ROW_NUMBER() over(ORDER BY gclaim_no, answer_no) AS rownum,
 	  count(1) over() AS total
 	FROM ClaimHierarchy
 	ORDER BY gclaim_no, answer_no
