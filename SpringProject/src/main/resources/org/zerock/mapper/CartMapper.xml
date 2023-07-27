@@ -11,6 +11,10 @@
 		mem_id = #{id} AND ordernum is null
 	</select>
 
+	<select id="selectCartAllByNumber" resultType="list" parameterType="Map">
+		select * from cart where 
+		cart_no in ||#{numberList}|| 
+	</select>
 	<select id="selectCartNo" resultType="org.zerock.domain.Cart">
 		select * from cart where
 		cart_no = #{cartNo} AND ordernum is null
