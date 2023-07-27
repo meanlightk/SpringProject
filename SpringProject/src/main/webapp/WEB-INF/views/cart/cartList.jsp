@@ -94,12 +94,13 @@
 													data-cart-no="${cartItem.cartNo}">
 													<td class="column-1">
 														<div class="how-itemcart1">
-															<img src="${cartItem.goodsImage}"
+															<img src="/upload/main/${cartItem.goodsImage}"
 																alt="${cartItem.goodsName}">
 														</div>
 													</td>
 													<td class="column-2">${cartItem.goodsName}</td>
 													<td class="column-3">${cartItem.goodsPrice}원</td>
+													<input type="hidden" name="cartNo" id="cartNo" value="${cartItem.cartNo}" />
 													<td class="column-4">
 														<div class="wrap-num-product flex-w m-l-auto m-r-0">
 															<div
@@ -189,9 +190,9 @@
 					</div>
 				</form>
 				<!-- 결제창 끝 -->
-
+				<input id="carttype"  name="carttype" value="${carttype}" type="hidden">
 				<!-- 주소검색 modal -->
-				<div id="layer" class="find-addr-modal">
+				<div id="layer" class ="find-addr-modal">
 					<img src="https://t1.daumcdn.net/postcode/resource/images/close.png" id="btnCloseLayer"
 						class="close-btn" onclick="closeDaumPostcode()" alt="닫기 버튼">
 				</div>
@@ -367,6 +368,9 @@
 							updateCount($(this).prev());
 						});
 
+						var num = $("#carttype").val();
+						console.log(num);
+						var url ="/order/" + ((num === 1) ? 'new1' : 'new2');
 						//결제하기
 						$("#payment").click(function (e) {
 							e.preventDefault();
@@ -384,21 +388,29 @@
 							const token = $("meta[name='_csrf']").attr("content");
 							const header = $("meta[name='_csrf_header']").attr("content");
 
-							const data = {
-								name: $("#name").val(),
-								phone: $("#phone").val(),
-								addr1: $("#addr1").val(),
-								addr2: $("#addr2").val(),
-								memo: $("#memo").val()
-							};
+							const list = [];
+							
+							$("[name=cartNo]").each(function(idx){
+								const data = {
+										name: $("#name").val(),
+										phone: $("#phone").val(),
+										addr1: $("#addr1").val(),
+										addr2: $("#addr2").val(),
+										memo: $("#memo").val(),
+										cart: $("[name=cartNo]:eq(" + idx + ")").val()
+									};
+								console.log(data.cart);
+								list.push(data);
+							});
 
+							
 							$.ajax({
 								type: "POST",
 								beforeSend: function (xhr) {
 									xhr.setRequestHeader(header, token);
 								},
-								url: "/order/new",
-								data: JSON.stringify(data),
+								url:url,
+								data: JSON.stringify(list),
 								contentType: "application/json; charset=utf-8",
 								dataType: "json",
 								success: function (data) {

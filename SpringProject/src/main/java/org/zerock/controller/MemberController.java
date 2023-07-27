@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.zerock.domain.Member;
+import org.zerock.service.CartService;
 import org.zerock.service.MemberService;
 
 import lombok.extern.log4j.Log4j;
@@ -25,13 +26,17 @@ public class MemberController {
 	@Autowired
 	private MemberService service;
 	
+	@Autowired
+	CartService cartService;
+
+
 	
 	@GetMapping("/login")
 	public String loginInput(String error, String logout, Model model) {
 
 		log.info("error: " + error);
 		log.info("logout: " + logout);
-		
+	
 		return "customlogin";
 	}
 	

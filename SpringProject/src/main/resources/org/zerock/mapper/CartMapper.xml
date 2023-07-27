@@ -11,15 +11,21 @@
 		mem_id = #{id} AND ordernum is null
 	</select>
 
-	<select id="selectCartAllByNumber" resultType="list" parameterType="Map">
+	<select id="selectCartAllByNumber" resultType="list" parameterType="list">
 		select * from cart where 
-		cart_no in ||#{numberList}|| 
+		cart_no in #{numberList} 
 	</select>
 	<select id="selectCartNo" resultType="org.zerock.domain.Cart">
 		select * from cart where
 		cart_no = #{cartNo} AND ordernum is null
 	</select>
-
+    <select id="selectCartByCartNo" resultType="org.zerock.domain.Cart">
+		select * from cart where 
+		mem_id = #{id} and cart_no in
+	    <foreach collection="numberList" item="item" open="(" separator="," close=")">
+	          #{item}
+	    </foreach>    
+	</select>        
 	<insert id="insertCart" parameterType="org.zerock.domain.Cart" useGeneratedKeys="true"
 		keyProperty="cart_no">
 		insert into cart(mem_id, goods_no, optionName, totalPrice, quantity, pname)
@@ -32,13 +38,13 @@
 
 	<select id="selectCartCount" resultType="int">
 		select count(*) from
-		cart where mem_id = ${memid}
+		cart where mem_id = #{memid}
 	</select>
 
 	<update id="updateCart">
 		UPDATE cart SET quantity = #{quantity} WHERE mem_id =
 		#{id} AND cart_no =
-		#{cart_no}
+		#{cartNo}
 	</update>
 
 	<update id="updateCartOrderNo">

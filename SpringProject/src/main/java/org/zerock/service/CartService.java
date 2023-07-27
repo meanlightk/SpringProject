@@ -38,9 +38,9 @@ public class CartService {
 		mapper.deleteCart(cart);
 	}
 
-	public void showCartCount(String memid) {
+	public int showCartCount(String memid) {
 		log.info("-- cart count --");
-
+		return mapper.selectCartCount(memid);
 	}
 	
 	public List<CartItem> getDirectCartItem(List<Integer> cartNoList){

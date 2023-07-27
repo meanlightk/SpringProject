@@ -1172,12 +1172,12 @@ button{
 				<div class="swiper-pagination"></div>
 				
 			</div>
-			
+			<!-- 상세정보 -->
+			<div class="tab-pane fade show active" id="home" role="tabpanel" aria-labelledby="home-tab">${goods.content}</div>
 		</div>
  
 		<div class="tab-content current" id="myTabContent1" align="center" style="">
-			<!-- 상세정보 -->
-			<div class="tab-pane fade show active" id="home" role="tabpanel" aria-labelledby="home-tab">${goods.content}</div>
+
 		</div>
 		<div class="tab-content" id="myTabContent2" align="center" >
 			<!-- 리뷰 -->
@@ -1316,8 +1316,8 @@ button{
 	        		success: function(result){
 	        			console.log(result);
 	        			alert('장바구니에 추가되었습니다.');
-	        			$("#option_products").html('');
-//	        			location.href='/view/direct?cart_no=' + result;
+	        			//$("#option_products").html('');
+	        			location.href='/cart/direct?cart_no=' + result;
 	        		},
 	    			error: function(jqXHR, textStatus, errorThrown) {
 	    				alert("ERROR : " + textStatus + " : " + errorThrown);

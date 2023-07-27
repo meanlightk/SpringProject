@@ -54,15 +54,18 @@ public class CartContoller {
 			return "redirect:/member/login";
 		}
 		
+		
 		String userId = auth.getName();
 		List<CartItem> cartList = cartService.getCartItemList(userId);
 	
 		model.addAttribute("cartItemList", cartList);
+		model.addAttribute("carttype", 1);
+		
 		return "cart"; 
 	}
 	
 	
-	@GetMapping("/view/direct")
+	@GetMapping("/direct")
 	public String viewDirectCart(@RequestParam("cart_no") List<Integer> cartNoList, Model model) {
 		//로그인 유저 체크
 		Authentication auth = SecurityContextHolder.getContext().getAuthentication();		
@@ -74,8 +77,11 @@ public class CartContoller {
 		List<CartItem> cartList = cartService.getDirectCartItem(cartNoList);
 	
 		model.addAttribute("cartItemList", cartList);
+		model.addAttribute("cartype", 2);
+		
 		return "cart"; 
 	}
+	
 	
 	@PostMapping(path="/putCart", consumes = MediaType.APPLICATION_JSON_VALUE)
 	@ResponseBody
