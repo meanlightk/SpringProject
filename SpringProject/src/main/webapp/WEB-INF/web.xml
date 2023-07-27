@@ -30,7 +30,7 @@
 		<load-on-startup>1</load-on-startup>
 
 		<multipart-config>
-			<location>C:\\upload\\temp</location>    <!-- 나중에 우분투 내에서의 폴더를 설정할 예정 -->
+			<location>/upload</location>    <!-- 나중에 우분투 내에서의 폴더를 설정할 예정 -->
 			<max-file-size>20971520</max-file-size> <!-- 1MB * 20 -->
 			<max-request-size>41943040</max-request-size> <!-- 40MB -->
 			<file-size-threshold>20971520</file-size-threshold> <!-- 20MB -->

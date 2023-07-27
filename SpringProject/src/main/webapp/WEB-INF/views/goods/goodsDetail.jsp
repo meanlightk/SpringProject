@@ -765,66 +765,7 @@ button{
 									</div>							
 								</li>	 
 							</c:forEach>
-						
-<!--  						
-						    <li class="swiper-slide">
-								<div style="float: left;">
-									<img src="./../../../resources/img/product2.png" class="ThumbImage" alt>
-								</div>
-						    </li>
-						 	<li class="swiper-slide">
-								<div style="float: left;">
-									<img src="./../../../resources/img/product3.png" class="ThumbImage" alt>
-								</div>
-						    </li>
-						 	<li class="swiper-slide">
-								<div style="float: left;">
-									<img src="./../../../resources/img/product4.png" class="ThumbImage" alt>
-								</div>
-						    </li>
-  						    <li class="swiper-slide">
-								<div style="float: left;">
-									<img src="./../../../resources/img/product5.png" class="ThumbImage" alt>
-								</div>
-						    </li>
-  						    <li class="swiper-slide">
-								<div style="float: left;">
-									<img src="./../../../resources/img/product6.png" class="ThumbImage" alt>
-								</div>
-						    </li>
-  						    <li class="swiper-slide">
-								<div style="float: left;">
-									<img src="./../../../resources/img/product7.png" class="ThumbImage" alt>
-								</div>
-						    </li>-->
 						</ul>
-<!--  						<ul style="position: absolute; left: 0px; top: 0px; width: 660px; display: inline-block; padding-inline-start: 0px;">
-							<li class="xans-record-">
-								<img src="/upload/main/${goods.imagepath}" style="width:100px;" class="ThumbImage" alt>
-							</li>
-							<li class="xans-record-">
-								<img src="./../../../resources/img/product1.png" class="ThumbImage" alt>
-							</li>
-							<li class="xans-record-" >
-								<img src="./../../../resources/img/product2.png" class="ThumbImage" alt>
-							</li>
-							<li class="xans-record-">
-								<img src="./../../../resources/img/product3.png" class="ThumbImage" alt>
-							</li>
-							<li class="xans-record-">
-								<img src="./../../../resources/img/product4.png" class="ThumbImage" alt>
-							</li>
-							<li class="xans-record-">
-								<img src="./../../../resources/img/product5.png" class="ThumbImage" alt>
-							</li>
-							<li class="xans-record-">
-								<img src="./../../../resources/img/product6.png" class="ThumbImage" alt>
-							</li>
-							<li class="xans-record-">
-								<img src="./../../../resources/img/product7.png" class="ThumbImage" alt>
-							</li>
-						</ul>
-						-->
 						<button type="button" class="prev" style="display: none;">이전</button>
 						<button type="button" class="next"></button>				
 					</div>
@@ -1374,7 +1315,7 @@ button{
 	    				alert("ERROR : " + textStatus + " : " + errorThrown);
 	    			}
 	        	});  //$.ajax
-	        });	 
+	        });	
 		})
 		
 	
@@ -1535,6 +1476,17 @@ button{
   	imgStyleDel();
   	calculateTot();
   	
+  	
+	   function readURL(input) {
+		      if (input.files && input.files[0]) {
+			      var reader = new FileReader();
+			      reader.onload = function (e) {
+			        $('#preview').attr('src', e.target.result);
+		          }
+		         reader.readAsDataURL(input.files[0]);
+		      }
+		  }  
+
 	</script>
 </body>
 </html>
