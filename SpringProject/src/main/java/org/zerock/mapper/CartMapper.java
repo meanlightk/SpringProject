@@ -11,6 +11,7 @@ public interface CartMapper {
 
 	public List<Cart> selectCartNo(int cartNo);
 
+	public List<Cart> selectCartByCartNo(@Param("id") String id, @Param("numberList") List<Integer> numberList);
 	
 	public void insertCart(Cart cart);
 

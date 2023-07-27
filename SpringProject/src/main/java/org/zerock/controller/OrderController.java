@@ -39,9 +39,9 @@ public class OrderController {
 	GoodsService goodsService;
 
 	
-	@PostMapping("new")
+	@PostMapping("new1")
 	@ResponseBody
-	public AjaxRes newOrder(@RequestBody NewOrder newOrder) {
+	public AjaxRes newOrder(@RequestBody List<NewOrder> cartList) {
 		String id = null;
 		
 		// 로그인 유저 체크
@@ -52,12 +52,35 @@ public class OrderController {
 		}
 		
 		id = auth.getName();
-		PaymentItem paymentItem = orderService.newOrder(id, newOrder);
+		PaymentItem paymentItem = orderService.newOrder(id,cartList);
 		if(paymentItem == null) {
 		}
 		
 		return AjaxRes.builder().status("SUCCESS").data(paymentItem).build();
 	}
+	
+	
+	@PostMapping("new2")
+	@ResponseBody
+	public AjaxRes newOrder2(@RequestBody List<NewOrder> cartList) {
+		String id = null;
+		
+		// 로그인 유저 체크
+		Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+		if (auth.getName() == null || auth.getName().equals("") || auth.getName().equals("anonymousUser")) {
+			// 미로그인 상태
+			return AjaxRes.builder().status("FAIL").message("Not logged in").build();
+		}
+		
+		id = auth.getName();
+		PaymentItem paymentItem = orderService.newOrder(id,cartList);
+		if(paymentItem == null) {
+		}
+		
+		return AjaxRes.builder().status("SUCCESS").data(paymentItem).build();
+	}
+	
+	
 
 	@PostMapping("updateCart")
 	@ResponseBody

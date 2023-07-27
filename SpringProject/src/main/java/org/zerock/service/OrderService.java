@@ -1,5 +1,6 @@
 package org.zerock.service;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
@@ -12,6 +13,7 @@ import org.zerock.domain.Goods;
 import org.zerock.domain.OrderAddress;
 import org.zerock.domain.OrderList;
 import org.zerock.dto.req.NewOrder;
+import org.zerock.dto.res.CartItem;
 import org.zerock.dto.res.PaymentItem;
 import org.zerock.mapper.CartMapper;
 import org.zerock.mapper.GoodsMapper;
@@ -32,10 +34,17 @@ public class OrderService {
 	GoodsMapper goodsMapper;
 
 	@Transactional
-	public PaymentItem newOrder(String memberId, NewOrder newOrder) {
+	public PaymentItem newOrder(String id,List<NewOrder> dataList) {
 		int totalAmount = 0;
+		
+		List<Integer> noList = new ArrayList<Integer>();
 
-		List<Cart> cartList = cartMapper.selectCart(memberId);
+		for (int i = 0; i < dataList.size(); i++)
+			noList.add(dataList.get(i).getCart());
+		
+		List<Cart> cartList = cartMapper.selectCartByCartNo(id, noList);
+		
+		
 		for (int i = 0; i < cartList.size(); i++) {
 			Cart cart = cartList.get(i);
 			Goods goods = goodsMapper.selectOneItem(cart.getGoods_no());
@@ -49,7 +58,7 @@ public class OrderService {
 
 		// 1. 주문 등록
 		OrderList orderList = new OrderList();
-		orderList.setMem_id(memberId);
+		orderList.setMem_id(id);
 		orderList.setTotprice(totalAmount);
 
 		if (orderMapper.insertOrder(orderList) < 1) {
@@ -59,18 +68,18 @@ public class OrderService {
 		// 2. 배송지 등록
 		OrderAddress orderAddress = new OrderAddress();
 		orderAddress.setOrder_no(orderList.getOrderlist_no());
-		orderAddress.setName(newOrder.getName());
-		orderAddress.setPhone(newOrder.getPhone());
-		orderAddress.setAddr1(newOrder.getAddr1());
-		orderAddress.setAddr2(newOrder.getAddr2());
-		orderAddress.setMemo(newOrder.getMemo());
+		orderAddress.setName(dataList.get(0).getName());
+		orderAddress.setPhone(dataList.get(0).getPhone());
+		orderAddress.setAddr1(dataList.get(0).getAddr1());
+		orderAddress.setAddr2(dataList.get(0).getAddr2());
+		orderAddress.setMemo(dataList.get(0).getMemo());
 
 		if (orderMapper.insertOrderAddress(orderAddress) < 1) {
 			return null;
 		}
 		
 		//3. 장바구니 업데이트
-		if(cartMapper.updateCartOrderNo(memberId, orderList.getOrderlist_no()) < 1) {
+		if(cartMapper.updateCartOrderNo(id, orderList.getOrderlist_no()) < 1) {
 			return null;
 		}
 

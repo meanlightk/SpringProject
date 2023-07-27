@@ -13,4 +13,5 @@ public class NewOrder {
 	private String addr1;
 	private String addr2;
 	private String memo;
+	private int cart;
 }
