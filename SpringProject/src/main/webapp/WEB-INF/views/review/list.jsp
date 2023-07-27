@@ -9,22 +9,22 @@
 <div class="review" style="width: 70%">
 	<p class="desc">상품의 사용후기를 적어주세요.</p>
 	<ul>
-		<c:forEach var="item" items="${reviewList}">							
+		<c:forEach var="item" items="${reviewList}" varStatus="stat">							
 			<li>
 		        <div>
 		   			<fieldset>
 		   				<c:forEach var="num" begin="1" end="5">
 		   					<c:choose>
 		   						<c:when test="${num <= item.score}">
-								    <input type="radio" name="score" value="${num}" id="rate5" checked readonly><label for="rate5">⭐</label>
+								    <input type="radio" name="score" value="${num}" id="rate${stat.count}_${num}"  checked readonly><label for="rate${stat.count}_${num}" class="active">⭐</label>
 							    </c:when>
 							    <c:otherwise>
-									<input type="radio" name="score" value="${num}" id="rate5" readonly><label for="rate5">⭐</label>
+									<input type="radio" name="score" value="${num}" id="rate${stat.count}_${num}"  readonly><label for="rate${stat.count}_${num}" readonly>⭐</label>
 							    </c:otherwise>
 						    </c:choose>
 						</c:forEach>
 					 </fieldset>
-		            <span>${item.memId} ${item.regiDateStr}</span>
+		            <span>${item.memId} ${item.regiDateStr} </span>
 		        </div>
 		        <h3>${item.title}</h3>
 			    ${item.content}
