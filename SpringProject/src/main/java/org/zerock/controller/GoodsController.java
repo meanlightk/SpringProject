@@ -4,6 +4,7 @@ import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.nio.file.Files;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
 
@@ -373,6 +374,9 @@ public class GoodsController {
 		String id = auth.getName();
 		log.info("id: "+id);
 		model.addAttribute("id", id);
+		
+		List<Review> newestReview = new ArrayList<>();
+		
 		
 		return "detail";
 	}

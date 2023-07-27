@@ -1184,7 +1184,32 @@ button{
 			<jsp:include page="../review/list.jsp"></jsp:include>
 		</div>
 		<div class="tab-content" id="myTabContent3" align="center">	
-			<!-- -->
+			<!-- 상품 유의 사항 -->
+			<div id="prdInfo">
+				<div class="cboth prdInfo_box">
+					<div class="prdInfo_line">
+						<div class>
+							<h3>상품결제정보</h3>
+						</div>
+						<div class="cboth prdInfo_text">
+							" 고액결제의 경우 안전을 위해 카드사에서 확인전화를 드릴 수도 있습니다. 확인과정에서 도난 카드의 사용이나 타인 명의의 주문등 정상적인 주문이 아니라고 판단될 경우 임의로 주문을 보류 또는 취소할 수 있습니다.  "
+							<br>
+							<br>
+							" 무통장 입금은 상품 구매 대금은 PC뱅킹, 인터넷뱅킹, 텔레뱅킹 혹은 가까운 은행에서 직접 입금하시면 됩니다."
+							<br>
+							" 주문시 입력한 입금자명과 실제입금자의 성명이 반드시 일치하여야 하며, 4일 이내로 입금을 하셔야 하며 입금되지 않은 주문은 자동취소 됩니다."
+						</div>
+					</div>
+					<div class="prdInfo_line">
+						<div class>
+							<h3>배송정보</h3>
+						</div>
+						<div class="cboth prdInfo_text"></div>
+					</div>
+				</div>
+				<div class="cboth prdInfo_box topline" style="margin-top:0px !important;"></div>
+			
+			</div>
 		</div>
 		<div class="tab-content" id="myTabContent4" align="center">
 			<!-- 클레임 or Qna -->
@@ -1323,7 +1348,34 @@ button{
 	    				alert("ERROR : " + textStatus + " : " + errorThrown);
 	    			}
 	        	});  //$.ajax
-	        });			
+	        });	
+		    
+		    
+		    $("#insertLike").click(function(){
+	   			var gno = $("#gno").val();
+	   			
+   				var jsonData = { goods_no : gno }
+	   	
+ 	        	$.ajax({
+	        		url: '/wish/addwish',
+	        		processData: false,
+	        		contentType: 'application/json',
+	        		data: JSON.stringify(jsonData),
+	        		type: 'POST',
+	        		dataType: 'json',
+	        		beforeSend: function(xhr) { //XMLHttpRequest (XHR)은 AJAX 요청을 생성하는 JavaScript API이다. XHR의 메서드로 브라우저와 서버간의 네트워크 요청을 전송할 수 있다.
+	        			xhr.setRequestHeader(header, token); //csrf 전송하지 않으면 아예 ajax가 되지 않는 문제가 생김.
+	        		},
+	        		success: function(result){
+	        			console.log(result);
+	        			(result === 1) ? alert('위시리스트에 추가되었습니다.') : alert('위시리스트에서 해제되었습니다.');
+	        			alert('위시리스트에 추가되었습니다.');
+	        		},
+	    			error: function(jqXHR, textStatus, errorThrown) {
+	    				alert("ERROR : " + textStatus + " : " + errorThrown);
+	    			}
+	        	});  //$.ajax
+	        });	
 		})
 		
 	

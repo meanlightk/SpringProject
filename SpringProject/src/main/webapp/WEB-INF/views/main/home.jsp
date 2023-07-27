@@ -474,3 +474,60 @@
 		</div>
 	</section>
 </body>
+<script src="https://cdn.jsdelivr.net/npm/jquery@3.6.4/dist/jquery.slim.min.js"></script>
+<script>
+$(document).ready(function(){
+	  
+
+
+  	
+    $("#insertBasket").click(function(){
+    	var dataList = []; 
+			var pname = $("#pname").attr('value'); 
+			var gno = $("#gno").val();
+			
+			//옵션별 넣어주어야 할 내용
+			for(var i = 0; i < arr.length; i++){
+				var option_num = arr[i].slice(-1);
+				
+				var option_name = $("#option_name_" + option_num).attr('value');
+				var sub_price = $('#option_box_price2_' + option_num).text();
+				var quantity = $("#input_box_" + option_num).val();
+				sub_price = sub_price.replaceAll(',','');
+				sub_price = sub_price.replace(' 원','');
+				var jsonData = {
+                      pname : pname,
+                      goods_no : gno,
+                      optionName : option_name,
+                      totalPrice : sub_price,
+    				  quantity : quantity                 
+            }
+				dataList.push(jsonData); 
+
+			}	   			
+		
+		console.log(dataList);
+		console.log(JSON.stringify(dataList));
+     	$.ajax({
+    		url: '/cart/putCart',
+    		processData: false,
+    		contentType: 'application/json',
+    		data: JSON.stringify(dataList),
+    		type: 'POST',
+    		dataType: false,
+    		beforeSend: function(xhr) { //XMLHttpRequest (XHR)은 AJAX 요청을 생성하는 JavaScript API이다. XHR의 메서드로 브라우저와 서버간의 네트워크 요청을 전송할 수 있다.
+    			xhr.setRequestHeader(header, token); //csrf 전송하지 않으면 아예 ajax가 되지 않는 문제가 생김.
+    		},
+    		success: function(result){
+    			console.log(result);
+    			alert('장바구니에 추가되었습니다.');
+    			$("#option_products").html('');
+    		},
+			error: function(jqXHR, textStatus, errorThrown) {
+				alert("ERROR : " + textStatus + " : " + errorThrown);
+			}
+    	});  //$.ajax
+    });
+    
+}
+</script>
