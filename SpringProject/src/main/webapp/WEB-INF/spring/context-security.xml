@@ -33,6 +33,9 @@
 		<security:intercept-url pattern="/order" access="hasRole('ROLE_MEMBER')" />
 		<security:intercept-url pattern="/order/*" access="hasRole('ROLE_MEMBER')" />
 		<security:intercept-url pattern="/review/*.do" access="hasRole('ROLE_MEMBER')" />
+		<security:intercept-url pattern="/wish" access="hasRole('ROLE_MEMBER')" />
+		<security:intercept-url pattern="/wish/*" access="hasRole('ROLE_MEMBER')" />
+		<security:intercept-url pattern="/wish/*/*" access="hasRole('ROLE_MEMBER')" />
 		
 		<security:form-login login-page="/member/login" authentication-success-handler-ref="loginSuccess" />
 		<security:logout logout-url="/logout.do" invalidate-session="true" />
