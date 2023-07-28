@@ -368,6 +368,18 @@ public class GoodsController {
 		model.addAttribute("reviewList", list);
 		model.addAttribute("ReviewCount", list.size());
 
+		List<Review> list2 = new ArrayList<>();
+		
+		/*
+		 * if(list.size() >= 10) { for(int i = 0; i < 10; i++) { Review review =
+		 * list.get(i); log.info(review.getContent()); String content =
+		 * review.getContent(); int m = content.indexOf("src=\""); if(m!=-1) { String
+		 * imagepath = content.substring(m+5); log.info("imagepath"+imagepath);
+		 * review.setImagepath(imagepath); }else { review.setImagepath(null); }
+		 * list2.add(review); } model.addAttribute("reviewList2", list2); }
+		 */
+		
+		
 		
 		common4.setGoods_no(gno);
 		List<Adminclaim> claimlist = claimService.showlistAll(common4);
@@ -383,8 +395,6 @@ public class GoodsController {
 		String id = auth.getName();
 		log.info("id: "+id);
 		model.addAttribute("id", id);
-		
-		List<Review> newestReview = new ArrayList<>();
 		
 		
 		return "detail";

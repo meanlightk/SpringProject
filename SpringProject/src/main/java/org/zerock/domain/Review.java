@@ -27,4 +27,6 @@ public class Review {
 	
 	private String updateDateStr;
 	
+	private String imagepath;
+	
 }
