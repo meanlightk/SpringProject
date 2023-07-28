@@ -43,33 +43,33 @@ Spring으로 구현한 화장품 판매 웹사이트입니다.
 <img src="https://cdn.discordapp.com/attachments/1125397127988793468/1134299179909382277/KakaoTalk_20230727_215410682.png">
 <br>
 <br>
-<H3>기능 설명</H3>
+<H2>기능 설명</H3>
 
-<H4>Tiles 설정</H4>
+<H3>Tiles 설정</H4>
 <img src="https://github.com/ThereIsGrace/SpringProject/assets/109272327/2f93c275-5461-4922-a3ff-b38a522981a0"><br>
 <img src="https://github.com/ThereIsGrace/SpringProject/assets/109272327/af96d836-f8e0-4bb7-b385-1635b8de6311"
-<H4>회원가입</H4>
+<H3>회원가입</H4>
 
-<H4>로그인</H4>
+<H3>로그인</H4>
 
-<H5>스프링 시큐리티</H5> 
+<H3>스프링 시큐리티</H3> 
 <img src="https://github.com/ThereIsGrace/SpringProject/assets/109272327/85224f61-bfd1-4179-bdb0-4a96e072dc98">
 <br>
 관리자와 사용자의 권한을 설정해줘서 페이지마다 권한을 설정해야 하는 번거로움을 제거
-<H4>상품 조회</H4>
+<H3>상품 조회</H3>
 
-<H4>상품 상세 조회</H4>
+<H3>상품 상세 조회</H3>
 
-<H4>장바구니 및 위시리스트</H4>
+<H3>장바구니 및 위시리스트</H3>
 
-<H5>일반적인 Ajax와 부가적인 설정</H5>
+<H3>일반적인 Ajax와 부가적인 설정</H3>
 
-<H4>결제 및 주문 내역</H4>
+<H3>결제 및 주문 내역</H3>
 
-<H5>결제 API</H5>
-<H5>배송 API</H5>
+<H3>결제 API</H3>
+<H3>배송 API</H3>
 
-<H4>클레임</H4>
+<H3>클레임</H3>
 
 
 
