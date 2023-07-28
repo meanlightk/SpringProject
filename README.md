@@ -11,7 +11,7 @@ Spring으로 구현한 화장품 웹사이트입니다.
 2023-07-11 2023-07-28
 
 <H2>👩역할 분담</H2>
-![image](https://github.com/ThereIsGrace/SpringProject/assets/109272327/012a4927-5294-489b-b9dc-f865986f24d3)
+<img src="https://github.com/ThereIsGrace/SpringProject/assets/109272327/012a4927-5294-489b-b9dc-f865986f24d3">
 
 <H2>💻기술 스택</H2>
 <div align="left">
@@ -20,17 +20,19 @@ Spring으로 구현한 화장품 웹사이트입니다.
 
 <H2>설계</H2>
 <H3>요구사항 명세서</H3>
-![image](https://github.com/ThereIsGrace/SpringProject/assets/109272327/ab2ef3ca-1cf3-4708-ba1d-590d09f5e001)
+<img src="https://github.com/ThereIsGrace/SpringProject/assets/109272327/ab2ef3ca-1cf3-4708-ba1d-590d09f5e001">
 <H3>유스케이스 다이어그램</H3>
-<img src="https://github.com/ThereIsGrace/Servlet_JSP_WebSite/assets/109272327/9e5f77b8-4b2b-41d9-bda7-2f5dab4fd7ae">
-<H3>시퀀스 다이어그램</H3>
-<img src="https://github.com/ThereIsGrace/Servlet_JSP_WebSite/assets/109272327/7fb31e93-d3c1-41ad-a70c-e4cef83b4707">
+<img src="https://cdn.discordapp.com/attachments/1125397127988793468/1134299180546928681/KakaoTalk_20230727_012835580.png">
+<H3>시퀀스 다이어그램(관리자)</H3>
+<img src="https://cdn.discordapp.com/attachments/1125397127988793468/1134299179464790066/KakaoTalk_20230727_015123671.png">
+<H3>시퀀스 다이어그램(사용자)</H3>
+<img src="https://cdn.discordapp.com/attachments/1125397127988793468/1134299179464790066/KakaoTalk_20230727_015123671.png">
 <H3>클래스 다이어그램</H3>
-<img src="https://github.com/ThereIsGrace/Servlet_JSP_WebSite/assets/109272327/f092dd50-c157-42be-b071-f00d80e0cc32">
+<img src="https://cdn.discordapp.com/attachments/1125397127988793468/1134299179909382277/KakaoTalk_20230727_215410682.png">
 <H3>ERD</H3>
-<img src="https://github.com/ThereIsGrace/Servlet_JSP_WebSite/assets/109272327/334951d5-acb2-4669-8221-e546d6816ac5">
+<img src="https://github.com/ThereIsGrace/SpringProject/assets/109272327/7e066804-2081-40f9-8716-fed44b5d5a8b">
 <H3>블록 다이어그램</H3>
-<img src="https://github.com/ThereIsGrace/Servlet_JSP_WebSite/assets/109272327/b8125f37-c25e-460d-b19c-a6644fbf5e89">
+<img src="https://cdn.discordapp.com/attachments/1125397127988793468/1134299179909382277/KakaoTalk_20230727_215410682.png">
 
 <H3>기능 설명</H3>
 <H4>회원가입</H4>
