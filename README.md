@@ -11,7 +11,7 @@ Spring으로 구현한 화장품 웹사이트입니다.
 2023-07-11 2023-07-28
 
 <H2>👩역할 분담</H2>
-
+![image](https://github.com/ThereIsGrace/SpringProject/assets/109272327/012a4927-5294-489b-b9dc-f865986f24d3)
 
 <H2>💻기술 스택</H2>
 <div align="left">
@@ -20,7 +20,7 @@ Spring으로 구현한 화장품 웹사이트입니다.
 
 <H2>설계</H2>
 <H3>요구사항 명세서</H3>
-<img src="https://github.com/ThereIsGrace/Servlet_JSP_WebSite/assets/109272327/fa54e2e4-7651-4244-bbef-f5cb9d645453">
+![image](https://github.com/ThereIsGrace/SpringProject/assets/109272327/ab2ef3ca-1cf3-4708-ba1d-590d09f5e001)
 <H3>유스케이스 다이어그램</H3>
 <img src="https://github.com/ThereIsGrace/Servlet_JSP_WebSite/assets/109272327/9e5f77b8-4b2b-41d9-bda7-2f5dab4fd7ae">
 <H3>시퀀스 다이어그램</H3>
