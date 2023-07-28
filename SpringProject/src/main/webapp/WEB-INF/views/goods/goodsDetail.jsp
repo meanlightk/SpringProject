@@ -327,16 +327,16 @@
 						</c:if>
 					</div> 
 				</div>
-				<div class="swiper-pagination"></div>  --%>
-			</div> 
+				<div class="swiper-pagination"></div>  
+			</div> --%>
 			
 			<!-- 상세정보 -->
 			<div class="tab-pane fade show active" id="home" role="tabpanel" aria-labelledby="home-tab">${goods.content}</div>
 		</div>
  
-		<div class="tab-content current" id="myTabContent1" align="center" style="">
+<!-- 	<div class="tab-content current" id="myTabContent1" align="center" style="">
 
-		</div>
+		</div> -->	
 		<div class="tab-content" id="myTabContent2" align="center" >
 			<!-- 리뷰 -->
 			<jsp:include page="../review/list.jsp"></jsp:include>
@@ -453,12 +453,7 @@
 	        			console.log(result);
 	        			alert('장바구니에 추가되었습니다.');
 	        			$("#option_products").html('');
-	        			console.log(result.totalCount)
-
-	        			$('#cartCount').data('notify', result.totalCount);
-	        			console.log($('#cartCount').data('notify'));
-	        			$('#cartCount').removeClass('icon-header-noti');
-	        			$('#cartCount').parent().load(location.href + ' #cartCount')
+	        			$("#cart-total").html('0');
 	        		},
 	    			error: function(jqXHR, textStatus, errorThrown) {
 	    				alert("ERROR : " + textStatus + " : " + errorThrown);
@@ -478,6 +473,7 @@
 	   				var option_name = $("#option_name_" + option_num).attr('value');
 	   				var sub_price = $('#option_box_price2_' + option_num).text();
 	   				var quantity = $("#input_box_" + option_num).val();
+
 	   				sub_price = sub_price.replaceAll(',','');
 	   				sub_price = sub_price.replace(' 원','');
 	   				var jsonData = {
