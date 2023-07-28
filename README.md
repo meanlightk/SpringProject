@@ -1,5 +1,6 @@
 <H1>💄화장품 웹사이트</H1>
 Spring으로 구현한 화장품 웹사이트입니다.
+
 <H2>😊목표</H2>
 
 > 1. Spring을 사용하여 CRUD 기능을 연습하고 쇼핑몰의 다양한 게시판 형식을 구현한다.
@@ -7,15 +8,18 @@ Spring으로 구현한 화장품 웹사이트입니다.
 > 3. 외부 API중 실무와 밀접한 결제, 배송 API를 구현한다. 
 > 4. Spring Security를 사용하여 보안과 관련된 로직을 구현한다.
 
+
 <H2>👩‍💻개발 기간</H2>
 2023-07-11 2023-07-28
+
 
 <H2>👩역할 분담</H2>
 <img src="https://github.com/ThereIsGrace/SpringProject/assets/109272327/012a4927-5294-489b-b9dc-f865986f24d3">
 
+
 <H2>💻기술 스택</H2>
 <div align="left">
-<img alt="Html" src ="https://img.shields.io/badge/HTML5-E34F26.svg?&style=for-the-badge&logo=HTML5&logoColor=white"/> <img alt="Css" src ="https://img.shields.io/badge/CSS3-1572B6.svg?&style=for-the-badge&logo=CSS3&logoColor=white"/> <img alt="JavaScript" src ="https://img.shields.io/badge/JavaScriipt-F7DF1E.svg?&style=for-the-badge&logo=JavaScript&logoColor=black"/> <img alt="Java" src="https://img.shields.io/badge/java-007396?style=for-the-badge&logo=java&logoColor=white"><br><img src="https://img.shields.io/badge/mariaDB-003545?style=for-the-badge&logo=mariaDB&logoColor=white"> <img src="https://img.shields.io/badge/jquery-0769AD?style=for-the-badge&logo=jquery&logoColor=white"> <img src="https://img.shields.io/badge/apache tomcat-F8DC75?style=for-the-badge&logo=apachetomcat&logoColor=white"> <img src="https://img.shields.io/badge/bootstrap-7952B3?style=for-the-badge&logo=BootStrap&logoColor=white"> <img src="https://img.shields.io/badge/git-181717?style=for-the-badge&logo=git&logoColor=white"> <img src="https://img.shields.io/badge/git kraken-179287?style=for-the-badge&logo=gitKraken&logoColor=white">
+<img alt="Html" src ="https://img.shields.io/badge/HTML5-E34F26.svg?&style=for-the-badge&logo=HTML5&logoColor=white"/> <img alt="Css" src ="https://img.shields.io/badge/CSS3-1572B6.svg?&style=for-the-badge&logo=CSS3&logoColor=white"/> <img alt="JavaScript" src ="https://img.shields.io/badge/JavaScriipt-F7DF1E.svg?&style=for-the-badge&logo=JavaScript&logoColor=black"/> <img alt="Java" src="https://img.shields.io/badge/java-007396?style=for-the-badge&logo=java&logoColor=white"><br><img src="https://img.shields.io/badge/mariaDB-003545?style=for-the-badge&logo=mariaDB&logoColor=white"> <img src="https://img.shields.io/badge/jquery-0769AD?style=for-the-badge&logo=jquery&logoColor=white"> <img src="https://img.shields.io/badge/apache tomcat-F8DC75?style=for-the-badge&logo=apachetomcat&logoColor=white"> <img src="https://img.shields.io/badge/bootstrap-7952B3?style=for-the-badge&logo=BootStrap&logoColor=white"> <img src="https://img.shields.io/badge/git-181717?style=for-the-badge&logo=git&logoColor=white"> <img src="https://img.shields.io/badge/git kraken-179287?style=for-the-badge&logo=gitKraken&logoColor=white"> <img src="https://img.shields.io/badge/Spring-#6DB33F?style=for-the-badge&logo=spring&logoColor=black">
 </div>
 
 <H2>설계</H2>
