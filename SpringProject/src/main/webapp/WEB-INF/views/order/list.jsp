@@ -55,7 +55,7 @@
 													<div class="order-data">
 														<div class="image-form">
 															<a class="thimage"  href="" target="_blank">
-																<img loading="lazy" width="64" height="64" src="/upload">
+																<img loading="lazy" width="64" height="64" src="/upload/main/${item.imagepath}">
 															</a>
 														</div>
 														<div class="text-form">

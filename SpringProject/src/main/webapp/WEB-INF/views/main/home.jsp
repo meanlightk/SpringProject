@@ -29,7 +29,7 @@
 							</div>
 								
 							<div class="layer-slick1 animated visible-false" data-appear="zoomIn" data-delay="1600">
-								<a href="product.html" class="flex-c-m stext-101 cl0 size-101 bg1 bor1 hov-btn1 p-lr-15 trans-04">
+								<a href="/showlist" class="flex-c-m stext-101 cl0 size-101 bg1 bor1 hov-btn1 p-lr-15 trans-04">
 									Shop Now
 								</a>
 							</div>
@@ -53,7 +53,7 @@
 							</div>
 								
 							<div class="layer-slick1 animated visible-false" data-appear="slideInUp" data-delay="1600">
-								<a href="product.html" class="flex-c-m stext-101 cl0 size-101 bg1 bor1 hov-btn1 p-lr-15 trans-04">
+								<a href="/showlist" class="flex-c-m stext-101 cl0 size-101 bg1 bor1 hov-btn1 p-lr-15 trans-04">
 									Shop Now
 								</a>
 							</div>
@@ -77,7 +77,7 @@
 							</div>
 								
 							<div class="layer-slick1 animated visible-false" data-appear="rotateIn" data-delay="1600">
-								<a  href="product.html" class="flex-c-m stext-101 cl0 size-101 bg1 bor1 hov-btn1 p-lr-15 trans-04">
+								<a  href="/showlist.do" class="flex-c-m stext-101 cl0 size-101 bg1 bor1 hov-btn1 p-lr-15 trans-04">
 									Shop Now
 								</a>
 							</div>
@@ -216,7 +216,7 @@
 									<c:if test="${section > 1 && page==1 }">
 									</c:if>
 										<li><a class="no-uline"
-											href="/board/list.do?section=${section}&pageNum=${page}&katNo=${katTargetNo}">${(section-1)*20 +page}</a></li>
+											href="/home?section=${section}&pageNum=${page}&katNo=${katTargetNo}">${(section-1)*20 +page}</a></li>
 								</c:forEach>
 							</c:when>
 							<c:when test="${tot == 200 }">
@@ -230,12 +230,12 @@
 									<c:choose>
 										<c:when test="${page== pageNum }">
 											<li><a class="sel-page"
-												href="/board/list.do?section=${section}&pageNum=${page}&katNo=${katTargetNo}">${page }
+												href="/home?section=${section}&pageNum=${page}&katNo=${katTargetNo}">${page }
 											</a></li>
 										</c:when>
 										<c:otherwise>
 											<li><a class="no-uline"
-												href="/board/list.do?section=${section}&pageNum=${page}&katNo=${katTargetNo}">${page }
+												href="/home?section=${section}&pageNum=${page}&katNo=${katTargetNo}">${page }
 											</a></li>
 										</c:otherwise>
 									</c:choose>
@@ -248,7 +248,7 @@
 							</c:when>
 							<c:otherwise>
 								<li><a class="no-uline"
-									href="/board/list.do?section=${section+1}&pageNum=${section*20+1}&katNo=${katTargetNo}">&nbsp;&gt;</a></li>
+									href="/home?section=${section+1}&pageNum=${section*20+1}&katNo=${katTargetNo}">&nbsp;&gt;</a></li>
 							</c:otherwise>
 					</c:choose>
 						

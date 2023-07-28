@@ -123,7 +123,7 @@
 			<if test='searchText != null and searchText != ""'>
 				like concat('%',#{searchText},'%')
 			</if>
-			<if test='category != null and category != ""'>
+			<if test='category != null and category != 0'>
 				and category like concat('%',#{category},'%')
 			</if>
 			<if test='price1 != 0 and price2 != 0'>

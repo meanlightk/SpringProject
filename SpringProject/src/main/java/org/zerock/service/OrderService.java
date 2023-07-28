@@ -78,7 +78,7 @@ public class OrderService {
 		}
 		
 		//3. 장바구니 업데이트
-		if(cartMapper.updateCartOrderNo(id, orderList.getOrderlist_no()) < 1) {
+		if(cartMapper.updateCartOrderNo(id, orderList.getOrderlist_no(), noList) < 1) {
 			return null;
 		}
 

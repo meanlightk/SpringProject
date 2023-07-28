@@ -38,7 +38,7 @@
 
 	<select id="selectCartCount" resultType="int">
 		select count(*) from
-		cart where mem_id = #{memid}
+		cart where mem_id = #{memid} AND ordernum is null
 	</select>
 
 	<update id="updateCart">
@@ -52,6 +52,11 @@
 			status = '2',
 			update_date = SYSDATE()
 		 WHERE mem_id = #{memberId}
+		 and cart_no in
+		<foreach collection="numberList" item="item" open="(" separator="," close=")">
+	          #{item}
+	    </foreach>    
+		 
 	</update>
 
 </mapper>

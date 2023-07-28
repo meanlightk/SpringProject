@@ -92,6 +92,10 @@
 	<put-attribute name="title" value="goodsDetail" />
 	<put-attribute name="body" value="/WEB-INF/views/goods/goodsDetail.jsp" />
 </definition>
+<definition name="*/*" extends="layout">
+	<put-attribute name="title" value="shop" />
+	<put-attribute name="body" value="/WEB-INF/views/{1}/{2}.jsp" />
+</definition>
 
 
 </tiles-definitions>

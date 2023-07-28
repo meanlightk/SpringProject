@@ -189,8 +189,8 @@ search-form .searchbox #order_by {
 								</div>
 								<div class="item">
 									<strong>판매가격대</strong> 
-									<input id="product_price1" name="price1" class="input01" placeholder="" size="15" value="" type="text"> ~ 
-									<input id="product_price2" name="price2" class="input01" placeholder="" size="15" value="" type="text">
+									<input id="product_price1" name="price1" class="input01" placeholder="" size="15" value="0" type="text"> ~ 
+									<input id="product_price2" name="price2" class="input01" placeholder="" size="15" value="0" type="text">
 								</div>
 <!--  								<div class="item">
 									<strong>검색정렬기준</strong> 
@@ -315,6 +315,5 @@ search-form .searchbox #order_by {
 					Load More </a>
 			</div>
 		</div>
-	</div>
 
 	<%@include file="../includes/modal.jsp"%>

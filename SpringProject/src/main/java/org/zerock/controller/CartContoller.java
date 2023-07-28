@@ -43,7 +43,7 @@ public class CartContoller {
 		List<CartItem> cartList = cartService.getCartItemList(userId);
 	
 		model.addAttribute("cartItemList", cartList);
-		model.addAttribute("carttype", 1);
+		model.addAttribute("cartype", 1);
 		
 		return "cart"; 
 	}

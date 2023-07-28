@@ -21,5 +21,5 @@ public interface CartMapper {
 
 	public int updateCart(@Param("id") String id, @Param("cartNo") int cartNo, @Param("quantity") int quantity);
 	
-	public int updateCartOrderNo(@Param("memberId") String memberId, @Param("orderNo") int orderNo);
+	public int updateCartOrderNo(@Param("memberId") String memberId, @Param("orderNo") int orderNo, @Param("numberList") List<Integer> numberList);
 }

@@ -17,6 +17,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
@@ -73,12 +74,15 @@ public class GoodsController {
 	}
 	
 	@RequestMapping("/showlist")
-	public String goodslist(Model model) {
+	public String goodslist(Model model,Common common) {
 
-	//.	List<Goods> goodsList = service.goodsList();
-	//	model.addAttribute("goodsList", goodsList);
+		List<Goods> goodsList = service.goodsList(common);
+		model.addAttribute("goodsList", goodsList);
 
 		
+		if(goodsList.size() > 0)
+			model.addAttribute("tot", goodsList.get(0).getTotalCount());
+
 
 		
 		return "itemlist";
@@ -87,7 +91,7 @@ public class GoodsController {
 	
 	
 	@GetMapping("/goods/search.do")
-	public String searchList(Model model, Common common) {
+	public String searchList(Model model,Common common) {
 
 		System.out.println(common);
 		List<Goods> goodsList = service.getSearchGoodsList(common);

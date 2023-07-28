@@ -57,7 +57,7 @@ public class MemberController {
 		System.out.println(member.getPnum());
 		System.out.println(member.getEmail());
 		service.join(member);
-		return "redirect:/login";
+		return "redirect:/member/login";
 	}
 	
 	@GetMapping("/profile")

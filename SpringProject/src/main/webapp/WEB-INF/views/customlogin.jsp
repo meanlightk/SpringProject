@@ -11,14 +11,14 @@
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
 <script type="text/javascript">
 	$(function() {
-		$('#formContent #id').focus();
+//		$('#formContent #id').focus();
 		
 		// 에러가 있는 경우 메세지 처리
-		var errMsg = $('#errMsg').val();
+/*		var errMsg = $('#errMsg').val();
 		if(errMsg != '') {
 			alert(errMsg);
 			$('#formContent').find('#id').focus();
-		}
+		}*/
 	});
 </script>
 
