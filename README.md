@@ -45,16 +45,15 @@ Spring으로 구현한 화장품 판매 웹사이트입니다.
 <br>
 <H3>기능 설명</H3>
 <H4>회원가입</H4>
-<img src="https://github.com/ThereIsGrace/Servlet_JSP_WebSite/assets/109272327/634d39e5-b43c-4139-900a-f8f978efb65d">
-<H4>로그인</H4>
-<img src="https://github.com/ThereIsGrace/Servlet_JSP_WebSite/assets/109272327/16fb9464-aa9b-4303-82f9-22bcac8deef4">
-<H4>상품 조회</H4>
-<img src="https://github.com/ThereIsGrace/Servlet_JSP_WebSite/assets/109272327/384f7360-0ae9-42ac-a0d0-c136d21ccc2b">
-<H4>상품 상세 조회</H4>
-<img src="https://github.com/ThereIsGrace/Servlet_JSP_WebSite/assets/109272327/4299da99-c6f7-4004-b91f-1fcfaaa018c5">
-<H4>장바구니 및 위시리스트</H4>
-<img src="https://github.com/ThereIsGrace/Servlet_JSP_WebSite/assets/109272327/e7dae9b1-331d-4ab5-9758-38bfece1618c">
-<H4>커뮤니티 게시판 입력</H4>
-<img src="https://github.com/ThereIsGrace/Servlet_JSP_WebSite/assets/109272327/779c08ea-2f3f-4e47-a8c7-4319c8d70ac4">
 
-<H3>코드 설명</H3>
+<H4>로그인</H4>
+
+<H4>상품 조회</H4>
+
+<H4>상품 상세 조회</H4>
+
+<H4>장바구니 및 위시리스트</H4>
+
+<H4>결제 및 주문 내역</H4>
+
+<H4>클레임</H4>
