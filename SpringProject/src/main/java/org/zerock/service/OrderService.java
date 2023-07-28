@@ -13,7 +13,6 @@ import org.zerock.domain.Goods;
 import org.zerock.domain.OrderAddress;
 import org.zerock.domain.OrderList;
 import org.zerock.dto.req.NewOrder;
-import org.zerock.dto.res.CartItem;
 import org.zerock.dto.res.PaymentItem;
 import org.zerock.mapper.CartMapper;
 import org.zerock.mapper.GoodsMapper;

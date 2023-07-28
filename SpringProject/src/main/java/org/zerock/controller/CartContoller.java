@@ -1,18 +1,11 @@
 package org.zerock.controller;
 
 import java.io.IOException;
-import java.io.PrintWriter;
 import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 import javax.servlet.http.HttpServletResponse;
 
-import org.json.simple.JSONObject;
-import org.json.simple.parser.JSONParser;
-import org.json.simple.parser.ParseException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
 import org.springframework.security.core.Authentication;
@@ -26,12 +19,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.zerock.domain.Cart;
-import org.zerock.dto.res.AjaxRes;
 import org.zerock.dto.res.CartItem;
 import org.zerock.service.CartService;
-
-import com.fasterxml.jackson.core.type.TypeReference;
-import com.fasterxml.jackson.databind.ObjectMapper;
 
 import lombok.extern.log4j.Log4j;
 
@@ -49,11 +38,6 @@ public class CartContoller {
 	public String viewCart(Model model) {
 		//로그인 유저 체크
 		Authentication auth = SecurityContextHolder.getContext().getAuthentication();		
-		if(auth.getName() == null || auth.getName().equals("") || auth.getName().equals("anonymousUser")) {
-			//미로그인 상태
-			return "redirect:/member/login";
-		}
-		
 		
 		String userId = auth.getName();
 		List<CartItem> cartList = cartService.getCartItemList(userId);
@@ -67,12 +51,6 @@ public class CartContoller {
 	
 	@GetMapping("/direct")
 	public String viewDirectCart(@RequestParam("cart_no") List<Integer> cartNoList, Model model) {
-		//로그인 유저 체크
-		Authentication auth = SecurityContextHolder.getContext().getAuthentication();		
-		if(auth.getName() == null || auth.getName().equals("") || auth.getName().equals("anonymousUser")) {
-			//미로그인 상태
-			return "redirect:/member/login";
-		}
 		
 		List<CartItem> cartList = cartService.getDirectCartItem(cartNoList);
 	

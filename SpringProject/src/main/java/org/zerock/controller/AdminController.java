@@ -6,7 +6,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -15,7 +14,6 @@ import org.zerock.domain.AnswerClaim;
 import org.zerock.domain.Common;
 import org.zerock.domain.Gclaim;
 import org.zerock.domain.Goods;
-import org.zerock.service.AdminService;
 import org.zerock.service.ClaimService;
 import org.zerock.service.GoodsService;
 
@@ -25,9 +23,6 @@ import lombok.extern.log4j.Log4j;
 @Log4j
 @RequestMapping("/admin/")
 public class AdminController {
-	
-	@Autowired
-	private AdminService service;
 	
 	@Autowired
 	private ClaimService claimService;

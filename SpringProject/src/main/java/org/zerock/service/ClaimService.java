@@ -57,6 +57,9 @@ public class ClaimService {
 	};
 	
 	public void answerToClaim(AnswerClaim AClaim) {
+		
+		log.info("reg answer.......");
+		
 		mapper.insertClaimAnswer(AClaim);
 	};
 	

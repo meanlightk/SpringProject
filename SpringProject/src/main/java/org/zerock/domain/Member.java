@@ -2,7 +2,6 @@ package org.zerock.domain;
 
 import java.util.Date;
 import java.util.List;
-import java.util.Set;
 
 import lombok.Data;
 

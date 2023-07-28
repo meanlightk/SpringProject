@@ -1,7 +1,6 @@
 package org.zerock.mapper;
 
 import java.util.List;
-import java.util.Map;
 
 import org.zerock.domain.Common;
 import org.zerock.domain.Review;

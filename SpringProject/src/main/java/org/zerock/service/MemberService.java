@@ -26,8 +26,8 @@ public class MemberService {
 	}
 	
 	public Member login(String id) {
+		log.info("ID: "+id);
 		return memberMapper.selectMemberaslogin(id);
-//		return memberMapper.selectMember(id);
 	}
 	
 	public Member memberInfo(String id) {

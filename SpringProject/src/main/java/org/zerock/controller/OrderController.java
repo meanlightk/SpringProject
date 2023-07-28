@@ -12,7 +12,6 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
-import org.springframework.web.bind.annotation.RestController;
 import org.zerock.domain.Common;
 import org.zerock.domain.Goods;
 import org.zerock.dto.req.NewOrder;
@@ -105,13 +104,8 @@ public class OrderController {
 	
 	@GetMapping("/list.do")
 	public String main(Model model, Common common) {
-		String id = null;
 		
 		Authentication auth = SecurityContextHolder.getContext().getAuthentication();
-		if(auth.getName() == null || auth.getName().equals("") || auth.getName().equals("anonymousUser")) {
-			//미로그인 상태
-			return "redirect:/member/login";
-		}
 		
 		String userId = auth.getName();
 

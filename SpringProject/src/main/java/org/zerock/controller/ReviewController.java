@@ -29,9 +29,12 @@ public class ReviewController {
 	public String review(Model model,Review review) {
 
 		Authentication auth = SecurityContextHolder.getContext().getAuthentication();
-
-		System.out.println(review);		
+		
+		System.out.println(review);
 		review.setMemId(auth.getName());
+		
+		log.info("ID: " + review.getMemId());
+		
 		reviewService.insertReview(review);
 		
 		return "redirect:/goodsDetail/" + review.getGoodsNo();
@@ -54,15 +57,8 @@ public class ReviewController {
 		return "redirect://";
 	}
 	
-	@RequestMapping("/list.do")
+	@RequestMapping("/list")
 	public String list(Model model,Common common,@RequestParam("gno") int gno) {
-
-		Authentication auth = SecurityContextHolder.getContext().getAuthentication();
-		if(auth.getName() == null || auth.getName().equals("") || auth.getName().equals("anonymousUser")) {
-			//미로그인 상태
-			return "redirect:/member/login";
-		}
-
 		
 		List<Review> reviewList = reviewService.getReviewList(common,gno);
 		
