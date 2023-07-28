@@ -327,16 +327,16 @@
 						</c:if>
 					</div> 
 				</div>
-				<div class="swiper-pagination"></div>  
-			</div> --%>
+				<div class="swiper-pagination"></div>  --%>
+			</div> 
 			
 			<!-- 상세정보 -->
 			<div class="tab-pane fade show active" id="home" role="tabpanel" aria-labelledby="home-tab">${goods.content}</div>
 		</div>
  
-<!-- 	<div class="tab-content current" id="myTabContent1" align="center" style="">
+		<div class="tab-content current" id="myTabContent1" align="center" style="">
 
-		</div> -->	
+		</div>
 		<div class="tab-content" id="myTabContent2" align="center" >
 			<!-- 리뷰 -->
 			<jsp:include page="../review/list.jsp"></jsp:include>
@@ -453,7 +453,12 @@
 	        			console.log(result);
 	        			alert('장바구니에 추가되었습니다.');
 	        			$("#option_products").html('');
-	        			$("#cart-total").html('0');
+	        			console.log(result.totalCount)
+
+	        			$('#cartCount').data('notify', result.totalCount);
+	        			console.log($('#cartCount').data('notify'));
+	        			$('#cartCount').removeClass('icon-header-noti');
+	        			$('#cartCount').parent().load(location.href + ' #cartCount')
 	        		},
 	    			error: function(jqXHR, textStatus, errorThrown) {
 	    				alert("ERROR : " + textStatus + " : " + errorThrown);
