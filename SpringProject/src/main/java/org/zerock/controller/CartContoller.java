@@ -20,6 +20,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.zerock.domain.Cart;
 import org.zerock.dto.res.CartItem;
+import org.zerock.dto.res.CartPutitem;
 import org.zerock.service.CartService;
 
 import lombok.extern.log4j.Log4j;
@@ -63,7 +64,7 @@ public class CartContoller {
 	
 	@PostMapping(path="/putCart", consumes = MediaType.APPLICATION_JSON_VALUE)
 	@ResponseBody
-	public List<Integer> putCart(@RequestBody List<Cart> jsonData, HttpServletResponse response) throws IOException {
+	public CartPutitem putCart(@RequestBody List<Cart> jsonData, HttpServletResponse response) throws IOException {
 		log.info("putcart 실행");
 		Authentication auth = SecurityContextHolder.getContext().getAuthentication();
 		List<Integer> list = new ArrayList<Integer>();
@@ -75,7 +76,13 @@ public class CartContoller {
 	    	cartService.putCart(cart);
 	    	list.add(cart.getCart_no());
 	    }
-		return list;	
+	    
+	    CartPutitem item = new CartPutitem();
+	    item.setList(list);
+	    item.setTotalCount(cartService.showCartCount(auth.getName()));
+	    
+	    
+		return item;	
 	    
 	}
 }

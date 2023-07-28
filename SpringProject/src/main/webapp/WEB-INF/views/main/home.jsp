@@ -37,7 +37,7 @@
 					</div>
 				</div>
 
-				<div class="item-slick1" style="background-image: url(../resources/images/banner_1.jpg);">
+				<div class="item-slick1" style="background-image: url(../resources/images/banner_4.jpg);">
 					<div class="container h-full">
 						<div class="flex-col-l-m h-full p-t-100 p-b-30 respon5">
 							<div class="layer-slick1 animated visible-false" data-appear="rollIn" data-delay="0">
@@ -61,7 +61,7 @@
 					</div>
 				</div>
 
-				<div class="item-slick1" style="background-image: url(../resources/images/banner_2.jpg);">
+				<div class="item-slick1" style="background-image: url(../resources/images/banner_3.jpg);">
 					<div class="container h-full">
 						<div class="flex-col-l-m h-full p-t-100 p-b-30 respon5">
 							<div class="layer-slick1 animated visible-false" data-appear="rotateInDownLeft" data-delay="0">
@@ -88,10 +88,10 @@
 		</div>
 	</section>
 
-
-			
-
-
+	
+				
+	
+	
 	<!-- Product -->
 	<section class="bg0 p-t-23 p-b-140">
 		<div class="container">
@@ -285,8 +285,7 @@ $(document).ready(function(){
     		},
     		success: function(result){
     			console.log(result);
-    			(result === 1) ? alert('위시리스트에 추가되었습니다.') : alert('위시리스트에서 해제되었습니다.');
-    		},
+   		},
 			error: function(jqXHR, textStatus, errorThrown) {
 				alert("ERROR : " + textStatus + " : " + errorThrown);
 			}
@@ -313,7 +312,6 @@ $(document).ready(function(){
     			console.log(str);
     			
     			
-    			(result === 'insert') ? alert('위시리스트에 추가되었습니다.') : alert('위시리스트에서 해제되었습니다.');
     		},
 			error: function(jqXHR, textStatus, errorThrown) {
 				alert("ERROR : " + textStatus + " : " + errorThrown);
