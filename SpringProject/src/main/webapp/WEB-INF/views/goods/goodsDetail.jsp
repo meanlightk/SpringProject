@@ -598,7 +598,7 @@ img {
 	overflow: clip;
 	border: none;
 	vertical-align: top;
-	display: block;
+/* 	display: block; */  /*이거 바꾸면 수량 증감 버튼 깨짐*/
 }
 
 #home img {
@@ -618,7 +618,7 @@ img {
 #totalProducts tbody td .quantity .down{
 	position: absolute;
 	left: 22px;
-	top: 11px;
+	top: 6px;  /*이거 바꾸면 수량 증감 버튼 깨짐*/
 }
 #totalProducts tbody td img {
 	vertical-align: middle; 
@@ -783,9 +783,11 @@ button{
 								</td>
 							</tr>
 			
+			<!-- value가 존재해야 pname을 가져간다. -->
 							<tr>
-								<td id="pname"><font size="5"
-									style="box-sizing: border-box; position: relative;"><h2>${goods.pname}</h2></font></td>
+								<td id="pname" value="${goods.pname}"><font size="5"   
+									style="box-sizing: border-box; position: relative;"><h2>${goods.pname}</h2></font></td>  
+									
 							</tr>
 									
 							<tr>
@@ -816,7 +818,7 @@ button{
 							<tr>
 								<td id="discountPrice" 
 									style="font-weight: 600px; font-Size: 24px; line-height: 42px; color: red;">
-									할인가격 <fmt:formatNumber value="${goods.discountPrice}" pattern="#,###" />원
+									할인가격 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<fmt:formatNumber value="${goods.discountPrice}" pattern="#,###" />원
 								</td>
 								<!-- <td>3만원 이상 구매시 할인가격 구매 가능</td> -->
 							</tr>
