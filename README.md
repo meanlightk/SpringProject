@@ -46,13 +46,16 @@ Spring으로 구현한 화장품 판매 웹사이트입니다.
 <H3>기능 설명</H3>
 
 <H4>Tiles 설정</H4>
-
+<img src="https://github.com/ThereIsGrace/SpringProject/assets/109272327/2f93c275-5461-4922-a3ff-b38a522981a0"><br>
+<img src="https://github.com/ThereIsGrace/SpringProject/assets/109272327/af96d836-f8e0-4bb7-b385-1635b8de6311"
 <H4>회원가입</H4>
 
 <H4>로그인</H4>
 
 <H5>스프링 시큐리티</H5> 
-
+<img src="https://github.com/ThereIsGrace/SpringProject/assets/109272327/85224f61-bfd1-4179-bdb0-4a96e072dc98">
+<br>
+관리자와 사용자의 권한을 설정해줘서 페이지마다 권한을 설정해야 하는 번거로움을 제거
 <H4>상품 조회</H4>
 
 <H4>상품 상세 조회</H4>
