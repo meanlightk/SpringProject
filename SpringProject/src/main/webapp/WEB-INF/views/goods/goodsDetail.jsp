@@ -598,7 +598,7 @@ img {
 	overflow: clip;
 	border: none;
 	vertical-align: top;
-	display: block;
+	/* display: block; */
 }
 
 #home img {
@@ -618,7 +618,7 @@ img {
 #totalProducts tbody td .quantity .down{
 	position: absolute;
 	left: 22px;
-	top: 11px;
+	top: 6px;
 }
 #totalProducts tbody td img {
 	vertical-align: middle; 
@@ -784,7 +784,7 @@ button{
 							</tr>
 			
 							<tr>
-								<td id="pname"><font size="5"
+								<td id="pname" value="${goods.pname}"><font size="5"
 									style="box-sizing: border-box; position: relative;"><h2>${goods.pname}</h2></font></td>
 							</tr>
 									
