@@ -43,7 +43,7 @@ Spring으로 구현한 화장품 판매 웹사이트입니다.
 <img src="https://cdn.discordapp.com/attachments/1125397127988793468/1134299179909382277/KakaoTalk_20230727_215410682.png">
 <br>
 <br>
-<H2>기능 설명</H3>
+<H2><b>🕹기능 설명</b></H3>
 
 <H3>Tiles 설정</H4>
 <img src="https://github.com/ThereIsGrace/SpringProject/assets/109272327/2f93c275-5461-4922-a3ff-b38a522981a0"><br>
@@ -54,6 +54,8 @@ Spring으로 구현한 화장품 판매 웹사이트입니다.
 
 <H3>스프링 시큐리티</H3> 
 <img src="https://github.com/ThereIsGrace/SpringProject/assets/109272327/85224f61-bfd1-4179-bdb0-4a96e072dc98">
+<br>
+<img src="https://github.com/ThereIsGrace/SpringProject/assets/109272327/d51c0b9a-7358-441a-9f31-067335bc221e">
 <br>
 관리자와 사용자의 권한을 설정해줘서 페이지마다 권한을 설정해야 하는 번거로움을 제거
 <H3>상품 조회</H3>
