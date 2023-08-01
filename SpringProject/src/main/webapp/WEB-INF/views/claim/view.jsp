@@ -50,7 +50,7 @@
 .w3-table, .w3-table-all {
 	border-collapse: collapse;
 	border-spacing: 0;
-	width: 900px;
+	width: 100%;
 	display: table;
 }
 
@@ -86,7 +86,7 @@
 .w3-table th:first-child, .w3-table td:first-child, .w3-table-all th:first-child,
 	.w3-table-all td:first-child {
 	padding-left: 16px;
-	width: 10%;
+	width: 20%;
 }
 
 .w3-center {

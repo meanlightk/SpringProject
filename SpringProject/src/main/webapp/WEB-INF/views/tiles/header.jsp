@@ -127,29 +127,19 @@
 						<ul class="main-menu">
 						<!--  	<li class="active-menu">
 								<a href="/home?menu=1">Home</a>
- 								<ul class="sub-menu">
-									<li><a href="/home">Homepage 1</a></li>
-									<li><a href="/home2">Homepage 2</a></li>
-									<li><a href="/home3">Homepage 3</a></li>
-								</ul>
 							</li>
-
 							<li>
 								<a href="/showlist">Shop</a>
 							</li>
-
 							<li class="label1" data-label1="hot">
 								<a href="/cart/view">Features</a>
 							</li>
-
 							<li>
 								<a href="/blogs">Blog</a>
 							</li>
-
 							<li>
 								<a href="/about">About</a>
 							</li>
-
 							<li>
 								<a href="/contact">Contact</a>
 							</li>-->
@@ -205,11 +195,13 @@
 					<i class="zmdi zmdi-search"></i>
 				</div>
 
-				<div class="icon-header-item cl2 hov-cl1 trans-04 p-r-11 p-l-10 icon-header-noti js-show-cart" data-notify="2">
-					<i class="zmdi zmdi-shopping-cart"></i>
-				</div>
-
-				<a href="#" class="dis-block icon-header-item cl2 hov-cl1 trans-04 p-r-11 p-l-10 icon-header-noti" data-notify="0">
+				<a href="/cart/view">
+					<div id="cartCount" class="icon-header-item cl2 hov-cl1 trans-04 p-l-22 p-r-11 icon-header-noti js-show-cart" data-notify="${cartCount}">
+						<i class="zmdi zmdi-shopping-cart"></i>
+					</div>
+				</a>
+				
+				<a href="#" class="icon-header-item cl2 hov-cl1 trans-04 p-l-22 p-r-11 icon-header-noti" data-notify="${wishCount}">
 					<i class="zmdi zmdi-favorite-outline"></i>
 				</a>
 			</div>
@@ -238,6 +230,15 @@
 							Help & FAQs
 						</a>
 						<c:choose>
+							<c:when test='${role != "ROLE_MANAGER" }'>
+							</c:when>
+							<c:when test='${role == "ROLE_MANAGER" }'>
+								<a href="/admin/claims" class="flex-c-m trans-04 p-lr-25">
+									고객관리
+								</a>
+							</c:when>
+						</c:choose>
+						<c:choose>
 							<c:when test='${userId == "anonymousUser" }'>
 								<a href="/member/login" class="flex-c-m p-lr-10 trans-04">
 									로그인
@@ -255,37 +256,34 @@
 			</ul>
 
 			<ul class="main-menu-m">
+				<!-- 
 				<li>
 					<a href="/home">Home</a>
-					<ul class="sub-menu-m">
-						<li><a href="/home">Homepage 1</a></li>
-						<li><a href="/home2">Homepage 2</a></li>
-						<li><a href="/home3">Homepage 3</a></li>
-					</ul>
-					<span class="arrow-main-menu-m">
-						<i class="fa fa-angle-right" aria-hidden="true"></i>
-					</span>
 				</li>
-
 				<li>
 					<a href="/showlist">Shop</a>
 				</li>
-
 				<li>
 					<a href="/cart/view" class="label1 rs1" data-label1="hot">Features</a>
 				</li>
-
-				<li>
-					<a href="/blogs">Blog</a>
-				</li>
-
 				<li>
 					<a href="/about">About</a>
 				</li>
-
-				<li>
-					<a href="/contact">Contact</a>
-				</li>
+				 -->			 
+				<c:forEach var="menu"  items="${menuList}"> 
+					<c:choose>
+						<c:when test="${menu.check1 == 1 }">
+							<li>
+								<a href="${menu.menuUrl}?menu=${menu.menuCd}">${menu.menuName}</a>
+							</li>
+						</c:when>
+						<c:otherwise>
+							<li>
+								<a href="${menu.menuUrl}?menu=${menu.menuCd}">${menu.menuName}</a>
+							</li>
+						</c:otherwise>
+					</c:choose>
+				</c:forEach>
 			</ul>
 		</div>
 
@@ -309,6 +307,7 @@
 	</header>
 
 	<!-- Cart -->
+	<!-- 
 	<div class="wrap-header-cart js-panel-cart">
 		<div class="s-full js-hide-cart"></div>
 
@@ -392,3 +391,4 @@
 			</div>
 		</div>
 	</div>
+	 -->
