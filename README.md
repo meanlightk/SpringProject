@@ -30,7 +30,7 @@ Spring으로 구현한 화장품 판매 웹사이트입니다.
 <H3>요구사항 명세서</H3>
 <img src="https://github.com/ThereIsGrace/SpringProject/assets/109272327/ab2ef3ca-1cf3-4708-ba1d-590d09f5e001">
 <H3>유스케이스 다이어그램</H3>
-<img src="https://cdn.discordapp.com/attachments/1125397127988793468/1134299180546928681/KakaoTalk_20230727_012835580.png">
+<img src="">
 <H3>시퀀스 다이어그램(관리자)</H3>
 <img src="https://cdn.discordapp.com/attachments/1125397127988793468/1134299179464790066/KakaoTalk_20230727_015123671.png">
 <H3>시퀀스 다이어그램(사용자)</H3>
@@ -58,20 +58,6 @@ Spring으로 구현한 화장품 판매 웹사이트입니다.
 <img src="https://github.com/ThereIsGrace/SpringProject/assets/109272327/d51c0b9a-7358-441a-9f31-067335bc221e">
 <br>
 관리자와 사용자의 권한을 설정해줘서 페이지마다 권한을 설정해야 하는 번거로움을 제거
-<H3>상품 조회</H3>
-
-<H3>상품 상세 조회</H3>
-
-<H3>장바구니 및 위시리스트</H3>
-
-<H3>일반적인 Ajax와 부가적인 설정</H3>
-
-<H3>결제 및 주문 내역</H3>
-
-<H3>결제 API</H3>
-<H3>배송 API</H3>
-
-<H3>클레임</H3>
 
 
 
