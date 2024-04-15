@@ -17,7 +17,6 @@ Spring으로 구현한 화장품 판매 웹사이트입니다.
 <br>
 <H2>👩역할 분담</H2>
 <img src="https://github.com/ThereIsGrace/SpringProject/assets/109272327/012a4927-5294-489b-b9dc-f865986f24d3">
-
 <br>
 <br>
 <H2>💻기술 스택</H2>
@@ -30,17 +29,17 @@ Spring으로 구현한 화장품 판매 웹사이트입니다.
 <H3>요구사항 명세서</H3>
 <img src="https://github.com/ThereIsGrace/SpringProject/assets/109272327/ab2ef3ca-1cf3-4708-ba1d-590d09f5e001">
 <H3>유스케이스 다이어그램</H3>
-<img src="">
+<img src="https://github.com/meanlightk/image/assets/119726468/b0ed86da-7164-4cf9-98b9-8d83079d4971">
 <H3>시퀀스 다이어그램(관리자)</H3>
-<img src="https://cdn.discordapp.com/attachments/1125397127988793468/1134299179464790066/KakaoTalk_20230727_015123671.png">
+<img src="https://github.com/meanlightk/image/assets/119726468/36e42db6-e2c8-4247-af5c-607747201a28">
 <H3>시퀀스 다이어그램(사용자)</H3>
-<img src="https://cdn.discordapp.com/attachments/1125397127988793468/1134299179464790066/KakaoTalk_20230727_015123671.png">
+<img src="https://github.com/meanlightk/image/assets/119726468/8cf31e4f-04b0-4b5f-8f4a-70a80acfe123">
 <H3>클래스 다이어그램</H3>
-<img src="https://cdn.discordapp.com/attachments/1125397127988793468/1134299179909382277/KakaoTalk_20230727_215410682.png">
+<img src="https://github.com/meanlightk/image/assets/119726468/6bd109d3-6367-458b-a27b-fcb9bc8a9538">
 <H3>ERD</H3>
 <img src="https://github.com/ThereIsGrace/SpringProject/assets/109272327/7e066804-2081-40f9-8716-fed44b5d5a8b">
 <H3>블록 다이어그램</H3>
-<img src="https://cdn.discordapp.com/attachments/1125397127988793468/1134299179909382277/KakaoTalk_20230727_215410682.png">
+<img src="https://github.com/meanlightk/image/assets/119726468/d33919bf-3578-47be-8a0d-0378983e0aee">
 <br>
 <br>
 <H2><b>🕹기능 설명</b></H3>
